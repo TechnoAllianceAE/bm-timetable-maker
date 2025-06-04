@@ -1,8 +1,21 @@
 'use client';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { BarChart, LineChart, PieChart, Users, BookOpen, AlertTriangle, CheckSquare } from "lucide-react";
-import { ResponsiveContainer, Bar, XAxis, YAxis, Tooltip, Legend, Line, Pie, Cell } from 'recharts';
+import { Users, BookOpen, AlertTriangle, CheckSquare } from "lucide-react"; // Corrected: Removed BarChart, LineChart, PieChart
+import {
+  ResponsiveContainer,
+  BarChart, // Added
+  LineChart, // Added
+  PieChart, // Added
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+  Line,
+  Pie,
+  Cell
+} from 'recharts'; // Corrected: Added BarChart, LineChart, PieChart
 import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartLegend, ChartLegendContent } from '@/components/ui/chart';
 
 const teacherUtilizationData = [
