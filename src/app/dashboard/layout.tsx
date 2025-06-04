@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } } from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/hooks/use-auth';
 import { AppSidebar } from '@/components/layout/app-sidebar';
