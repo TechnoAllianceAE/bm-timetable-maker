@@ -1,0 +1,439 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model School {
+  id              String   @id @default(cuid())
+  name            String
+  address         String?
+  settings        Json?
+  wellnessConfig  Json?
+  subscriptionTier String? // e.g., basic, premium, enterprise
+  createdAt       DateTime @default(now())
+
+  // Relations
+  users           User[]
+  academicYears   AcademicYear[]
+  timetables      Timetable[]
+  classes         Class[]
+  subjects        Subject[]
+  timeSlots       TimeSlot[]
+  rooms           Room[]
+  constraints     Constraint[]
+  departmentWellnessSummaries DepartmentWellnessSummary[]
+
+  @@map("schools")
+}
+
+model User {
+  id                String   @id @default(cuid())
+  schoolId          String
+  email             String   @unique
+  passwordHash      String?
+  role              Role
+  profile           Json?
+  wellnessPreferences Json?
+  createdAt         DateTime @default(now())
+
+  school            School    @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  teacher           Teacher?
+  workloadAlerts    WorkloadAlert[]
+  wellnessInterventions CreatedByUser? // for interventions created by
+  timetablesCreated Timetable[] @relation("CreatedBy")
+  timetablesApproved Timetable[] @relation("ApprovedBy")
+
+  @@map("users")
+}
+
+enum Role {
+  ADMIN
+  PRINCIPAL
+  TEACHER
+  STUDENT
+  PARENT
+}
+
+model AcademicYear {
+  id        String    @id @default(cuid())
+  schoolId  String
+  year      String    // e.g., "2024-2025"
+  startDate DateTime?
+  endDate   DateTime?
+
+  school    School    @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  timetables Timetable[]
+
+  @@unique([schoolId, year])
+  @@map("academic_years")
+}
+
+model Class {
+  id          String           @id @default(cuid())
+  schoolId    String
+  name        String
+  grade       Int
+  section     String?          // e.g., A, B, C
+  stream      Stream?          // For grades 11-12
+  studentCount Int?
+
+  school      School           @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  timetableEntries TimetableEntry[]
+
+  @@map("classes")
+}
+
+enum Stream {
+  SCIENCE
+  COMMERCE
+  ARTS
+}
+
+model Subject {
+  id              String   @id @default(cuid())
+  schoolId        String
+  name            String
+  department      String?
+  credits         Int
+  minPeriodsPerWeek Int?
+  maxPeriodsPerWeek Int?
+  prepTime        Int?     // minutes
+  correctionWorkload Float? // time per student
+  requiresLab     Boolean  @default(false)
+
+  school          School   @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  teachers        Teacher[] // many-to-many via json in Teacher.subjects, or add junction if needed
+  timetableEntries TimetableEntry[]
+
+  @@map("subjects")
+}
+
+model TimeSlot {
+  id        String   @id @default(cuid())
+  schoolId  String
+  day       DayOfWeek
+  startTime String   // e.g., "09:00"
+  endTime   String   // e.g., "10:00"
+  isBreak   Boolean  @default(false)
+
+  school    School   @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  timetableEntries TimetableEntry[]
+
+  @@map("time_slots")
+}
+
+enum DayOfWeek {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+}
+
+model Room {
+  id       String   @id @default(cuid())
+  schoolId String
+  name     String
+  capacity Int?
+  type     RoomType?
+
+  school   School   @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  timetableEntries TimetableEntry[]
+
+  @@map("rooms")
+}
+
+enum RoomType {
+  CLASSROOM
+  LAB
+  AUDITORIUM
+  OFFICE
+}
+
+model Teacher {
+  id                    String                @id @default(cuid())
+  userId                String                @unique
+  subjects              Json                  // array of subject IDs or names
+  availability          Json?
+  preferences           Json?
+  maxPeriodsPerDay      Int                   @default(6)
+  maxPeriodsPerWeek     Int                   @default(30)
+  maxConsecutivePeriods Int                   @default(3)
+  minBreakDuration      Int                   @default(10)
+  wellnessScore         Float?
+  burnoutRiskLevel      BurnoutRiskLevel?
+
+  user                  User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  workloadConfig        TeacherWorkloadConfig?
+  wellnessMetrics       TeacherWellnessMetric[]
+  workloadAlerts        WorkloadAlert[]
+  wellnessInterventions WellnessIntervention[]
+  wellnessPredictions   WellnessPrediction[]
+  timetableEntries      TimetableEntry[]
+  substitutionsAbsent   Substitution[]        @relation("AbsentTeacher")
+  substitutionsSub      Substitution[]        @relation("SubstituteTeacher")
+
+  @@map("teachers")
+}
+
+enum BurnoutRiskLevel {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+model TeacherWorkloadConfig {
+  id                      String   @id @default(cuid())
+  teacherId               String   @unique
+  maxPeriodsPerDay        Int      @default(6)
+  maxConsecutivePeriods   Int      @default(3)
+  minBreakBetweenClasses  Int      @default(10)
+  maxPeriodsPerWeek       Int      @default(30)
+  preferredFreePeriods    Int      @default(2)
+  maxEarlyMorningClasses  Int      @default(3)
+  maxLateEveningClasses   Int      @default(2)
+  prepTimeRequired        Int      @default(60)
+  correctionTimePerStudent Float    @default(0.5)
+  specialRequirements     Json?
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+
+  teacher Teacher @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+
+  @@map("teacher_workload_config")
+  @@index([teacherId])
+}
+
+model TeacherWellnessMetric {
+  id                  String   @id @default(cuid())
+  teacherId           String
+  metricDate          DateTime
+  teachingHours       Float?
+  prepHours           Float?
+  correctionHours     Float?
+  totalWorkHours      Float?
+  consecutivePeriodsMax Int?
+  gapsTotalMinutes    Int?
+  stressScore         Int?     // 0-100
+  wellnessScore       Int?     // 0-100
+  burnoutIndicators   Json?
+  createdAt           DateTime @default(now())
+
+  teacher Teacher @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+
+  @@unique([teacherId, metricDate])
+  @@index([teacherId, metricDate(sort: Desc)])
+  @@map("teacher_wellness_metrics")
+}
+
+model WorkloadAlert {
+  id               String   @id @default(cuid())
+  teacherId        String
+  alertType        String
+  severity         AlertSeverity
+  title            String
+  message          String
+  recommendations  Json?
+  acknowledged     Boolean  @default(false)
+  acknowledgedBy   String?
+  acknowledgedAt   DateTime?
+  resolved         Boolean  @default(false)
+  resolvedAt       DateTime?
+  createdAt        DateTime @default(now())
+
+  teacher          Teacher  @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  acknowledgedUser User?    @relation(fields: [acknowledgedBy], references: [id])
+
+  @@index([teacherId, resolved, severity])
+  @@index([teacherId, resolved, createdAt(sort: Desc)])
+  @@map("workload_alerts")
+}
+
+enum AlertSeverity {
+  INFO
+  WARNING
+  CRITICAL
+}
+
+model WellnessIntervention {
+  id                  String   @id @default(cuid())
+  teacherId           String
+  interventionType    String
+  description         String
+  recommendedActions  Json?
+  implemented         Boolean  @default(false)
+  implementationDate  DateTime?
+  effectivenessScore  Int?
+  notes               String?
+  createdBy           String
+  createdAt           DateTime @default(now())
+
+  teacher     Teacher @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  createdUser User    @relation(fields: [createdBy], references: [id])
+
+  @@map("wellness_interventions")
+}
+
+model Timetable {
+  id                  String             @id @default(cuid())
+  schoolId            String
+  academicYearId      String
+  version             Int                @default(1)
+  status              TimetableStatus
+  wellnessScore       Float?
+  workloadBalanceScore Float?
+  metadata            Json?
+  wellnessAnalysis    Json?
+  createdBy           String?
+  approvedBy          String?
+  createdAt           DateTime           @default(now())
+
+  school         School    @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  academicYear   AcademicYear @relation(fields: [academicYearId], references: [id], onDelete: Cascade)
+  entries        TimetableEntry[]
+  createdUser    User?     @relation("CreatedBy", fields: [createdBy], references: [id])
+  approvedUser   User?     @relation("ApprovedBy", fields: [approvedBy], references: [id])
+  substitutions  Substitution[]
+
+  @@map("timetables")
+}
+
+enum TimetableStatus {
+  DRAFT
+  APPROVED
+  ACTIVE
+  ARCHIVED
+}
+
+model TimetableEntry {
+  id            String   @id @default(cuid())
+  timetableId   String
+  classId       String
+  subjectId     String
+  teacherId     String
+  timeSlotId    String
+  roomId        String?
+  isCombined    Boolean  @default(false)
+  combinedWith  Json?
+  workloadImpact Float?
+  wellnessImpact WellnessImpact?
+
+  timetable     Timetable  @relation(fields: [timetableId], references: [id], onDelete: Cascade)
+  class         Class      @relation(fields: [classId], references: [id], onDelete: Cascade)
+  subject       Subject    @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  teacher       Teacher    @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  timeSlot      TimeSlot   @relation(fields: [timeSlotId], references: [id], onDelete: Cascade)
+  room          Room?      @relation(fields: [roomId], references: [id])
+
+  @@map("timetable_entries")
+}
+
+enum WellnessImpact {
+  POSITIVE
+  NEUTRAL
+  NEGATIVE
+}
+
+model Substitution {
+  id                    String    @id @default(cuid())
+  originalEntryId       String
+  absentTeacherId       String
+  substituteTeacherId   String
+  date                  DateTime
+  reason                String?
+  workloadCheckPassed   Boolean?
+  workloadOverrideReason String?
+  status                SubstitutionStatus @default(PENDING)
+  createdAt             DateTime  @default(now())
+
+  originalEntry         TimetableEntry     @relation(fields: [originalEntryId], references: [id], onDelete: Cascade)
+  absentTeacher         Teacher           @relation("AbsentTeacher", fields: [absentTeacherId], references: [id], onDelete: Cascade)
+  substituteTeacher     Teacher           @relation("SubstituteTeacher", fields: [substituteTeacherId], references: [id], onDelete: Cascade)
+
+  @@map("substitutions")
+}
+
+enum SubstitutionStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model Constraint {
+  id        String   @id @default(cuid())
+  schoolId  String
+  type      ConstraintType
+  entityId  String   // e.g., subjectId, teacherId
+  value     Json
+  priority  ConstraintPriority @default(SOFT)
+  createdAt DateTime @default(now())
+
+  school School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  @@map("constraints")
+}
+
+enum ConstraintType {
+  ACADEMIC_MIN_PERIODS
+  ACADEMIC_TIME_PREFERENCE
+  WELLNESS_MAX_CONSECUTIVE
+  WELLNESS_DAILY_HOURS
+  // Add more as needed
+}
+
+enum ConstraintPriority {
+  HARD
+  SOFT
+}
+
+model DepartmentWellnessSummary {
+  id              String   @id @default(cuid())
+  schoolId        String
+  department      String
+  summaryDate     DateTime
+  avgWorkloadHours Float?
+  avgStressScore  Float?
+  teachersAtRisk  Int?
+  topStressFactors Json?
+  recommendations Json?
+  createdAt       DateTime @default(now())
+
+  school School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  @@map("department_wellness_summary")
+}
+
+model WellnessPrediction {
+  id                String   @id @default(cuid())
+  teacherId         String
+  predictionDate    DateTime
+  predictionType    PredictionType
+  predictionValue   Float
+  confidenceLevel   Float?
+  contributingFactors Json?
+  recommendedInterventions Json?
+  createdAt         DateTime @default(now())
+
+  teacher Teacher @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+
+  @@index([teacherId, predictionDate(sort: Desc)])
+  @@map("wellness_predictions")
+}
+
+enum PredictionType {
+  BURNOUT_RISK
+  WORKLOAD_TREND
+}
+
+// Note: Views like teacher_current_workload and department_workload_distribution
+// can be created via raw SQL after migration, as Prisma doesn't support views directly in schema.
+// Example raw SQL for views would go in a migration file.
