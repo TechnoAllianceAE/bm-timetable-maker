@@ -1,0 +1,12 @@
+{
+  "tt_generation_id": "TT_20250919_120829_4c651766",
+  "generation_timestamp": "2025-09-19T12:08:29.286488",
+  "filename": "gapfree_timetable_TT_20250919_120829_4c651766.csv",
+  "total_entries": 1200,
+  "classes_count": 30,
+  "teachers_count": 105,
+  "expected_entries": 1200,
+  "coverage_percentage": 100.0,
+  "is_gapfree": true,
+  "validation_passed": true
+}
