@@ -6,16 +6,16 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
 model School {
   id              String   @id @default(cuid())
   name            String
   address         String?
-  settings        Json?
-  wellnessConfig  Json?
+  settings        String?
+  wellnessConfig  String?
   subscriptionTier String? // e.g., basic, premium, enterprise
   createdAt       DateTime @default(now())
 
@@ -38,12 +38,12 @@ model User {
   schoolId          String
   email             String   @unique
   passwordHash      String?
-  role              Role
-  profile           Json?
-  wellnessPreferences Json?
+  role              String
+  profile           String?
+  wellnessPreferences String?
   createdAt         DateTime @default(now())
 
-  school            School    @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  school            School    @relation(fields: [schoolId], references: [id])
   teacher           Teacher?
   workloadAlerts    WorkloadAlert[]
   wellnessInterventions WellnessIntervention[] @relation("CreatedByUser")
@@ -53,14 +53,6 @@ model User {
   @@map("users")
 }
 
-enum Role {
-  ADMIN
-  PRINCIPAL
-  TEACHER
-  STUDENT
-  PARENT
-}
-
 model AcademicYear {
   id        String    @id @default(cuid())
   schoolId  String
@@ -68,7 +60,7 @@ model AcademicYear {
   startDate DateTime?
   endDate   DateTime?
 
-  school    School    @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  school    School    @relation(fields: [schoolId], references: [id])
   timetables Timetable[]
 
   @@unique([schoolId, year])
@@ -81,19 +73,13 @@ model Class {
   name        String
   grade       Int
   section     String?          // e.g., A, B, C
-  stream      Stream?          // For grades 11-12
+  stream      String?          // For grades 11-12
   studentCount Int?
 
-  school      School           @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  school      School           @relation(fields: [schoolId], references: [id])
   timetableEntries TimetableEntry[]
 
   @@map("classes")
-}
-
-enum Stream {
-  SCIENCE
-  COMMERCE
-  ARTS
 }
 
 model Subject {
@@ -108,7 +94,7 @@ model Subject {
   correctionWorkload Float? // time per student
   requiresLab     Boolean  @default(false)
 
-  school          School   @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  school          School   @relation(fields: [schoolId], references: [id])
   timetableEntries TimetableEntry[]
 
   @@map("subjects")
@@ -117,24 +103,15 @@ model Subject {
 model TimeSlot {
   id        String   @id @default(cuid())
   schoolId  String
-  day       DayOfWeek
+  day       String
   startTime String   // e.g., "09:00"
   endTime   String   // e.g., "10:00"
   isBreak   Boolean  @default(false)
 
-  school    School   @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  school    School   @relation(fields: [schoolId], references: [id])
   timetableEntries TimetableEntry[]
 
   @@map("time_slots")
-}
-
-enum DayOfWeek {
-  MONDAY
-  TUESDAY
-  WEDNESDAY
-  THURSDAY
-  FRIDAY
-  SATURDAY
 }
 
 model Room {
@@ -142,35 +119,28 @@ model Room {
   schoolId String
   name     String
   capacity Int?
-  type     RoomType?
+  type     String?
 
-  school   School   @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  school   School   @relation(fields: [schoolId], references: [id])
   timetableEntries TimetableEntry[]
 
   @@map("rooms")
 }
 
-enum RoomType {
-  CLASSROOM
-  LAB
-  AUDITORIUM
-  OFFICE
-}
-
 model Teacher {
   id                    String                @id @default(cuid())
   userId                String                @unique
-  subjects              Json                  // array of subject IDs or names
-  availability          Json?
-  preferences           Json?
+  subjects              String                  // array of subject IDs or names
+  availability          String?
+  preferences           String?
   maxPeriodsPerDay      Int                   @default(6)
   maxPeriodsPerWeek     Int                   @default(30)
   maxConsecutivePeriods Int                   @default(3)
   minBreakDuration      Int                   @default(10)
   wellnessScore         Float?
-  burnoutRiskLevel      BurnoutRiskLevel?
+  burnoutRiskLevel      String?
 
-  user                  User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user                  User                  @relation(fields: [userId], references: [id])
   workloadConfig        TeacherWorkloadConfig?
   wellnessMetrics       TeacherWellnessMetric[]
   workloadAlerts        WorkloadAlert[]
@@ -181,13 +151,6 @@ model Teacher {
   substitutionsSub      Substitution[]        @relation("SubstituteTeacher")
 
   @@map("teachers")
-}
-
-enum BurnoutRiskLevel {
-  LOW
-  MEDIUM
-  HIGH
-  CRITICAL
 }
 
 model TeacherWorkloadConfig {
@@ -202,11 +165,11 @@ model TeacherWorkloadConfig {
   maxLateEveningClasses   Int      @default(2)
   prepTimeRequired        Int      @default(60)
   correctionTimePerStudent Float    @default(0.5)
-  specialRequirements     Json?
+  specialRequirements     String?
   createdAt               DateTime @default(now())
   updatedAt               DateTime @updatedAt
 
-  teacher Teacher @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  teacher Teacher @relation(fields: [teacherId], references: [id])
 
   @@map("teacher_workload_config")
   @@index([teacherId])
@@ -224,10 +187,10 @@ model TeacherWellnessMetric {
   gapsTotalMinutes    Int?
   stressScore         Int?     // 0-100
   wellnessScore       Int?     // 0-100
-  burnoutIndicators   Json?
+  burnoutIndicators   String?
   createdAt           DateTime @default(now())
 
-  teacher Teacher @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  teacher Teacher @relation(fields: [teacherId], references: [id])
 
   @@unique([teacherId, metricDate])
   @@index([teacherId, metricDate(sort: Desc)])
@@ -238,10 +201,10 @@ model WorkloadAlert {
   id               String   @id @default(cuid())
   teacherId        String
   alertType        String
-  severity         AlertSeverity
+  severity         String
   title            String
   message          String
-  recommendations  Json?
+  recommendations  String?
   acknowledged     Boolean  @default(false)
   acknowledgedBy   String?
   acknowledgedAt   DateTime?
@@ -249,7 +212,7 @@ model WorkloadAlert {
   resolvedAt       DateTime?
   createdAt        DateTime @default(now())
 
-  teacher          Teacher  @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  teacher          Teacher  @relation(fields: [teacherId], references: [id])
   acknowledgedUser User?    @relation(fields: [acknowledgedBy], references: [id])
 
   @@index([teacherId, resolved, severity])
@@ -257,18 +220,12 @@ model WorkloadAlert {
   @@map("workload_alerts")
 }
 
-enum AlertSeverity {
-  INFO
-  WARNING
-  CRITICAL
-}
-
 model WellnessIntervention {
   id                  String   @id @default(cuid())
   teacherId           String
   interventionType    String
   description         String
-  recommendedActions  Json?
+  recommendedActions  String?
   implemented         Boolean  @default(false)
   implementationDate  DateTime?
   effectivenessScore  Int?
@@ -276,7 +233,7 @@ model WellnessIntervention {
   createdBy           String
   createdAt           DateTime @default(now())
 
-  teacher     Teacher @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  teacher     Teacher @relation(fields: [teacherId], references: [id])
   createdUser User    @relation("CreatedByUser", fields: [createdBy], references: [id])
 
   @@map("wellness_interventions")
@@ -287,29 +244,22 @@ model Timetable {
   schoolId            String
   academicYearId      String
   version             Int                @default(1)
-  status              TimetableStatus
+  status              String
   wellnessScore       Float?
   workloadBalanceScore Float?
-  metadata            Json?
-  wellnessAnalysis    Json?
+  metadata            String?
+  wellnessAnalysis    String?
   createdBy           String?
   approvedBy          String?
   createdAt           DateTime           @default(now())
 
-  school         School    @relation(fields: [schoolId], references: [id], onDelete: Cascade)
-  academicYear   AcademicYear @relation(fields: [academicYearId], references: [id], onDelete: Cascade)
+  school         School    @relation(fields: [schoolId], references: [id])
+  academicYear   AcademicYear @relation(fields: [academicYearId], references: [id])
   entries        TimetableEntry[]
   createdUser    User?     @relation("CreatedBy", fields: [createdBy], references: [id])
   approvedUser   User?     @relation("ApprovedBy", fields: [approvedBy], references: [id])
 
   @@map("timetables")
-}
-
-enum TimetableStatus {
-  DRAFT
-  APPROVED
-  ACTIVE
-  ARCHIVED
 }
 
 model TimetableEntry {
@@ -321,25 +271,19 @@ model TimetableEntry {
   timeSlotId    String
   roomId        String?
   isCombined    Boolean  @default(false)
-  combinedWith  Json?
+  combinedWith  String?
   workloadImpact Float?
-  wellnessImpact WellnessImpact?
+  wellnessImpact String?
 
-  timetable     Timetable  @relation(fields: [timetableId], references: [id], onDelete: Cascade)
-  class         Class      @relation(fields: [classId], references: [id], onDelete: Cascade)
-  subject       Subject    @relation(fields: [subjectId], references: [id], onDelete: Cascade)
-  teacher       Teacher    @relation(fields: [teacherId], references: [id], onDelete: Cascade)
-  timeSlot      TimeSlot   @relation(fields: [timeSlotId], references: [id], onDelete: Cascade)
+  timetable     Timetable  @relation(fields: [timetableId], references: [id])
+  class         Class      @relation(fields: [classId], references: [id])
+  subject       Subject    @relation(fields: [subjectId], references: [id])
+  teacher       Teacher    @relation(fields: [teacherId], references: [id])
+  timeSlot      TimeSlot   @relation(fields: [timeSlotId], references: [id])
   room          Room?      @relation(fields: [roomId], references: [id])
   substitutions Substitution[] @relation("OriginalEntry")
 
   @@map("timetable_entries")
-}
-
-enum WellnessImpact {
-  POSITIVE
-  NEUTRAL
-  NEGATIVE
 }
 
 model Substitution {
@@ -351,47 +295,28 @@ model Substitution {
   reason                String?
   workloadCheckPassed   Boolean?
   workloadOverrideReason String?
-  status                SubstitutionStatus @default(PENDING)
+  status                String @default("PENDING")
   createdAt             DateTime  @default(now())
 
-  originalEntry         TimetableEntry     @relation("OriginalEntry", fields: [originalEntryId], references: [id], onDelete: Cascade)
-  absentTeacher         Teacher           @relation("AbsentTeacher", fields: [absentTeacherId], references: [id], onDelete: Cascade)
-  substituteTeacher     Teacher           @relation("SubstituteTeacher", fields: [substituteTeacherId], references: [id], onDelete: Cascade)
+  originalEntry         TimetableEntry     @relation("OriginalEntry", fields: [originalEntryId], references: [id])
+  absentTeacher         Teacher           @relation("AbsentTeacher", fields: [absentTeacherId], references: [id])
+  substituteTeacher     Teacher           @relation("SubstituteTeacher", fields: [substituteTeacherId], references: [id])
 
   @@map("substitutions")
-}
-
-enum SubstitutionStatus {
-  PENDING
-  APPROVED
-  REJECTED
 }
 
 model Constraint {
   id        String   @id @default(cuid())
   schoolId  String
-  type      ConstraintType
+  type      String
   entityId  String   // e.g., subjectId, teacherId
-  value     Json
-  priority  ConstraintPriority @default(SOFT)
+  value     String
+  priority  String @default("SOFT")
   createdAt DateTime @default(now())
 
-  school School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  school School @relation(fields: [schoolId], references: [id])
 
   @@map("constraints")
-}
-
-enum ConstraintType {
-  ACADEMIC_MIN_PERIODS
-  ACADEMIC_TIME_PREFERENCE
-  WELLNESS_MAX_CONSECUTIVE
-  WELLNESS_DAILY_HOURS
-  // Add more as needed
-}
-
-enum ConstraintPriority {
-  HARD
-  SOFT
 }
 
 model DepartmentWellnessSummary {
@@ -402,11 +327,11 @@ model DepartmentWellnessSummary {
   avgWorkloadHours Float?
   avgStressScore  Float?
   teachersAtRisk  Int?
-  topStressFactors Json?
-  recommendations Json?
+  topStressFactors String?
+  recommendations String?
   createdAt       DateTime @default(now())
 
-  school School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  school School @relation(fields: [schoolId], references: [id])
 
   @@map("department_wellness_summary")
 }
@@ -415,22 +340,17 @@ model WellnessPrediction {
   id                String   @id @default(cuid())
   teacherId         String
   predictionDate    DateTime
-  predictionType    PredictionType
+  predictionType    String
   predictionValue   Float
   confidenceLevel   Float?
-  contributingFactors Json?
-  recommendedInterventions Json?
+  contributingFactors String?
+  recommendedInterventions String?
   createdAt         DateTime @default(now())
 
-  teacher Teacher @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  teacher Teacher @relation(fields: [teacherId], references: [id])
 
   @@index([teacherId, predictionDate(sort: Desc)])
   @@map("wellness_predictions")
-}
-
-enum PredictionType {
-  BURNOUT_RISK
-  WORKLOAD_TREND
 }
 
 // Note: Views like teacher_current_workload and department_workload_distribution
