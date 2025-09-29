@@ -1,0 +1,31 @@
+room_id,name,type,capacity,has_projector,specialization
+ROOM_001,Classroom 1,classroom,36,True,
+ROOM_002,Classroom 2,classroom,37,False,
+ROOM_003,Classroom 3,classroom,30,True,
+ROOM_004,Classroom 4,classroom,36,False,
+ROOM_005,Classroom 5,classroom,34,True,
+ROOM_006,Classroom 6,classroom,33,False,
+ROOM_007,Classroom 7,classroom,31,True,
+ROOM_008,Classroom 8,classroom,36,True,
+ROOM_009,Classroom 9,classroom,35,False,
+ROOM_010,Classroom 10,classroom,39,False,
+ROOM_011,Classroom 11,classroom,30,False,
+ROOM_012,Classroom 12,classroom,38,True,
+ROOM_013,Classroom 13,classroom,36,True,
+ROOM_014,Classroom 14,classroom,38,False,
+ROOM_015,Classroom 15,classroom,40,False,
+ROOM_016,Classroom 16,classroom,39,True,
+ROOM_017,Classroom 17,classroom,31,True,
+ROOM_018,Classroom 18,classroom,40,True,
+ROOM_019,Classroom 19,classroom,34,True,
+ROOM_020,Classroom 20,classroom,33,True,
+ROOM_021,Classroom 21,classroom,36,False,
+ROOM_022,Classroom 22,classroom,37,False,
+ROOM_023,Classroom 23,classroom,32,False,
+ROOM_024,Classroom 24,classroom,35,True,
+ROOM_025,Classroom 25,classroom,40,False,
+LAB_001,Science Lab 1,lab,22,True,science_lab
+LAB_002,Computer Lab 2,lab,25,True,computer_lab
+LAB_003,Physics Lab 3,lab,27,True,physics_lab
+LAB_004,Chemistry Lab 4,lab,25,True,chemistry_lab
+LAB_005,Biology Lab 5,lab,34,True,biology_lab
