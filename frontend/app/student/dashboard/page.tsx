@@ -84,6 +84,7 @@ export default function StudentDashboard() {
                   <TimetableViewer
                     timetableId={activeTimetable.id}
                     viewMode="class"
+                    allowViewSwitching={false}
                   />
                 ) : (
                   <p className="text-gray-500">No active timetable available.</p>

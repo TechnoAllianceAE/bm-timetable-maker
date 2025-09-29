@@ -143,6 +143,8 @@ export default function TeacherDashboard() {
                     timetableId={activeTimetable.id}
                     viewMode="teacher"
                     filterById={teacherData.id}
+                    allowViewSwitching={false}
+                    allowFilterChange={false}
                   />
                 ) : (
                   <p className="text-gray-500">No active timetable available.</p>
