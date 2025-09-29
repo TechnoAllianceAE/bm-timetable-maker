@@ -1,31 +1,18 @@
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { Request, Response } from 'express';
+import { Request } from 'express';
 import Joi from 'joi';
-import { Role } from '@prisma/client';
+import { ROLE_VALUES, Role, AuthPayload } from '../types';
 
 const prisma = new PrismaClient();
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-prod';
 const SALT_ROUNDS = 10;
 
-interface RegisterData {
-  email: string;
-  password: string;
-  role: Role;
-  schoolId: string;
-  profile?: any;
-}
-
-interface LoginData {
-  email: string;
-  password: string;
-}
-
 const registerSchema = Joi.object({
   email: Joi.string().email().required(),
   password: Joi.string().min(6).required(),
-  role: Joi.string().valid(...Object.values(Role)).required(),
+  role: Joi.string().valid(...ROLE_VALUES).required(),
   schoolId: Joi.string().required(),
   profile: Joi.object().optional()
 });
@@ -36,7 +23,7 @@ const loginSchema = Joi.object({
 });
 
 export class AuthService {
-  async register(data: RegisterData) {
+  async register(data: { email: string; password: string; role: Role; schoolId: string; profile?: Record<string, unknown> }) {
     const { error } = registerSchema.validate(data);
     if (error) {
       throw new Error(error.details[0].message);
@@ -58,33 +45,43 @@ export class AuthService {
         email: data.email,
         passwordHash,
         role: data.role,
-        profile: data.profile || {},
-        wellnessPreferences: {}
-      },
-      include: { teacher: true }  // If role is TEACHER, create teacher record
+        profile: this.stringify(data.profile),
+        wellnessPreferences: this.stringify({})
+      }
     });
 
     // If teacher, create teacher record
-    if (data.role === Role.TEACHER) {
+    if (data.role === 'TEACHER') {
       await prisma.teacher.create({
         data: {
           userId: user.id,
-          subjects: [],  // Empty, update later
-          availability: {},
-          preferences: {}
+          subjects: JSON.stringify([]),
+          availability: JSON.stringify({}),
+          preferences: JSON.stringify({})
         }
       });
     }
 
-    const token = jwt.sign({ userId: user.id, role: user.role }, JWT_SECRET, { expiresIn: '24h' });
+    const token = this.signToken({
+      userId: user.id,
+      role: user.role as Role,
+      schoolId: user.schoolId,
+      email: user.email
+    });
 
     return {
-      user: { id: user.id, email: user.email, role: user.role, profile: user.profile },
+      user: {
+        id: user.id,
+        email: user.email,
+        role: user.role as Role,
+        schoolId: user.schoolId,
+        profile: this.parse(user.profile)
+      },
       token
     };
   }
 
-  async login(data: LoginData) {
+  async login(data: { email: string; password: string }) {
     const { error } = loginSchema.validate(data);
     if (error) {
       throw new Error(error.details[0].message);
@@ -104,26 +101,61 @@ export class AuthService {
       throw new Error('Invalid credentials');
     }
 
-    const token = jwt.sign({ userId: user.id, role: user.role }, JWT_SECRET, { expiresIn: '24h' });
+    const token = this.signToken({
+      userId: user.id,
+      role: user.role as Role,
+      schoolId: user.schoolId,
+      email: user.email
+    });
 
     return {
-      user: { id: user.id, email: user.email, role: user.role, profile: user.profile },
+      user: {
+        id: user.id,
+        email: user.email,
+        role: user.role as Role,
+        schoolId: user.schoolId,
+        profile: this.parse(user.profile)
+      },
       token
     };
   }
 
-  verifyToken(req: Request) {
+  verifyToken(req: Request): AuthPayload {
     const token = req.headers.authorization?.split(' ')[1];
     if (!token) {
       throw new Error('No token provided');
     }
 
     try {
-      const decoded = jwt.verify(token, JWT_SECRET) as { userId: string; role: Role };
+      const decoded = jwt.verify(token, JWT_SECRET) as AuthPayload;
       return decoded;
     } catch (err) {
       throw new Error('Invalid token');
     }
+  }
+
+  private signToken(payload: AuthPayload) {
+    return jwt.sign(payload, JWT_SECRET, { expiresIn: '24h' });
+  }
+
+  private stringify(value: unknown) {
+    if (value === undefined || value === null) {
+      return null;
+    }
+    return JSON.stringify(value);
+  }
+
+  private parse(value: unknown) {
+    if (!value) return null;
+    if (typeof value === 'object') return value as Record<string, unknown>;
+    if (typeof value === 'string') {
+      try {
+        return JSON.parse(value) as Record<string, unknown>;
+      } catch {
+        return null;
+      }
+    }
+    return null;
   }
 }
 
