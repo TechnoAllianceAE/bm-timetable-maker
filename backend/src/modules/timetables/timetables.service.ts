@@ -16,76 +16,268 @@ export class TimetablesService {
 
   async generate(generateTimetableDto: GenerateTimetableDto) {
     const { schoolId } = generateTimetableDto;
-
-    // Fetch school data
-    const school = await this.prisma.school.findUnique({
-      where: { id: schoolId },
-      include: {
-        classes: true,
-        teachers: {
-          include: {
-            user: true,
-            subjects: true,
-          },
-        },
-        subjects: true,
-        rooms: true,
-      },
-    });
-
-    if (!school) {
-      throw new NotFoundException(`School with ID ${schoolId} not found`);
-    }
-
-    // Prepare data for Python service
-    const timetableData = {
-      school: {
-        id: school.id,
-        name: school.name,
-        settings: school.settings,
-      },
-      classes: school.classes,
-      teachers: school.teachers.map(teacher => ({
-        id: teacher.id,
-        name: `${teacher.user.profile?.firstName || ''} ${teacher.user.profile?.lastName || ''}`.trim(),
-        subjects: teacher.subjects.map(s => s.id),
-        availability: teacher.availability,
-        maxPeriodsPerDay: teacher.maxPeriodsPerDay,
-        maxPeriodsPerWeek: teacher.maxPeriodsPerWeek,
-      })),
-      subjects: school.subjects,
-      rooms: school.rooms.filter(room => room.isAvailable),
-      constraints: generateTimetableDto.constraints,
-    };
+    console.log('Starting timetable generation for school:', schoolId);
 
     try {
+      // Fetch school data
+      const school = await this.prisma.school.findUnique({
+        where: { id: schoolId },
+      });
+
+      if (!school) {
+        console.error('School not found:', schoolId);
+        throw new NotFoundException(`School with ID ${schoolId} not found`);
+      }
+
+      console.log('Found school:', school.name);
+
+      // Fetch school data separately to avoid include issues
+      const [classes, subjects, rooms, teachers] = await Promise.all([
+        this.prisma.class.findMany({ where: { schoolId } }),
+        this.prisma.subject.findMany({ where: { schoolId } }),
+        this.prisma.room.findMany({ where: { schoolId } }),
+        this.prisma.teacher.findMany({
+          where: { user: { schoolId } },
+          include: { user: true },
+        }),
+      ]);
+
+      console.log('Found', classes.length, 'classes,', subjects.length, 'subjects,', rooms.length, 'rooms,', teachers.length, 'teachers');
+
+      // Prepare data for Python service with better error handling
+      const mappedTeachers = teachers.map(teacher => {
+        try {
+          let subjects = [];
+          if (teacher.subjects) {
+            subjects = typeof teacher.subjects === 'string'
+              ? JSON.parse(teacher.subjects)
+              : teacher.subjects;
+          }
+
+          return {
+            id: teacher.id,
+            name: teacher.user?.email || `Teacher-${teacher.id}`,
+            subjects: Array.isArray(subjects) ? subjects : [],
+            availability: teacher.availability || {},
+            maxPeriodsPerDay: teacher.maxPeriodsPerDay || 6,
+            maxPeriodsPerWeek: teacher.maxPeriodsPerWeek || 30,
+          };
+        } catch (parseError) {
+          console.warn('Error parsing teacher data for:', teacher.id, parseError.message);
+          return {
+            id: teacher.id,
+            name: teacher.user?.email || `Teacher-${teacher.id}`,
+            subjects: [],
+            availability: {},
+            maxPeriodsPerDay: 6,
+            maxPeriodsPerWeek: 30,
+          };
+        }
+      });
+
+      // Generate time slots (Monday-Friday, 8 periods per day)
+      const timeSlots = [];
+      const days = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY'];
+      const periods = generateTimetableDto.constraints?.periodsPerDay || 8;
+
+      for (let dayIndex = 0; dayIndex < days.length; dayIndex++) {
+        for (let period = 1; period <= periods; period++) {
+          const startHour = 8 + Math.floor((period - 1) * 0.75); // Roughly every 45 minutes
+          const startMinute = ((period - 1) * 45) % 60;
+          const endHour = startHour + (startMinute >= 15 ? 1 : 0);
+          const endMinute = (startMinute + 45) % 60;
+
+          timeSlots.push({
+            id: `${days[dayIndex]}_P${period}`,
+            school_id: school.id,
+            day_of_week: days[dayIndex],
+            period_number: period,
+            start_time: `${startHour.toString().padStart(2, '0')}:${startMinute.toString().padStart(2, '0')}`,
+            end_time: `${endHour.toString().padStart(2, '0')}:${endMinute.toString().padStart(2, '0')}`,
+            is_break: false,
+          });
+        }
+      }
+
+      // Convert constraints to the expected format
+      const constraints = [];
+      const hardRules = generateTimetableDto.constraints?.hardRules || {};
+      const softRules = generateTimetableDto.constraints?.softRules || {};
+
+      // Add hard constraints
+      if (hardRules.noTeacherConflicts) {
+        constraints.push({
+          id: 'no_teacher_conflicts',
+          school_id: school.id,
+          type: 'TEACHER_AVAILABILITY',
+          priority: 'MANDATORY',
+          entity_type: 'TEACHER',
+          parameters: {},
+          description: 'No teacher should be assigned to multiple classes at the same time',
+        });
+      }
+
+      if (hardRules.noRoomConflicts) {
+        constraints.push({
+          id: 'no_room_conflicts',
+          school_id: school.id,
+          type: 'ROOM_CAPACITY',
+          priority: 'MANDATORY',
+          entity_type: 'ROOM',
+          parameters: {},
+          description: 'No room should be assigned to multiple classes at the same time',
+        });
+      }
+
+      if (hardRules.maxPeriodsPerDayPerTeacher) {
+        constraints.push({
+          id: 'max_periods_per_day',
+          school_id: school.id,
+          type: 'MAX_PERIODS_PER_WEEK',
+          priority: 'MANDATORY',
+          entity_type: 'TEACHER',
+          parameters: { max_periods_per_day: 6 },
+          description: 'Teachers should not exceed maximum periods per day',
+        });
+      }
+
+      // Add soft constraints
+      if (softRules.minimizeTeacherGaps) {
+        constraints.push({
+          id: 'minimize_gaps',
+          school_id: school.id,
+          type: 'NO_GAPS',
+          priority: 'HIGH',
+          entity_type: 'TEACHER',
+          parameters: {},
+          description: 'Minimize gaps in teacher schedules',
+        });
+      }
+
+      // Transform data to match Python service expectations
+      const timetableData = {
+        school_id: school.id,
+        academic_year_id: generateTimetableDto.academicYearId,
+        classes: classes.map(cls => ({
+          id: cls.id,
+          school_id: cls.schoolId,
+          name: cls.name,
+          grade: cls.grade || 10,
+          section: cls.section || 'A',
+          stream: cls.stream || null,
+          student_count: cls.studentCount || 30,
+        })),
+        subjects: subjects.map(subj => ({
+          id: subj.id,
+          school_id: subj.schoolId,
+          name: subj.name,
+          code: subj.name, // Use name as code since code field doesn't exist
+          periods_per_week: subj.minPeriodsPerWeek || 4,
+          requires_lab: subj.requiresLab || false,
+          is_elective: false, // Default since field doesn't exist
+        })),
+        teachers: mappedTeachers.map(teacher => ({
+          id: teacher.id,
+          user_id: teacher.id, // Using same ID for simplicity
+          subjects: teacher.subjects,
+          availability: typeof teacher.availability === 'string'
+            ? JSON.parse(teacher.availability)
+            : teacher.availability,
+          max_periods_per_day: teacher.maxPeriodsPerDay,
+          max_periods_per_week: teacher.maxPeriodsPerWeek,
+          max_consecutive_periods: 3,
+        })),
+        rooms: rooms.map(room => ({
+          id: room.id,
+          school_id: room.schoolId,
+          name: room.name,
+          building: 'Main', // Default since field doesn't exist
+          floor: 1, // Default since field doesn't exist
+          capacity: room.capacity || 40,
+          type: room.type || 'CLASSROOM',
+        })),
+        time_slots: timeSlots,
+        constraints: constraints,
+        options: 3,
+        timeout: 60,
+      };
+
+      console.log('Prepared timetable data:', {
+        school_id: timetableData.school_id,
+        academic_year_id: timetableData.academic_year_id,
+        classCount: classes.length,
+        teacherCount: teachers.length,
+        subjectCount: subjects.length,
+        roomCount: rooms.length,
+        timeSlotsCount: timetableData.time_slots.length,
+        constraintsCount: timetableData.constraints.length,
+      });
+
       // Call Python timetable generation service
       const pythonUrl = this.configService.get('PYTHON_TIMETABLE_URL') || 'http://localhost:8000';
+      console.log('Calling Python service at:', pythonUrl);
+
       const response = await firstValueFrom(
-        this.httpService.post(`${pythonUrl}/generate`, timetableData)
+        this.httpService.post(`${pythonUrl}/generate`, timetableData, {
+          timeout: 120000, // 2 minute timeout for complex timetable generation
+        })
       );
+
+      console.log('Python service response status:', response.status);
+      console.log('Python service response data keys:', Object.keys(response.data || {}));
 
       // Save timetable to database
       const timetable = await this.prisma.timetable.create({
         data: {
           schoolId,
-          name: generateTimetableDto.name || `Timetable ${new Date().toISOString()}`,
+          academicYearId: generateTimetableDto.academicYearId,
           status: 'DRAFT',
-          metadata: response.data,
+          metadata: JSON.stringify(response.data),
         },
       });
 
+      console.log('Saved timetable to database with ID:', timetable.id);
+
       return {
+        status: 'success',
         timetable,
         generatedData: response.data,
+        generation_time: response.data?.generation_time,
+        diagnostics: response.data?.diagnostics,
+        solutions: response.data?.solutions,
       };
     } catch (error) {
-      throw new BadRequestException('Failed to generate timetable: ' + error.message);
+      console.error('Timetable generation error:', error);
+
+      if (error.response) {
+        console.error('HTTP Response Status:', error.response.status);
+        console.error('HTTP Response Data:', error.response.data);
+
+        // Extract detailed error information
+        const errorDetails = error.response.data?.detail || error.response.data?.message || error.response.statusText;
+        const errorMessage = typeof errorDetails === 'string'
+          ? errorDetails
+          : JSON.stringify(errorDetails, null, 2);
+
+        throw new BadRequestException(`Python service error (${error.response.status}): ${errorMessage}`);
+      }
+
+      if (error.code === 'ECONNREFUSED') {
+        throw new BadRequestException('Python timetable service is not running. Please start the service on port 8000.');
+      }
+
+      if (error instanceof NotFoundException) {
+        throw error;
+      }
+
+      throw new BadRequestException(`Failed to generate timetable: ${error.message}`);
     }
   }
 
-  async findAll(schoolId?: string, status?: string, page: number = 1, limit: number = 10) {
-    const skip = (page - 1) * limit;
+  async findAll(schoolId?: string, status?: string, page?: number, limit?: number) {
+    const pageNum = page || 1;
+    const limitNum = limit || 10;
+    const skip = (pageNum - 1) * limitNum;
     const where: any = {};
 
     if (schoolId) where.schoolId = schoolId;
@@ -95,7 +287,7 @@ export class TimetablesService {
       this.prisma.timetable.findMany({
         where,
         skip,
-        take: limit,
+        take: limitNum,
         include: {
           school: true,
         },
@@ -110,9 +302,9 @@ export class TimetablesService {
       data: timetables,
       meta: {
         total,
-        page,
-        limit,
-        totalPages: Math.ceil(total / limit),
+        page: pageNum,
+        limit: limitNum,
+        totalPages: Math.ceil(total / limitNum),
       },
     };
   }
@@ -122,7 +314,7 @@ export class TimetablesService {
       where: { id },
       include: {
         school: true,
-        slots: {
+        entries: {
           include: {
             class: true,
             subject: true,
