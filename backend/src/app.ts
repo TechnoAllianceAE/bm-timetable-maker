@@ -3,6 +3,10 @@ import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import authRoutes from './auth/auth.routes';
+import userRoutes from './users/user.routes';
+import timetableRoutes from './timetables/timetable.routes';
+
+const API_PREFIX = process.env.API_PREFIX || '/api/v1';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -24,7 +28,9 @@ app.use(limiter);
 app.use(express.json({ limit: '10mb' })); // For large payloads like timetable data
 
 // Routes
-app.use('/auth', authRoutes);
+app.use(`${API_PREFIX}/auth`, authRoutes);
+app.use(`${API_PREFIX}/users`, userRoutes);
+app.use(`${API_PREFIX}/timetables`, timetableRoutes);
 
 // Health check
 app.get('/health', (req, res) => {

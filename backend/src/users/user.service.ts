@@ -1,24 +1,27 @@
-import { PrismaClient, Role } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
-import { CreateUserRequest, UpdateUserRequest, AuthPayload } from '../types';
+import { CreateUserRequest, UpdateUserRequest, AuthPayload, Role } from '../types';
 
 const prisma = new PrismaClient();
 const SALT_ROUNDS = 10;
+const ADMIN_ROLES: Role[] = ['ADMIN', 'PRINCIPAL'];
 
 export class UserService {
   async getAll(schoolId: string, user: AuthPayload) {
-    if (user.role !== Role.ADMIN && user.role !== Role.PRINCIPAL) {
+    if (!ADMIN_ROLES.includes(user.role)) {
       throw new Error('Insufficient permissions');
     }
 
-    return prisma.user.findMany({
+    const users = await prisma.user.findMany({
       where: { schoolId },
       include: { teacher: true }
     });
+
+    return users.map(this.formatUser);
   }
 
   async create(data: CreateUserRequest, user: AuthPayload) {
-    if (user.role !== Role.ADMIN && user.role !== Role.PRINCIPAL) {
+    if (!ADMIN_ROLES.includes(user.role)) {
       throw new Error('Insufficient permissions');
     }
 
@@ -40,25 +43,24 @@ export class UserService {
         email,
         passwordHash,
         role,
-        profile: profile || {},
-        wellnessPreferences: {}
+        profile: profile ? JSON.stringify(profile) : null,
+        wellnessPreferences: JSON.stringify({})
       },
       include: { teacher: true }
     });
 
-    // If teacher, create teacher record
-    if (role === Role.TEACHER) {
+    if (role === 'TEACHER') {
       await prisma.teacher.create({
         data: {
           userId: newUser.id,
-          subjects: [],
-          availability: {},
-          preferences: {}
+          subjects: JSON.stringify([]),
+          availability: JSON.stringify({}),
+          preferences: JSON.stringify({})
         }
       });
     }
 
-    return newUser;
+    return this.formatUser(newUser);
   }
 
   async getById(id: string, user: AuthPayload) {
@@ -71,16 +73,15 @@ export class UserService {
       throw new Error('User not found');
     }
 
-    // Permission: Own or admin
-    if (user.role !== Role.ADMIN && user.role !== Role.PRINCIPAL && user.userId !== id) {
+    if (!ADMIN_ROLES.includes(user.role) && user.userId !== id) {
       throw new Error('Insufficient permissions');
     }
 
-    return foundUser;
+    return this.formatUser(foundUser);
   }
 
   async update(id: string, data: UpdateUserRequest, user: AuthPayload) {
-    if (user.role !== Role.ADMIN && user.role !== Role.PRINCIPAL && user.userId !== id) {
+    if (!ADMIN_ROLES.includes(user.role) && user.userId !== id) {
       throw new Error('Insufficient permissions');
     }
 
@@ -91,23 +92,42 @@ export class UserService {
       data: {
         email,
         role,
-        profile,
-        wellnessPreferences
+        profile: profile ? JSON.stringify(profile) : undefined,
+        wellnessPreferences: wellnessPreferences ? JSON.stringify(wellnessPreferences) : undefined
       },
       include: { teacher: true }
     });
 
-    return updatedUser;
+    return this.formatUser(updatedUser);
   }
 
   async delete(id: string, user: AuthPayload) {
-    if (user.role !== Role.ADMIN && user.role !== Role.PRINCIPAL) {
+    if (!ADMIN_ROLES.includes(user.role)) {
       throw new Error('Insufficient permissions');
     }
 
     await prisma.user.delete({
       where: { id }
     });
+  }
+
+  private formatUser = (user: any) => ({
+    ...user,
+    profile: this.parse(user.profile),
+    wellnessPreferences: this.parse(user.wellnessPreferences)
+  });
+
+  private parse(value: unknown) {
+    if (!value) return null;
+    if (typeof value === 'object') return value as Record<string, unknown>;
+    if (typeof value === 'string') {
+      try {
+        return JSON.parse(value);
+      } catch {
+        return null;
+      }
+    }
+    return null;
   }
 }
 

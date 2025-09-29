@@ -1,40 +1,44 @@
 'use client';
 
-import { useState } from 'react';
-import axios from 'axios';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect, Suspense } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import { authAPI } from '@/lib/api';
 
-export default function LoginPage() {
+function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (searchParams.get('registered') === 'true') {
+      setSuccess('Registration successful! Please login.');
+    }
+  }, [searchParams]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError('');
+    setSuccess('');
 
     try {
-      const response = await axios.post('http://localhost:3000/auth/login', {
-        email,
-        password,
-      });
+      const response = await authAPI.login(email, password);
 
-      // Store token in localStorage
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('user', JSON.stringify(response.data.user));
 
-      // Redirect to dashboard based on role
       const user = response.data.user;
       if (user.role === 'ADMIN' || user.role === 'PRINCIPAL') {
-        router.push('/admin/users');
+        router.push('/admin/dashboard');
       } else if (user.role === 'TEACHER') {
         router.push('/teacher/dashboard');
       } else {
-        router.push('/teacher/dashboard');
+        router.push('/student/dashboard');
       }
     } catch (err: any) {
       setError(err.response?.data?.message || 'Login failed');
@@ -91,6 +95,7 @@ export default function LoginPage() {
             </div>
           </div>
 
+          {success && <div className="text-green-600 text-sm text-center">{success}</div>}
           {error && <div className="text-red-600 text-sm text-center">{error}</div>}
 
           <div>
@@ -105,5 +110,13 @@ export default function LoginPage() {
         </form>
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+      <LoginForm />
+    </Suspense>
   );
 }

@@ -1,13 +1,18 @@
-import { User, School, AcademicYear, Class, Subject, TimeSlot, Room, Teacher, TeacherWorkloadConfig, TeacherWellnessMetric, WorkloadAlert, WellnessIntervention, Timetable, TimetableEntry, Substitution, Constraint, DepartmentWellnessSummary, WellnessPrediction, Role, Stream, DayOfWeek, RoomType, BurnoutRiskLevel, AlertSeverity, TimetableStatus, WellnessImpact, SubstitutionStatus, ConstraintType, ConstraintPriority, PredictionType } from '@prisma/client';
+// Centralised domain types and enums for the backend API.
+// We intentionally avoid importing from `@prisma/client` so that
+// the application can compile even when Prisma engines are not generated yet.
 
-export type { User, School, AcademicYear, Class, Subject, TimeSlot, Room, Teacher, TeacherWorkloadConfig, TeacherWellnessMetric, WorkloadAlert, WellnessIntervention, Timetable, TimetableEntry, Substitution, Constraint, DepartmentWellnessSummary, WellnessPrediction };
+export const ROLE_VALUES = ['ADMIN', 'PRINCIPAL', 'TEACHER', 'STUDENT', 'PARENT'] as const;
+export type Role = typeof ROLE_VALUES[number];
 
-export type { Role, Stream, DayOfWeek, RoomType, BurnoutRiskLevel, AlertSeverity, TimetableStatus, WellnessImpact, SubstitutionStatus, ConstraintType, ConstraintPriority, PredictionType };
+export const TIMETABLE_STATUS_VALUES = ['DRAFT', 'GENERATING', 'ACTIVE', 'ARCHIVED', 'FAILED'] as const;
+export type TimetableStatus = typeof TIMETABLE_STATUS_VALUES[number];
 
-// Auth types
 export interface AuthPayload {
   userId: string;
+  schoolId: string;
   role: Role;
+  email: string;
 }
 
 export interface RegisterRequest {
@@ -15,7 +20,7 @@ export interface RegisterRequest {
   password: string;
   role: Role;
   schoolId: string;
-  profile?: any;
+  profile?: Record<string, unknown>;
 }
 
 export interface LoginRequest {
@@ -28,19 +33,19 @@ export interface AuthResponse {
     id: string;
     email: string;
     role: Role;
-    profile: any;
+    schoolId: string;
+    profile: Record<string, unknown> | null;
   };
   token: string;
 }
 
-// Request/Response for routes
 export interface CreateUserRequest extends RegisterRequest {}
 
 export interface UpdateUserRequest {
   email?: string;
   role?: Role;
-  profile?: any;
-  wellnessPreferences?: any;
+  profile?: Record<string, unknown>;
+  wellnessPreferences?: Record<string, unknown>;
 }
 
 export interface GenerateTimetableRequest {
@@ -55,28 +60,9 @@ export interface GenerateTimetableRequest {
   };
 }
 
-// Wellness
-export interface WellnessDashboardRequest {
-  teacherId: string;
-  period?: 'day' | 'week' | 'month' | 'term';
-}
-
-export interface WorkloadAnalysisRequest {
-  scope: 'teacher' | 'department' | 'school';
-  id?: string;
-}
-
-// From OpenAPI/Python (simplified for backend use)
-export interface GenerateRequestBackend {
-  school_id: string;
-  academic_year_id: string;
-  classes: Class[];
-  subjects: Subject[];
-  teachers: Teacher[];
-  teacher_configs: TeacherWorkloadConfig[];
-  time_slots: TimeSlot[];
-  rooms: Room[];
-  constraints: Constraint[];
+export interface TimetableGenerationPayload {
+  schoolId: string;
+  academicYearId: string;
   options: number;
   timeout: number;
   weights: {
@@ -85,4 +71,11 @@ export interface GenerateRequestBackend {
     efficiency: number;
     preference: number;
   };
+}
+
+export interface TimetableGenerationResult {
+  timetableId: string;
+  status: TimetableStatus;
+  entries: Array<Record<string, unknown>>;
+  metadata?: Record<string, unknown>;
 }

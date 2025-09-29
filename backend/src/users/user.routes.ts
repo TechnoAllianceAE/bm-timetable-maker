@@ -1,25 +1,17 @@
 import { Router } from 'express';
 import { userService } from './user.service';
-import { AuthPayload } from '../types/index';
-import { authService } from '../auth/auth.service';
+import { authMiddleware } from '../shared/middleware/auth';
 
 const router = Router();
 
-// Middleware to verify token and attach payload
-const authenticate = (req: any, res: any, next: any) => {
-  try {
-    const payload = authService.verifyToken(req);
-    req.user = payload;
-    next();
-  } catch (error: any) {
-    res.status(401).json({ message: error.message });
-  }
-};
-
 // GET /users - List users in school
-router.get('/', authenticate, async (req: any, res: any) => {
+router.get('/', authMiddleware, async (req, res) => {
   try {
-    const users = await userService.getAll(req.query.schoolId, req.user);
+    const schoolId = (req.query.schoolId as string) || req.user?.schoolId;
+    if (!schoolId) {
+      return res.status(400).json({ message: 'schoolId is required' });
+    }
+    const users = await userService.getAll(schoolId, req.user!);
     res.json(users);
   } catch (error: any) {
     res.status(400).json({ message: error.message });
@@ -27,9 +19,9 @@ router.get('/', authenticate, async (req: any, res: any) => {
 });
 
 // POST /users - Create user
-router.post('/', authenticate, async (req: any, res: any) => {
+router.post('/', authMiddleware, async (req, res) => {
   try {
-    const user = await userService.create(req.body, req.user);
+    const user = await userService.create(req.body, req.user!);
     res.status(201).json(user);
   } catch (error: any) {
     res.status(400).json({ message: error.message });
@@ -37,9 +29,9 @@ router.post('/', authenticate, async (req: any, res: any) => {
 });
 
 // GET /users/:id
-router.get('/:id', authenticate, async (req: any, res: any) => {
+router.get('/:id', authMiddleware, async (req, res) => {
   try {
-    const user = await userService.getById(req.params.id, req.user);
+    const user = await userService.getById(req.params.id, req.user!);
     res.json(user);
   } catch (error: any) {
     if (error.message === 'User not found') {
@@ -51,9 +43,9 @@ router.get('/:id', authenticate, async (req: any, res: any) => {
 });
 
 // PUT /users/:id
-router.put('/:id', authenticate, async (req: any, res: any) => {
+router.put('/:id', authMiddleware, async (req, res) => {
   try {
-    const user = await userService.update(req.params.id, req.body, req.user);
+    const user = await userService.update(req.params.id, req.body, req.user!);
     res.json(user);
   } catch (error: any) {
     res.status(400).json({ message: error.message });
@@ -61,9 +53,9 @@ router.put('/:id', authenticate, async (req: any, res: any) => {
 });
 
 // DELETE /users/:id
-router.delete('/:id', authenticate, async (req: any, res: any) => {
+router.delete('/:id', authMiddleware, async (req, res) => {
   try {
-    await userService.delete(req.params.id, req.user);
+    await userService.delete(req.params.id, req.user!);
     res.status(204).send();
   } catch (error: any) {
     res.status(400).json({ message: error.message });
