@@ -79,26 +79,17 @@ This WIP file tracks the ACTUAL development status of the platform. The project 
 ### 📋 Todo for Phase 1 Completion
 
 #### Backend Critical Tasks
-1. **Fix app.ts**:
-   - Register user routes
-   - Add timetable routes registration
+1. **Fix app.ts** ✅
+   - Registered auth, user, timetable routes behind `/api/v1`
 
-2. **Implement Timetable Routes**:
-   - GET /timetables - List timetables
-   - POST /timetables - Create new timetable
-   - GET /timetables/:id - Get specific timetable
-   - POST /timetables/:id/generate - Call Python service
-   - GET /timetables/:id/entries - Get timetable entries
+2. **Implement Timetable Routes** ✅
+   - Implemented list/create/detail/entries/generate endpoints with validation and RBAC
 
-3. **Python Service Integration**:
-   - Create service class to call Python endpoints
-   - Handle request/response transformation
-   - Error handling for service failures
+3. **Python Service Integration** ✅
+   - Added Axios-based client and generation orchestration with persistence
 
-4. **Database Setup**:
-   - Run `prisma migrate dev` to create database
-   - Create seed data for testing
-   - Test database connections
+4. **Database Setup** 🚧
+   - Prisma schema still needs migrations + seeds executed locally
 
 #### Frontend Essential Pages
 1. **Registration Page**
@@ -136,11 +127,10 @@ python3 test_service.py
 # Should show all tests passing
 ```
 
-### Backend (needs fixes)
+### Backend
 ```bash
 cd backend
 npm install
-# Fix routes in app.ts first
 npm run dev
 ```
 
