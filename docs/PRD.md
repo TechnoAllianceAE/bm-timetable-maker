@@ -358,6 +358,106 @@ Cache:     Redis for session management and caching
 
 ---
 
+## 🧠 Advanced Technical Details
+
+### Algorithm Architecture
+
+The system employs a comprehensive three-phase pipeline combining multiple optimization techniques:
+
+```
+Phase 1: Pre-processing & Initialization
+├── Greedy Resource Allocator
+├── Heuristic Population Seeder
+└── Feasibility Analysis
+
+Phase 2: Core Solving Engine
+├── CSP Solver (OR-Tools) ✅ OPERATIONAL
+├── Genetic Algorithm (NSGA-II) ⚠️ PLACEHOLDER
+├── Simulated Annealing
+└── Tabu Search
+
+Phase 3: Post-processing & Interaction
+├── Real-time Constraint Validator
+├── Solution Ranking & Selection
+└── User Modification Support
+```
+
+### Diagnostic Intelligence Layer
+
+#### Verbose Logger and Bottleneck Analyzer
+**Purpose**: Transform black-box solving into transparent process with real-time visibility
+
+**For CSP Solver**:
+```
+[INFO] Trying Class_8, Monday, P3...
+[WARN] Teacher_4 CONFLICT: Already assigned to Class_2
+[SUCCESS] Assignment: Class_8, Mon, P3 = (Math, Teacher_9, Room_102)
+```
+
+#### Resource Scarcity Advisor
+**Pre-computation Sanity Check**:
+- Teacher Load Analysis: Total demand vs. supply
+- Subject-Specific Teacher Check: Math needs 98 periods, Math teachers can provide 85
+- Specialized Room Analysis: Lab demand vs. lab availability
+- Peak Usage Detection: Maximum concurrent classes vs. available rooms
+
+**Sample Output**:
+```
+❌ INFEASIBLE: Mathematics demand (98 periods) exceeds supply (85 periods)
+💡 Recommendation: Hire 1 additional Math teacher or reduce Math periods by 2 per week
+```
+
+### Database Schema
+
+The system uses a comprehensive PostgreSQL schema with the following key entities:
+
+```sql
+-- Core Tables
+CREATE TABLE schools (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name VARCHAR(255) NOT NULL,
+    address TEXT,
+    settings JSONB,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE users (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    school_id UUID REFERENCES schools(id),
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password_hash VARCHAR(255),
+    role VARCHAR(50) NOT NULL,
+    profile JSONB,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Additional tables for classes, subjects, teachers, rooms, timetables, etc.
+```
+
+### API Specification
+
+The system provides a comprehensive REST API with the following key endpoints:
+
+```yaml
+# Timetable Generation
+POST /api/v1/timetables/generate
+  - Generate timetables with diagnostic intelligence
+  - Request: schoolId, academicYearId, constraints
+  - Response: Generated timetables with scores and diagnostics
+
+# Data Management
+GET /api/v1/teachers
+POST /api/v1/teachers
+GET /api/v1/classes
+POST /api/v1/classes
+
+# Authentication
+POST /api/v1/auth/login
+POST /api/v1/auth/register
+```
+
+---
+
 ## ✅ Conclusion
 
 **The School Timetable Management SaaS Platform has successfully completed Phase 1 and is ready for production deployment.** All core components are fully integrated, tested, and performing at enterprise scale. The system delivers on its promise of transforming weeks of manual work into seconds of intelligent automation.
@@ -376,3 +476,9 @@ Cache:     Redis for session management and caching
 - ⚠️ Soft constraint optimization not yet implemented
 
 **Ready for:** Production deployment, user acceptance testing, and Phase 2 GA optimizer implementation.
+
+---
+
+*Document Version: 2.1*  
+*Last Updated: September 30, 2025*  
+*Status: Phase 1 Complete - Production Ready*
