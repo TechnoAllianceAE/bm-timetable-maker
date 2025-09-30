@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Direct Login Test</title>
+</head>
+<body>
+    <h1>Direct Login Test (No Next.js)</h1>
+    <button onclick="testLogin()">Test Login</button>
+    <pre id="output"></pre>
+
+    <script>
+        async function testLogin() {
+            const output = document.getElementById('output');
+            output.textContent = 'Testing login...\n';
+
+            try {
+                const response = await fetch('http://localhost:5000/api/v1/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: 'admin@test.com',
+                        password: 'Admin123'
+                    })
+                });
+
+                const data = await response.json();
+                output.textContent += 'Status: ' + response.status + '\n';
+                output.textContent += 'Response: ' + JSON.stringify(data, null, 2) + '\n';
+
+                if (data.access_token) {
+                    output.textContent += '\n✅ Login successful!\n';
+                    localStorage.setItem('token', data.access_token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    output.textContent += 'Token and user data stored in localStorage\n';
+                }
+            } catch (error) {
+                output.textContent += '❌ Error: ' + error.message + '\n';
+            }
+        }
+    </script>
+</body>
+</html>

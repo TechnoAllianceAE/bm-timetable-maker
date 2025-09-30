@@ -13,8 +13,8 @@ export class AuthService {
 
   async validateUser(email: string, password: string): Promise<any> {
     const user = await this.usersService.findByEmail(email);
-    if (user && await bcrypt.compare(password, user.password)) {
-      const { password, ...result } = user;
+    if (user && await bcrypt.compare(password, user.passwordHash)) {
+      const { passwordHash, ...result } = user;
       return result;
     }
     return null;
@@ -51,13 +51,18 @@ export class AuthService {
     const hashedPassword = await bcrypt.hash(registerDto.password, 10);
 
     // Create user
-    const user = await this.usersService.create({
-      ...registerDto,
-      password: hashedPassword,
-    });
+    const { password, profile, ...userDataWithoutPassword } = registerDto;
+    const userData = {
+      email: registerDto.email,
+      passwordHash: hashedPassword,
+      schoolId: registerDto.schoolId,
+      role: registerDto.role,
+      profile: profile ? JSON.stringify(profile) : undefined,
+    };
+    const user = await this.usersService.create(userData);
 
     // Remove password from response
-    const { password, ...result } = user;
+    const { passwordHash, ...result } = user;
 
     // Generate token
     const payload = {

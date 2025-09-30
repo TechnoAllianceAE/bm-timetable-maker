@@ -31,7 +31,7 @@ export default function TimetablesPage() {
   const fetchTimetables = async () => {
     try {
       const response = await timetableAPI.list();
-      setTimetables(response.data);
+      setTimetables(response.data.data || []);
     } catch (error) {
       console.error('Failed to fetch timetables:', error);
     } finally {

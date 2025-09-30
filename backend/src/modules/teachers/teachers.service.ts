@@ -8,18 +8,17 @@ export class TeachersService {
   constructor(private prisma: PrismaService) {}
 
   async create(createTeacherDto: CreateTeacherDto) {
-    const { subjects, ...teacherData } = createTeacherDto;
+    const { subjects, preferences, availability, ...teacherData } = createTeacherDto;
 
     return this.prisma.teacher.create({
       data: {
         ...teacherData,
-        subjects: {
-          connect: subjects?.map(id => ({ id })) || [],
-        },
+        subjects: JSON.stringify(subjects || []),
+        preferences: JSON.stringify(preferences || []),
+        availability: JSON.stringify(availability || {}),
       },
       include: {
         user: true,
-        subjects: true,
       },
     });
   }
@@ -31,21 +30,19 @@ export class TeachersService {
     return teachers;
   }
 
-  async findAll(schoolId?: string, page: number = 1, limit: number = 10) {
-    const skip = (page - 1) * limit;
+  async findAll(schoolId?: string, page?: number, limit?: number) {
+    const pageNum = page || 1;
+    const limitNum = limit || 10;
+    const skip = (pageNum - 1) * limitNum;
     const where = schoolId ? { user: { schoolId } } : {};
 
     const [teachers, total] = await Promise.all([
       this.prisma.teacher.findMany({
         where,
         skip,
-        take: limit,
+        take: limitNum,
         include: {
           user: true,
-          subjects: true,
-        },
-        orderBy: {
-          createdAt: 'desc',
         },
       }),
       this.prisma.teacher.count({ where }),
@@ -55,9 +52,9 @@ export class TeachersService {
       data: teachers,
       meta: {
         total,
-        page,
-        limit,
-        totalPages: Math.ceil(total / limit),
+        page: pageNum,
+        limit: limitNum,
+        totalPages: Math.ceil(total / limitNum),
       },
     };
   }
@@ -67,11 +64,12 @@ export class TeachersService {
       where: { id },
       include: {
         user: true,
-        subjects: true,
-        assignments: {
+        timetableEntries: {
           include: {
             class: true,
             subject: true,
+            timeSlot: true,
+            room: true,
           },
         },
       },
@@ -85,7 +83,7 @@ export class TeachersService {
   }
 
   async update(id: string, updateTeacherDto: UpdateTeacherDto) {
-    const { subjects, ...teacherData } = updateTeacherDto;
+    const { subjects, preferences, availability, ...teacherData } = updateTeacherDto;
 
     try {
       return await this.prisma.teacher.update({
@@ -93,15 +91,17 @@ export class TeachersService {
         data: {
           ...teacherData,
           ...(subjects && {
-            subjects: {
-              set: [],
-              connect: subjects.map(id => ({ id })),
-            },
+            subjects: JSON.stringify(subjects),
+          }),
+          ...(preferences && {
+            preferences: JSON.stringify(preferences),
+          }),
+          ...(availability && {
+            availability: JSON.stringify(availability),
           }),
         },
         include: {
           user: true,
-          subjects: true,
         },
       });
     } catch (error) {

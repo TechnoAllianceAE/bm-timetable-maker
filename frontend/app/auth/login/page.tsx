@@ -26,22 +26,58 @@ function LoginForm() {
     setError('');
     setSuccess('');
 
+    console.log('=== Login attempt ===');
+    console.log('Email:', email);
+    console.log('Password:', password.replace(/./g, '*'));
+
     try {
+      console.log('Calling authAPI.login...');
       const response = await authAPI.login(email, password);
 
-      localStorage.setItem('token', response.data.token);
+      console.log('Login response received:', response);
+      console.log('Response status:', response.status);
+      console.log('Response data:', response.data);
+      console.log('Access token present:', !!response.data.access_token);
+      console.log('User object:', response.data.user);
+
+      if (!response.data.access_token) {
+        throw new Error('No access token in response');
+      }
+
+      localStorage.setItem('token', response.data.access_token);
       localStorage.setItem('user', JSON.stringify(response.data.user));
 
+      console.log('Credentials stored in localStorage');
+      console.log('Token in localStorage:', localStorage.getItem('token')?.substring(0, 20) + '...');
+
       const user = response.data.user;
+      console.log('User role:', user.role);
+
       if (user.role === 'ADMIN' || user.role === 'PRINCIPAL') {
+        console.log('Redirecting to admin dashboard...');
         router.push('/admin/dashboard');
       } else if (user.role === 'TEACHER') {
+        console.log('Redirecting to teacher dashboard...');
         router.push('/teacher/dashboard');
       } else {
+        console.log('Redirecting to student dashboard...');
         router.push('/student/dashboard');
       }
     } catch (err: any) {
-      setError(err.response?.data?.message || 'Login failed');
+      console.error('=== Login error ===');
+      console.error('Full error object:', err);
+      console.error('Error response:', err.response);
+      console.error('Error message:', err.message);
+
+      if (err.response) {
+        console.error('Response status:', err.response.status);
+        console.error('Response data:', err.response.data);
+        console.error('Response headers:', err.response.headers);
+      }
+
+      const errorMessage = err.response?.data?.message || err.message || 'Login failed';
+      console.error('Setting error message:', errorMessage);
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }

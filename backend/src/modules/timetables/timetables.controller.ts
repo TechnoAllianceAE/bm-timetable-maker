@@ -17,6 +17,7 @@ export class TimetablesController {
   @ApiResponse({ status: 201, description: 'Timetable generated successfully' })
   @ApiResponse({ status: 400, description: 'Invalid constraints' })
   generate(@Body() generateTimetableDto: GenerateTimetableDto) {
+    console.log('Received timetable generation request:', generateTimetableDto);
     return this.timetablesService.generate(generateTimetableDto);
   }
 

@@ -13,13 +13,15 @@ export class SchoolsService {
     });
   }
 
-  async findAll(page: number = 1, limit: number = 10) {
-    const skip = (page - 1) * limit;
+  async findAll(page?: number, limit?: number) {
+    const pageNum = page || 1;
+    const limitNum = limit || 10;
+    const skip = (pageNum - 1) * limitNum;
 
     const [schools, total] = await Promise.all([
       this.prisma.school.findMany({
         skip,
-        take: limit,
+        take: limitNum,
         orderBy: {
           createdAt: 'desc',
         },
@@ -31,9 +33,9 @@ export class SchoolsService {
       data: schools,
       meta: {
         total,
-        page,
-        limit,
-        totalPages: Math.ceil(total / limit),
+        page: pageNum,
+        limit: limitNum,
+        totalPages: Math.ceil(total / limitNum),
       },
     };
   }
@@ -41,12 +43,6 @@ export class SchoolsService {
   async findOne(id: string) {
     const school = await this.prisma.school.findUnique({
       where: { id },
-      include: {
-        users: true,
-        classes: true,
-        subjects: true,
-        rooms: true,
-      },
     });
 
     if (!school) {

@@ -20,5 +20,11 @@
     "paths": {
       "@/*": ["src/*"]
     }
-  }
+  },
+  "exclude": [
+    "src/timetables/timetable.routes.ts",
+    "src/timetables/timetable.service.ts",
+    "src/timetables/timetableEngine.client.ts",
+    "src/shared/middleware/validation.ts"
+  ]
 }

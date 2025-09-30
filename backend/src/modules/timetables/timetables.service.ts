@@ -247,19 +247,54 @@ export class TimetablesService {
         solutions: response.data?.solutions,
       };
     } catch (error) {
-      console.error('Timetable generation error:', error);
+      console.error('=== TIMETABLE GENERATION ERROR START ===');
+      console.error('Error message:', error.message);
+      console.error('Error code:', error.code);
 
       if (error.response) {
-        console.error('HTTP Response Status:', error.response.status);
-        console.error('HTTP Response Data:', error.response.data);
+        console.error('Python service returned error:');
+        console.error('Status:', error.response.status);
+        console.error('Status Text:', error.response.statusText);
+        console.error('Response Data:', error.response.data);
 
-        // Extract detailed error information
-        const errorDetails = error.response.data?.detail || error.response.data?.message || error.response.statusText;
-        const errorMessage = typeof errorDetails === 'string'
-          ? errorDetails
-          : JSON.stringify(errorDetails, null, 2);
+        // Extract the detailed error from Python service
+        let errorMessage = 'Unknown error from Python service';
 
-        throw new BadRequestException(`Python service error (${error.response.status}): ${errorMessage}`);
+        if (error.response.data?.detail) {
+          if (Array.isArray(error.response.data.detail)) {
+            // FastAPI validation errors
+            const validationErrors = error.response.data.detail.map(err =>
+              `${err.loc.join('.')}: ${err.msg} (input: ${JSON.stringify(err.input)})`
+            ).join('; ');
+            errorMessage = `Validation errors: ${validationErrors}`;
+          } else if (typeof error.response.data.detail === 'string') {
+            errorMessage = error.response.data.detail;
+          } else {
+            errorMessage = JSON.stringify(error.response.data.detail);
+          }
+        } else if (error.response.data?.message) {
+          errorMessage = error.response.data.message;
+        } else if (error.response.data?.error) {
+          errorMessage = error.response.data.error;
+        }
+
+        console.error('Extracted error message:', errorMessage);
+        console.error('=== TIMETABLE GENERATION ERROR END ===');
+
+        // Create a user-friendly error message
+        const userFriendlyMessage = error.response.data?.detail?.message || errorMessage;
+        const suggestions = error.response.data?.detail?.suggestions || [];
+        const conflicts = error.response.data?.detail?.conflicts || [];
+
+        let fullMessage = `Timetable generation failed: ${userFriendlyMessage}`;
+        if (conflicts.length > 0) {
+          fullMessage += `\n\nIssues found: ${conflicts.join(', ')}`;
+        }
+        if (suggestions.length > 0) {
+          fullMessage += `\n\nSuggestions: ${suggestions.join(', ')}`;
+        }
+
+        throw new BadRequestException(fullMessage);
       }
 
       if (error.code === 'ECONNREFUSED') {

@@ -17,39 +17,43 @@ export class CreateSubjectDto {
   @IsString()
   name: string;
 
-  @ApiProperty({ example: 'MATH' })
-  @IsString()
-  code: string;
-
-  @ApiPropertyOptional({ enum: SubjectType, default: SubjectType.CORE })
+  @ApiPropertyOptional({ example: 'Science', description: 'Department name' })
   @IsOptional()
-  @IsEnum(SubjectType)
-  type?: SubjectType;
+  @IsString()
+  department?: string;
+
+  @ApiProperty({ example: 4, description: 'Credit hours' })
+  @IsNumber()
+  @Min(1)
+  @Max(10)
+  credits: number;
 
   @ApiPropertyOptional({ example: 4, minimum: 1, maximum: 10 })
   @IsOptional()
   @IsNumber()
   @Min(1)
   @Max(10)
-  periodsPerWeek?: number;
+  minPeriodsPerWeek?: number;
 
-  @ApiPropertyOptional({ example: 2, description: 'Credit hours' })
+  @ApiPropertyOptional({ example: 6, minimum: 1, maximum: 10 })
   @IsOptional()
   @IsNumber()
-  credits?: number;
+  @Min(1)
+  @Max(10)
+  maxPeriodsPerWeek?: number;
 
-  @ApiPropertyOptional({ example: true, description: 'Whether the subject requires a lab' })
+  @ApiPropertyOptional({ example: 60, description: 'Preparation time in minutes' })
+  @IsOptional()
+  @IsNumber()
+  prepTime?: number;
+
+  @ApiPropertyOptional({ example: 0.5, description: 'Correction workload time per student' })
+  @IsOptional()
+  @IsNumber()
+  correctionWorkload?: number;
+
+  @ApiPropertyOptional({ example: false, description: 'Whether the subject requires a lab' })
   @IsOptional()
   @IsBoolean()
   requiresLab?: boolean;
-
-  @ApiPropertyOptional({ example: false, description: 'Whether the subject requires special room' })
-  @IsOptional()
-  @IsBoolean()
-  requiresSpecialRoom?: boolean;
-
-  @ApiPropertyOptional({ example: 'Advanced mathematics covering algebra, geometry, and calculus' })
-  @IsOptional()
-  @IsString()
-  description?: string;
 }

@@ -7,11 +7,13 @@ import { authAPI } from '@/lib/api';
 
 export default function RegisterPage() {
   const [formData, setFormData] = useState({
-    name: '',
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
     confirmPassword: '',
     role: 'TEACHER',
+    schoolId: 'default-school-id', // This should be selected from a dropdown in production
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -30,10 +32,15 @@ export default function RegisterPage() {
 
     try {
       await authAPI.register({
-        name: formData.name,
         email: formData.email,
         password: formData.password,
         role: formData.role,
+        schoolId: formData.schoolId,
+        // Temporarily disable profile until backend issue is fixed
+        // profile: {
+        //   firstName: formData.firstName,
+        //   lastName: formData.lastName,
+        // },
       });
 
       router.push('/auth/login?registered=true');
@@ -68,17 +75,33 @@ export default function RegisterPage() {
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-4">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                Full Name
+              <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
+                First Name
               </label>
               <input
-                id="name"
-                name="name"
+                id="firstName"
+                name="firstName"
                 type="text"
                 required
                 className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                placeholder="John Doe"
-                value={formData.name}
+                placeholder="John"
+                value={formData.firstName}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div>
+              <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
+                Last Name
+              </label>
+              <input
+                id="lastName"
+                name="lastName"
+                type="text"
+                required
+                className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                placeholder="Doe"
+                value={formData.lastName}
                 onChange={handleChange}
               />
             </div>

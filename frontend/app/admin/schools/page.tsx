@@ -40,7 +40,7 @@ export default function SchoolsPage() {
   const fetchSchools = async () => {
     try {
       const response = await schoolAPI.list();
-      setSchools(response.data);
+      setSchools(response.data.data || []);
     } catch (error) {
       console.error('Failed to fetch schools:', error);
     } finally {

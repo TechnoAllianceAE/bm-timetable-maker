@@ -24,11 +24,13 @@ export class RoomsController {
   @ApiResponse({ status: 200, description: 'Return all rooms' })
   findAll(
     @Query('schoolId') schoolId?: string,
-    @Query('page') page?: number,
-    @Query('limit') limit?: number,
+    @Query('page') page?: string,
+    @Query('limit') limit?: string,
     @Query('type') type?: string,
   ) {
-    return this.roomsService.findAll(schoolId, type, page, limit);
+    const pageNum = page ? parseInt(page, 10) : undefined;
+    const limitNum = limit ? parseInt(limit, 10) : undefined;
+    return this.roomsService.findAll(schoolId, type, pageNum, limitNum);
   }
 
   @Get(':id')

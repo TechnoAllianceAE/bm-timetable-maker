@@ -58,12 +58,7 @@ export class SubjectsService {
       where: { id },
       include: {
         school: true,
-        teachers: {
-          include: {
-            user: true,
-          },
-        },
-        assignments: {
+        timetableEntries: {
           include: {
             class: true,
             teacher: {
@@ -71,6 +66,8 @@ export class SubjectsService {
                 user: true,
               },
             },
+            timeSlot: true,
+            room: true,
           },
         },
       },

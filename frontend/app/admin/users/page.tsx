@@ -32,7 +32,7 @@ export default function UsersPage() {
   const fetchUsers = async () => {
     try {
       const response = await userAPI.list();
-      setUsers(response.data);
+      setUsers(response.data.data || []);
     } catch (error) {
       console.error('Failed to fetch users:', error);
     } finally {

@@ -17,20 +17,22 @@ export class UsersService {
         schoolId: true,
         profile: true,
         createdAt: true,
-        updatedAt: true,
+        passwordHash: true,
       },
     });
   }
 
-  async findAll(schoolId?: string, page: number = 1, limit: number = 10) {
-    const skip = (page - 1) * limit;
+  async findAll(schoolId?: string, page?: number, limit?: number) {
+    const pageNum = page || 1;
+    const limitNum = limit || 10;
+    const skip = (pageNum - 1) * limitNum;
     const where = schoolId ? { schoolId } : {};
 
     const [users, total] = await Promise.all([
       this.prisma.user.findMany({
         where,
         skip,
-        take: limit,
+        take: limitNum,
         select: {
           id: true,
           email: true,
@@ -38,7 +40,6 @@ export class UsersService {
           schoolId: true,
           profile: true,
           createdAt: true,
-          updatedAt: true,
         },
         orderBy: {
           createdAt: 'desc',
@@ -51,9 +52,9 @@ export class UsersService {
       data: users,
       meta: {
         total,
-        page,
-        limit,
-        totalPages: Math.ceil(total / limit),
+        page: pageNum,
+        limit: limitNum,
+        totalPages: Math.ceil(total / limitNum),
       },
     };
   }
@@ -70,7 +71,6 @@ export class UsersService {
         school: true,
         teacher: true,
         createdAt: true,
-        updatedAt: true,
       },
     });
 
@@ -99,7 +99,6 @@ export class UsersService {
           schoolId: true,
           profile: true,
           createdAt: true,
-          updatedAt: true,
         },
       });
     } catch (error) {

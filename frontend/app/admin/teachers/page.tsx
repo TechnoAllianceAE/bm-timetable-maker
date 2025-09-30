@@ -16,7 +16,16 @@ interface Teacher {
   school?: { name: string };
   maxHoursPerWeek: number;
   subjectIds: string[];
-  subjects?: { id: string; name: string }[];
+  subjects?: string | { id: string; name: string }[]; // Can be JSON string or parsed array
+  maxPeriodsPerDay?: number;
+  maxPeriodsPerWeek?: number;
+  availability?: string | object;
+  preferences?: string | object;
+  user?: {
+    id: string;
+    email: string;
+    profile?: string | object;
+  };
 }
 
 interface School {
@@ -59,9 +68,9 @@ export default function TeachersPage() {
         schoolAPI.list(),
         subjectAPI.list(),
       ]);
-      setTeachers(teachersRes.data);
-      setSchools(schoolsRes.data);
-      setSubjects(subjectsRes.data);
+      setTeachers(teachersRes.data.data || []);
+      setSchools(schoolsRes.data.data || []);
+      setSubjects(subjectsRes.data.data || []);
     } catch (error) {
       console.error('Failed to fetch data:', error);
     } finally {
@@ -171,42 +180,76 @@ export default function TeachersPage() {
                       <div className="flex-1">
                         <div className="flex items-center">
                           <div className="text-lg font-medium text-blue-600">
-                            {teacher.name}
+                            {(() => {
+                              if (teacher.user?.profile) {
+                                try {
+                                  const profile = typeof teacher.user.profile === 'string'
+                                    ? JSON.parse(teacher.user.profile)
+                                    : teacher.user.profile;
+                                  return profile.name || teacher.name || 'Unknown Teacher';
+                                } catch (e) {
+                                  return teacher.name || 'Unknown Teacher';
+                                }
+                              }
+                              return teacher.name || 'Unknown Teacher';
+                            })()}
                           </div>
                           <span className="ml-3 px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">
-                            {teacher.qualification}
+                            Teacher
                           </span>
                         </div>
                         <div className="mt-2 sm:flex sm:justify-between">
                           <div className="sm:flex sm:space-x-6">
                             <p className="flex items-center text-sm text-gray-500">
-                              📧 {teacher.email}
+                              📧 {teacher.user?.email || teacher.email || 'N/A'}
                             </p>
                             <p className="flex items-center text-sm text-gray-500">
-                              📞 {teacher.phone}
+                              📞 {(() => {
+                                if (teacher.user?.profile) {
+                                  try {
+                                    const profile = typeof teacher.user.profile === 'string'
+                                      ? JSON.parse(teacher.user.profile)
+                                      : teacher.user.profile;
+                                    return profile.phone || teacher.phone || 'N/A';
+                                  } catch (e) {
+                                    return teacher.phone || 'N/A';
+                                  }
+                                }
+                                return teacher.phone || 'N/A';
+                              })()}
                             </p>
                             <p className="flex items-center text-sm text-gray-500">
-                              🏫 {teacher.school?.name || 'N/A'}
+                              📚 Max {teacher.maxPeriodsPerDay || 6} periods/day
                             </p>
                             <p className="flex items-center text-sm text-gray-500">
-                              📚 {teacher.specialization}
+                              📅 Max {teacher.maxPeriodsPerWeek || 30} periods/week
                             </p>
-                          </div>
-                          <div className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
-                            <p>⏰ Max {teacher.maxHoursPerWeek} hrs/week</p>
                           </div>
                         </div>
-                        {teacher.subjects && teacher.subjects.length > 0 && (
+                        {teacher.subjects && (
                           <div className="mt-2">
                             <div className="flex flex-wrap gap-2">
-                              {teacher.subjects.map((subject) => (
-                                <span
-                                  key={subject.id}
-                                  className="px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded"
-                                >
-                                  {subject.name}
-                                </span>
-                              ))}
+                              {(() => {
+                                try {
+                                  const subjects = typeof teacher.subjects === 'string'
+                                    ? JSON.parse(teacher.subjects)
+                                    : teacher.subjects;
+
+                                  if (Array.isArray(subjects) && subjects.length > 0) {
+                                    return subjects.map((subject, index) => (
+                                      <span
+                                        key={subject.id || index}
+                                        className="px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded"
+                                      >
+                                        {subject.name || subject}
+                                      </span>
+                                    ));
+                                  }
+                                } catch (e) {
+                                  console.error('Error parsing teacher subjects:', e);
+                                }
+                                return null;
+                              })()}
                             </div>
                           </div>
                         )}

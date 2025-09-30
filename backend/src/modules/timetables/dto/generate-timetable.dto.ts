@@ -6,6 +6,10 @@ export class GenerateTimetableDto {
   @IsString()
   schoolId: string;
 
+  @ApiProperty({ example: 'academic-year-id-123' })
+  @IsString()
+  academicYearId: string;
+
   @ApiPropertyOptional({ example: 'Fall 2024 Timetable' })
   @IsOptional()
   @IsString()

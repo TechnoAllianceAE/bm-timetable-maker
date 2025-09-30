@@ -19,47 +19,19 @@ export class CreateRoomDto {
   @IsString()
   schoolId: string;
 
-  @ApiProperty({ example: '101' })
+  @ApiProperty({ example: 'Room 101' })
   @IsString()
-  roomNumber: string;
+  name: string;
 
-  @ApiPropertyOptional({ example: 'Building A' })
+  @ApiPropertyOptional({ example: 40, minimum: 1, maximum: 200 })
   @IsOptional()
-  @IsString()
-  building?: string;
-
-  @ApiPropertyOptional({ example: '1', description: 'Floor number' })
-  @IsOptional()
-  @IsString()
-  floor?: string;
-
-  @ApiPropertyOptional({ enum: RoomType, default: RoomType.CLASSROOM })
-  @IsOptional()
-  @IsEnum(RoomType)
-  type?: RoomType;
-
-  @ApiProperty({ example: 40, minimum: 1, maximum: 200 })
   @IsNumber()
   @Min(1)
   @Max(200)
-  capacity: number;
+  capacity?: number;
 
-  @ApiPropertyOptional({
-    example: ['Projector', 'Whiteboard', 'Air Conditioning'],
-    description: 'List of equipment/facilities available'
-  })
-  @IsOptional()
-  @IsArray()
-  @IsString({ each: true })
-  facilities?: string[];
-
-  @ApiPropertyOptional({ example: true, default: true })
-  @IsOptional()
-  @IsBoolean()
-  isAvailable?: boolean;
-
-  @ApiPropertyOptional({ example: 'Physics and Chemistry Lab' })
+  @ApiPropertyOptional({ example: 'CLASSROOM', description: 'Type of room' })
   @IsOptional()
   @IsString()
-  description?: string;
+  type?: string;
 }

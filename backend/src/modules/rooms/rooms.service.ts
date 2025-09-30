@@ -39,8 +39,7 @@ export class RoomsService {
           school: true,
         },
         orderBy: [
-          { building: 'asc' },
-          { roomNumber: 'asc' },
+          { name: 'asc' },
         ],
       }),
       this.prisma.room.count({ where }),
@@ -62,10 +61,12 @@ export class RoomsService {
       where: { id },
       include: {
         school: true,
-        timetableSlots: {
+        timetableEntries: {
           include: {
             timetable: true,
             timeSlot: true,
+            teacher: true,
+            subject: true,
           },
         },
       },

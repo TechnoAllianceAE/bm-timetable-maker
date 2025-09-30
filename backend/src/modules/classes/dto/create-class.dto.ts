@@ -12,18 +12,25 @@ export class CreateClassDto {
   @IsString()
   schoolId: string;
 
-  @ApiProperty({ example: '10', description: 'Grade level (1-12)' })
+  @ApiProperty({ example: 'Class 10A', description: 'Name of the class' })
   @IsString()
-  grade: string;
+  name: string;
 
-  @ApiProperty({ example: 'A', description: 'Section (A, B, C, etc.)' })
-  @IsString()
-  section: string;
+  @ApiProperty({ example: 10, description: 'Grade level (1-12)' })
+  @IsNumber()
+  @Min(1)
+  @Max(12)
+  grade: number;
 
-  @ApiPropertyOptional({ enum: ClassStream, description: 'Stream for grades 11-12' })
+  @ApiPropertyOptional({ example: 'A', description: 'Section (A, B, C, etc.)' })
   @IsOptional()
-  @IsEnum(ClassStream)
-  stream?: ClassStream;
+  @IsString()
+  section?: string;
+
+  @ApiPropertyOptional({ example: 'SCIENCE', description: 'Stream for grades 11-12' })
+  @IsOptional()
+  @IsString()
+  stream?: string;
 
   @ApiPropertyOptional({ example: 35, minimum: 1, maximum: 60 })
   @IsOptional()
@@ -31,14 +38,4 @@ export class CreateClassDto {
   @Min(1)
   @Max(60)
   studentCount?: number;
-
-  @ApiPropertyOptional({ example: 'Room 101', description: 'Home room for the class' })
-  @IsOptional()
-  @IsString()
-  homeRoom?: string;
-
-  @ApiPropertyOptional({ example: 'teacher-id-123', description: 'Class teacher ID' })
-  @IsOptional()
-  @IsString()
-  classTeacherId?: string;
 }

@@ -3,15 +3,23 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import AdminLayout from '@/components/AdminLayout';
-import { timetableAPI, schoolAPI } from '@/lib/api';
+import { timetableAPI, schoolAPI, academicYearAPI } from '@/lib/api';
 
 interface School {
   id: string;
   name: string;
 }
 
+interface AcademicYear {
+  id: string;
+  year: string;
+  startDate?: string;
+  endDate?: string;
+}
+
 interface GenerationParams {
   schoolId: string;
+  academicYearId: string;
   name: string;
   description: string;
   startDate: string;
@@ -28,18 +36,39 @@ interface GenerationParams {
     preferMorningForDifficultSubjects: boolean;
     balanceTeacherWorkload: boolean;
   };
+  hardRules: {
+    noTeacherConflicts: boolean;
+    noRoomConflicts: boolean;
+    respectTeacherAvailability: boolean;
+    subjectPeriodsPerWeek: boolean;
+    maxPeriodsPerDayPerTeacher: boolean;
+    roomCapacityConstraints: boolean;
+    labRequirements: boolean;
+  };
+  softRules: {
+    minimizeTeacherGaps: boolean;
+    balanceSubjectDistribution: boolean;
+    avoidSinglePeriodGaps: boolean;
+    preferConsecutiveSubjects: boolean;
+    minimizeRoomChanges: boolean;
+    preferredTimeSlots: boolean;
+    teacherPreferences: boolean;
+  };
 }
 
 export default function GenerateTimetablePage() {
   const router = useRouter();
   const [schools, setSchools] = useState<School[]>([]);
+  const [academicYears, setAcademicYears] = useState<AcademicYear[]>([]);
   const [loading, setLoading] = useState(false);
   const [generating, setGenerating] = useState(false);
   const [generationResult, setGenerationResult] = useState<any>(null);
   const [error, setError] = useState('');
+  const [diagnostics, setDiagnostics] = useState<any>(null);
 
   const [params, setParams] = useState<GenerationParams>({
     schoolId: '',
+    academicYearId: '',
     name: '',
     description: '',
     startDate: '',
@@ -56,19 +85,44 @@ export default function GenerateTimetablePage() {
       preferMorningForDifficultSubjects: true,
       balanceTeacherWorkload: true,
     },
+    hardRules: {
+      noTeacherConflicts: true,
+      noRoomConflicts: true,
+      respectTeacherAvailability: true,
+      subjectPeriodsPerWeek: true,
+      maxPeriodsPerDayPerTeacher: true,
+      roomCapacityConstraints: true,
+      labRequirements: true,
+    },
+    softRules: {
+      minimizeTeacherGaps: true,
+      balanceSubjectDistribution: true,
+      avoidSinglePeriodGaps: true,
+      preferConsecutiveSubjects: false,
+      minimizeRoomChanges: true,
+      preferredTimeSlots: false,
+      teacherPreferences: false,
+    },
   });
 
   useEffect(() => {
     fetchSchools();
   }, []);
 
+  useEffect(() => {
+    if (params.schoolId) {
+      fetchAcademicYears(params.schoolId);
+    }
+  }, [params.schoolId]);
+
   const fetchSchools = async () => {
     setLoading(true);
     try {
       const response = await schoolAPI.list();
-      setSchools(response.data);
-      if (response.data.length > 0) {
-        setParams(prev => ({ ...prev, schoolId: response.data[0].id }));
+      const schoolsData = response.data.data || [];
+      setSchools(schoolsData);
+      if (schoolsData.length > 0) {
+        setParams(prev => ({ ...prev, schoolId: schoolsData[0].id }));
       }
     } catch (error) {
       console.error('Failed to fetch schools:', error);
@@ -78,15 +132,72 @@ export default function GenerateTimetablePage() {
     }
   };
 
+  const fetchAcademicYears = async (schoolId: string) => {
+    try {
+      // For now, use a mock academic year since the API endpoint doesn't exist yet
+      // In the future, this should call: const response = await academicYearAPI.list(schoolId);
+      const mockAcademicYears = [
+        {
+          id: 'cmg4x4ixh0001ouno5q5d9eb6', // Actual academic year ID from database
+          year: '2024-2025',
+          startDate: '2024-09-01',
+          endDate: '2025-06-30'
+        }
+      ];
+      setAcademicYears(mockAcademicYears);
+      setParams(prev => ({ ...prev, academicYearId: mockAcademicYears[0].id }));
+    } catch (error) {
+      console.error('Failed to fetch academic years:', error);
+      setError('Failed to load academic years');
+    }
+  };
+
   const handleGenerate = async (e: React.FormEvent) => {
     e.preventDefault();
     setGenerating(true);
     setError('');
     setGenerationResult(null);
+    setDiagnostics(null);
 
     try {
-      const response = await timetableAPI.generate(params);
+      // Transform the form data to match the backend API structure
+      const payload = {
+        schoolId: params.schoolId,
+        academicYearId: params.academicYearId,
+        name: params.name,
+        constraints: {
+          // Basic constraints
+          maxConsecutiveTeachingHours: params.constraints.maxConsecutiveTeachingHours,
+          minBreaksBetweenClasses: params.constraints.minBreaksBetweenClasses,
+          avoidBackToBackDifficultSubjects: params.constraints.avoidBackToBackDifficultSubjects,
+          preferMorningForDifficultSubjects: params.constraints.preferMorningForDifficultSubjects,
+          balanceTeacherWorkload: params.constraints.balanceTeacherWorkload,
+
+          // Schedule structure
+          periodsPerDay: params.periodsPerDay,
+          daysPerWeek: params.daysPerWeek,
+          periodDuration: params.periodDuration,
+          breakDuration: params.breakDuration,
+          lunchDuration: params.lunchDuration,
+
+          // Hard rules
+          hardRules: params.hardRules,
+
+          // Soft rules
+          softRules: params.softRules,
+        }
+      };
+
+      console.log('Sending timetable generation payload:', payload);
+      console.log('Auth token available:', !!localStorage.getItem('token'));
+
+      const response = await timetableAPI.generate(payload);
       setGenerationResult(response.data);
+
+      // Extract diagnostics if available
+      if (response.data.diagnostics) {
+        setDiagnostics(response.data.diagnostics);
+      }
 
       if (response.data.status === 'success') {
         setTimeout(() => {
@@ -94,7 +205,17 @@ export default function GenerateTimetablePage() {
         }, 3000);
       }
     } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to generate timetable');
+      console.error('Timetable generation error:', err);
+      console.error('Error response:', err.response?.data);
+      console.error('Error status:', err.response?.status);
+      console.error('Error headers:', err.response?.headers);
+
+      // Extract diagnostics from error response if available
+      if (err.response?.data?.diagnostics) {
+        setDiagnostics(err.response.data.diagnostics);
+      }
+
+      setError(err.response?.data?.message || err.message || 'Failed to generate timetable');
     } finally {
       setGenerating(false);
     }
@@ -105,6 +226,26 @@ export default function GenerateTimetablePage() {
       ...prev,
       constraints: {
         ...prev.constraints,
+        [key]: value,
+      },
+    }));
+  };
+
+  const handleHardRuleChange = (key: keyof typeof params.hardRules, value: boolean) => {
+    setParams(prev => ({
+      ...prev,
+      hardRules: {
+        ...prev.hardRules,
+        [key]: value,
+      },
+    }));
+  };
+
+  const handleSoftRuleChange = (key: keyof typeof params.softRules, value: boolean) => {
+    setParams(prev => ({
+      ...prev,
+      softRules: {
+        ...prev.softRules,
         [key]: value,
       },
     }));
@@ -137,13 +278,32 @@ export default function GenerateTimetablePage() {
                   <select
                     required
                     value={params.schoolId}
-                    onChange={(e) => setParams({ ...params, schoolId: e.target.value })}
+                    onChange={(e) => setParams({ ...params, schoolId: e.target.value, academicYearId: '' })}
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
                   >
                     <option value="">Select a school</option>
                     {schools.map((school) => (
                       <option key={school.id} value={school.id}>
                         {school.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">
+                    Academic Year
+                  </label>
+                  <select
+                    required
+                    value={params.academicYearId}
+                    onChange={(e) => setParams({ ...params, academicYearId: e.target.value })}
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+                    disabled={!params.schoolId}
+                  >
+                    <option value="">Select an academic year</option>
+                    {academicYears.map((year) => (
+                      <option key={year.id} value={year.id}>
+                        {year.year}
                       </option>
                     ))}
                   </select>
@@ -363,65 +523,488 @@ export default function GenerateTimetablePage() {
               </div>
             </div>
 
-            {/* Error Display */}
+            {/* Hard Rules */}
+            <div>
+              <h2 className="text-lg font-medium text-gray-900 mb-4">
+                Hard Rules
+                <span className="text-sm text-red-600 ml-2">(Must be satisfied)</span>
+              </h2>
+              <div className="space-y-3">
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={params.hardRules.noTeacherConflicts}
+                    onChange={(e) => handleHardRuleChange('noTeacherConflicts', e.target.checked)}
+                    className="rounded border-gray-300 text-red-600 shadow-sm mr-3"
+                  />
+                  <span className="text-sm font-medium text-gray-700">
+                    No teacher conflicts - A teacher cannot be in two places at once
+                  </span>
+                </label>
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={params.hardRules.noRoomConflicts}
+                    onChange={(e) => handleHardRuleChange('noRoomConflicts', e.target.checked)}
+                    className="rounded border-gray-300 text-red-600 shadow-sm mr-3"
+                  />
+                  <span className="text-sm font-medium text-gray-700">
+                    No room conflicts - A room cannot host multiple classes simultaneously
+                  </span>
+                </label>
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={params.hardRules.respectTeacherAvailability}
+                    onChange={(e) => handleHardRuleChange('respectTeacherAvailability', e.target.checked)}
+                    className="rounded border-gray-300 text-red-600 shadow-sm mr-3"
+                  />
+                  <span className="text-sm font-medium text-gray-700">
+                    Respect teacher availability - Only assign teachers when they are available
+                  </span>
+                </label>
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={params.hardRules.subjectPeriodsPerWeek}
+                    onChange={(e) => handleHardRuleChange('subjectPeriodsPerWeek', e.target.checked)}
+                    className="rounded border-gray-300 text-red-600 shadow-sm mr-3"
+                  />
+                  <span className="text-sm font-medium text-gray-700">
+                    Meet subject period requirements - Ensure minimum periods per week for each subject
+                  </span>
+                </label>
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={params.hardRules.maxPeriodsPerDayPerTeacher}
+                    onChange={(e) => handleHardRuleChange('maxPeriodsPerDayPerTeacher', e.target.checked)}
+                    className="rounded border-gray-300 text-red-600 shadow-sm mr-3"
+                  />
+                  <span className="text-sm font-medium text-gray-700">
+                    Respect teacher daily limits - Don't exceed maximum periods per day per teacher
+                  </span>
+                </label>
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={params.hardRules.roomCapacityConstraints}
+                    onChange={(e) => handleHardRuleChange('roomCapacityConstraints', e.target.checked)}
+                    className="rounded border-gray-300 text-red-600 shadow-sm mr-3"
+                  />
+                  <span className="text-sm font-medium text-gray-700">
+                    Room capacity constraints - Ensure class size doesn't exceed room capacity
+                  </span>
+                </label>
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={params.hardRules.labRequirements}
+                    onChange={(e) => handleHardRuleChange('labRequirements', e.target.checked)}
+                    className="rounded border-gray-300 text-red-600 shadow-sm mr-3"
+                  />
+                  <span className="text-sm font-medium text-gray-700">
+                    Lab requirements - Assign lab subjects to appropriate lab rooms
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            {/* Soft Rules */}
+            <div>
+              <h2 className="text-lg font-medium text-gray-900 mb-4">
+                Soft Rules
+                <span className="text-sm text-blue-600 ml-2">(Preferred but flexible)</span>
+              </h2>
+              <div className="space-y-3">
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={params.softRules.minimizeTeacherGaps}
+                    onChange={(e) => handleSoftRuleChange('minimizeTeacherGaps', e.target.checked)}
+                    className="rounded border-gray-300 text-blue-600 shadow-sm mr-3"
+                  />
+                  <span className="text-sm font-medium text-gray-700">
+                    Minimize teacher gaps - Reduce free periods between classes for teachers
+                  </span>
+                </label>
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={params.softRules.balanceSubjectDistribution}
+                    onChange={(e) => handleSoftRuleChange('balanceSubjectDistribution', e.target.checked)}
+                    className="rounded border-gray-300 text-blue-600 shadow-sm mr-3"
+                  />
+                  <span className="text-sm font-medium text-gray-700">
+                    Balance subject distribution - Spread subjects evenly across days
+                  </span>
+                </label>
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={params.softRules.avoidSinglePeriodGaps}
+                    onChange={(e) => handleSoftRuleChange('avoidSinglePeriodGaps', e.target.checked)}
+                    className="rounded border-gray-300 text-blue-600 shadow-sm mr-3"
+                  />
+                  <span className="text-sm font-medium text-gray-700">
+                    Avoid single period gaps - Prevent isolated free periods in schedules
+                  </span>
+                </label>
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={params.softRules.preferConsecutiveSubjects}
+                    onChange={(e) => handleSoftRuleChange('preferConsecutiveSubjects', e.target.checked)}
+                    className="rounded border-gray-300 text-blue-600 shadow-sm mr-3"
+                  />
+                  <span className="text-sm font-medium text-gray-700">
+                    Prefer consecutive subjects - Group multiple periods of same subject together
+                  </span>
+                </label>
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={params.softRules.minimizeRoomChanges}
+                    onChange={(e) => handleSoftRuleChange('minimizeRoomChanges', e.target.checked)}
+                    className="rounded border-gray-300 text-blue-600 shadow-sm mr-3"
+                  />
+                  <span className="text-sm font-medium text-gray-700">
+                    Minimize room changes - Keep classes in same room when possible
+                  </span>
+                </label>
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={params.softRules.preferredTimeSlots}
+                    onChange={(e) => handleSoftRuleChange('preferredTimeSlots', e.target.checked)}
+                    className="rounded border-gray-300 text-blue-600 shadow-sm mr-3"
+                  />
+                  <span className="text-sm font-medium text-gray-700">
+                    Respect preferred time slots - Consider teacher and subject time preferences
+                  </span>
+                </label>
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={params.softRules.teacherPreferences}
+                    onChange={(e) => handleSoftRuleChange('teacherPreferences', e.target.checked)}
+                    className="rounded border-gray-300 text-blue-600 shadow-sm mr-3"
+                  />
+                  <span className="text-sm font-medium text-gray-700">
+                    Teacher preferences - Consider individual teacher scheduling preferences
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            {/* Error Display with Diagnostics */}
             {error && (
-              <div className="rounded-md bg-red-50 p-4">
-                <p className="text-sm text-red-800">{error}</p>
+              <div className="rounded-md bg-red-50 p-4 space-y-4">
+                <div className="flex items-start">
+                  <div className="flex-shrink-0">
+                    <span className="text-red-400 text-lg">❌</span>
+                  </div>
+                  <div className="ml-3">
+                    <h3 className="text-sm font-medium text-red-800">Generation Failed</h3>
+                    <p className="text-sm text-red-700 mt-1">{error}</p>
+                  </div>
+                </div>
+
+                {/* Diagnostic Information */}
+                {diagnostics && (
+                  <div className="border-t border-red-200 pt-4">
+                    <h4 className="text-sm font-medium text-red-800 mb-3">🔍 Diagnostic Analysis</h4>
+
+                    {/* Critical Issues */}
+                    {diagnostics.critical_issues && diagnostics.critical_issues.length > 0 && (
+                      <div className="mb-4">
+                        <h5 className="text-xs font-medium text-red-800 mb-2 uppercase tracking-wide">Critical Issues</h5>
+                        <div className="space-y-2">
+                          {diagnostics.critical_issues.map((issue: any, index: number) => (
+                            <div key={index} className="bg-red-100 rounded p-3">
+                              <div className="flex items-center mb-1">
+                                <span className="text-red-600 text-xs font-medium uppercase">{issue.type}</span>
+                              </div>
+                              <p className="text-sm text-red-700 mb-2">{issue.message}</p>
+                              {issue.suggestions && issue.suggestions.length > 0 && (
+                                <div className="mt-2">
+                                  <p className="text-xs font-medium text-red-600 mb-1">Suggested Solutions:</p>
+                                  <ul className="text-xs text-red-600 space-y-1">
+                                    {issue.suggestions.map((suggestion: string, idx: number) => (
+                                      <li key={idx} className="flex items-start">
+                                        <span className="mr-1">•</span>
+                                        <span>{suggestion}</span>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Resource Bottlenecks */}
+                    {diagnostics.bottleneck_resources && Object.keys(diagnostics.bottleneck_resources).length > 0 && (
+                      <div className="mb-4">
+                        <h5 className="text-xs font-medium text-red-800 mb-2 uppercase tracking-wide">Resource Bottlenecks</h5>
+                        <div className="space-y-1">
+                          {Object.entries(diagnostics.bottleneck_resources).map(([resource, score]: [string, any]) => (
+                            <div key={resource} className="flex items-center justify-between bg-red-100 rounded px-3 py-2">
+                              <span className="text-xs font-medium text-red-700 capitalize">{resource.replace('_', ' ')}</span>
+                              <div className="flex items-center space-x-2">
+                                <div className="w-16 bg-red-200 rounded-full h-2">
+                                  <div
+                                    className="bg-red-600 h-2 rounded-full"
+                                    style={{ width: `${Math.min(100, score)}%` }}
+                                  ></div>
+                                </div>
+                                <span className="text-xs text-red-600 font-medium">{Math.round(score)}%</span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Recommendations */}
+                    {diagnostics.recommendations && diagnostics.recommendations.length > 0 && (
+                      <div>
+                        <h5 className="text-xs font-medium text-red-800 mb-2 uppercase tracking-wide">💡 Recommendations</h5>
+                        <div className="bg-red-100 rounded p-3">
+                          <ul className="text-xs text-red-700 space-y-1">
+                            {diagnostics.recommendations.map((rec: string, index: number) => (
+                              <li key={index} className="flex items-start">
+                                <span className="mr-1 text-red-500">▶</span>
+                                <span>{rec}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             )}
 
-            {/* Generation Result */}
+            {/* Generation Result with Enhanced Diagnostics */}
             {generationResult && (
               <div
-                className={`rounded-md p-4 ${
+                className={`rounded-md p-4 space-y-4 ${
                   generationResult.status === 'success'
                     ? 'bg-green-50'
                     : generationResult.status === 'partial'
                     ? 'bg-yellow-50'
+                    : generationResult.status === 'infeasible'
+                    ? 'bg-orange-50'
                     : 'bg-red-50'
                 }`}
               >
-                <h3
-                  className={`text-sm font-medium mb-2 ${
-                    generationResult.status === 'success'
-                      ? 'text-green-800'
-                      : generationResult.status === 'partial'
-                      ? 'text-yellow-800'
-                      : 'text-red-800'
-                  }`}
-                >
-                  {generationResult.status === 'success'
-                    ? '✅ Timetable Generated Successfully!'
-                    : generationResult.status === 'partial'
-                    ? '⚠️ Partial Timetable Generated'
-                    : '❌ Generation Failed'}
-                </h3>
-                {generationResult.message && (
-                  <p
-                    className={`text-sm ${
-                      generationResult.status === 'success'
-                        ? 'text-green-700'
+                <div className="flex items-start">
+                  <div className="flex-shrink-0">
+                    <span className="text-lg">
+                      {generationResult.status === 'success'
+                        ? '✅'
                         : generationResult.status === 'partial'
-                        ? 'text-yellow-700'
-                        : 'text-red-700'
-                    }`}
-                  >
-                    {generationResult.message}
-                  </p>
-                )}
-                {generationResult.diagnostics && (
-                  <div className="mt-3">
-                    <h4 className="text-xs font-medium text-gray-700 mb-1">Diagnostics:</h4>
-                    <pre className="text-xs text-gray-600 bg-white p-2 rounded overflow-x-auto">
-                      {JSON.stringify(generationResult.diagnostics, null, 2)}
-                    </pre>
+                        ? '⚠️'
+                        : generationResult.status === 'infeasible'
+                        ? '🚫'
+                        : '❌'}
+                    </span>
                   </div>
-                )}
-                {generationResult.status === 'success' && (
-                  <p className="text-sm text-green-600 mt-2">
-                    Redirecting to timetables list...
-                  </p>
-                )}
+                  <div className="ml-3 flex-1">
+                    <h3
+                      className={`text-sm font-medium mb-2 ${
+                        generationResult.status === 'success'
+                          ? 'text-green-800'
+                          : generationResult.status === 'partial'
+                          ? 'text-yellow-800'
+                          : generationResult.status === 'infeasible'
+                          ? 'text-orange-800'
+                          : 'text-red-800'
+                      }`}
+                    >
+                      {generationResult.status === 'success'
+                        ? 'Timetable Generated Successfully!'
+                        : generationResult.status === 'partial'
+                        ? 'Partial Timetable Generated'
+                        : generationResult.status === 'infeasible'
+                        ? 'Problem is Mathematically Infeasible'
+                        : 'Generation Failed'}
+                    </h3>
+
+                    {/* Generation Statistics */}
+                    {generationResult.generation_time && (
+                      <div className="flex items-center space-x-4 text-xs text-gray-600 mb-3">
+                        <span>⏱️ Generated in {generationResult.generation_time}s</span>
+                        {generationResult.solutions && (
+                          <span>📊 {generationResult.solutions.length} solution(s) found</span>
+                        )}
+                      </div>
+                    )}
+
+                    {generationResult.message && (
+                      <p
+                        className={`text-sm mb-3 ${
+                          generationResult.status === 'success'
+                            ? 'text-green-700'
+                            : generationResult.status === 'partial'
+                            ? 'text-yellow-700'
+                            : generationResult.status === 'infeasible'
+                            ? 'text-orange-700'
+                            : 'text-red-700'
+                        }`}
+                      >
+                        {generationResult.message}
+                      </p>
+                    )}
+
+                    {/* Success Diagnostics */}
+                    {generationResult.status === 'success' && generationResult.diagnostics && (
+                      <div className="border-t border-green-200 pt-4">
+                        <h4 className="text-sm font-medium text-green-800 mb-3">📊 Generation Analytics</h4>
+
+                        {/* Optimization Summary */}
+                        {generationResult.diagnostics.optimization_summary && (
+                          <div className="bg-green-100 rounded p-3 mb-3">
+                            <h5 className="text-xs font-medium text-green-800 mb-2 uppercase tracking-wide">Optimization Performance</h5>
+                            <div className="grid grid-cols-3 gap-4 text-xs">
+                              {generationResult.diagnostics.optimization_summary.csp_time && (
+                                <div className="text-center">
+                                  <div className="text-green-600 font-medium">⚡ CSP Solver</div>
+                                  <div className="text-green-700">{generationResult.diagnostics.optimization_summary.csp_time}s</div>
+                                </div>
+                              )}
+                              {generationResult.diagnostics.optimization_summary.total_iterations && (
+                                <div className="text-center">
+                                  <div className="text-green-600 font-medium">🔄 Iterations</div>
+                                  <div className="text-green-700">{generationResult.diagnostics.optimization_summary.total_iterations}</div>
+                                </div>
+                              )}
+                              {generationResult.diagnostics.optimization_summary.final_fitness && (
+                                <div className="text-center">
+                                  <div className="text-green-600 font-medium">🎯 Quality Score</div>
+                                  <div className="text-green-700">{Math.round(generationResult.diagnostics.optimization_summary.final_fitness)}%</div>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Resource Utilization */}
+                        {generationResult.diagnostics.resource_utilization && Object.keys(generationResult.diagnostics.resource_utilization).length > 0 && (
+                          <div className="bg-green-100 rounded p-3 mb-3">
+                            <h5 className="text-xs font-medium text-green-800 mb-2 uppercase tracking-wide">Resource Utilization</h5>
+                            <div className="space-y-1">
+                              {Object.entries(generationResult.diagnostics.resource_utilization).map(([resource, utilization]: [string, any]) => (
+                                <div key={resource} className="flex items-center justify-between">
+                                  <span className="text-xs font-medium text-green-700 capitalize">{resource.replace('_', ' ')}</span>
+                                  <div className="flex items-center space-x-2">
+                                    <div className="w-16 bg-green-200 rounded-full h-2">
+                                      <div
+                                        className="bg-green-600 h-2 rounded-full"
+                                        style={{ width: `${Math.min(100, utilization)}%` }}
+                                      ></div>
+                                    </div>
+                                    <span className="text-xs text-green-600 font-medium">{Math.round(utilization)}%</span>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Warnings (if any) */}
+                        {generationResult.diagnostics.warnings && generationResult.diagnostics.warnings.length > 0 && (
+                          <div className="bg-yellow-50 border border-yellow-200 rounded p-3 mb-3">
+                            <h5 className="text-xs font-medium text-yellow-800 mb-2 uppercase tracking-wide">⚠️ Optimization Notes</h5>
+                            <ul className="text-xs text-yellow-700 space-y-1">
+                              {generationResult.diagnostics.warnings.map((warning: string, index: number) => (
+                                <li key={index} className="flex items-start">
+                                  <span className="mr-1">•</span>
+                                  <span>{warning}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+
+                        {/* Convergence Analysis */}
+                        {generationResult.diagnostics.convergence && (
+                          <div className="bg-green-100 rounded p-3">
+                            <h5 className="text-xs font-medium text-green-800 mb-1 uppercase tracking-wide">Algorithm Status</h5>
+                            <p className="text-xs text-green-700">{generationResult.diagnostics.convergence}</p>
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    {/* Failed/Infeasible Diagnostics */}
+                    {(generationResult.status === 'failed' || generationResult.status === 'infeasible') && generationResult.diagnostics && (
+                      <div className={`border-t pt-4 ${generationResult.status === 'infeasible' ? 'border-orange-200' : 'border-red-200'}`}>
+                        <h4 className={`text-sm font-medium mb-3 ${generationResult.status === 'infeasible' ? 'text-orange-800' : 'text-red-800'}`}>
+                          🔍 Failure Analysis
+                        </h4>
+
+                        {/* Solver Stage */}
+                        {generationResult.diagnostics.solver_stage && (
+                          <div className={`rounded p-3 mb-3 ${generationResult.status === 'infeasible' ? 'bg-orange-100' : 'bg-red-100'}`}>
+                            <p className={`text-xs ${generationResult.status === 'infeasible' ? 'text-orange-700' : 'text-red-700'}`}>
+                              Failed at: <span className="font-medium">{generationResult.diagnostics.solver_stage} stage</span>
+                            </p>
+                          </div>
+                        )}
+
+                        {/* Conflicts */}
+                        {generationResult.diagnostics.conflicts && generationResult.diagnostics.conflicts.length > 0 && (
+                          <div className={`rounded p-3 mb-3 ${generationResult.status === 'infeasible' ? 'bg-orange-100' : 'bg-red-100'}`}>
+                            <h5 className={`text-xs font-medium mb-2 uppercase tracking-wide ${generationResult.status === 'infeasible' ? 'text-orange-800' : 'text-red-800'}`}>
+                              Detected Conflicts
+                            </h5>
+                            <ul className={`text-xs space-y-1 ${generationResult.status === 'infeasible' ? 'text-orange-700' : 'text-red-700'}`}>
+                              {generationResult.diagnostics.conflicts.map((conflict: string, index: number) => (
+                                <li key={index} className="flex items-start">
+                                  <span className="mr-1">•</span>
+                                  <span className="capitalize">{conflict.replace('_', ' ')}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+
+                        {/* Suggestions */}
+                        {generationResult.diagnostics.suggestions && generationResult.diagnostics.suggestions.length > 0 && (
+                          <div className={`rounded p-3 ${generationResult.status === 'infeasible' ? 'bg-orange-100' : 'bg-red-100'}`}>
+                            <h5 className={`text-xs font-medium mb-2 uppercase tracking-wide ${generationResult.status === 'infeasible' ? 'text-orange-800' : 'text-red-800'}`}>
+                              💡 Suggested Actions
+                            </h5>
+                            <ul className={`text-xs space-y-1 ${generationResult.status === 'infeasible' ? 'text-orange-700' : 'text-red-700'}`}>
+                              {generationResult.diagnostics.suggestions.map((suggestion: string, index: number) => (
+                                <li key={index} className="flex items-start">
+                                  <span className="mr-1">▶</span>
+                                  <span>{suggestion}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    {generationResult.status === 'success' && (
+                      <div className="mt-4 flex items-center justify-between bg-green-100 rounded p-3">
+                        <p className="text-sm text-green-600">
+                          ✨ Timetable ready! Redirecting to view...
+                        </p>
+                        <div className="text-xs text-green-500">
+                          Auto-redirect in 3s
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
             )}
 
@@ -436,7 +1019,7 @@ export default function GenerateTimetablePage() {
               </button>
               <button
                 type="submit"
-                disabled={generating || !params.schoolId}
+                disabled={generating || !params.schoolId || !params.academicYearId}
                 className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {generating ? (

@@ -23,15 +23,17 @@ export class ClassesService {
     return classes;
   }
 
-  async findAll(schoolId?: string, page: number = 1, limit: number = 10) {
-    const skip = (page - 1) * limit;
+  async findAll(schoolId?: string, page?: number, limit?: number) {
+    const pageNum = page || 1;
+    const limitNum = limit || 10;
+    const skip = (pageNum - 1) * limitNum;
     const where = schoolId ? { schoolId } : {};
 
     const [classes, total] = await Promise.all([
       this.prisma.class.findMany({
         where,
         skip,
-        take: limit,
+        take: limitNum,
         include: {
           school: true,
         },
@@ -47,9 +49,9 @@ export class ClassesService {
       data: classes,
       meta: {
         total,
-        page,
-        limit,
-        totalPages: Math.ceil(total / limit),
+        page: pageNum,
+        limit: limitNum,
+        totalPages: Math.ceil(total / limitNum),
       },
     };
   }
@@ -59,7 +61,7 @@ export class ClassesService {
       where: { id },
       include: {
         school: true,
-        assignments: {
+        timetableEntries: {
           include: {
             teacher: {
               include: {
@@ -67,6 +69,8 @@ export class ClassesService {
               },
             },
             subject: true,
+            timeSlot: true,
+            room: true,
           },
         },
       },

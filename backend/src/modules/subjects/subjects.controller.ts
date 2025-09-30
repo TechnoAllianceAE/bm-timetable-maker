@@ -24,10 +24,12 @@ export class SubjectsController {
   @ApiResponse({ status: 200, description: 'Return all subjects' })
   findAll(
     @Query('schoolId') schoolId?: string,
-    @Query('page') page?: number,
-    @Query('limit') limit?: number,
+    @Query('page') page?: string,
+    @Query('limit') limit?: string,
   ) {
-    return this.subjectsService.findAll(schoolId, page, limit);
+    const pageNum = page ? parseInt(page, 10) : undefined;
+    const limitNum = limit ? parseInt(limit, 10) : undefined;
+    return this.subjectsService.findAll(schoolId, pageNum, limitNum);
   }
 
   @Get(':id')
