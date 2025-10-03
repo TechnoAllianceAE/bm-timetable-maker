@@ -247,20 +247,20 @@ class VerboseLogger:
 
         # Summary
         report.append(f"\n📊 SUMMARY")
-        report.append(f"  Total Time: {analysis['total_time']:.2f} seconds")
-        report.append(f"  Iterations: {analysis['iterations']}")
-        report.append(f"  Improvement Rate: {analysis['improvement_rate']:.1f}%")
-        report.append(f"  Status: {analysis['convergence_analysis']}")
+        report.append(f"  Total Time: {analysis.get('total_time', 0):.2f} seconds")
+        report.append(f"  Iterations: {analysis.get('iterations', 0)}")
+        report.append(f"  Improvement Rate: {analysis.get('improvement_rate', 0):.1f}%")
+        report.append(f"  Status: {analysis.get('convergence_analysis', 'N/A')}")
 
         # Bottlenecks
         report.append(f"\n🔍 BOTTLENECK ANALYSIS")
 
-        if analysis['persistent_violations']:
+        if analysis.get('persistent_violations'):
             report.append("  Persistent Constraint Violations:")
             for vtype, count in analysis['persistent_violations']:
                 report.append(f"    • {vtype}: {count} occurrences")
 
-        if analysis['resource_bottlenecks']:
+        if analysis.get('resource_bottlenecks'):
             report.append("\n  Resource Bottlenecks:")
             for resource, conflicts in analysis['resource_bottlenecks'][:5]:
                 report.append(f"    • {resource}: involved in {conflicts} conflicts")
@@ -279,14 +279,16 @@ class VerboseLogger:
         recommendations = []
 
         # Check convergence
-        if "STAGNATED" in analysis['convergence_analysis']:
+        convergence = analysis.get('convergence_analysis', '')
+        if "STAGNATED" in convergence:
             recommendations.append("Algorithm is stuck - try increasing mutation rate or population diversity")
-        elif "NOT CONVERGING" in analysis['convergence_analysis']:
+        elif "NOT CONVERGING" in convergence:
             recommendations.append("Algorithm not converging - verify constraints are satisfiable")
 
         # Check persistent violations
-        if analysis['persistent_violations']:
-            top_violation = analysis['persistent_violations'][0][0]
+        persistent_violations = analysis.get('persistent_violations', [])
+        if persistent_violations:
+            top_violation = persistent_violations[0][0]
 
             if 'teacher_conflict' in top_violation.lower():
                 recommendations.append(f"Teacher conflicts are the main bottleneck - consider hiring more teachers or adjusting workload limits")
@@ -296,8 +298,9 @@ class VerboseLogger:
                 recommendations.append(f"Consecutive period constraints are too restrictive - consider relaxing them")
 
         # Check resource bottlenecks
-        if analysis['resource_bottlenecks']:
-            top_resources = [r[0] for r in analysis['resource_bottlenecks'][:3]]
+        resource_bottlenecks = analysis.get('resource_bottlenecks', [])
+        if resource_bottlenecks:
+            top_resources = [r[0] for r in resource_bottlenecks[:3]]
             recommendations.append(f"Resources causing most conflicts: {', '.join(top_resources)} - review their availability")
 
         if not recommendations:

@@ -250,9 +250,7 @@ npm run dev
 
 ### Future Algorithm Enhancements (Optional)
 - [ ] Genetic Algorithm optimization (for quality improvement)
-- [ ] Simulated Annealing (for local search)
-- [ ] Tabu Search (for diversification)
-- [ ] Multi-objective optimization (for preference handling)
+
 
 **Note**: Current CSP solver meets all requirements. Additional algorithms would be for optimization rather than core functionality.
 

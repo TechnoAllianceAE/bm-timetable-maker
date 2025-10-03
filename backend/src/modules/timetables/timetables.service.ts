@@ -6,6 +6,20 @@ import { GenerateTimetableDto } from './dto/generate-timetable.dto';
 import { UpdateTimetableDto } from './dto/update-timetable.dto';
 import { firstValueFrom } from 'rxjs';
 
+// Subject code to full name mapping
+const SUBJECT_CODE_MAP: Record<string, string> = {
+  'MATH': 'Mathematics',
+  'ENG': 'English',
+  'SCI': 'Science',
+  'SS': 'Social Studies',
+  'CS': 'Computer Science',
+  'PE': 'Physical Education',
+  'ART': 'Art',
+  'MUS': 'Music',
+  'HIN': 'Hindi',
+  'FRE': 'French',
+};
+
 @Injectable()
 export class TimetablesService {
   constructor(
@@ -179,7 +193,7 @@ export class TimetablesService {
         teachers: mappedTeachers.map(teacher => ({
           id: teacher.id,
           user_id: teacher.id, // Using same ID for simplicity
-          subjects: teacher.subjects,
+          subjects: this.transformTeacherSubjects(teacher.subjects),
           availability: typeof teacher.availability === 'string'
             ? JSON.parse(teacher.availability)
             : teacher.availability,
@@ -226,26 +240,41 @@ export class TimetablesService {
       console.log('Python service response status:', response.status);
       console.log('Python service response data keys:', Object.keys(response.data || {}));
 
+      // Check if the generation was successful
+      const pythonStatus = response.data?.status || 'unknown';
+      const isSuccessful = pythonStatus === 'success';
+      const isInfeasible = pythonStatus === 'infeasible';
+
       // Save timetable to database
       const timetable = await this.prisma.timetable.create({
         data: {
           schoolId,
           academicYearId: generateTimetableDto.academicYearId,
-          status: 'DRAFT',
+          status: isSuccessful ? 'DRAFT' : 'FAILED',
           metadata: JSON.stringify(response.data),
         },
       });
 
       console.log('Saved timetable to database with ID:', timetable.id);
+      console.log('Python status:', pythonStatus);
 
-      return {
-        status: 'success',
+      // Return diagnostics even if generation failed
+      const result = {
+        status: pythonStatus,
         timetable,
         generatedData: response.data,
         generation_time: response.data?.generation_time,
         diagnostics: response.data?.diagnostics,
         solutions: response.data?.solutions,
+        message: response.data?.message || (isInfeasible ? 'Timetable generation is mathematically infeasible with current constraints' : undefined),
       };
+
+      // If infeasible or failed, include detailed diagnostic info
+      if (!isSuccessful && response.data?.diagnostics) {
+        result.diagnostics = response.data.diagnostics;
+      }
+
+      return result;
     } catch (error) {
       console.error('=== TIMETABLE GENERATION ERROR START ===');
       console.error('Error message:', error.message);
@@ -423,5 +452,115 @@ export class TimetablesService {
         status: 'INACTIVE',
       },
     });
+  }
+
+  async getEntries(id: string) {
+    // First check if timetable exists
+    const timetable = await this.prisma.timetable.findUnique({
+      where: { id },
+    });
+
+    if (!timetable) {
+      throw new NotFoundException(`Timetable with ID ${id} not found`);
+    }
+
+    // Fetch all entries with related data
+    const entries = await this.prisma.timetableEntry.findMany({
+      where: { timetableId: id },
+      include: {
+        class: true,
+        subject: true,
+        teacher: {
+          include: {
+            user: true,
+          },
+        },
+        room: true,
+        timeSlot: true,
+      },
+    });
+
+    // Transform to match frontend expectations (compatible with TimetableViewer component)
+    const transformedEntries = entries.map(entry => ({
+      id: entry.id,
+      dayOfWeek: this.parseDayOfWeek(entry.timeSlot.day),
+      periodNumber: this.parsePeriodNumber(entry.timeSlot),
+      startTime: entry.timeSlot.startTime,
+      endTime: entry.timeSlot.endTime,
+      classId: entry.classId,
+      teacherId: entry.teacherId,
+      subjectId: entry.subjectId,
+      roomId: entry.roomId,
+      class: {
+        name: entry.class.name,
+      },
+      teacher: {
+        name: entry.teacher.user?.email || `Teacher-${entry.teacherId}`,
+      },
+      subject: {
+        name: entry.subject.name,
+      },
+      room: entry.room ? {
+        name: entry.room.name,
+        roomNumber: entry.room.name, // Use name as roomNumber since we don't have a separate field
+      } : null,
+    }));
+
+    return { data: transformedEntries };
+  }
+
+  private parseDayOfWeek(day: string): number {
+    const dayMap: Record<string, number> = {
+      'MONDAY': 1,
+      'TUESDAY': 2,
+      'WEDNESDAY': 3,
+      'THURSDAY': 4,
+      'FRIDAY': 5,
+      'SATURDAY': 6,
+      'SUNDAY': 7,
+    };
+    return dayMap[day.toUpperCase()] || 1;
+  }
+
+  private parsePeriodNumber(timeSlot: any): number {
+    // Try to extract period number from timeslot ID or calculate from time
+    if (timeSlot.id && timeSlot.id.includes('_P')) {
+      const match = timeSlot.id.match(/_P(\d+)/);
+      if (match) {
+        return parseInt(match[1], 10);
+      }
+    }
+
+    // Fallback: calculate from start time (assuming periods start at 08:00)
+    const startTime = timeSlot.startTime;
+    if (startTime) {
+      const [hours, minutes] = startTime.split(':').map(Number);
+      const totalMinutes = (hours - 8) * 60 + minutes;
+      return Math.floor(totalMinutes / 45) + 1; // Assuming 45-minute periods
+    }
+
+    return 1; // Default fallback
+  }
+
+  private transformTeacherSubjects(subjects: string[] | any): string[] {
+    // If subjects is already an array, transform codes to full names
+    if (Array.isArray(subjects)) {
+      return subjects.map(code => SUBJECT_CODE_MAP[code] || code);
+    }
+
+    // If subjects is a string, try to parse it as JSON first
+    if (typeof subjects === 'string') {
+      try {
+        const parsed = JSON.parse(subjects);
+        if (Array.isArray(parsed)) {
+          return parsed.map(code => SUBJECT_CODE_MAP[code] || code);
+        }
+      } catch (e) {
+        // If parsing fails, return empty array
+        return [];
+      }
+    }
+
+    return [];
   }
 }

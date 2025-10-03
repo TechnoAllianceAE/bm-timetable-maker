@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Complete Timetable - TT_20250930_170315_reduced46</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; background: #f5f5f5; }
+        h1 { color: #2c3e50; text-align: center; margin: 20px 0; }
+
+        /* Tab Navigation */
+        .tabs { background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .tab-buttons { display: flex; border-bottom: 2px solid #ddd; }
+        .tab-button { padding: 15px 30px; cursor: pointer; border: none; background: none; font-size: 16px; font-weight: bold; color: #7f8c8d; transition: all 0.3s; }
+        .tab-button:hover { background: #ecf0f1; }
+        .tab-button.active { color: #3498db; border-bottom: 3px solid #3498db; }
+        .tab-content { display: none; padding: 20px; }
+        .tab-content.active { display: block; }
+
+        .summary { background: #fff; padding: 20px; border-radius: 8px; margin: 0 20px 30px 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .summary h2 { margin-top: 0; color: #27ae60; }
+        .summary .stat { display: inline-block; margin-right: 30px; }
+        .class-timetable { background: white; margin: 30px 20px; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .class-timetable h3 { margin-top: 0; color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th { background: #3498db; color: white; padding: 12px; text-align: left; font-weight: bold; }
+        td { padding: 10px; border: 1px solid #ddd; }
+        tr:nth-child(even) { background: #f9f9f9; }
+        .subject { font-weight: bold; color: #2c3e50; }
+        .teacher { color: #7f8c8d; font-size: 0.9em; }
+        .class-info { color: #16a085; font-size: 0.9em; }
+        .gap { background: #ffebee !important; color: #c62828; font-weight: bold; }
+        .free { background: #e8f5e9 !important; color: #2e7d32; }
+        .complete-badge { display: inline-block; background: #27ae60; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.85em; margin-left: 10px; }
+        .gap-badge { display: inline-block; background: #e74c3c; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.85em; margin-left: 10px; }
+        .workload-badge { display: inline-block; background: #9b59b6; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.85em; margin-left: 10px; }
+    </style>
+    <script>
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            document.querySelector(`[onclick="switchTab('${tabName}')"]`).classList.add('active');
+        }
+    </script>
+</head>
+<body>
+    <h1>🎓 Complete School Timetable</h1>
+
+    <div class="tabs">
+        <div class="tab-buttons">
+            <button class="tab-button active" onclick="switchTab('classes')">📚 Class Timetables</button>
+            <button class="tab-button" onclick="switchTab('teachers')">👨‍🏫 Teacher Timetables</button>
+        </div>
+    </div>
+
+    <div class="summary">
+        <h2>✅ Generation Summary</h2>
+        <div class="stat"><strong>TT ID:</strong> TT_20250930_170315_reduced46</div>
+        <div class="stat"><strong>Classes:</strong> 14</div>
+        <div class="stat"><strong>Teachers:</strong> 46</div>
+        <div class="stat"><strong>Total Entries:</strong> 560/560</div>
+        <div class="stat"><strong>Coverage:</strong> 100.0%</div>
+    </div>
+
+    <div id="classes" class="tab-content active">
+
+    <div class="class-timetable">
+        <h3>Grade 6A <span class="complete-badge">✅ NO GAPS</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td><div class="subject">English</div><div class="teacher">Sarah Wright</div></td><td><div class="subject">Mathematics</div><div class="teacher">Lisa Martin</div></td><td><div class="subject">Hindi</div><div class="teacher">Lisa Miller</div></td><td><div class="subject">Social Studies</div><div class="teacher">Sarah Lee</div></td><td><div class="subject">Mathematics</div><div class="teacher">George Walker</div></td></tr>
+            <tr><td><strong>P2</strong></td><td><div class="subject">Mathematics</div><div class="teacher">Nancy Thomas</div></td><td><div class="subject">Music</div><div class="teacher">Ronald King</div></td><td><div class="subject">Physical Education</div><div class="teacher">Kimberly Young</div></td><td><div class="subject">Science</div><div class="teacher">Anthony Ramirez</div></td><td><div class="subject">English</div><div class="teacher">Sarah Wright</div></td></tr>
+            <tr><td><strong>P3</strong></td><td><div class="subject">English</div><div class="teacher">Matthew Rodriguez</div></td><td><div class="subject">Computer Science</div><div class="teacher">Ronald Garcia</div></td><td><div class="subject">Science</div><div class="teacher">David Smith</div></td><td><div class="subject">French</div><div class="teacher">Michael Smith</div></td><td><div class="subject">English</div><div class="teacher">Matthew Rodriguez</div></td></tr>
+            <tr><td><strong>P4</strong></td><td><div class="subject">Hindi</div><div class="teacher">Timothy Taylor</div></td><td><div class="subject">Art</div><div class="teacher">George Scott</div></td><td><div class="subject">Computer Science</div><div class="teacher">Matthew Davis</div></td><td><div class="subject">Hindi</div><div class="teacher">James Brown</div></td><td><div class="subject">Science</div><div class="teacher">Kenneth Walker</div></td></tr>
+            <tr><td><strong>P5</strong></td><td><div class="subject">Physical Education</div><div class="teacher">Kimberly Young</div></td><td><div class="subject">Computer Science</div><div class="teacher">Steven Taylor</div></td><td><div class="subject">Social Studies</div><div class="teacher">Sarah Hernandez</div></td><td><div class="subject">Mathematics</div><div class="teacher">Dorothy Torres</div></td><td><div class="subject">Science</div><div class="teacher">George Scott</div></td></tr>
+            <tr><td><strong>P6</strong></td><td><div class="subject">Computer Science</div><div class="teacher">Matthew Davis</div></td><td><div class="subject">Social Studies</div><div class="teacher">Brian Ramirez</div></td><td><div class="subject">Music</div><div class="teacher">Ronald King</div></td><td><div class="subject">Mathematics</div><div class="teacher">Helen White</div></td><td><div class="subject">Social Studies</div><div class="teacher">Sarah Lee</div></td></tr>
+            <tr><td><strong>P7</strong></td><td><div class="subject">Art</div><div class="teacher">Michael Wright</div></td><td><div class="subject">Science</div><div class="teacher">Andrew Wright</div></td><td><div class="subject">French</div><div class="teacher">Nancy Miller</div></td><td><div class="subject">French</div><div class="teacher">Sarah Wright</div></td><td><div class="subject">Mathematics</div><div class="teacher">Lisa Martin</div></td></tr>
+            <tr><td><strong>P8</strong></td><td><div class="subject">Science</div><div class="teacher">Kenneth Walker</div></td><td><div class="subject">Hindi</div><div class="teacher">Lisa Miller</div></td><td><div class="subject">Art</div><div class="teacher">David Smith</div></td><td><div class="subject">Physical Education</div><div class="teacher">Steven Taylor</div></td><td><div class="subject">English</div><div class="teacher">Nancy Jones</div></td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Grade 6B <span class="complete-badge">✅ NO GAPS</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td><div class="subject">Science</div><div class="teacher">Carol Wilson</div></td><td><div class="subject">Art</div><div class="teacher">Sarah Lee</div></td><td><div class="subject">French</div><div class="teacher">Sarah Wright</div></td><td><div class="subject">Hindi</div><div class="teacher">James Brown</div></td><td><div class="subject">Mathematics</div><div class="teacher">Lisa Miller</div></td></tr>
+            <tr><td><strong>P2</strong></td><td><div class="subject">Social Studies</div><div class="teacher">Michael Smith</div></td><td><div class="subject">Hindi</div><div class="teacher">Lisa Miller</div></td><td><div class="subject">Computer Science</div><div class="teacher">Kenneth Walker</div></td><td><div class="subject">Mathematics</div><div class="teacher">Joshua Clark</div></td><td><div class="subject">English</div><div class="teacher">George Walker</div></td></tr>
+            <tr><td><strong>P3</strong></td><td><div class="subject">Computer Science</div><div class="teacher">Matthew Davis</div></td><td><div class="subject">Social Studies</div><div class="teacher">Michael Smith</div></td><td><div class="subject">Mathematics</div><div class="teacher">Lisa Martin</div></td><td><div class="subject">Art</div><div class="teacher">George Scott</div></td><td><div class="subject">Mathematics</div><div class="teacher">Helen Jones</div></td></tr>
+            <tr><td><strong>P4</strong></td><td><div class="subject">English</div><div class="teacher">Matthew Rodriguez</div></td><td><div class="subject">Science</div><div class="teacher">Nancy Jones</div></td><td><div class="subject">French</div><div class="teacher">Nancy Miller</div></td><td><div class="subject">Science</div><div class="teacher">Anthony Ramirez</div></td><td><div class="subject">English</div><div class="teacher">Sarah Wright</div></td></tr>
+            <tr><td><strong>P5</strong></td><td><div class="subject">Computer Science</div><div class="teacher">Lisa Ramirez</div></td><td><div class="subject">Music</div><div class="teacher">Andrew Wright</div></td><td><div class="subject">English</div><div class="teacher">George Walker</div></td><td><div class="subject">Hindi</div><div class="teacher">Christopher Wright</div></td><td><div class="subject">Mathematics</div><div class="teacher">Joshua Clark</div></td></tr>
+            <tr><td><strong>P6</strong></td><td><div class="subject">Science</div><div class="teacher">Michelle Lopez</div></td><td><div class="subject">Art</div><div class="teacher">George Scott</div></td><td><div class="subject">Music</div><div class="teacher">Helen Taylor</div></td><td><div class="subject">Social Studies</div><div class="teacher">Sarah Lee</div></td><td><div class="subject">French</div><div class="teacher">Michael Smith</div></td></tr>
+            <tr><td><strong>P7</strong></td><td><div class="subject">English</div><div class="teacher">Nancy Jones</div></td><td><div class="subject">Science</div><div class="teacher">Jennifer Jones</div></td><td><div class="subject">Physical Education</div><div class="teacher">Lisa Miller</div></td><td><div class="subject">Social Studies</div><div class="teacher">Sarah Hernandez</div></td><td><div class="subject">Physical Education</div><div class="teacher">Lisa Miller</div></td></tr>
+            <tr><td><strong>P8</strong></td><td><div class="subject">Mathematics</div><div class="teacher">Joshua Clark</div></td><td><div class="subject">Physical Education</div><div class="teacher">Lisa Thomas</div></td><td><div class="subject">Science</div><div class="teacher">Karen Gonzalez</div></td><td><div class="subject">Computer Science</div><div class="teacher">Dorothy Thomas</div></td><td><div class="subject">Hindi</div><div class="teacher">Helen Jones</div></td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Grade 6C <span class="complete-badge">✅ NO GAPS</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td><div class="subject">Mathematics</div><div class="teacher">George Walker</div></td><td><div class="subject">Physical Education</div><div class="teacher">Paul Robinson</div></td><td><div class="subject">French</div><div class="teacher">Nancy Miller</div></td><td><div class="subject">Science</div><div class="teacher">Ronald Garcia</div></td><td><div class="subject">Physical Education</div><div class="teacher">Donna White</div></td></tr>
+            <tr><td><strong>P2</strong></td><td><div class="subject">Social Studies</div><div class="teacher">Brian Ramirez</div></td><td><div class="subject">Computer Science</div><div class="teacher">Ronald Garcia</div></td><td><div class="subject">English</div><div class="teacher">Mark Taylor</div></td><td><div class="subject">Social Studies</div><div class="teacher">Carol Miller</div></td><td><div class="subject">Science</div><div class="teacher">George Scott</div></td></tr>
+            <tr><td><strong>P3</strong></td><td><div class="subject">Mathematics</div><div class="teacher">Helen Jones</div></td><td><div class="subject">Hindi</div><div class="teacher">Christopher Wright</div></td><td><div class="subject">Hindi</div><div class="teacher">Mark Taylor</div></td><td><div class="subject">French</div><div class="teacher">Joshua Clark</div></td><td><div class="subject">Social Studies</div><div class="teacher">Sarah Lee</div></td></tr>
+            <tr><td><strong>P4</strong></td><td><div class="subject">English</div><div class="teacher">Mark Taylor</div></td><td><div class="subject">French</div><div class="teacher">Nancy Miller</div></td><td><div class="subject">Computer Science</div><div class="teacher">Dorothy Thomas</div></td><td><div class="subject">Science</div><div class="teacher">Kenneth Walker</div></td><td><div class="subject">Mathematics</div><div class="teacher">Helen Jones</div></td></tr>
+            <tr><td><strong>P5</strong></td><td><div class="subject">Science</div><div class="teacher">Ronald Garcia</div></td><td><div class="subject">Social Studies</div><div class="teacher">Carol Miller</div></td><td><div class="subject">English</div><div class="teacher">Nancy Jones</div></td><td><div class="subject">Hindi</div><div class="teacher">Mark Taylor</div></td><td><div class="subject">Mathematics</div><div class="teacher">Karen Gonzalez</div></td></tr>
+            <tr><td><strong>P6</strong></td><td><div class="subject">English</div><div class="teacher">Matthew Rodriguez</div></td><td><div class="subject">Hindi</div><div class="teacher">Mark Taylor</div></td><td><div class="subject">Music</div><div class="teacher">Paul Robinson</div></td><td><div class="subject">Computer Science</div><div class="teacher">Steven Taylor</div></td><td><div class="subject">Art</div><div class="teacher">Lisa Thomas</div></td></tr>
+            <tr><td><strong>P7</strong></td><td><div class="subject">Computer Science</div><div class="teacher">Dorothy Thomas</div></td><td><div class="subject">Mathematics</div><div class="teacher">Dorothy Torres</div></td><td><div class="subject">Science</div><div class="teacher">George Scott</div></td><td><div class="subject">English</div><div class="teacher">Mark Taylor</div></td><td><div class="subject">Music</div><div class="teacher">Anthony Ramirez</div></td></tr>
+            <tr><td><strong>P8</strong></td><td><div class="subject">Mathematics</div><div class="teacher">Nancy Thomas</div></td><td><div class="subject">Art</div><div class="teacher">Helen Taylor</div></td><td><div class="subject">Physical Education</div><div class="teacher">Michael Wright</div></td><td><div class="subject">Science</div><div class="teacher">George Scott</div></td><td><div class="subject">Art</div><div class="teacher">David Smith</div></td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Grade 7A <span class="complete-badge">✅ NO GAPS</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td><div class="subject">English</div><div class="teacher">Matthew Rodriguez</div></td><td><div class="subject">Mathematics</div><div class="teacher">Dorothy Torres</div></td><td><div class="subject">Music</div><div class="teacher">Paul Robinson</div></td><td><div class="subject">Social Studies</div><div class="teacher">Brian Ramirez</div></td><td><div class="subject">Hindi</div><div class="teacher">Christopher Wright</div></td></tr>
+            <tr><td><strong>P2</strong></td><td><div class="subject">Hindi</div><div class="teacher">Helen Jones</div></td><td><div class="subject">Hindi</div><div class="teacher">Robert Ramirez</div></td><td><div class="subject">English</div><div class="teacher">Sarah Wright</div></td><td><div class="subject">Art</div><div class="teacher">Michael Wright</div></td><td><div class="subject">Art</div><div class="teacher">David Smith</div></td></tr>
+            <tr><td><strong>P3</strong></td><td><div class="subject">French</div><div class="teacher">Joshua Clark</div></td><td><div class="subject">French</div><div class="teacher">Carol Wilson</div></td><td><div class="subject">Physical Education</div><div class="teacher">Christopher Wright</div></td><td><div class="subject">English</div><div class="teacher">Matthew Rodriguez</div></td><td><div class="subject">Science</div><div class="teacher">George Scott</div></td></tr>
+            <tr><td><strong>P4</strong></td><td><div class="subject">Mathematics</div><div class="teacher">Helen White</div></td><td><div class="subject">Physical Education</div><div class="teacher">Steven Taylor</div></td><td><div class="subject">Mathematics</div><div class="teacher">Joshua Clark</div></td><td><div class="subject">Mathematics</div><div class="teacher">Helen Jones</div></td><td><div class="subject">Physical Education</div><div class="teacher">Lisa Thomas</div></td></tr>
+            <tr><td><strong>P5</strong></td><td><div class="subject">English</div><div class="teacher">Nancy Jones</div></td><td><div class="subject">Computer Science</div><div class="teacher">Lisa Ramirez</div></td><td><div class="subject">Computer Science</div><div class="teacher">Nancy Thomas</div></td><td><div class="subject">Science</div><div class="teacher">David Smith</div></td><td><div class="subject">Social Studies</div><div class="teacher">Brian Ramirez</div></td></tr>
+            <tr><td><strong>P6</strong></td><td><div class="subject">French</div><div class="teacher">Sarah Wright</div></td><td><div class="subject">Social Studies</div><div class="teacher">Sandra Jackson</div></td><td><div class="subject">English</div><div class="teacher">Matthew Rodriguez</div></td><td><div class="subject">Hindi</div><div class="teacher">Dorothy Torres</div></td><td><div class="subject">Computer Science</div><div class="teacher">Steven Taylor</div></td></tr>
+            <tr><td><strong>P7</strong></td><td><div class="subject">Social Studies</div><div class="teacher">Sarah Hernandez</div></td><td><div class="subject">Science</div><div class="teacher">George Scott</div></td><td><div class="subject">Computer Science</div><div class="teacher">Kenneth Walker</div></td><td><div class="subject">Music</div><div class="teacher">Helen Taylor</div></td><td><div class="subject">Art</div><div class="teacher">David Smith</div></td></tr>
+            <tr><td><strong>P8</strong></td><td><div class="subject">Science</div><div class="teacher">Ronald Garcia</div></td><td><div class="subject">Mathematics</div><div class="teacher">Helen Jones</div></td><td><div class="subject">Science</div><div class="teacher">George Scott</div></td><td><div class="subject">Science</div><div class="teacher">Carol Wilson</div></td><td><div class="subject">Mathematics</div><div class="teacher">George Walker</div></td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Grade 7B <span class="complete-badge">✅ NO GAPS</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td><div class="subject">Physical Education</div><div class="teacher">Michael Wright</div></td><td><div class="subject">English</div><div class="teacher">Mark Taylor</div></td><td><div class="subject">Science</div><div class="teacher">Kenneth Walker</div></td><td><div class="subject">Art</div><div class="teacher">Sandra Jackson</div></td><td><div class="subject">Physical Education</div><div class="teacher">Timothy Taylor</div></td></tr>
+            <tr><td><strong>P2</strong></td><td><div class="subject">Social Studies</div><div class="teacher">Dorothy Thomas</div></td><td><div class="subject">Music</div><div class="teacher">Helen Taylor</div></td><td><div class="subject">Hindi</div><div class="teacher">Lisa Miller</div></td><td><div class="subject">French</div><div class="teacher">Sarah Nguyen</div></td><td><div class="subject">Music</div><div class="teacher">Paul Robinson</div></td></tr>
+            <tr><td><strong>P3</strong></td><td><div class="subject">Physical Education</div><div class="teacher">Donna White</div></td><td><div class="subject">Hindi</div><div class="teacher">Lisa Miller</div></td><td><div class="subject">Science</div><div class="teacher">Carol Wilson</div></td><td><div class="subject">Hindi</div><div class="teacher">Lisa Miller</div></td><td><div class="subject">Mathematics</div><div class="teacher">Karen Gonzalez</div></td></tr>
+            <tr><td><strong>P4</strong></td><td><div class="subject">Science</div><div class="teacher">Nancy Miller</div></td><td><div class="subject">English</div><div class="teacher">Mark Taylor</div></td><td><div class="subject">Mathematics</div><div class="teacher">Helen Jones</div></td><td><div class="subject">Computer Science</div><div class="teacher">Steven Taylor</div></td><td><div class="subject">English</div><div class="teacher">George Walker</div></td></tr>
+            <tr><td><strong>P5</strong></td><td><div class="subject">French</div><div class="teacher">Carol Wilson</div></td><td><div class="subject">English</div><div class="teacher">Nancy Jones</div></td><td><div class="subject">Art</div><div class="teacher">David Smith</div></td><td><div class="subject">Social Studies</div><div class="teacher">Michael Smith</div></td><td><div class="subject">Social Studies</div><div class="teacher">Michael Smith</div></td></tr>
+            <tr><td><strong>P6</strong></td><td><div class="subject">Mathematics</div><div class="teacher">Helen White</div></td><td><div class="subject">Mathematics</div><div class="teacher">Helen Jones</div></td><td><div class="subject">Mathematics</div><div class="teacher">Helen Jones</div></td><td><div class="subject">Science</div><div class="teacher">Karen Gonzalez</div></td><td><div class="subject">Social Studies</div><div class="teacher">Lisa Martin</div></td></tr>
+            <tr><td><strong>P7</strong></td><td><div class="subject">Computer Science</div><div class="teacher">Nancy Thomas</div></td><td><div class="subject">French</div><div class="teacher">Nancy Miller</div></td><td><div class="subject">Hindi</div><div class="teacher">Helen Jones</div></td><td><div class="subject">Mathematics</div><div class="teacher">Lisa Miller</div></td><td><div class="subject">Science</div><div class="teacher">Kenneth Walker</div></td></tr>
+            <tr><td><strong>P8</strong></td><td><div class="subject">Art</div><div class="teacher">Michael Wright</div></td><td><div class="subject">Computer Science</div><div class="teacher">Matthew Davis</div></td><td><div class="subject">Computer Science</div><div class="teacher">Dorothy Thomas</div></td><td><div class="subject">Science</div><div class="teacher">Anthony Ramirez</div></td><td><div class="subject">English</div><div class="teacher">Mark Taylor</div></td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Grade 7C <span class="complete-badge">✅ NO GAPS</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td><div class="subject">Music</div><div class="teacher">Anthony Ramirez</div></td><td><div class="subject">French</div><div class="teacher">Nancy Miller</div></td><td><div class="subject">English</div><div class="teacher">Matthew Rodriguez</div></td><td><div class="subject">Science</div><div class="teacher">Andrew Wright</div></td><td><div class="subject">Computer Science</div><div class="teacher">Nancy Thomas</div></td></tr>
+            <tr><td><strong>P2</strong></td><td><div class="subject">Mathematics</div><div class="teacher">Lisa Martin</div></td><td><div class="subject">Physical Education</div><div class="teacher">Lisa Miller</div></td><td><div class="subject">French</div><div class="teacher">Michael Smith</div></td><td><div class="subject">Hindi</div><div class="teacher">Robert Ramirez</div></td><td><div class="subject">Art</div><div class="teacher">Michael Wright</div></td></tr>
+            <tr><td><strong>P3</strong></td><td><div class="subject">Hindi</div><div class="teacher">Lisa Miller</div></td><td><div class="subject">Mathematics</div><div class="teacher">Nancy Thomas</div></td><td><div class="subject">Art</div><div class="teacher">Sarah Lee</div></td><td><div class="subject">Science</div><div class="teacher">Anthony Ramirez</div></td><td><div class="subject">Physical Education</div><div class="teacher">Ronald King</div></td></tr>
+            <tr><td><strong>P4</strong></td><td><div class="subject">Social Studies</div><div class="teacher">Brian Ramirez</div></td><td><div class="subject">Hindi</div><div class="teacher">Robert Ramirez</div></td><td><div class="subject">Music</div><div class="teacher">Sarah Nguyen</div></td><td><div class="subject">Art</div><div class="teacher">Michael Wright</div></td><td><div class="subject">Physical Education</div><div class="teacher">Donna White</div></td></tr>
+            <tr><td><strong>P5</strong></td><td><div class="subject">Mathematics</div><div class="teacher">Helen Jones</div></td><td><div class="subject">Social Studies</div><div class="teacher">Michael Smith</div></td><td><div class="subject">Hindi</div><div class="teacher">Mark Taylor</div></td><td><div class="subject">Computer Science</div><div class="teacher">Nancy Thomas</div></td><td><div class="subject">Computer Science</div><div class="teacher">Lisa Ramirez</div></td></tr>
+            <tr><td><strong>P6</strong></td><td><div class="subject">Science</div><div class="teacher">George Scott</div></td><td><div class="subject">Science</div><div class="teacher">David Smith</div></td><td><div class="subject">Science</div><div class="teacher">Ronald Garcia</div></td><td><div class="subject">Science</div><div class="teacher">Michelle Lopez</div></td><td><div class="subject">English</div><div class="teacher">Nancy Jones</div></td></tr>
+            <tr><td><strong>P7</strong></td><td><div class="subject">Social Studies</div><div class="teacher">Sandra Jackson</div></td><td><div class="subject">Mathematics</div><div class="teacher">Helen White</div></td><td><div class="subject">Mathematics</div><div class="teacher">Karen Gonzalez</div></td><td><div class="subject">Mathematics</div><div class="teacher">Joshua Clark</div></td><td><div class="subject">Social Studies</div><div class="teacher">Dorothy Thomas</div></td></tr>
+            <tr><td><strong>P8</strong></td><td><div class="subject">English</div><div class="teacher">Sarah Wright</div></td><td><div class="subject">English</div><div class="teacher">Mark Taylor</div></td><td><div class="subject">English</div><div class="teacher">Sarah Wright</div></td><td><div class="subject">French</div><div class="teacher">Matthew Rodriguez</div></td><td><div class="subject">Computer Science</div><div class="teacher">Steven Taylor</div></td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Grade 8A <span class="complete-badge">✅ NO GAPS</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td><div class="subject">Physical Education</div><div class="teacher">James Brown</div></td><td><div class="subject">Science</div><div class="teacher">Karen Gonzalez</div></td><td><div class="subject">English</div><div class="teacher">Mark Taylor</div></td><td><div class="subject">Computer Science</div><div class="teacher">Lisa Ramirez</div></td><td><div class="subject">Hindi</div><div class="teacher">Helen Jones</div></td></tr>
+            <tr><td><strong>P2</strong></td><td><div class="subject">Mathematics</div><div class="teacher">Lisa Miller</div></td><td><div class="subject">Science</div><div class="teacher">Nancy Miller</div></td><td><div class="subject">English</div><div class="teacher">Nancy Jones</div></td><td><div class="subject">Music</div><div class="teacher">Andrew Wright</div></td><td><div class="subject">Computer Science</div><div class="teacher">Lisa Ramirez</div></td></tr>
+            <tr><td><strong>P3</strong></td><td><div class="subject">Mathematics</div><div class="teacher">Lisa Martin</div></td><td><div class="subject">Physical Education</div><div class="teacher">Ronald King</div></td><td><div class="subject">Science</div><div class="teacher">Jennifer Jones</div></td><td><div class="subject">Art</div><div class="teacher">David Smith</div></td><td><div class="subject">French</div><div class="teacher">Robert Ramirez</div></td></tr>
+            <tr><td><strong>P4</strong></td><td><div class="subject">French</div><div class="teacher">Carol Wilson</div></td><td><div class="subject">French</div><div class="teacher">Michael Smith</div></td><td><div class="subject">Social Studies</div><div class="teacher">Brian Ramirez</div></td><td><div class="subject">English</div><div class="teacher">George Walker</div></td><td><div class="subject">Art</div><div class="teacher">Helen White</div></td></tr>
+            <tr><td><strong>P5</strong></td><td><div class="subject">Physical Education</div><div class="teacher">Timothy Taylor</div></td><td><div class="subject">Mathematics</div><div class="teacher">George Walker</div></td><td><div class="subject">English</div><div class="teacher">Sarah Wright</div></td><td><div class="subject">Social Studies</div><div class="teacher">Brian Ramirez</div></td><td><div class="subject">Social Studies</div><div class="teacher">Carol Miller</div></td></tr>
+            <tr><td><strong>P6</strong></td><td><div class="subject">Mathematics</div><div class="teacher">Lisa Miller</div></td><td><div class="subject">Mathematics</div><div class="teacher">Lisa Martin</div></td><td><div class="subject">Music</div><div class="teacher">Andrew Wright</div></td><td><div class="subject">Art</div><div class="teacher">Sandra Jackson</div></td><td><div class="subject">Hindi</div><div class="teacher">Dorothy Torres</div></td></tr>
+            <tr><td><strong>P7</strong></td><td><div class="subject">English</div><div class="teacher">Sarah Wright</div></td><td><div class="subject">Social Studies</div><div class="teacher">Carol Miller</div></td><td><div class="subject">Hindi</div><div class="teacher">Timothy Taylor</div></td><td><div class="subject">Science</div><div class="teacher">Ronald Garcia</div></td><td><div class="subject">Science</div><div class="teacher">Michelle Lopez</div></td></tr>
+            <tr><td><strong>P8</strong></td><td><div class="subject">Mathematics</div><div class="teacher">Karen Gonzalez</div></td><td><div class="subject">Computer Science</div><div class="teacher">Steven Taylor</div></td><td><div class="subject">Computer Science</div><div class="teacher">Kenneth Walker</div></td><td><div class="subject">Science</div><div class="teacher">David Smith</div></td><td><div class="subject">Hindi</div><div class="teacher">Jennifer Jones</div></td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Grade 8B <span class="complete-badge">✅ NO GAPS</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td><div class="subject">Science</div><div class="teacher">George Scott</div></td><td><div class="subject">Computer Science</div><div class="teacher">Carol Miller</div></td><td><div class="subject">English</div><div class="teacher">Nancy Jones</div></td><td><div class="subject">Mathematics</div><div class="teacher">Helen White</div></td><td><div class="subject">Hindi</div><div class="teacher">Dorothy Torres</div></td></tr>
+            <tr><td><strong>P2</strong></td><td><div class="subject">Mathematics</div><div class="teacher">Helen White</div></td><td><div class="subject">Hindi</div><div class="teacher">Mark Taylor</div></td><td><div class="subject">Music</div><div class="teacher">Anthony Ramirez</div></td><td><div class="subject">Computer Science</div><div class="teacher">Matthew Davis</div></td><td><div class="subject">Art</div><div class="teacher">Helen White</div></td></tr>
+            <tr><td><strong>P3</strong></td><td><div class="subject">French</div><div class="teacher">Nancy Miller</div></td><td><div class="subject">Mathematics</div><div class="teacher">Helen White</div></td><td><div class="subject">Hindi</div><div class="teacher">Dorothy Torres</div></td><td><div class="subject">Physical Education</div><div class="teacher">Kimberly Young</div></td><td><div class="subject">Science</div><div class="teacher">Nancy Jones</div></td></tr>
+            <tr><td><strong>P4</strong></td><td><div class="subject">Art</div><div class="teacher">Lisa Thomas</div></td><td><div class="subject">Science</div><div class="teacher">Michelle Lopez</div></td><td><div class="subject">Physical Education</div><div class="teacher">Timothy Taylor</div></td><td><div class="subject">English</div><div class="teacher">Sarah Wright</div></td><td><div class="subject">Science</div><div class="teacher">Karen Gonzalez</div></td></tr>
+            <tr><td><strong>P5</strong></td><td><div class="subject">Music</div><div class="teacher">Ronald King</div></td><td><div class="subject">English</div><div class="teacher">Matthew Rodriguez</div></td><td><div class="subject">Social Studies</div><div class="teacher">Lisa Martin</div></td><td><div class="subject">Mathematics</div><div class="teacher">Lisa Martin</div></td><td><div class="subject">Mathematics</div><div class="teacher">Dorothy Torres</div></td></tr>
+            <tr><td><strong>P6</strong></td><td><div class="subject">Computer Science</div><div class="teacher">Dorothy Thomas</div></td><td><div class="subject">Social Studies</div><div class="teacher">Sarah Lee</div></td><td><div class="subject">English</div><div class="teacher">George Walker</div></td><td><div class="subject">Art</div><div class="teacher">David Smith</div></td><td><div class="subject">Mathematics</div><div class="teacher">George Walker</div></td></tr>
+            <tr><td><strong>P7</strong></td><td><div class="subject">Social Studies</div><div class="teacher">Brian Ramirez</div></td><td><div class="subject">Social Studies</div><div class="teacher">Lisa Martin</div></td><td><div class="subject">Science</div><div class="teacher">David Smith</div></td><td><div class="subject">English</div><div class="teacher">Matthew Rodriguez</div></td><td><div class="subject">French</div><div class="teacher">Matthew Rodriguez</div></td></tr>
+            <tr><td><strong>P8</strong></td><td><div class="subject">Science</div><div class="teacher">Nancy Jones</div></td><td><div class="subject">Hindi</div><div class="teacher">Jennifer Jones</div></td><td><div class="subject">Physical Education</div><div class="teacher">Kimberly Young</div></td><td><div class="subject">Computer Science</div><div class="teacher">Carol Miller</div></td><td><div class="subject">French</div><div class="teacher">Michael Smith</div></td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Grade 8C <span class="complete-badge">✅ NO GAPS</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td><div class="subject">Art</div><div class="teacher">Helen White</div></td><td><div class="subject">Social Studies</div><div class="teacher">Brian Ramirez</div></td><td><div class="subject">French</div><div class="teacher">Michael Smith</div></td><td><div class="subject">Mathematics</div><div class="teacher">Lisa Martin</div></td><td><div class="subject">Art</div><div class="teacher">George Scott</div></td></tr>
+            <tr><td><strong>P2</strong></td><td><div class="subject">Physical Education</div><div class="teacher">Christopher Wright</div></td><td><div class="subject">Mathematics</div><div class="teacher">Lisa Martin</div></td><td><div class="subject">Science</div><div class="teacher">Andrew Wright</div></td><td><div class="subject">Computer Science</div><div class="teacher">Kenneth Walker</div></td><td><div class="subject">Mathematics</div><div class="teacher">Donna White</div></td></tr>
+            <tr><td><strong>P3</strong></td><td><div class="subject">English</div><div class="teacher">Nancy Jones</div></td><td><div class="subject">French</div><div class="teacher">Robert Ramirez</div></td><td><div class="subject">Science</div><div class="teacher">George Scott</div></td><td><div class="subject">Physical Education</div><div class="teacher">Ronald King</div></td><td><div class="subject">Computer Science</div><div class="teacher">Carol Miller</div></td></tr>
+            <tr><td><strong>P4</strong></td><td><div class="subject">Computer Science</div><div class="teacher">Nancy Thomas</div></td><td><div class="subject">Science</div><div class="teacher">Karen Gonzalez</div></td><td><div class="subject">Music</div><div class="teacher">Ronald King</div></td><td><div class="subject">Mathematics</div><div class="teacher">Lisa Miller</div></td><td><div class="subject">English</div><div class="teacher">Matthew Rodriguez</div></td></tr>
+            <tr><td><strong>P5</strong></td><td><div class="subject">Social Studies</div><div class="teacher">Sarah Hernandez</div></td><td><div class="subject">Social Studies</div><div class="teacher">Sarah Lee</div></td><td><div class="subject">Science</div><div class="teacher">Anthony Ramirez</div></td><td><div class="subject">Mathematics</div><div class="teacher">Helen Jones</div></td><td><div class="subject">Music</div><div class="teacher">Helen Taylor</div></td></tr>
+            <tr><td><strong>P6</strong></td><td><div class="subject">Hindi</div><div class="teacher">Lisa Miller</div></td><td><div class="subject">English</div><div class="teacher">George Walker</div></td><td><div class="subject">English</div><div class="teacher">Sarah Wright</div></td><td><div class="subject">Science</div><div class="teacher">Anthony Ramirez</div></td><td><div class="subject">French</div><div class="teacher">Matthew Davis</div></td></tr>
+            <tr><td><strong>P7</strong></td><td><div class="subject">Mathematics</div><div class="teacher">Dorothy Torres</div></td><td><div class="subject">Hindi</div><div class="teacher">Christopher Wright</div></td><td><div class="subject">Hindi</div><div class="teacher">Jennifer Jones</div></td><td><div class="subject">Hindi</div><div class="teacher">Dorothy Torres</div></td><td><div class="subject">Art</div><div class="teacher">Sandra Jackson</div></td></tr>
+            <tr><td><strong>P8</strong></td><td><div class="subject">Computer Science</div><div class="teacher">Carol Miller</div></td><td><div class="subject">Social Studies</div><div class="teacher">Dorothy Thomas</div></td><td><div class="subject">Science</div><div class="teacher">Michelle Lopez</div></td><td><div class="subject">English</div><div class="teacher">Nancy Jones</div></td><td><div class="subject">Physical Education</div><div class="teacher">Lisa Miller</div></td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Grade 9A <span class="complete-badge">✅ NO GAPS</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td><div class="subject">Art</div><div class="teacher">Michelle Lopez</div></td><td><div class="subject">Social Studies</div><div class="teacher">Michael Smith</div></td><td><div class="subject">English</div><div class="teacher">George Walker</div></td><td><div class="subject">Physical Education</div><div class="teacher">Steven Taylor</div></td><td><div class="subject">French</div><div class="teacher">Matthew Rodriguez</div></td></tr>
+            <tr><td><strong>P2</strong></td><td><div class="subject">Mathematics</div><div class="teacher">Karen Gonzalez</div></td><td><div class="subject">Computer Science</div><div class="teacher">Carol Miller</div></td><td><div class="subject">Science</div><div class="teacher">Michelle Lopez</div></td><td><div class="subject">Social Studies</div><div class="teacher">Lisa Martin</div></td><td><div class="subject">Physical Education</div><div class="teacher">Steven Taylor</div></td></tr>
+            <tr><td><strong>P3</strong></td><td><div class="subject">Mathematics</div><div class="teacher">Nancy Thomas</div></td><td><div class="subject">English</div><div class="teacher">Mark Taylor</div></td><td><div class="subject">Science</div><div class="teacher">Nancy Miller</div></td><td><div class="subject">French</div><div class="teacher">Matthew Davis</div></td><td><div class="subject">Computer Science</div><div class="teacher">Ronald Garcia</div></td></tr>
+            <tr><td><strong>P4</strong></td><td><div class="subject">Mathematics</div><div class="teacher">Helen Jones</div></td><td><div class="subject">Social Studies</div><div class="teacher">Sarah Lee</div></td><td><div class="subject">Hindi</div><div class="teacher">Dorothy Torres</div></td><td><div class="subject">Mathematics</div><div class="teacher">Donna White</div></td><td><div class="subject">English</div><div class="teacher">Nancy Jones</div></td></tr>
+            <tr><td><strong>P5</strong></td><td><div class="subject">Physical Education</div><div class="teacher">Lisa Thomas</div></td><td><div class="subject">Science</div><div class="teacher">Kenneth Walker</div></td><td><div class="subject">Mathematics</div><div class="teacher">Lisa Miller</div></td><td><div class="subject">Art</div><div class="teacher">Sandra Jackson</div></td><td><div class="subject">Social Studies</div><div class="teacher">Dorothy Thomas</div></td></tr>
+            <tr><td><strong>P6</strong></td><td><div class="subject">Music</div><div class="teacher">Ronald King</div></td><td><div class="subject">Music</div><div class="teacher">Andrew Wright</div></td><td><div class="subject">English</div><div class="teacher">Mark Taylor</div></td><td><div class="subject">Science</div><div class="teacher">Andrew Wright</div></td><td><div class="subject">Computer Science</div><div class="teacher">Nancy Thomas</div></td></tr>
+            <tr><td><strong>P7</strong></td><td><div class="subject">English</div><div class="teacher">George Walker</div></td><td><div class="subject">Computer Science</div><div class="teacher">Kenneth Walker</div></td><td><div class="subject">Hindi</div><div class="teacher">Dorothy Torres</div></td><td><div class="subject">Hindi</div><div class="teacher">Jennifer Jones</div></td><td><div class="subject">Mathematics</div><div class="teacher">Lisa Miller</div></td></tr>
+            <tr><td><strong>P8</strong></td><td><div class="subject">Art</div><div class="teacher">Sarah Lee</div></td><td><div class="subject">Science</div><div class="teacher">Karen Gonzalez</div></td><td><div class="subject">French</div><div class="teacher">Matthew Rodriguez</div></td><td><div class="subject">Science</div><div class="teacher">Andrew Wright</div></td><td><div class="subject">Hindi</div><div class="teacher">Lisa Miller</div></td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Grade 9B <span class="complete-badge">✅ NO GAPS</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td><div class="subject">Social Studies</div><div class="teacher">Carol Miller</div></td><td><div class="subject">French</div><div class="teacher">Sarah Wright</div></td><td><div class="subject">Art</div><div class="teacher">Sandra Jackson</div></td><td><div class="subject">Hindi</div><div class="teacher">Christopher Wright</div></td><td><div class="subject">Science</div><div class="teacher">Michelle Lopez</div></td></tr>
+            <tr><td><strong>P2</strong></td><td><div class="subject">Science</div><div class="teacher">Michelle Lopez</div></td><td><div class="subject">Social Studies</div><div class="teacher">Dorothy Thomas</div></td><td><div class="subject">Mathematics</div><div class="teacher">Karen Gonzalez</div></td><td><div class="subject">French</div><div class="teacher">Carol Wilson</div></td><td><div class="subject">Computer Science</div><div class="teacher">Kenneth Walker</div></td></tr>
+            <tr><td><strong>P3</strong></td><td><div class="subject">Computer Science</div><div class="teacher">Dorothy Thomas</div></td><td><div class="subject">Science</div><div class="teacher">Jennifer Jones</div></td><td><div class="subject">Science</div><div class="teacher">Anthony Ramirez</div></td><td><div class="subject">Hindi</div><div class="teacher">James Brown</div></td><td><div class="subject">Mathematics</div><div class="teacher">Nancy Thomas</div></td></tr>
+            <tr><td><strong>P4</strong></td><td><div class="subject">Music</div><div class="teacher">Anthony Ramirez</div></td><td><div class="subject">Hindi</div><div class="teacher">Helen Jones</div></td><td><div class="subject">Science</div><div class="teacher">Karen Gonzalez</div></td><td><div class="subject">Physical Education</div><div class="teacher">Kimberly Young</div></td><td><div class="subject">Art</div><div class="teacher">Michelle Lopez</div></td></tr>
+            <tr><td><strong>P5</strong></td><td><div class="subject">Social Studies</div><div class="teacher">Brian Ramirez</div></td><td><div class="subject">Art</div><div class="teacher">Lisa Thomas</div></td><td><div class="subject">Mathematics</div><div class="teacher">Helen Jones</div></td><td><div class="subject">Mathematics</div><div class="teacher">Karen Gonzalez</div></td><td><div class="subject">Hindi</div><div class="teacher">Helen Jones</div></td></tr>
+            <tr><td><strong>P6</strong></td><td><div class="subject">Physical Education</div><div class="teacher">Kimberly Young</div></td><td><div class="subject">Physical Education</div><div class="teacher">Donna White</div></td><td><div class="subject">Computer Science</div><div class="teacher">Matthew Davis</div></td><td><div class="subject">Computer Science</div><div class="teacher">Matthew Davis</div></td><td><div class="subject">Mathematics</div><div class="teacher">Karen Gonzalez</div></td></tr>
+            <tr><td><strong>P7</strong></td><td><div class="subject">English</div><div class="teacher">Mark Taylor</div></td><td><div class="subject">English</div><div class="teacher">Matthew Rodriguez</div></td><td><div class="subject">Social Studies</div><div class="teacher">Dorothy Thomas</div></td><td><div class="subject">English</div><div class="teacher">George Walker</div></td><td><div class="subject">Science</div><div class="teacher">Nancy Jones</div></td></tr>
+            <tr><td><strong>P8</strong></td><td><div class="subject">English</div><div class="teacher">George Walker</div></td><td><div class="subject">Music</div><div class="teacher">Andrew Wright</div></td><td><div class="subject">Mathematics</div><div class="teacher">Helen White</div></td><td><div class="subject">English</div><div class="teacher">George Walker</div></td><td><div class="subject">French</div><div class="teacher">Matthew Rodriguez</div></td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Grade 9C <span class="complete-badge">✅ NO GAPS</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td><div class="subject">Social Studies</div><div class="teacher">Sandra Jackson</div></td><td><div class="subject">Hindi</div><div class="teacher">Timothy Taylor</div></td><td><div class="subject">Physical Education</div><div class="teacher">James Brown</div></td><td><div class="subject">Hindi</div><div class="teacher">Mark Taylor</div></td><td><div class="subject">Computer Science</div><div class="teacher">Steven Taylor</div></td></tr>
+            <tr><td><strong>P2</strong></td><td><div class="subject">Music</div><div class="teacher">Helen Taylor</div></td><td><div class="subject">Mathematics</div><div class="teacher">Joshua Clark</div></td><td><div class="subject">Science</div><div class="teacher">Ronald Garcia</div></td><td><div class="subject">Computer Science</div><div class="teacher">Dorothy Thomas</div></td><td><div class="subject">Physical Education</div><div class="teacher">Lisa Miller</div></td></tr>
+            <tr><td><strong>P3</strong></td><td><div class="subject">Computer Science</div><div class="teacher">Ronald Garcia</div></td><td><div class="subject">Mathematics</div><div class="teacher">Karen Gonzalez</div></td><td><div class="subject">Music</div><div class="teacher">Paul Robinson</div></td><td><div class="subject">English</div><div class="teacher">Nancy Jones</div></td><td><div class="subject">Social Studies</div><div class="teacher">Sarah Hernandez</div></td></tr>
+            <tr><td><strong>P4</strong></td><td><div class="subject">Hindi</div><div class="teacher">James Brown</div></td><td><div class="subject">Science</div><div class="teacher">Ronald Garcia</div></td><td><div class="subject">French</div><div class="teacher">Robert Ramirez</div></td><td><div class="subject">Art</div><div class="teacher">David Smith</div></td><td><div class="subject">Social Studies</div><div class="teacher">Carol Miller</div></td></tr>
+            <tr><td><strong>P5</strong></td><td><div class="subject">Art</div><div class="teacher">Michelle Lopez</div></td><td><div class="subject">English</div><div class="teacher">Sarah Wright</div></td><td><div class="subject">Mathematics</div><div class="teacher">Donna White</div></td><td><div class="subject">English</div><div class="teacher">Matthew Rodriguez</div></td><td><div class="subject">Science</div><div class="teacher">Ronald Garcia</div></td></tr>
+            <tr><td><strong>P6</strong></td><td><div class="subject">Art</div><div class="teacher">David Smith</div></td><td><div class="subject">Mathematics</div><div class="teacher">Lisa Miller</div></td><td><div class="subject">Social Studies</div><div class="teacher">Sarah Hernandez</div></td><td><div class="subject">English</div><div class="teacher">Nancy Jones</div></td><td><div class="subject">Science</div><div class="teacher">Ronald Garcia</div></td></tr>
+            <tr><td><strong>P7</strong></td><td><div class="subject">Mathematics</div><div class="teacher">Donna White</div></td><td><div class="subject">English</div><div class="teacher">Sarah Wright</div></td><td><div class="subject">Science</div><div class="teacher">Michelle Lopez</div></td><td><div class="subject">French</div><div class="teacher">Matthew Davis</div></td><td><div class="subject">Mathematics</div><div class="teacher">Dorothy Torres</div></td></tr>
+            <tr><td><strong>P8</strong></td><td><div class="subject">Science</div><div class="teacher">Anthony Ramirez</div></td><td><div class="subject">Physical Education</div><div class="teacher">Timothy Taylor</div></td><td><div class="subject">Hindi</div><div class="teacher">James Brown</div></td><td><div class="subject">Computer Science</div><div class="teacher">Ronald Garcia</div></td><td><div class="subject">French</div><div class="teacher">Carol Wilson</div></td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Grade 10A <span class="complete-badge">✅ NO GAPS</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td><div class="subject">Science</div><div class="teacher">Kenneth Walker</div></td><td><div class="subject">Music</div><div class="teacher">Helen Taylor</div></td><td><div class="subject">Computer Science</div><div class="teacher">Carol Miller</div></td><td><div class="subject">Computer Science</div><div class="teacher">Kenneth Walker</div></td><td><div class="subject">Hindi</div><div class="teacher">James Brown</div></td></tr>
+            <tr><td><strong>P2</strong></td><td><div class="subject">Science</div><div class="teacher">Nancy Jones</div></td><td><div class="subject">English</div><div class="teacher">Sarah Wright</div></td><td><div class="subject">Social Studies</div><div class="teacher">Brian Ramirez</div></td><td><div class="subject">Hindi</div><div class="teacher">Helen Jones</div></td><td><div class="subject">Art</div><div class="teacher">Sarah Lee</div></td></tr>
+            <tr><td><strong>P3</strong></td><td><div class="subject">Social Studies</div><div class="teacher">Sarah Lee</div></td><td><div class="subject">Mathematics</div><div class="teacher">Helen Jones</div></td><td><div class="subject">Mathematics</div><div class="teacher">Donna White</div></td><td><div class="subject">Mathematics</div><div class="teacher">Lisa Martin</div></td><td><div class="subject">Art</div><div class="teacher">Lisa Thomas</div></td></tr>
+            <tr><td><strong>P4</strong></td><td><div class="subject">French</div><div class="teacher">Matthew Davis</div></td><td><div class="subject">Art</div><div class="teacher">Michael Wright</div></td><td><div class="subject">Science</div><div class="teacher">Michelle Lopez</div></td><td><div class="subject">English</div><div class="teacher">Matthew Rodriguez</div></td><td><div class="subject">Mathematics</div><div class="teacher">Dorothy Torres</div></td></tr>
+            <tr><td><strong>P5</strong></td><td><div class="subject">English</div><div class="teacher">George Walker</div></td><td><div class="subject">Social Studies</div><div class="teacher">Sarah Hernandez</div></td><td><div class="subject">Science</div><div class="teacher">George Scott</div></td><td><div class="subject">Science</div><div class="teacher">Ronald Garcia</div></td><td><div class="subject">Science</div><div class="teacher">Andrew Wright</div></td></tr>
+            <tr><td><strong>P6</strong></td><td><div class="subject">English</div><div class="teacher">Mark Taylor</div></td><td><div class="subject">English</div><div class="teacher">Nancy Jones</div></td><td><div class="subject">Physical Education</div><div class="teacher">Lisa Thomas</div></td><td><div class="subject">Hindi</div><div class="teacher">Jennifer Jones</div></td><td><div class="subject">Physical Education</div><div class="teacher">Timothy Taylor</div></td></tr>
+            <tr><td><strong>P7</strong></td><td><div class="subject">Music</div><div class="teacher">Andrew Wright</div></td><td><div class="subject">French</div><div class="teacher">Joshua Clark</div></td><td><div class="subject">Mathematics</div><div class="teacher">Joshua Clark</div></td><td><div class="subject">Physical Education</div><div class="teacher">Paul Robinson</div></td><td><div class="subject">Computer Science</div><div class="teacher">Ronald Garcia</div></td></tr>
+            <tr><td><strong>P8</strong></td><td><div class="subject">Computer Science</div><div class="teacher">Dorothy Thomas</div></td><td><div class="subject">Mathematics</div><div class="teacher">Nancy Thomas</div></td><td><div class="subject">Social Studies</div><div class="teacher">Sandra Jackson</div></td><td><div class="subject">French</div><div class="teacher">Sarah Nguyen</div></td><td><div class="subject">Hindi</div><div class="teacher">Christopher Wright</div></td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Grade 10B <span class="complete-badge">✅ NO GAPS</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td><div class="subject">Science</div><div class="teacher">Ronald Garcia</div></td><td><div class="subject">Physical Education</div><div class="teacher">Ronald King</div></td><td><div class="subject">English</div><div class="teacher">Dorothy Torres</div></td><td><div class="subject">Mathematics</div><div class="teacher">Nancy Thomas</div></td><td><div class="subject">Science</div><div class="teacher">Kenneth Walker</div></td></tr>
+            <tr><td><strong>P2</strong></td><td><div class="subject">Computer Science</div><div class="teacher">Kenneth Walker</div></td><td><div class="subject">Hindi</div><div class="teacher">Jennifer Jones</div></td><td><div class="subject">Social Studies</div><div class="teacher">Sarah Lee</div></td><td><div class="subject">Social Studies</div><div class="teacher">Michael Smith</div></td><td><div class="subject">Science</div><div class="teacher">Anthony Ramirez</div></td></tr>
+            <tr><td><strong>P3</strong></td><td><div class="subject">French</div><div class="teacher">Sarah Nguyen</div></td><td><div class="subject">Art</div><div class="teacher">Sarah Lee</div></td><td><div class="subject">Hindi</div><div class="teacher">Lisa Miller</div></td><td><div class="subject">Physical Education</div><div class="teacher">Timothy Taylor</div></td><td><div class="subject">English</div><div class="teacher">Mark Taylor</div></td></tr>
+            <tr><td><strong>P4</strong></td><td><div class="subject">Art</div><div class="teacher">Helen Taylor</div></td><td><div class="subject">English</div><div class="teacher">Sarah Wright</div></td><td><div class="subject">Mathematics</div><div class="teacher">Lisa Martin</div></td><td><div class="subject">Computer Science</div><div class="teacher">Lisa Ramirez</div></td><td><div class="subject">English</div><div class="teacher">Mark Taylor</div></td></tr>
+            <tr><td><strong>P5</strong></td><td><div class="subject">Mathematics</div><div class="teacher">Dorothy Torres</div></td><td><div class="subject">French</div><div class="teacher">Carol Wilson</div></td><td><div class="subject">Computer Science</div><div class="teacher">Kenneth Walker</div></td><td><div class="subject">Mathematics</div><div class="teacher">George Walker</div></td><td><div class="subject">Music</div><div class="teacher">Anthony Ramirez</div></td></tr>
+            <tr><td><strong>P6</strong></td><td><div class="subject">Music</div><div class="teacher">Helen Taylor</div></td><td><div class="subject">Hindi</div><div class="teacher">Robert Ramirez</div></td><td><div class="subject">Social Studies</div><div class="teacher">Lisa Martin</div></td><td><div class="subject">Mathematics</div><div class="teacher">Donna White</div></td><td><div class="subject">Physical Education</div><div class="teacher">Ronald King</div></td></tr>
+            <tr><td><strong>P7</strong></td><td><div class="subject">Mathematics</div><div class="teacher">Joshua Clark</div></td><td><div class="subject">Science</div><div class="teacher">Michelle Lopez</div></td><td><div class="subject">Hindi</div><div class="teacher">Lisa Miller</div></td><td><div class="subject">English</div><div class="teacher">Nancy Jones</div></td><td><div class="subject">Science</div><div class="teacher">Karen Gonzalez</div></td></tr>
+            <tr><td><strong>P8</strong></td><td><div class="subject">French</div><div class="teacher">Michael Smith</div></td><td><div class="subject">Art</div><div class="teacher">George Scott</div></td><td><div class="subject">Social Studies</div><div class="teacher">Brian Ramirez</div></td><td><div class="subject">Science</div><div class="teacher">Michelle Lopez</div></td><td><div class="subject">Computer Science</div><div class="teacher">Nancy Thomas</div></td></tr>
+        </table>
+    </div>
+    </div>
+
+    <div id="teachers" class="tab-content">
+
+    <div class="class-timetable">
+        <h3>Dorothy Torres <span class="workload-badge" style="background: #27ae60;">16/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 7A</div></td><td><div class="subject">English</div><div class="class-info">Grade 10B</div></td><td class="free">Free Period</td><td><div class="subject">Hindi</div><div class="class-info">Grade 8B</div></td></tr>
+            <tr><td><strong>P2</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P3</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Hindi</div><div class="class-info">Grade 8B</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P4</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Hindi</div><div class="class-info">Grade 9A</div></td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 10A</div></td></tr>
+            <tr><td><strong>P5</strong></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 10B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 6A</div></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 8B</div></td></tr>
+            <tr><td><strong>P6</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Hindi</div><div class="class-info">Grade 7A</div></td><td><div class="subject">Hindi</div><div class="class-info">Grade 8A</div></td></tr>
+            <tr><td><strong>P7</strong></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 8C</div></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 6C</div></td><td><div class="subject">Hindi</div><div class="class-info">Grade 9A</div></td><td><div class="subject">Hindi</div><div class="class-info">Grade 8C</div></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 9C</div></td></tr>
+            <tr><td><strong>P8</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Joshua Clark <span class="workload-badge" style="background: #27ae60;">11/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P2</strong></td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 9C</div></td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 6B</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P3</strong></td><td><div class="subject">French</div><div class="class-info">Grade 7A</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">French</div><div class="class-info">Grade 6C</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P4</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 7A</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P5</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 6B</div></td></tr>
+            <tr><td><strong>P6</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P7</strong></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 10B</div></td><td><div class="subject">French</div><div class="class-info">Grade 10A</div></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 10A</div></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 7C</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P8</strong></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 6B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Robert Ramirez <span class="workload-badge" style="background: #27ae60;">7/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P2</strong></td><td class="free">Free Period</td><td><div class="subject">Hindi</div><div class="class-info">Grade 7A</div></td><td class="free">Free Period</td><td><div class="subject">Hindi</div><div class="class-info">Grade 7C</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P3</strong></td><td class="free">Free Period</td><td><div class="subject">French</div><div class="class-info">Grade 8C</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">French</div><div class="class-info">Grade 8A</div></td></tr>
+            <tr><td><strong>P4</strong></td><td class="free">Free Period</td><td><div class="subject">Hindi</div><div class="class-info">Grade 7C</div></td><td><div class="subject">French</div><div class="class-info">Grade 9C</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P5</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P6</strong></td><td class="free">Free Period</td><td><div class="subject">Hindi</div><div class="class-info">Grade 10B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P7</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P8</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Paul Robinson <span class="workload-badge" style="background: #27ae60;">6/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td class="free">Free Period</td><td><div class="subject">Physical Education</div><div class="class-info">Grade 6C</div></td><td><div class="subject">Music</div><div class="class-info">Grade 7A</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P2</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Music</div><div class="class-info">Grade 7B</div></td></tr>
+            <tr><td><strong>P3</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Music</div><div class="class-info">Grade 9C</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P4</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P5</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P6</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Music</div><div class="class-info">Grade 6C</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P7</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Physical Education</div><div class="class-info">Grade 10A</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P8</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Nancy Miller <span class="workload-badge" style="background: #27ae60;">10/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td class="free">Free Period</td><td><div class="subject">French</div><div class="class-info">Grade 7C</div></td><td><div class="subject">French</div><div class="class-info">Grade 6C</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P2</strong></td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 8A</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P3</strong></td><td><div class="subject">French</div><div class="class-info">Grade 8B</div></td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 9A</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P4</strong></td><td><div class="subject">Science</div><div class="class-info">Grade 7B</div></td><td><div class="subject">French</div><div class="class-info">Grade 6C</div></td><td><div class="subject">French</div><div class="class-info">Grade 6B</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P5</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P6</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P7</strong></td><td class="free">Free Period</td><td><div class="subject">French</div><div class="class-info">Grade 7B</div></td><td><div class="subject">French</div><div class="class-info">Grade 6A</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P8</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Carol Miller <span class="workload-badge" style="background: #27ae60;">12/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td><div class="subject">Social Studies</div><div class="class-info">Grade 9B</div></td><td><div class="subject">Computer Science</div><div class="class-info">Grade 8B</div></td><td><div class="subject">Computer Science</div><div class="class-info">Grade 10A</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P2</strong></td><td class="free">Free Period</td><td><div class="subject">Computer Science</div><div class="class-info">Grade 9A</div></td><td class="free">Free Period</td><td><div class="subject">Social Studies</div><div class="class-info">Grade 6C</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P3</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Computer Science</div><div class="class-info">Grade 8C</div></td></tr>
+            <tr><td><strong>P4</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Social Studies</div><div class="class-info">Grade 9C</div></td></tr>
+            <tr><td><strong>P5</strong></td><td class="free">Free Period</td><td><div class="subject">Social Studies</div><div class="class-info">Grade 6C</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Social Studies</div><div class="class-info">Grade 8A</div></td></tr>
+            <tr><td><strong>P6</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P7</strong></td><td class="free">Free Period</td><td><div class="subject">Social Studies</div><div class="class-info">Grade 8A</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P8</strong></td><td><div class="subject">Computer Science</div><div class="class-info">Grade 8C</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Computer Science</div><div class="class-info">Grade 8B</div></td><td class="free">Free Period</td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Christopher Wright <span class="workload-badge" style="background: #27ae60;">8/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Hindi</div><div class="class-info">Grade 9B</div></td><td><div class="subject">Hindi</div><div class="class-info">Grade 7A</div></td></tr>
+            <tr><td><strong>P2</strong></td><td><div class="subject">Physical Education</div><div class="class-info">Grade 8C</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P3</strong></td><td class="free">Free Period</td><td><div class="subject">Hindi</div><div class="class-info">Grade 6C</div></td><td><div class="subject">Physical Education</div><div class="class-info">Grade 7A</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P4</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P5</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Hindi</div><div class="class-info">Grade 6B</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P6</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P7</strong></td><td class="free">Free Period</td><td><div class="subject">Hindi</div><div class="class-info">Grade 8C</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P8</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Hindi</div><div class="class-info">Grade 10A</div></td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Michelle Lopez <span class="workload-badge" style="background: #27ae60;">15/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td><div class="subject">Art</div><div class="class-info">Grade 9A</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 9B</div></td></tr>
+            <tr><td><strong>P2</strong></td><td><div class="subject">Science</div><div class="class-info">Grade 9B</div></td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 9A</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P3</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P4</strong></td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 8B</div></td><td><div class="subject">Science</div><div class="class-info">Grade 10A</div></td><td class="free">Free Period</td><td><div class="subject">Art</div><div class="class-info">Grade 9B</div></td></tr>
+            <tr><td><strong>P5</strong></td><td><div class="subject">Art</div><div class="class-info">Grade 9C</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P6</strong></td><td><div class="subject">Science</div><div class="class-info">Grade 6B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 7C</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P7</strong></td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 10B</div></td><td><div class="subject">Science</div><div class="class-info">Grade 9C</div></td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 8A</div></td></tr>
+            <tr><td><strong>P8</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 8C</div></td><td><div class="subject">Science</div><div class="class-info">Grade 10B</div></td><td class="free">Free Period</td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Helen Jones <span class="workload-badge" style="background: #27ae60;">20/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Hindi</div><div class="class-info">Grade 8A</div></td></tr>
+            <tr><td><strong>P2</strong></td><td><div class="subject">Hindi</div><div class="class-info">Grade 7A</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Hindi</div><div class="class-info">Grade 10A</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P3</strong></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 6C</div></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 10A</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 6B</div></td></tr>
+            <tr><td><strong>P4</strong></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 9A</div></td><td><div class="subject">Hindi</div><div class="class-info">Grade 9B</div></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 7B</div></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 7A</div></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 6C</div></td></tr>
+            <tr><td><strong>P5</strong></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 7C</div></td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 9B</div></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 8C</div></td><td><div class="subject">Hindi</div><div class="class-info">Grade 9B</div></td></tr>
+            <tr><td><strong>P6</strong></td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 7B</div></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 7B</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P7</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Hindi</div><div class="class-info">Grade 7B</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P8</strong></td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 7A</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Hindi</div><div class="class-info">Grade 6B</div></td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Sarah Wright <span class="workload-badge" style="background: #27ae60;">18/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td><div class="subject">English</div><div class="class-info">Grade 6A</div></td><td><div class="subject">French</div><div class="class-info">Grade 9B</div></td><td><div class="subject">French</div><div class="class-info">Grade 6B</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P2</strong></td><td class="free">Free Period</td><td><div class="subject">English</div><div class="class-info">Grade 10A</div></td><td><div class="subject">English</div><div class="class-info">Grade 7A</div></td><td class="free">Free Period</td><td><div class="subject">English</div><div class="class-info">Grade 6A</div></td></tr>
+            <tr><td><strong>P3</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P4</strong></td><td class="free">Free Period</td><td><div class="subject">English</div><div class="class-info">Grade 10B</div></td><td class="free">Free Period</td><td><div class="subject">English</div><div class="class-info">Grade 8B</div></td><td><div class="subject">English</div><div class="class-info">Grade 6B</div></td></tr>
+            <tr><td><strong>P5</strong></td><td class="free">Free Period</td><td><div class="subject">English</div><div class="class-info">Grade 9C</div></td><td><div class="subject">English</div><div class="class-info">Grade 8A</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P6</strong></td><td><div class="subject">French</div><div class="class-info">Grade 7A</div></td><td class="free">Free Period</td><td><div class="subject">English</div><div class="class-info">Grade 8C</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P7</strong></td><td><div class="subject">English</div><div class="class-info">Grade 8A</div></td><td><div class="subject">English</div><div class="class-info">Grade 9C</div></td><td class="free">Free Period</td><td><div class="subject">French</div><div class="class-info">Grade 6A</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P8</strong></td><td><div class="subject">English</div><div class="class-info">Grade 7C</div></td><td class="free">Free Period</td><td><div class="subject">English</div><div class="class-info">Grade 7C</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Lisa Thomas <span class="workload-badge" style="background: #27ae60;">8/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P2</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P3</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Art</div><div class="class-info">Grade 10A</div></td></tr>
+            <tr><td><strong>P4</strong></td><td><div class="subject">Art</div><div class="class-info">Grade 8B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Physical Education</div><div class="class-info">Grade 7A</div></td></tr>
+            <tr><td><strong>P5</strong></td><td><div class="subject">Physical Education</div><div class="class-info">Grade 9A</div></td><td><div class="subject">Art</div><div class="class-info">Grade 9B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P6</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Physical Education</div><div class="class-info">Grade 10A</div></td><td class="free">Free Period</td><td><div class="subject">Art</div><div class="class-info">Grade 6C</div></td></tr>
+            <tr><td><strong>P7</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P8</strong></td><td class="free">Free Period</td><td><div class="subject">Physical Education</div><div class="class-info">Grade 6B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Kenneth Walker <span class="workload-badge" style="background: #27ae60;">17/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td><div class="subject">Science</div><div class="class-info">Grade 10A</div></td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 7B</div></td><td><div class="subject">Computer Science</div><div class="class-info">Grade 10A</div></td><td><div class="subject">Science</div><div class="class-info">Grade 10B</div></td></tr>
+            <tr><td><strong>P2</strong></td><td><div class="subject">Computer Science</div><div class="class-info">Grade 10B</div></td><td class="free">Free Period</td><td><div class="subject">Computer Science</div><div class="class-info">Grade 6B</div></td><td><div class="subject">Computer Science</div><div class="class-info">Grade 8C</div></td><td><div class="subject">Computer Science</div><div class="class-info">Grade 9B</div></td></tr>
+            <tr><td><strong>P3</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P4</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 6C</div></td><td><div class="subject">Science</div><div class="class-info">Grade 6A</div></td></tr>
+            <tr><td><strong>P5</strong></td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 9A</div></td><td><div class="subject">Computer Science</div><div class="class-info">Grade 10B</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P6</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P7</strong></td><td class="free">Free Period</td><td><div class="subject">Computer Science</div><div class="class-info">Grade 9A</div></td><td><div class="subject">Computer Science</div><div class="class-info">Grade 7A</div></td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 7B</div></td></tr>
+            <tr><td><strong>P8</strong></td><td><div class="subject">Science</div><div class="class-info">Grade 6A</div></td><td class="free">Free Period</td><td><div class="subject">Computer Science</div><div class="class-info">Grade 8A</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Sarah Hernandez <span class="workload-badge" style="background: #27ae60;">7/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P2</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P3</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Social Studies</div><div class="class-info">Grade 9C</div></td></tr>
+            <tr><td><strong>P4</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P5</strong></td><td><div class="subject">Social Studies</div><div class="class-info">Grade 8C</div></td><td><div class="subject">Social Studies</div><div class="class-info">Grade 10A</div></td><td><div class="subject">Social Studies</div><div class="class-info">Grade 6A</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P6</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Social Studies</div><div class="class-info">Grade 9C</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P7</strong></td><td><div class="subject">Social Studies</div><div class="class-info">Grade 7A</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Social Studies</div><div class="class-info">Grade 6B</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P8</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Steven Taylor <span class="workload-badge" style="background: #27ae60;">11/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Physical Education</div><div class="class-info">Grade 9A</div></td><td><div class="subject">Computer Science</div><div class="class-info">Grade 9C</div></td></tr>
+            <tr><td><strong>P2</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Physical Education</div><div class="class-info">Grade 9A</div></td></tr>
+            <tr><td><strong>P3</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P4</strong></td><td class="free">Free Period</td><td><div class="subject">Physical Education</div><div class="class-info">Grade 7A</div></td><td class="free">Free Period</td><td><div class="subject">Computer Science</div><div class="class-info">Grade 7B</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P5</strong></td><td class="free">Free Period</td><td><div class="subject">Computer Science</div><div class="class-info">Grade 6A</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P6</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Computer Science</div><div class="class-info">Grade 6C</div></td><td><div class="subject">Computer Science</div><div class="class-info">Grade 7A</div></td></tr>
+            <tr><td><strong>P7</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P8</strong></td><td class="free">Free Period</td><td><div class="subject">Computer Science</div><div class="class-info">Grade 8A</div></td><td class="free">Free Period</td><td><div class="subject">Physical Education</div><div class="class-info">Grade 6A</div></td><td><div class="subject">Computer Science</div><div class="class-info">Grade 7C</div></td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Anthony Ramirez <span class="workload-badge" style="background: #27ae60;">14/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td><div class="subject">Music</div><div class="class-info">Grade 7C</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P2</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Music</div><div class="class-info">Grade 8B</div></td><td><div class="subject">Science</div><div class="class-info">Grade 6A</div></td><td><div class="subject">Science</div><div class="class-info">Grade 10B</div></td></tr>
+            <tr><td><strong>P3</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 9B</div></td><td><div class="subject">Science</div><div class="class-info">Grade 7C</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P4</strong></td><td><div class="subject">Music</div><div class="class-info">Grade 9B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 6B</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P5</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 8C</div></td><td class="free">Free Period</td><td><div class="subject">Music</div><div class="class-info">Grade 10B</div></td></tr>
+            <tr><td><strong>P6</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 8C</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P7</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Music</div><div class="class-info">Grade 6C</div></td></tr>
+            <tr><td><strong>P8</strong></td><td><div class="subject">Science</div><div class="class-info">Grade 9C</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 7B</div></td><td class="free">Free Period</td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Karen Gonzalez <span class="workload-badge" style="background: #27ae60;">17/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 8A</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P2</strong></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 9A</div></td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 9B</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P3</strong></td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 9C</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 7B</div></td></tr>
+            <tr><td><strong>P4</strong></td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 8C</div></td><td><div class="subject">Science</div><div class="class-info">Grade 9B</div></td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 8B</div></td></tr>
+            <tr><td><strong>P5</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 9B</div></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 6C</div></td></tr>
+            <tr><td><strong>P6</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 7B</div></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 9B</div></td></tr>
+            <tr><td><strong>P7</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 7C</div></td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 10B</div></td></tr>
+            <tr><td><strong>P8</strong></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 8A</div></td><td><div class="subject">Science</div><div class="class-info">Grade 9A</div></td><td><div class="subject">Science</div><div class="class-info">Grade 6B</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Sarah Nguyen <span class="workload-badge" style="background: #27ae60;">4/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P2</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">French</div><div class="class-info">Grade 7B</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P3</strong></td><td><div class="subject">French</div><div class="class-info">Grade 10B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P4</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Music</div><div class="class-info">Grade 7C</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P5</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P6</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P7</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P8</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">French</div><div class="class-info">Grade 10A</div></td><td class="free">Free Period</td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Sarah Lee <span class="workload-badge" style="background: #27ae60;">14/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td class="free">Free Period</td><td><div class="subject">Art</div><div class="class-info">Grade 6B</div></td><td class="free">Free Period</td><td><div class="subject">Social Studies</div><div class="class-info">Grade 6A</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P2</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Social Studies</div><div class="class-info">Grade 10B</div></td><td class="free">Free Period</td><td><div class="subject">Art</div><div class="class-info">Grade 10A</div></td></tr>
+            <tr><td><strong>P3</strong></td><td><div class="subject">Social Studies</div><div class="class-info">Grade 10A</div></td><td><div class="subject">Art</div><div class="class-info">Grade 10B</div></td><td><div class="subject">Art</div><div class="class-info">Grade 7C</div></td><td class="free">Free Period</td><td><div class="subject">Social Studies</div><div class="class-info">Grade 6C</div></td></tr>
+            <tr><td><strong>P4</strong></td><td class="free">Free Period</td><td><div class="subject">Social Studies</div><div class="class-info">Grade 9A</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P5</strong></td><td class="free">Free Period</td><td><div class="subject">Social Studies</div><div class="class-info">Grade 8C</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P6</strong></td><td class="free">Free Period</td><td><div class="subject">Social Studies</div><div class="class-info">Grade 8B</div></td><td class="free">Free Period</td><td><div class="subject">Social Studies</div><div class="class-info">Grade 6B</div></td><td><div class="subject">Social Studies</div><div class="class-info">Grade 6A</div></td></tr>
+            <tr><td><strong>P7</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P8</strong></td><td><div class="subject">Art</div><div class="class-info">Grade 9A</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>George Walker <span class="workload-badge" style="background: #27ae60;">18/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 6C</div></td><td class="free">Free Period</td><td><div class="subject">English</div><div class="class-info">Grade 9A</div></td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 6A</div></td></tr>
+            <tr><td><strong>P2</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">English</div><div class="class-info">Grade 6B</div></td></tr>
+            <tr><td><strong>P3</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P4</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">English</div><div class="class-info">Grade 8A</div></td><td><div class="subject">English</div><div class="class-info">Grade 7B</div></td></tr>
+            <tr><td><strong>P5</strong></td><td><div class="subject">English</div><div class="class-info">Grade 10A</div></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 8A</div></td><td><div class="subject">English</div><div class="class-info">Grade 6B</div></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 10B</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P6</strong></td><td class="free">Free Period</td><td><div class="subject">English</div><div class="class-info">Grade 8C</div></td><td><div class="subject">English</div><div class="class-info">Grade 8B</div></td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 8B</div></td></tr>
+            <tr><td><strong>P7</strong></td><td><div class="subject">English</div><div class="class-info">Grade 9A</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">English</div><div class="class-info">Grade 9B</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P8</strong></td><td><div class="subject">English</div><div class="class-info">Grade 9B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">English</div><div class="class-info">Grade 9B</div></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 7A</div></td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>James Brown <span class="workload-badge" style="background: #27ae60;">8/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td><div class="subject">Physical Education</div><div class="class-info">Grade 8A</div></td><td class="free">Free Period</td><td><div class="subject">Physical Education</div><div class="class-info">Grade 9C</div></td><td><div class="subject">Hindi</div><div class="class-info">Grade 6B</div></td><td><div class="subject">Hindi</div><div class="class-info">Grade 10A</div></td></tr>
+            <tr><td><strong>P2</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P3</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Hindi</div><div class="class-info">Grade 9B</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P4</strong></td><td><div class="subject">Hindi</div><div class="class-info">Grade 9C</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Hindi</div><div class="class-info">Grade 6A</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P5</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P6</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P7</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P8</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Hindi</div><div class="class-info">Grade 9C</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Nancy Jones <span class="workload-badge" style="background: #27ae60;">20/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">English</div><div class="class-info">Grade 8B</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P2</strong></td><td><div class="subject">Science</div><div class="class-info">Grade 10A</div></td><td class="free">Free Period</td><td><div class="subject">English</div><div class="class-info">Grade 8A</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P3</strong></td><td><div class="subject">English</div><div class="class-info">Grade 8C</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">English</div><div class="class-info">Grade 9C</div></td><td><div class="subject">Science</div><div class="class-info">Grade 8B</div></td></tr>
+            <tr><td><strong>P4</strong></td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 6B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">English</div><div class="class-info">Grade 9A</div></td></tr>
+            <tr><td><strong>P5</strong></td><td><div class="subject">English</div><div class="class-info">Grade 7A</div></td><td><div class="subject">English</div><div class="class-info">Grade 7B</div></td><td><div class="subject">English</div><div class="class-info">Grade 6C</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P6</strong></td><td class="free">Free Period</td><td><div class="subject">English</div><div class="class-info">Grade 10A</div></td><td class="free">Free Period</td><td><div class="subject">English</div><div class="class-info">Grade 9C</div></td><td><div class="subject">English</div><div class="class-info">Grade 7C</div></td></tr>
+            <tr><td><strong>P7</strong></td><td><div class="subject">English</div><div class="class-info">Grade 6B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">English</div><div class="class-info">Grade 10B</div></td><td><div class="subject">Science</div><div class="class-info">Grade 9B</div></td></tr>
+            <tr><td><strong>P8</strong></td><td><div class="subject">Science</div><div class="class-info">Grade 8B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">English</div><div class="class-info">Grade 8C</div></td><td><div class="subject">English</div><div class="class-info">Grade 6A</div></td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Nancy Thomas <span class="workload-badge" style="background: #27ae60;">14/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 10B</div></td><td><div class="subject">Computer Science</div><div class="class-info">Grade 7C</div></td></tr>
+            <tr><td><strong>P2</strong></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 6A</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P3</strong></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 9A</div></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 7C</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 9B</div></td></tr>
+            <tr><td><strong>P4</strong></td><td><div class="subject">Computer Science</div><div class="class-info">Grade 8C</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P5</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Computer Science</div><div class="class-info">Grade 7A</div></td><td><div class="subject">Computer Science</div><div class="class-info">Grade 7C</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P6</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Computer Science</div><div class="class-info">Grade 9A</div></td></tr>
+            <tr><td><strong>P7</strong></td><td><div class="subject">Computer Science</div><div class="class-info">Grade 7B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P8</strong></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 6C</div></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 10A</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Computer Science</div><div class="class-info">Grade 10B</div></td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Dorothy Thomas <span class="workload-badge" style="background: #27ae60;">14/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P2</strong></td><td><div class="subject">Social Studies</div><div class="class-info">Grade 7B</div></td><td><div class="subject">Social Studies</div><div class="class-info">Grade 9B</div></td><td class="free">Free Period</td><td><div class="subject">Computer Science</div><div class="class-info">Grade 9C</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P3</strong></td><td><div class="subject">Computer Science</div><div class="class-info">Grade 9B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P4</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Computer Science</div><div class="class-info">Grade 6C</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P5</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Social Studies</div><div class="class-info">Grade 9A</div></td></tr>
+            <tr><td><strong>P6</strong></td><td><div class="subject">Computer Science</div><div class="class-info">Grade 8B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P7</strong></td><td><div class="subject">Computer Science</div><div class="class-info">Grade 6C</div></td><td class="free">Free Period</td><td><div class="subject">Social Studies</div><div class="class-info">Grade 9B</div></td><td class="free">Free Period</td><td><div class="subject">Social Studies</div><div class="class-info">Grade 7C</div></td></tr>
+            <tr><td><strong>P8</strong></td><td><div class="subject">Computer Science</div><div class="class-info">Grade 10A</div></td><td><div class="subject">Social Studies</div><div class="class-info">Grade 8C</div></td><td><div class="subject">Computer Science</div><div class="class-info">Grade 7B</div></td><td><div class="subject">Computer Science</div><div class="class-info">Grade 6B</div></td><td class="free">Free Period</td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Ronald Garcia <span class="workload-badge" style="background: #27ae60;">17/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td><div class="subject">Science</div><div class="class-info">Grade 10B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 6C</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P2</strong></td><td class="free">Free Period</td><td><div class="subject">Computer Science</div><div class="class-info">Grade 6C</div></td><td><div class="subject">Science</div><div class="class-info">Grade 9C</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P3</strong></td><td><div class="subject">Computer Science</div><div class="class-info">Grade 9C</div></td><td><div class="subject">Computer Science</div><div class="class-info">Grade 6A</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Computer Science</div><div class="class-info">Grade 9A</div></td></tr>
+            <tr><td><strong>P4</strong></td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 9C</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P5</strong></td><td><div class="subject">Science</div><div class="class-info">Grade 6C</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 10A</div></td><td><div class="subject">Science</div><div class="class-info">Grade 9C</div></td></tr>
+            <tr><td><strong>P6</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 7C</div></td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 9C</div></td></tr>
+            <tr><td><strong>P7</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 8A</div></td><td><div class="subject">Computer Science</div><div class="class-info">Grade 10A</div></td></tr>
+            <tr><td><strong>P8</strong></td><td><div class="subject">Science</div><div class="class-info">Grade 7A</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Computer Science</div><div class="class-info">Grade 9C</div></td><td class="free">Free Period</td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Mark Taylor <span class="workload-badge" style="background: #27ae60;">20/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td class="free">Free Period</td><td><div class="subject">English</div><div class="class-info">Grade 7B</div></td><td><div class="subject">English</div><div class="class-info">Grade 8A</div></td><td><div class="subject">Hindi</div><div class="class-info">Grade 9C</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P2</strong></td><td class="free">Free Period</td><td><div class="subject">Hindi</div><div class="class-info">Grade 8B</div></td><td><div class="subject">English</div><div class="class-info">Grade 6C</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P3</strong></td><td class="free">Free Period</td><td><div class="subject">English</div><div class="class-info">Grade 9A</div></td><td><div class="subject">Hindi</div><div class="class-info">Grade 6C</div></td><td class="free">Free Period</td><td><div class="subject">English</div><div class="class-info">Grade 10B</div></td></tr>
+            <tr><td><strong>P4</strong></td><td><div class="subject">English</div><div class="class-info">Grade 6C</div></td><td><div class="subject">English</div><div class="class-info">Grade 7B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">English</div><div class="class-info">Grade 10B</div></td></tr>
+            <tr><td><strong>P5</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Hindi</div><div class="class-info">Grade 7C</div></td><td><div class="subject">Hindi</div><div class="class-info">Grade 6C</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P6</strong></td><td><div class="subject">English</div><div class="class-info">Grade 10A</div></td><td><div class="subject">Hindi</div><div class="class-info">Grade 6C</div></td><td><div class="subject">English</div><div class="class-info">Grade 9A</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P7</strong></td><td><div class="subject">English</div><div class="class-info">Grade 9B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">English</div><div class="class-info">Grade 6C</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P8</strong></td><td class="free">Free Period</td><td><div class="subject">English</div><div class="class-info">Grade 7C</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">English</div><div class="class-info">Grade 7B</div></td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Helen Taylor <span class="workload-badge" style="background: #27ae60;">9/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td class="free">Free Period</td><td><div class="subject">Music</div><div class="class-info">Grade 10A</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P2</strong></td><td><div class="subject">Music</div><div class="class-info">Grade 9C</div></td><td><div class="subject">Music</div><div class="class-info">Grade 7B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P3</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P4</strong></td><td><div class="subject">Art</div><div class="class-info">Grade 10B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P5</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Music</div><div class="class-info">Grade 8C</div></td></tr>
+            <tr><td><strong>P6</strong></td><td><div class="subject">Music</div><div class="class-info">Grade 10B</div></td><td class="free">Free Period</td><td><div class="subject">Music</div><div class="class-info">Grade 6B</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P7</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Music</div><div class="class-info">Grade 7A</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P8</strong></td><td class="free">Free Period</td><td><div class="subject">Art</div><div class="class-info">Grade 6C</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Lisa Martin <span class="workload-badge" style="background: #27ae60;">16/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 6A</div></td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 8C</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P2</strong></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 7C</div></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 8C</div></td><td class="free">Free Period</td><td><div class="subject">Social Studies</div><div class="class-info">Grade 9A</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P3</strong></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 8A</div></td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 6B</div></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 10A</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P4</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 10B</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P5</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Social Studies</div><div class="class-info">Grade 8B</div></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 8B</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P6</strong></td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 8A</div></td><td><div class="subject">Social Studies</div><div class="class-info">Grade 10B</div></td><td class="free">Free Period</td><td><div class="subject">Social Studies</div><div class="class-info">Grade 7B</div></td></tr>
+            <tr><td><strong>P7</strong></td><td class="free">Free Period</td><td><div class="subject">Social Studies</div><div class="class-info">Grade 8B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 6A</div></td></tr>
+            <tr><td><strong>P8</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Michael Smith <span class="workload-badge" style="background: #27ae60;">14/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td class="free">Free Period</td><td><div class="subject">Social Studies</div><div class="class-info">Grade 9A</div></td><td><div class="subject">French</div><div class="class-info">Grade 8C</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P2</strong></td><td><div class="subject">Social Studies</div><div class="class-info">Grade 6B</div></td><td class="free">Free Period</td><td><div class="subject">French</div><div class="class-info">Grade 7C</div></td><td><div class="subject">Social Studies</div><div class="class-info">Grade 10B</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P3</strong></td><td class="free">Free Period</td><td><div class="subject">Social Studies</div><div class="class-info">Grade 6B</div></td><td class="free">Free Period</td><td><div class="subject">French</div><div class="class-info">Grade 6A</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P4</strong></td><td class="free">Free Period</td><td><div class="subject">French</div><div class="class-info">Grade 8A</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P5</strong></td><td class="free">Free Period</td><td><div class="subject">Social Studies</div><div class="class-info">Grade 7C</div></td><td class="free">Free Period</td><td><div class="subject">Social Studies</div><div class="class-info">Grade 7B</div></td><td><div class="subject">Social Studies</div><div class="class-info">Grade 7B</div></td></tr>
+            <tr><td><strong>P6</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">French</div><div class="class-info">Grade 6B</div></td></tr>
+            <tr><td><strong>P7</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P8</strong></td><td><div class="subject">French</div><div class="class-info">Grade 10B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">French</div><div class="class-info">Grade 8B</div></td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Michael Wright <span class="workload-badge" style="background: #27ae60;">8/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td><div class="subject">Physical Education</div><div class="class-info">Grade 7B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P2</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Art</div><div class="class-info">Grade 7A</div></td><td><div class="subject">Art</div><div class="class-info">Grade 7C</div></td></tr>
+            <tr><td><strong>P3</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P4</strong></td><td class="free">Free Period</td><td><div class="subject">Art</div><div class="class-info">Grade 10A</div></td><td class="free">Free Period</td><td><div class="subject">Art</div><div class="class-info">Grade 7C</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P5</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P6</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P7</strong></td><td><div class="subject">Art</div><div class="class-info">Grade 6A</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P8</strong></td><td><div class="subject">Art</div><div class="class-info">Grade 7B</div></td><td class="free">Free Period</td><td><div class="subject">Physical Education</div><div class="class-info">Grade 6C</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Matthew Rodriguez <span class="workload-badge" style="background: #27ae60;">19/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td><div class="subject">English</div><div class="class-info">Grade 7A</div></td><td class="free">Free Period</td><td><div class="subject">English</div><div class="class-info">Grade 7C</div></td><td class="free">Free Period</td><td><div class="subject">French</div><div class="class-info">Grade 9A</div></td></tr>
+            <tr><td><strong>P2</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P3</strong></td><td><div class="subject">English</div><div class="class-info">Grade 6A</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">English</div><div class="class-info">Grade 7A</div></td><td><div class="subject">English</div><div class="class-info">Grade 6A</div></td></tr>
+            <tr><td><strong>P4</strong></td><td><div class="subject">English</div><div class="class-info">Grade 6B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">English</div><div class="class-info">Grade 10A</div></td><td><div class="subject">English</div><div class="class-info">Grade 8C</div></td></tr>
+            <tr><td><strong>P5</strong></td><td class="free">Free Period</td><td><div class="subject">English</div><div class="class-info">Grade 8B</div></td><td class="free">Free Period</td><td><div class="subject">English</div><div class="class-info">Grade 9C</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P6</strong></td><td><div class="subject">English</div><div class="class-info">Grade 6C</div></td><td class="free">Free Period</td><td><div class="subject">English</div><div class="class-info">Grade 7A</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P7</strong></td><td class="free">Free Period</td><td><div class="subject">English</div><div class="class-info">Grade 9B</div></td><td class="free">Free Period</td><td><div class="subject">English</div><div class="class-info">Grade 8B</div></td><td><div class="subject">French</div><div class="class-info">Grade 8B</div></td></tr>
+            <tr><td><strong>P8</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">French</div><div class="class-info">Grade 9A</div></td><td><div class="subject">French</div><div class="class-info">Grade 7C</div></td><td><div class="subject">French</div><div class="class-info">Grade 9B</div></td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Helen White <span class="workload-badge" style="background: #27ae60;">11/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td><div class="subject">Art</div><div class="class-info">Grade 8C</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 8B</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P2</strong></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 8B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Art</div><div class="class-info">Grade 8B</div></td></tr>
+            <tr><td><strong>P3</strong></td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 8B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P4</strong></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 7A</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Art</div><div class="class-info">Grade 8A</div></td></tr>
+            <tr><td><strong>P5</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P6</strong></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 7B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 6A</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P7</strong></td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 7C</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P8</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 9B</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Andrew Wright <span class="workload-badge" style="background: #27ae60;">12/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 7C</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P2</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 8C</div></td><td><div class="subject">Music</div><div class="class-info">Grade 8A</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P3</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P4</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P5</strong></td><td class="free">Free Period</td><td><div class="subject">Music</div><div class="class-info">Grade 6B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 10A</div></td></tr>
+            <tr><td><strong>P6</strong></td><td class="free">Free Period</td><td><div class="subject">Music</div><div class="class-info">Grade 9A</div></td><td><div class="subject">Music</div><div class="class-info">Grade 8A</div></td><td><div class="subject">Science</div><div class="class-info">Grade 9A</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P7</strong></td><td><div class="subject">Music</div><div class="class-info">Grade 10A</div></td><td><div class="subject">Science</div><div class="class-info">Grade 6A</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P8</strong></td><td class="free">Free Period</td><td><div class="subject">Music</div><div class="class-info">Grade 9B</div></td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 9A</div></td><td class="free">Free Period</td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Ronald King <span class="workload-badge" style="background: #27ae60;">10/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td class="free">Free Period</td><td><div class="subject">Physical Education</div><div class="class-info">Grade 10B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P2</strong></td><td class="free">Free Period</td><td><div class="subject">Music</div><div class="class-info">Grade 6A</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P3</strong></td><td class="free">Free Period</td><td><div class="subject">Physical Education</div><div class="class-info">Grade 8A</div></td><td class="free">Free Period</td><td><div class="subject">Physical Education</div><div class="class-info">Grade 8C</div></td><td><div class="subject">Physical Education</div><div class="class-info">Grade 7C</div></td></tr>
+            <tr><td><strong>P4</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Music</div><div class="class-info">Grade 8C</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P5</strong></td><td><div class="subject">Music</div><div class="class-info">Grade 8B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P6</strong></td><td><div class="subject">Music</div><div class="class-info">Grade 9A</div></td><td class="free">Free Period</td><td><div class="subject">Music</div><div class="class-info">Grade 6A</div></td><td class="free">Free Period</td><td><div class="subject">Physical Education</div><div class="class-info">Grade 10B</div></td></tr>
+            <tr><td><strong>P7</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P8</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Lisa Miller <span class="workload-badge" style="background: #27ae60;">16/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Hindi</div><div class="class-info">Grade 6A</div></td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 6B</div></td></tr>
+            <tr><td><strong>P2</strong></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 8A</div></td><td><div class="subject">Hindi</div><div class="class-info">Grade 6B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P3</strong></td><td class="free">Free Period</td><td><div class="subject">Hindi</div><div class="class-info">Grade 7B</div></td><td><div class="subject">Hindi</div><div class="class-info">Grade 10B</div></td><td><div class="subject">Hindi</div><div class="class-info">Grade 7B</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P4</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 8C</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P5</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 9A</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P6</strong></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 8A</div></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 9C</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P7</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Hindi</div><div class="class-info">Grade 10B</div></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 7B</div></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 9A</div></td></tr>
+            <tr><td><strong>P8</strong></td><td class="free">Free Period</td><td><div class="subject">Hindi</div><div class="class-info">Grade 6A</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Hindi</div><div class="class-info">Grade 9A</div></td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Matthew Davis <span class="workload-badge" style="background: #27ae60;">11/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P2</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Computer Science</div><div class="class-info">Grade 8B</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P3</strong></td><td><div class="subject">Computer Science</div><div class="class-info">Grade 6B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">French</div><div class="class-info">Grade 9A</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P4</strong></td><td><div class="subject">French</div><div class="class-info">Grade 10A</div></td><td class="free">Free Period</td><td><div class="subject">Computer Science</div><div class="class-info">Grade 6A</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P5</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P6</strong></td><td><div class="subject">Computer Science</div><div class="class-info">Grade 6A</div></td><td class="free">Free Period</td><td><div class="subject">Computer Science</div><div class="class-info">Grade 9B</div></td><td><div class="subject">Computer Science</div><div class="class-info">Grade 9B</div></td><td><div class="subject">French</div><div class="class-info">Grade 8C</div></td></tr>
+            <tr><td><strong>P7</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">French</div><div class="class-info">Grade 9C</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P8</strong></td><td class="free">Free Period</td><td><div class="subject">Computer Science</div><div class="class-info">Grade 7B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Sandra Jackson <span class="workload-badge" style="background: #27ae60;">9/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td><div class="subject">Social Studies</div><div class="class-info">Grade 9C</div></td><td class="free">Free Period</td><td><div class="subject">Art</div><div class="class-info">Grade 9B</div></td><td><div class="subject">Art</div><div class="class-info">Grade 7B</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P2</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P3</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P4</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P5</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Art</div><div class="class-info">Grade 9A</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P6</strong></td><td class="free">Free Period</td><td><div class="subject">Social Studies</div><div class="class-info">Grade 7A</div></td><td class="free">Free Period</td><td><div class="subject">Art</div><div class="class-info">Grade 8A</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P7</strong></td><td><div class="subject">Social Studies</div><div class="class-info">Grade 7C</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Art</div><div class="class-info">Grade 8C</div></td></tr>
+            <tr><td><strong>P8</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Social Studies</div><div class="class-info">Grade 10A</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Carol Wilson <span class="workload-badge" style="background: #27ae60;">9/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td><div class="subject">Science</div><div class="class-info">Grade 6B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P2</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">French</div><div class="class-info">Grade 9B</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P3</strong></td><td class="free">Free Period</td><td><div class="subject">French</div><div class="class-info">Grade 7A</div></td><td><div class="subject">Science</div><div class="class-info">Grade 7B</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P4</strong></td><td><div class="subject">French</div><div class="class-info">Grade 8A</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P5</strong></td><td><div class="subject">French</div><div class="class-info">Grade 7B</div></td><td><div class="subject">French</div><div class="class-info">Grade 10B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P6</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P7</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P8</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 7A</div></td><td><div class="subject">French</div><div class="class-info">Grade 9C</div></td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Kimberly Young <span class="workload-badge" style="background: #27ae60;">6/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P2</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Physical Education</div><div class="class-info">Grade 6A</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P3</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Physical Education</div><div class="class-info">Grade 8B</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P4</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Physical Education</div><div class="class-info">Grade 9B</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P5</strong></td><td><div class="subject">Physical Education</div><div class="class-info">Grade 6A</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P6</strong></td><td><div class="subject">Physical Education</div><div class="class-info">Grade 9B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P7</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P8</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Physical Education</div><div class="class-info">Grade 8B</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Lisa Ramirez <span class="workload-badge" style="background: #27ae60;">6/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Computer Science</div><div class="class-info">Grade 8A</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P2</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Computer Science</div><div class="class-info">Grade 8A</div></td></tr>
+            <tr><td><strong>P3</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P4</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Computer Science</div><div class="class-info">Grade 10B</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P5</strong></td><td><div class="subject">Computer Science</div><div class="class-info">Grade 6B</div></td><td><div class="subject">Computer Science</div><div class="class-info">Grade 7A</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Computer Science</div><div class="class-info">Grade 7C</div></td></tr>
+            <tr><td><strong>P6</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P7</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P8</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>David Smith <span class="workload-badge" style="background: #27ae60;">14/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P2</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Art</div><div class="class-info">Grade 7A</div></td></tr>
+            <tr><td><strong>P3</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 6A</div></td><td><div class="subject">Art</div><div class="class-info">Grade 8A</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P4</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Art</div><div class="class-info">Grade 9C</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P5</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Art</div><div class="class-info">Grade 7B</div></td><td><div class="subject">Science</div><div class="class-info">Grade 7A</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P6</strong></td><td><div class="subject">Art</div><div class="class-info">Grade 9C</div></td><td><div class="subject">Science</div><div class="class-info">Grade 7C</div></td><td class="free">Free Period</td><td><div class="subject">Art</div><div class="class-info">Grade 8B</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P7</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 8B</div></td><td class="free">Free Period</td><td><div class="subject">Art</div><div class="class-info">Grade 7A</div></td></tr>
+            <tr><td><strong>P8</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Art</div><div class="class-info">Grade 6A</div></td><td><div class="subject">Science</div><div class="class-info">Grade 8A</div></td><td><div class="subject">Art</div><div class="class-info">Grade 6C</div></td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Timothy Taylor <span class="workload-badge" style="background: #27ae60;">9/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td class="free">Free Period</td><td><div class="subject">Hindi</div><div class="class-info">Grade 9C</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Physical Education</div><div class="class-info">Grade 7B</div></td></tr>
+            <tr><td><strong>P2</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P3</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Physical Education</div><div class="class-info">Grade 10B</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P4</strong></td><td><div class="subject">Hindi</div><div class="class-info">Grade 6A</div></td><td class="free">Free Period</td><td><div class="subject">Physical Education</div><div class="class-info">Grade 8B</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P5</strong></td><td><div class="subject">Physical Education</div><div class="class-info">Grade 8A</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P6</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Physical Education</div><div class="class-info">Grade 10A</div></td></tr>
+            <tr><td><strong>P7</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Hindi</div><div class="class-info">Grade 8A</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P8</strong></td><td class="free">Free Period</td><td><div class="subject">Physical Education</div><div class="class-info">Grade 9C</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Brian Ramirez <span class="workload-badge" style="background: #27ae60;">12/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td class="free">Free Period</td><td><div class="subject">Social Studies</div><div class="class-info">Grade 8C</div></td><td class="free">Free Period</td><td><div class="subject">Social Studies</div><div class="class-info">Grade 7A</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P2</strong></td><td><div class="subject">Social Studies</div><div class="class-info">Grade 6C</div></td><td class="free">Free Period</td><td><div class="subject">Social Studies</div><div class="class-info">Grade 10A</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P3</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P4</strong></td><td><div class="subject">Social Studies</div><div class="class-info">Grade 7C</div></td><td class="free">Free Period</td><td><div class="subject">Social Studies</div><div class="class-info">Grade 8A</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P5</strong></td><td><div class="subject">Social Studies</div><div class="class-info">Grade 9B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Social Studies</div><div class="class-info">Grade 8A</div></td><td><div class="subject">Social Studies</div><div class="class-info">Grade 7A</div></td></tr>
+            <tr><td><strong>P6</strong></td><td class="free">Free Period</td><td><div class="subject">Social Studies</div><div class="class-info">Grade 6A</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P7</strong></td><td><div class="subject">Social Studies</div><div class="class-info">Grade 8B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P8</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Social Studies</div><div class="class-info">Grade 10B</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Jennifer Jones <span class="workload-badge" style="background: #27ae60;">9/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P2</strong></td><td class="free">Free Period</td><td><div class="subject">Hindi</div><div class="class-info">Grade 10B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P3</strong></td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 9B</div></td><td><div class="subject">Science</div><div class="class-info">Grade 8A</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P4</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P5</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P6</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Hindi</div><div class="class-info">Grade 10A</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P7</strong></td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 6B</div></td><td><div class="subject">Hindi</div><div class="class-info">Grade 8C</div></td><td><div class="subject">Hindi</div><div class="class-info">Grade 9A</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P8</strong></td><td class="free">Free Period</td><td><div class="subject">Hindi</div><div class="class-info">Grade 8B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Hindi</div><div class="class-info">Grade 8A</div></td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>George Scott <span class="workload-badge" style="background: #27ae60;">16/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td><div class="subject">Science</div><div class="class-info">Grade 8B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Art</div><div class="class-info">Grade 8C</div></td></tr>
+            <tr><td><strong>P2</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 6C</div></td></tr>
+            <tr><td><strong>P3</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 8C</div></td><td><div class="subject">Art</div><div class="class-info">Grade 6B</div></td><td><div class="subject">Science</div><div class="class-info">Grade 7A</div></td></tr>
+            <tr><td><strong>P4</strong></td><td class="free">Free Period</td><td><div class="subject">Art</div><div class="class-info">Grade 6A</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P5</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 10A</div></td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 6A</div></td></tr>
+            <tr><td><strong>P6</strong></td><td><div class="subject">Science</div><div class="class-info">Grade 7C</div></td><td><div class="subject">Art</div><div class="class-info">Grade 6B</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P7</strong></td><td class="free">Free Period</td><td><div class="subject">Science</div><div class="class-info">Grade 7A</div></td><td><div class="subject">Science</div><div class="class-info">Grade 6C</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P8</strong></td><td class="free">Free Period</td><td><div class="subject">Art</div><div class="class-info">Grade 10B</div></td><td><div class="subject">Science</div><div class="class-info">Grade 7A</div></td><td><div class="subject">Science</div><div class="class-info">Grade 6C</div></td><td class="free">Free Period</td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Donna White <span class="workload-badge" style="background: #27ae60;">10/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Physical Education</div><div class="class-info">Grade 6C</div></td></tr>
+            <tr><td><strong>P2</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 8C</div></td></tr>
+            <tr><td><strong>P3</strong></td><td><div class="subject">Physical Education</div><div class="class-info">Grade 7B</div></td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 10A</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P4</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 9A</div></td><td><div class="subject">Physical Education</div><div class="class-info">Grade 7C</div></td></tr>
+            <tr><td><strong>P5</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 9C</div></td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P6</strong></td><td class="free">Free Period</td><td><div class="subject">Physical Education</div><div class="class-info">Grade 9B</div></td><td class="free">Free Period</td><td><div class="subject">Mathematics</div><div class="class-info">Grade 10B</div></td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P7</strong></td><td><div class="subject">Mathematics</div><div class="class-info">Grade 9C</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P8</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+        </table>
+    </div>
+
+    <div class="class-timetable">
+        <h3>Lisa Miller <span class="workload-badge" style="background: #27ae60;">8/40 periods</span></h3>
+        <table>
+            <tr>
+                <th>Period</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr><td><strong>P1</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P2</strong></td><td class="free">Free Period</td><td><div class="subject">Physical Education</div><div class="class-info">Grade 7C</div></td><td><div class="subject">Hindi</div><div class="class-info">Grade 7B</div></td><td class="free">Free Period</td><td><div class="subject">Physical Education</div><div class="class-info">Grade 9C</div></td></tr>
+            <tr><td><strong>P3</strong></td><td><div class="subject">Hindi</div><div class="class-info">Grade 7C</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P4</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P5</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P6</strong></td><td><div class="subject">Hindi</div><div class="class-info">Grade 8C</div></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td></tr>
+            <tr><td><strong>P7</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Physical Education</div><div class="class-info">Grade 6B</div></td><td class="free">Free Period</td><td><div class="subject">Physical Education</div><div class="class-info">Grade 6B</div></td></tr>
+            <tr><td><strong>P8</strong></td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td class="free">Free Period</td><td><div class="subject">Physical Education</div><div class="class-info">Grade 8C</div></td></tr>
+        </table>
+    </div>
+    </div>
+
+
+</body>
+</html>

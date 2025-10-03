@@ -72,4 +72,12 @@ export class TimetablesController {
   deactivate(@Param('id') id: string) {
     return this.timetablesService.deactivate(id);
   }
+
+  @Get(':id/entries')
+  @ApiOperation({ summary: 'Get timetable entries with details' })
+  @ApiResponse({ status: 200, description: 'Return timetable entries with class, teacher, subject, room, and timeslot details' })
+  @ApiResponse({ status: 404, description: 'Timetable not found' })
+  getEntries(@Param('id') id: string) {
+    return this.timetablesService.getEntries(id);
+  }
 }

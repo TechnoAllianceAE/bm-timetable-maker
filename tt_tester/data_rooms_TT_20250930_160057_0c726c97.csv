@@ -1,0 +1,61 @@
+room_id,name,type,capacity,has_projector,specialization
+ROOM_001,Classroom 1,classroom,36,True,
+ROOM_002,Classroom 2,classroom,38,False,
+ROOM_003,Classroom 3,classroom,40,False,
+ROOM_004,Classroom 4,classroom,39,True,
+ROOM_005,Classroom 5,classroom,31,True,
+ROOM_006,Classroom 6,classroom,40,True,
+ROOM_007,Classroom 7,classroom,34,True,
+ROOM_008,Classroom 8,classroom,33,True,
+ROOM_009,Classroom 9,classroom,36,False,
+ROOM_010,Classroom 10,classroom,37,False,
+ROOM_011,Classroom 11,classroom,32,False,
+ROOM_012,Classroom 12,classroom,35,True,
+ROOM_013,Classroom 13,classroom,40,False,
+ROOM_014,Classroom 14,classroom,40,True,
+ROOM_015,Classroom 15,classroom,39,True,
+ROOM_016,Classroom 16,classroom,38,True,
+ROOM_017,Classroom 17,classroom,32,False,
+ROOM_018,Classroom 18,classroom,36,False,
+ROOM_019,Classroom 19,classroom,40,True,
+ROOM_020,Classroom 20,classroom,40,False,
+ROOM_021,Classroom 21,classroom,30,True,
+ROOM_022,Classroom 22,classroom,30,False,
+ROOM_023,Classroom 23,classroom,36,False,
+ROOM_024,Classroom 24,classroom,31,True,
+ROOM_025,Classroom 25,classroom,39,False,
+ROOM_026,Classroom 26,classroom,33,False,
+ROOM_027,Classroom 27,classroom,36,False,
+ROOM_028,Classroom 28,classroom,32,False,
+ROOM_029,Classroom 29,classroom,32,True,
+ROOM_030,Classroom 30,classroom,38,False,
+ROOM_031,Classroom 31,classroom,39,False,
+ROOM_032,Classroom 32,classroom,39,False,
+ROOM_033,Classroom 33,classroom,35,True,
+ROOM_034,Classroom 34,classroom,32,False,
+ROOM_035,Classroom 35,classroom,31,True,
+ROOM_036,Classroom 36,classroom,31,True,
+ROOM_037,Classroom 37,classroom,40,True,
+ROOM_038,Classroom 38,classroom,40,False,
+ROOM_039,Classroom 39,classroom,39,True,
+ROOM_040,Classroom 40,classroom,36,False,
+ROOM_041,Classroom 41,classroom,39,False,
+ROOM_042,Classroom 42,classroom,38,False,
+ROOM_043,Classroom 43,classroom,38,True,
+ROOM_044,Classroom 44,classroom,40,True,
+ROOM_045,Classroom 45,classroom,40,False,
+LAB_001,Science Lab 1,lab,30,True,science_lab
+LAB_002,Computer Lab 2,lab,23,True,computer_lab
+LAB_003,Physics Lab 3,lab,29,True,physics_lab
+LAB_004,Chemistry Lab 4,lab,33,True,chemistry_lab
+LAB_005,Biology Lab 5,lab,25,True,biology_lab
+LAB_006,Language Lab 6,lab,34,True,language_lab
+LAB_007,Art Studio 7,lab,20,True,art_studio
+LAB_008,Music Room 8,lab,28,True,music_room
+LAB_009,PE Hall 9,lab,25,True,pe_hall
+LAB_010,Library 10,lab,23,True,library
+LAB_011,Math Lab 11,lab,29,True,math_lab
+LAB_012,Geography Lab 12,lab,26,True,geography_lab
+LAB_013,History Room 13,lab,24,True,history_room
+LAB_014,Auditorium 14,lab,31,True,auditorium
+LAB_015,Conference Room 15,lab,25,True,conference_room

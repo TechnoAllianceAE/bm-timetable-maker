@@ -23,6 +23,7 @@ export default function TimetablesPage() {
   const [loading, setLoading] = useState(true);
   const [selectedTimetable, setSelectedTimetable] = useState<Timetable | null>(null);
   const [viewMode, setViewMode] = useState<'list' | 'view'>('list');
+  const [currentTab, setCurrentTab] = useState<'class' | 'teacher'>('class');
 
   useEffect(() => {
     fetchTimetables();
@@ -181,14 +182,73 @@ export default function TimetablesPage() {
           </div>
         ) : (
           selectedTimetable && (
-            <div className="bg-white shadow rounded-lg p-6">
-              <div className="mb-4">
-                <h2 className="text-lg font-medium text-gray-900">Timetable View</h2>
-                <p className="text-sm text-gray-600">
-                  Complete weekly schedule for all classes
-                </p>
+            <div className="bg-white shadow rounded-lg">
+              {/* Tab Navigation */}
+              <div className="border-b border-gray-200">
+                <nav className="flex space-x-8 px-6" aria-label="Tabs">
+                  <button
+                    onClick={() => setCurrentTab('class')}
+                    className={`
+                      py-4 px-1 border-b-2 font-medium text-sm
+                      ${currentTab === 'class'
+                        ? 'border-blue-500 text-blue-600'
+                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                      }
+                    `}
+                  >
+                    📚 Class Timetables
+                  </button>
+                  <button
+                    onClick={() => setCurrentTab('teacher')}
+                    className={`
+                      py-4 px-1 border-b-2 font-medium text-sm
+                      ${currentTab === 'teacher'
+                        ? 'border-blue-500 text-blue-600'
+                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                      }
+                    `}
+                  >
+                    👨‍🏫 Teacher Timetables
+                  </button>
+                </nav>
               </div>
-              <TimetableViewer timetableId={selectedTimetable.id} viewMode="class" />
+
+              {/* Tab Content */}
+              <div className="p-6">
+                {currentTab === 'class' && (
+                  <div>
+                    <div className="mb-4">
+                      <h2 className="text-lg font-medium text-gray-900">Class Timetables</h2>
+                      <p className="text-sm text-gray-600">
+                        Complete weekly schedule for all classes - select a class to view
+                      </p>
+                    </div>
+                    <TimetableViewer
+                      timetableId={selectedTimetable.id}
+                      viewMode="class"
+                      allowViewSwitching={false}
+                      allowFilterChange={true}
+                    />
+                  </div>
+                )}
+
+                {currentTab === 'teacher' && (
+                  <div>
+                    <div className="mb-4">
+                      <h2 className="text-lg font-medium text-gray-900">Teacher Timetables</h2>
+                      <p className="text-sm text-gray-600">
+                        Individual teacher schedules showing assigned classes - select a teacher to view
+                      </p>
+                    </div>
+                    <TimetableViewer
+                      timetableId={selectedTimetable.id}
+                      viewMode="teacher"
+                      allowViewSwitching={false}
+                      allowFilterChange={true}
+                    />
+                  </div>
+                )}
+              </div>
             </div>
           )
         )}

@@ -1,0 +1,211 @@
+assignment_id,teacher_id,teacher_name,class_id,class_name,subject_code,subject_name,periods_per_week,needs_lab
+ASSIGN_001,TEACHER_001,George Hill,CLASS_026,Grade 11D,PE,Physical Education,3,False
+ASSIGN_002,TEACHER_001,George Hill,CLASS_001,Grade 6A,ART,Art,3,False
+ASSIGN_003,TEACHER_002,Laura Lewis,CLASS_024,Grade 11B,PE,Physical Education,3,False
+ASSIGN_004,TEACHER_002,Laura Lewis,CLASS_014,Grade 8D,SS,Social Studies,4,False
+ASSIGN_005,TEACHER_003,Kimberly Walker,CLASS_025,Grade 11C,HIN,Hindi,4,False
+ASSIGN_006,TEACHER_003,Kimberly Walker,CLASS_012,Grade 8B,ENG,English,5,False
+ASSIGN_007,TEACHER_004,Lisa Garcia,CLASS_018,Grade 9D,SS,Social Studies,4,False
+ASSIGN_008,TEACHER_004,Lisa Garcia,CLASS_003,Grade 6C,SS,Social Studies,4,False
+ASSIGN_009,TEACHER_005,Lisa Flores,CLASS_018,Grade 9D,MUS,Music,2,False
+ASSIGN_010,TEACHER_005,Lisa Flores,CLASS_015,Grade 9A,ART,Art,3,False
+ASSIGN_011,TEACHER_006,Helen Martin,CLASS_029,Grade 12C,CS,Computer Science,4,True
+ASSIGN_012,TEACHER_006,Helen Martin,CLASS_012,Grade 8B,MUS,Music,2,False
+ASSIGN_013,TEACHER_007,Karen Johnson,CLASS_010,Grade 7E,SCI,Science,6,True
+ASSIGN_014,TEACHER_007,Karen Johnson,CLASS_012,Grade 8B,FR,French,3,False
+ASSIGN_015,TEACHER_008,Joshua Flores,CLASS_024,Grade 11B,ART,Art,3,False
+ASSIGN_016,TEACHER_008,Joshua Flores,CLASS_029,Grade 12C,ENG,English,5,False
+ASSIGN_017,TEACHER_009,Laura Clark,CLASS_025,Grade 11C,SS,Social Studies,4,False
+ASSIGN_018,TEACHER_009,Laura Clark,CLASS_013,Grade 8C,SS,Social Studies,4,False
+ASSIGN_019,TEACHER_010,Karen Harris,CLASS_028,Grade 12B,FR,French,3,False
+ASSIGN_020,TEACHER_010,Karen Harris,CLASS_016,Grade 9B,PE,Physical Education,3,False
+ASSIGN_021,TEACHER_011,Helen Martinez,CLASS_010,Grade 7E,MATH,Mathematics,6,False
+ASSIGN_022,TEACHER_011,Helen Martinez,CLASS_030,Grade 12D,MATH,Mathematics,6,False
+ASSIGN_023,TEACHER_012,Robert Ramirez,CLASS_013,Grade 8C,FR,French,3,False
+ASSIGN_024,TEACHER_012,Robert Ramirez,CLASS_015,Grade 9A,MUS,Music,2,False
+ASSIGN_025,TEACHER_013,Karen King,CLASS_019,Grade 10A,FR,French,3,False
+ASSIGN_026,TEACHER_013,Karen King,CLASS_020,Grade 10B,ART,Art,3,False
+ASSIGN_027,TEACHER_014,Brian Thomas,CLASS_002,Grade 6B,ART,Art,3,False
+ASSIGN_028,TEACHER_014,Brian Thomas,CLASS_019,Grade 10A,SS,Social Studies,4,False
+ASSIGN_029,TEACHER_015,Laura Rodriguez,CLASS_021,Grade 10C,HIN,Hindi,4,False
+ASSIGN_030,TEACHER_015,Laura Rodriguez,CLASS_009,Grade 7D,ART,Art,3,False
+ASSIGN_031,TEACHER_016,Lisa King,CLASS_018,Grade 9D,ENG,English,5,False
+ASSIGN_032,TEACHER_016,Lisa King,CLASS_029,Grade 12C,SCI,Science,6,True
+ASSIGN_033,TEACHER_017,Andrew Flores,CLASS_004,Grade 6D,PE,Physical Education,3,False
+ASSIGN_034,TEACHER_017,Andrew Flores,CLASS_013,Grade 8C,SCI,Science,6,True
+ASSIGN_035,TEACHER_018,Michelle Scott,CLASS_024,Grade 11B,SS,Social Studies,4,False
+ASSIGN_036,TEACHER_018,Michelle Scott,CLASS_022,Grade 10D,SCI,Science,6,True
+ASSIGN_037,TEACHER_019,Joshua Lewis,CLASS_007,Grade 7B,HIN,Hindi,4,False
+ASSIGN_038,TEACHER_019,Joshua Lewis,CLASS_013,Grade 8C,CS,Computer Science,4,True
+ASSIGN_039,TEACHER_020,Timothy Moore,CLASS_024,Grade 11B,MATH,Mathematics,6,False
+ASSIGN_040,TEACHER_020,Timothy Moore,CLASS_026,Grade 11D,FR,French,3,False
+ASSIGN_041,TEACHER_021,Kenneth Thomas,CLASS_008,Grade 7C,CS,Computer Science,4,True
+ASSIGN_042,TEACHER_021,Kenneth Thomas,CLASS_009,Grade 7D,ENG,English,5,False
+ASSIGN_043,TEACHER_022,Michael Jackson,CLASS_027,Grade 12A,ENG,English,5,False
+ASSIGN_044,TEACHER_022,Michael Jackson,CLASS_002,Grade 6B,ENG,English,5,False
+ASSIGN_045,TEACHER_023,Carol Lee,CLASS_006,Grade 7A,FR,French,3,False
+ASSIGN_046,TEACHER_023,Carol Lee,CLASS_018,Grade 9D,FR,French,3,False
+ASSIGN_047,TEACHER_024,William Martinez,CLASS_002,Grade 6B,SS,Social Studies,4,False
+ASSIGN_048,TEACHER_024,William Martinez,CLASS_005,Grade 6E,PE,Physical Education,3,False
+ASSIGN_049,TEACHER_025,Karen Martinez,CLASS_018,Grade 9D,CS,Computer Science,4,True
+ASSIGN_050,TEACHER_025,Karen Martinez,CLASS_026,Grade 11D,MATH,Mathematics,6,False
+ASSIGN_051,TEACHER_026,Michael Clark,CLASS_019,Grade 10A,PE,Physical Education,3,False
+ASSIGN_052,TEACHER_026,Michael Clark,CLASS_008,Grade 7C,ART,Art,3,False
+ASSIGN_053,TEACHER_027,Deborah Robinson,CLASS_017,Grade 9C,FR,French,3,False
+ASSIGN_054,TEACHER_027,Deborah Robinson,CLASS_014,Grade 8D,FR,French,3,False
+ASSIGN_055,TEACHER_028,Betty Clark,CLASS_023,Grade 11A,MUS,Music,2,False
+ASSIGN_056,TEACHER_028,Betty Clark,CLASS_019,Grade 10A,MUS,Music,2,False
+ASSIGN_057,TEACHER_029,Dorothy Harris,CLASS_001,Grade 6A,SCI,Science,6,True
+ASSIGN_058,TEACHER_029,Dorothy Harris,CLASS_019,Grade 10A,MATH,Mathematics,6,False
+ASSIGN_059,TEACHER_030,Donald Martin,CLASS_028,Grade 12B,SCI,Science,6,True
+ASSIGN_060,TEACHER_030,Donald Martin,CLASS_006,Grade 7A,MUS,Music,2,False
+ASSIGN_061,TEACHER_031,Paul Wright,CLASS_020,Grade 10B,MATH,Mathematics,6,False
+ASSIGN_062,TEACHER_031,Paul Wright,CLASS_017,Grade 9C,MUS,Music,2,False
+ASSIGN_063,TEACHER_032,Edward Anderson,CLASS_009,Grade 7D,HIN,Hindi,4,False
+ASSIGN_064,TEACHER_032,Edward Anderson,CLASS_003,Grade 6C,SCI,Science,6,True
+ASSIGN_065,TEACHER_033,Sandra Ramirez,CLASS_011,Grade 8A,FR,French,3,False
+ASSIGN_066,TEACHER_033,Sandra Ramirez,CLASS_022,Grade 10D,ENG,English,5,False
+ASSIGN_067,TEACHER_034,Steven Perez,CLASS_011,Grade 8A,SCI,Science,6,True
+ASSIGN_068,TEACHER_034,Steven Perez,CLASS_010,Grade 7E,FR,French,3,False
+ASSIGN_069,TEACHER_035,James Robinson,CLASS_017,Grade 9C,ENG,English,5,False
+ASSIGN_070,TEACHER_035,James Robinson,CLASS_015,Grade 9A,PE,Physical Education,3,False
+ASSIGN_071,TEACHER_036,Mary Sanchez,CLASS_002,Grade 6B,MUS,Music,2,False
+ASSIGN_072,TEACHER_036,Mary Sanchez,CLASS_006,Grade 7A,ART,Art,3,False
+ASSIGN_073,TEACHER_037,Lisa Ramirez,CLASS_014,Grade 8D,HIN,Hindi,4,False
+ASSIGN_074,TEACHER_037,Lisa Ramirez,CLASS_008,Grade 7C,SCI,Science,6,True
+ASSIGN_075,TEACHER_038,Nancy Brown,CLASS_004,Grade 6D,CS,Computer Science,4,True
+ASSIGN_076,TEACHER_038,Nancy Brown,CLASS_025,Grade 11C,FR,French,3,False
+ASSIGN_077,TEACHER_039,Mark Wilson,CLASS_012,Grade 8B,MATH,Mathematics,6,False
+ASSIGN_078,TEACHER_039,Mark Wilson,CLASS_023,Grade 11A,SS,Social Studies,4,False
+ASSIGN_079,TEACHER_040,Carol Harris,CLASS_017,Grade 9C,SCI,Science,6,True
+ASSIGN_080,TEACHER_040,Carol Harris,CLASS_007,Grade 7B,CS,Computer Science,4,True
+ASSIGN_081,TEACHER_041,Matthew Garcia,CLASS_009,Grade 7D,CS,Computer Science,4,True
+ASSIGN_082,TEACHER_041,Matthew Garcia,CLASS_026,Grade 11D,SS,Social Studies,4,False
+ASSIGN_083,TEACHER_042,Deborah Brown,CLASS_021,Grade 10C,ENG,English,5,False
+ASSIGN_084,TEACHER_042,Deborah Brown,CLASS_009,Grade 7D,PE,Physical Education,3,False
+ASSIGN_085,TEACHER_043,Betty Jones,CLASS_026,Grade 11D,MUS,Music,2,False
+ASSIGN_086,TEACHER_043,Betty Jones,CLASS_007,Grade 7B,MATH,Mathematics,6,False
+ASSIGN_087,TEACHER_044,Mary Thomas,CLASS_018,Grade 9D,ART,Art,3,False
+ASSIGN_088,TEACHER_044,Mary Thomas,CLASS_014,Grade 8D,ART,Art,3,False
+ASSIGN_089,TEACHER_045,Ronald Martinez,CLASS_023,Grade 11A,HIN,Hindi,4,False
+ASSIGN_090,TEACHER_045,Ronald Martinez,CLASS_021,Grade 10C,MATH,Mathematics,6,False
+ASSIGN_091,TEACHER_046,Joshua Davis,CLASS_030,Grade 12D,FR,French,3,False
+ASSIGN_092,TEACHER_046,Joshua Davis,CLASS_015,Grade 9A,FR,French,3,False
+ASSIGN_093,TEACHER_047,Laura Taylor,CLASS_007,Grade 7B,ENG,English,5,False
+ASSIGN_094,TEACHER_047,Laura Taylor,CLASS_014,Grade 8D,MUS,Music,2,False
+ASSIGN_095,TEACHER_048,James Hill,CLASS_001,Grade 6A,MATH,Mathematics,6,False
+ASSIGN_096,TEACHER_048,James Hill,CLASS_015,Grade 9A,ENG,English,5,False
+ASSIGN_097,TEACHER_049,James Martin,CLASS_004,Grade 6D,SS,Social Studies,4,False
+ASSIGN_098,TEACHER_049,James Martin,CLASS_030,Grade 12D,SS,Social Studies,4,False
+ASSIGN_099,TEACHER_050,Donna Torres,CLASS_005,Grade 6E,HIN,Hindi,4,False
+ASSIGN_100,TEACHER_050,Donna Torres,CLASS_019,Grade 10A,ART,Art,3,False
+ASSIGN_101,TEACHER_051,Sharon Gonzalez,CLASS_014,Grade 8D,SCI,Science,6,True
+ASSIGN_102,TEACHER_051,Sharon Gonzalez,CLASS_012,Grade 8B,HIN,Hindi,4,False
+ASSIGN_103,TEACHER_052,Robert Martin,CLASS_022,Grade 10D,SS,Social Studies,4,False
+ASSIGN_104,TEACHER_052,Robert Martin,CLASS_011,Grade 8A,MATH,Mathematics,6,False
+ASSIGN_105,TEACHER_053,Dorothy Williams,CLASS_015,Grade 9A,HIN,Hindi,4,False
+ASSIGN_106,TEACHER_053,Dorothy Williams,CLASS_016,Grade 9B,ART,Art,3,False
+ASSIGN_107,TEACHER_054,Michelle White,CLASS_021,Grade 10C,PE,Physical Education,3,False
+ASSIGN_108,TEACHER_054,Michelle White,CLASS_020,Grade 10B,SS,Social Studies,4,False
+ASSIGN_109,TEACHER_055,Betty Perez,CLASS_005,Grade 6E,ART,Art,3,False
+ASSIGN_110,TEACHER_055,Betty Perez,CLASS_030,Grade 12D,HIN,Hindi,4,False
+ASSIGN_111,TEACHER_056,Kenneth Miller,CLASS_030,Grade 12D,MUS,Music,2,False
+ASSIGN_112,TEACHER_056,Kenneth Miller,CLASS_007,Grade 7B,ART,Art,3,False
+ASSIGN_113,TEACHER_057,Timothy Robinson,CLASS_027,Grade 12A,HIN,Hindi,4,False
+ASSIGN_114,TEACHER_057,Timothy Robinson,CLASS_016,Grade 9B,HIN,Hindi,4,False
+ASSIGN_115,TEACHER_058,Michelle Lopez,CLASS_028,Grade 12B,MATH,Mathematics,6,False
+ASSIGN_116,TEACHER_058,Michelle Lopez,CLASS_007,Grade 7B,PE,Physical Education,3,False
+ASSIGN_117,TEACHER_059,Betty Moore,CLASS_030,Grade 12D,CS,Computer Science,4,True
+ASSIGN_118,TEACHER_059,Betty Moore,CLASS_001,Grade 6A,MUS,Music,2,False
+ASSIGN_119,TEACHER_060,Joshua Robinson,CLASS_003,Grade 6C,CS,Computer Science,4,True
+ASSIGN_120,TEACHER_060,Joshua Robinson,CLASS_008,Grade 7C,ENG,English,5,False
+ASSIGN_121,TEACHER_061,Mark Thomas,CLASS_026,Grade 11D,SCI,Science,6,True
+ASSIGN_122,TEACHER_061,Mark Thomas,CLASS_027,Grade 12A,MATH,Mathematics,6,False
+ASSIGN_123,TEACHER_062,Sandra Lewis,CLASS_011,Grade 8A,ART,Art,3,False
+ASSIGN_124,TEACHER_062,Sandra Lewis,CLASS_007,Grade 7B,SCI,Science,6,True
+ASSIGN_125,TEACHER_063,Dorothy Flores,CLASS_016,Grade 9B,MATH,Mathematics,6,False
+ASSIGN_126,TEACHER_063,Dorothy Flores,CLASS_001,Grade 6A,ENG,English,5,False
+ASSIGN_127,TEACHER_064,Carol Johnson,CLASS_022,Grade 10D,FR,French,3,False
+ASSIGN_128,TEACHER_064,Carol Johnson,CLASS_006,Grade 7A,CS,Computer Science,4,True
+ASSIGN_129,TEACHER_065,Nancy Young,CLASS_003,Grade 6C,HIN,Hindi,4,False
+ASSIGN_130,TEACHER_065,Nancy Young,CLASS_005,Grade 6E,ENG,English,5,False
+ASSIGN_131,TEACHER_066,Matthew Perez,CLASS_024,Grade 11B,HIN,Hindi,4,False
+ASSIGN_132,TEACHER_066,Matthew Perez,CLASS_016,Grade 9B,ENG,English,5,False
+ASSIGN_133,TEACHER_067,Brian Smith,CLASS_017,Grade 9C,SS,Social Studies,4,False
+ASSIGN_134,TEACHER_067,Brian Smith,CLASS_006,Grade 7A,MATH,Mathematics,6,False
+ASSIGN_135,TEACHER_068,Lisa Thomas,CLASS_021,Grade 10C,CS,Computer Science,4,True
+ASSIGN_136,TEACHER_068,Lisa Thomas,CLASS_025,Grade 11C,MATH,Mathematics,6,False
+ASSIGN_137,TEACHER_069,Kenneth Scott,CLASS_013,Grade 8C,MUS,Music,2,False
+ASSIGN_138,TEACHER_069,Kenneth Scott,CLASS_001,Grade 6A,PE,Physical Education,3,False
+ASSIGN_139,TEACHER_070,Karen Walker,CLASS_002,Grade 6B,FR,French,3,False
+ASSIGN_140,TEACHER_070,Karen Walker,CLASS_011,Grade 8A,MUS,Music,2,False
+ASSIGN_141,TEACHER_071,Andrew Johnson,CLASS_016,Grade 9B,CS,Computer Science,4,True
+ASSIGN_142,TEACHER_071,Andrew Johnson,CLASS_004,Grade 6D,SCI,Science,6,True
+ASSIGN_143,TEACHER_072,Daniel Sanchez,CLASS_002,Grade 6B,SCI,Science,6,True
+ASSIGN_144,TEACHER_072,Daniel Sanchez,CLASS_010,Grade 7E,PE,Physical Education,3,False
+ASSIGN_145,TEACHER_073,Donna Nguyen,CLASS_018,Grade 9D,HIN,Hindi,4,False
+ASSIGN_146,TEACHER_073,Donna Nguyen,CLASS_026,Grade 11D,ART,Art,3,False
+ASSIGN_147,TEACHER_074,Brian King,CLASS_024,Grade 11B,ENG,English,5,False
+ASSIGN_148,TEACHER_074,Brian King,CLASS_029,Grade 12C,MUS,Music,2,False
+ASSIGN_149,TEACHER_075,Brian Perez,CLASS_013,Grade 8C,HIN,Hindi,4,False
+ASSIGN_150,TEACHER_075,Brian Perez,CLASS_008,Grade 7C,MATH,Mathematics,6,False
+ASSIGN_151,TEACHER_076,Sandra Martin,CLASS_030,Grade 12D,ENG,English,5,False
+ASSIGN_152,TEACHER_076,Sandra Martin,CLASS_010,Grade 7E,MUS,Music,2,False
+ASSIGN_153,TEACHER_077,Jennifer Gonzalez,CLASS_006,Grade 7A,SCI,Science,6,True
+ASSIGN_154,TEACHER_077,Jennifer Gonzalez,CLASS_023,Grade 11A,PE,Physical Education,3,False
+ASSIGN_155,TEACHER_078,Deborah Lopez,CLASS_004,Grade 6D,ART,Art,3,False
+ASSIGN_156,TEACHER_078,Deborah Lopez,CLASS_005,Grade 6E,SCI,Science,6,True
+ASSIGN_157,TEACHER_079,Joshua Moore,CLASS_025,Grade 11C,ENG,English,5,False
+ASSIGN_158,TEACHER_079,Joshua Moore,CLASS_005,Grade 6E,MATH,Mathematics,6,False
+ASSIGN_159,TEACHER_080,Edward Jackson,CLASS_004,Grade 6D,MATH,Mathematics,6,False
+ASSIGN_160,TEACHER_080,Edward Jackson,CLASS_027,Grade 12A,ART,Art,3,False
+ASSIGN_161,TEACHER_081,Anthony Anderson,CLASS_021,Grade 10C,ART,Art,3,False
+ASSIGN_162,TEACHER_081,Anthony Anderson,CLASS_028,Grade 12B,CS,Computer Science,4,True
+ASSIGN_163,TEACHER_082,Donna Smith,CLASS_020,Grade 10B,HIN,Hindi,4,False
+ASSIGN_164,TEACHER_082,Donna Smith,CLASS_023,Grade 11A,ENG,English,5,False
+ASSIGN_165,TEACHER_083,William Moore,CLASS_012,Grade 8B,SS,Social Studies,4,False
+ASSIGN_166,TEACHER_083,William Moore,CLASS_020,Grade 10B,CS,Computer Science,4,True
+ASSIGN_167,TEACHER_084,Brian Jackson,CLASS_017,Grade 9C,MATH,Mathematics,6,False
+ASSIGN_168,TEACHER_084,Brian Jackson,CLASS_006,Grade 7A,HIN,Hindi,4,False
+ASSIGN_169,TEACHER_085,Timothy Young,CLASS_011,Grade 8A,ENG,English,5,False
+ASSIGN_170,TEACHER_085,Timothy Young,CLASS_014,Grade 8D,PE,Physical Education,3,False
+ASSIGN_171,TEACHER_086,Dorothy Jackson,CLASS_009,Grade 7D,FR,French,3,False
+ASSIGN_172,TEACHER_086,Dorothy Jackson,CLASS_003,Grade 6C,PE,Physical Education,3,False
+ASSIGN_173,TEACHER_087,Andrew Perez,CLASS_013,Grade 8C,PE,Physical Education,3,False
+ASSIGN_174,TEACHER_087,Andrew Perez,CLASS_028,Grade 12B,HIN,Hindi,4,False
+ASSIGN_175,TEACHER_088,Matthew Walker,CLASS_028,Grade 12B,PE,Physical Education,3,False
+ASSIGN_176,TEACHER_088,Matthew Walker,CLASS_019,Grade 10A,ENG,English,5,False
+ASSIGN_177,TEACHER_089,Sharon Young,CLASS_008,Grade 7C,MUS,Music,2,False
+ASSIGN_178,TEACHER_089,Sharon Young,CLASS_020,Grade 10B,FR,French,3,False
+ASSIGN_179,TEACHER_090,Karen Martinez,CLASS_027,Grade 12A,SCI,Science,6,True
+ASSIGN_180,TEACHER_090,Karen Martinez,CLASS_004,Grade 6D,HIN,Hindi,4,False
+ASSIGN_181,TEACHER_091,Lisa Thomas,CLASS_029,Grade 12C,ART,Art,3,False
+ASSIGN_182,TEACHER_091,Lisa Thomas,CLASS_023,Grade 11A,MATH,Mathematics,6,False
+ASSIGN_183,TEACHER_092,Edward Hill,CLASS_027,Grade 12A,FR,French,3,False
+ASSIGN_184,TEACHER_092,Edward Hill,CLASS_001,Grade 6A,CS,Computer Science,4,True
+ASSIGN_185,TEACHER_093,Kevin Harris,CLASS_003,Grade 6C,MUS,Music,2,False
+ASSIGN_186,TEACHER_093,Kevin Harris,CLASS_028,Grade 12B,MUS,Music,2,False
+ASSIGN_187,TEACHER_094,Donna Nguyen,CLASS_017,Grade 9C,ART,Art,3,False
+ASSIGN_188,TEACHER_094,Donna Nguyen,CLASS_011,Grade 8A,HIN,Hindi,4,False
+ASSIGN_189,TEACHER_095,Dorothy Flores,CLASS_024,Grade 11B,MUS,Music,2,False
+ASSIGN_190,TEACHER_095,Dorothy Flores,CLASS_029,Grade 12C,FR,French,3,False
+ASSIGN_191,TEACHER_096,Betty Wilson,CLASS_005,Grade 6E,SS,Social Studies,4,False
+ASSIGN_192,TEACHER_096,Betty Wilson,CLASS_015,Grade 9A,MATH,Mathematics,6,False
+ASSIGN_193,TEACHER_097,James Thomas,CLASS_010,Grade 7E,ART,Art,3,False
+ASSIGN_194,TEACHER_097,James Thomas,CLASS_009,Grade 7D,MUS,Music,2,False
+ASSIGN_195,TEACHER_098,James Smith,CLASS_029,Grade 12C,MATH,Mathematics,6,False
+ASSIGN_196,TEACHER_098,James Smith,CLASS_027,Grade 12A,MUS,Music,2,False
+ASSIGN_197,TEACHER_099,Karen Hill,CLASS_025,Grade 11C,ART,Art,3,False
+ASSIGN_198,TEACHER_099,Karen Hill,CLASS_008,Grade 7C,SS,Social Studies,4,False
+ASSIGN_199,TEACHER_100,David Anderson,CLASS_010,Grade 7E,CS,Computer Science,4,True
+ASSIGN_200,TEACHER_100,David Anderson,CLASS_012,Grade 8B,PE,Physical Education,3,False
+ASSIGN_201,TEACHER_101,Karen Robinson,CLASS_020,Grade 10B,PE,Physical Education,3,False
+ASSIGN_202,TEACHER_101,Karen Robinson,CLASS_021,Grade 10C,FR,French,3,False
+ASSIGN_203,TEACHER_102,Matthew Nguyen,CLASS_022,Grade 10D,MUS,Music,2,False
+ASSIGN_204,TEACHER_102,Matthew Nguyen,CLASS_025,Grade 11C,MUS,Music,2,False
+ASSIGN_205,TEACHER_103,Michelle Davis,CLASS_016,Grade 9B,SS,Social Studies,4,False
+ASSIGN_206,TEACHER_103,Michelle Davis,CLASS_003,Grade 6C,ART,Art,3,False
+ASSIGN_207,TEACHER_104,Betty Martinez,CLASS_023,Grade 11A,CS,Computer Science,4,True
+ASSIGN_208,TEACHER_104,Betty Martinez,CLASS_002,Grade 6B,PE,Physical Education,3,False
+ASSIGN_209,TEACHER_105,Michael Brown,CLASS_022,Grade 10D,ART,Art,3,False
+ASSIGN_210,TEACHER_105,Michael Brown,CLASS_022,Grade 10D,HIN,Hindi,4,False

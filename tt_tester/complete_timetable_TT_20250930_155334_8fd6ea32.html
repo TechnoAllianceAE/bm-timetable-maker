@@ -1,0 +1,1928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Timetable - TT_20250930_155334_8fd6ea32</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 42px;
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+
+        .header .subtitle {
+            font-size: 18px;
+            color: #718096;
+        }
+
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .section h2 {
+            font-size: 28px;
+            color: #2d3748;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .timetable-grid {
+            overflow-x: auto;
+            margin-bottom: 40px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 10px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        td {
+            padding: 12px 8px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            font-size: 12px;
+        }
+
+        tr:nth-child(even) {
+            background: #f7fafc;
+        }
+
+        .period-cell {
+            background: #edf2f7;
+            font-weight: 600;
+        }
+
+        .subject {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 4px;
+        }
+
+        .teacher {
+            font-size: 11px;
+            color: #718096;
+        }
+
+        .free-period {
+            color: #a0aec0;
+            font-style: italic;
+        }
+
+        .class-title {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 10px 20px;
+            background: #edf2f7;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .nav-tab:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .nav-tab.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 800;
+            color: #2d3748;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #718096;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Complete School Timetable</h1>
+            <div class="subtitle">Generated on September 30, 2025 at 04:40 PM</div>
+            <div class="subtitle">TT ID: TT_20250930_155334_8fd6ea32</div>
+        </div>
+
+        <div class="section">
+            <h2>📊 Overview Statistics</h2>
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-value">14</div>
+                    <div class="stat-label">Total Classes</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">42</div>
+                    <div class="stat-label">Teachers Assigned</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">40</div>
+                    <div class="stat-label">Periods per Week</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">5</div>
+                    <div class="stat-label">Days per Week</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📚 Class Timetables</h2>
+            <div class="nav-tabs" id="classTabs">
+<button class="nav-tab active" onclick="showTab('class', 'CLASS_001')">Grade 6A</button>
+<button class="nav-tab " onclick="showTab('class', 'CLASS_002')">Grade 6B</button>
+<button class="nav-tab " onclick="showTab('class', 'CLASS_003')">Grade 6C</button>
+<button class="nav-tab " onclick="showTab('class', 'CLASS_004')">Grade 7A</button>
+<button class="nav-tab " onclick="showTab('class', 'CLASS_005')">Grade 7B</button>
+<button class="nav-tab " onclick="showTab('class', 'CLASS_006')">Grade 7C</button>
+<button class="nav-tab " onclick="showTab('class', 'CLASS_007')">Grade 8A</button>
+<button class="nav-tab " onclick="showTab('class', 'CLASS_008')">Grade 8B</button>
+<button class="nav-tab " onclick="showTab('class', 'CLASS_009')">Grade 8C</button>
+<button class="nav-tab " onclick="showTab('class', 'CLASS_010')">Grade 9A</button>
+<button class="nav-tab " onclick="showTab('class', 'CLASS_011')">Grade 9B</button>
+<button class="nav-tab " onclick="showTab('class', 'CLASS_012')">Grade 9C</button>
+<button class="nav-tab " onclick="showTab('class', 'CLASS_013')">Grade 10A</button>
+<button class="nav-tab " onclick="showTab('class', 'CLASS_014')">Grade 10B</button>
+
+            </div>
+
+            <div id="class-CLASS_001" class="tab-content active">
+                <div class="class-title">Grade 6A - Weekly Schedule</div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td><div class='subject'>Computer Science</div><div class='teacher'>Carol Miller</div></td><td><div class='subject'>English</div><div class='teacher'>Mark Taylor</div></td><td><div class='subject'>French</div><div class='teacher'>Michael Smith</div></td><td><div class='subject'>Hindi</div><div class='teacher'>Timothy Taylor</div></td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td><div class='subject'>Computer Science</div><div class='teacher'>Carol Miller</div></td><td><div class='subject'>Mathematics</div><div class='teacher'>Lisa Martin</div></td><td><div class='subject'>French</div><div class='teacher'>Michael Smith</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td><div class='subject'>Computer Science</div><div class='teacher'>Carol Miller</div></td><td><div class='subject'>Mathematics</div><div class='teacher'>Lisa Martin</div></td><td><div class='subject'>Physical Education</div><div class='teacher'>Ronald King</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td><div class='subject'>Computer Science</div><div class='teacher'>Carol Miller</div></td><td><div class='subject'>Mathematics</div><div class='teacher'>Lisa Martin</div></td><td><div class='subject'>Physical Education</div><div class='teacher'>Ronald King</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td><div class='subject'>English</div><div class='teacher'>Mark Taylor</div></td><td><div class='subject'>Mathematics</div><div class='teacher'>Lisa Martin</div></td><td><div class='subject'>Physical Education</div><div class='teacher'>Ronald King</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td><div class='subject'>English</div><div class='teacher'>Mark Taylor</div></td><td><div class='subject'>Mathematics</div><div class='teacher'>Lisa Martin</div></td><td><div class='subject'>Hindi</div><div class='teacher'>Timothy Taylor</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td><div class='subject'>English</div><div class='teacher'>Mark Taylor</div></td><td><div class='subject'>Mathematics</div><div class='teacher'>Lisa Martin</div></td><td><div class='subject'>Hindi</div><div class='teacher'>Timothy Taylor</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td><div class='subject'>English</div><div class='teacher'>Mark Taylor</div></td><td><div class='subject'>French</div><div class='teacher'>Michael Smith</div></td><td><div class='subject'>Hindi</div><div class='teacher'>Timothy Taylor</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="class-CLASS_002" class="tab-content ">
+                <div class="class-title">Grade 6B - Weekly Schedule</div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Dorothy Torres</div></td><td><div class='subject'>French</div><div class='teacher'>Joshua Clark</div></td><td><div class='subject'>English</div><div class='teacher'>Nancy Jones</div></td><td><div class='subject'>Computer Science</div><div class='teacher'>Ronald Garcia</div></td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Dorothy Torres</div></td><td><div class='subject'>Art</div><div class='teacher'>Michelle Lopez</div></td><td><div class='subject'>English</div><div class='teacher'>Nancy Jones</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Dorothy Torres</div></td><td><div class='subject'>Art</div><div class='teacher'>Michelle Lopez</div></td><td><div class='subject'>English</div><div class='teacher'>Nancy Jones</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Dorothy Torres</div></td><td><div class='subject'>Art</div><div class='teacher'>Michelle Lopez</div></td><td><div class='subject'>English</div><div class='teacher'>Nancy Jones</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Dorothy Torres</div></td><td><div class='subject'>Social Studies</div><div class='teacher'>Sarah Hernandez</div></td><td><div class='subject'>English</div><div class='teacher'>Nancy Jones</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Dorothy Torres</div></td><td><div class='subject'>Social Studies</div><div class='teacher'>Sarah Hernandez</div></td><td><div class='subject'>Computer Science</div><div class='teacher'>Ronald Garcia</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td><div class='subject'>French</div><div class='teacher'>Joshua Clark</div></td><td><div class='subject'>Social Studies</div><div class='teacher'>Sarah Hernandez</div></td><td><div class='subject'>Computer Science</div><div class='teacher'>Ronald Garcia</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td><div class='subject'>French</div><div class='teacher'>Joshua Clark</div></td><td><div class='subject'>Social Studies</div><div class='teacher'>Sarah Hernandez</div></td><td><div class='subject'>Computer Science</div><div class='teacher'>Ronald Garcia</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="class-CLASS_003" class="tab-content ">
+                <div class="class-title">Grade 6C - Weekly Schedule</div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td><div class='subject'>English</div><div class='teacher'>Sarah Wright</div></td><td><div class='subject'>Science</div><div class='teacher'>Nancy Jones</div></td><td><div class='subject'>Physical Education</div><div class='teacher'>Michael Wright</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td><div class='subject'>English</div><div class='teacher'>Sarah Wright</div></td><td><div class='subject'>Science</div><div class='teacher'>Nancy Jones</div></td><td><div class='subject'>Music</div><div class='teacher'>Andrew Wright</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td><div class='subject'>English</div><div class='teacher'>Sarah Wright</div></td><td><div class='subject'>Science</div><div class='teacher'>Nancy Jones</div></td><td><div class='subject'>Music</div><div class='teacher'>Andrew Wright</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td><div class='subject'>English</div><div class='teacher'>Sarah Wright</div></td><td><div class='subject'>Science</div><div class='teacher'>Nancy Jones</div></td><td><div class='subject'>Computer Science</div><div class='teacher'>Lisa Ramirez</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td><div class='subject'>English</div><div class='teacher'>Sarah Wright</div></td><td><div class='subject'>Science</div><div class='teacher'>Nancy Jones</div></td><td><div class='subject'>Computer Science</div><div class='teacher'>Lisa Ramirez</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td><div class='subject'>Art</div><div class='teacher'>Sarah Lee</div></td><td><div class='subject'>Science</div><div class='teacher'>Nancy Jones</div></td><td><div class='subject'>Computer Science</div><div class='teacher'>Lisa Ramirez</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td><div class='subject'>Art</div><div class='teacher'>Sarah Lee</div></td><td><div class='subject'>Physical Education</div><div class='teacher'>Michael Wright</div></td><td><div class='subject'>Computer Science</div><div class='teacher'>Lisa Ramirez</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td><div class='subject'>Art</div><div class='teacher'>Sarah Lee</div></td><td><div class='subject'>Physical Education</div><div class='teacher'>Michael Wright</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="class-CLASS_004" class="tab-content ">
+                <div class="class-title">Grade 7A - Weekly Schedule</div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td><div class='subject'>Hindi</div><div class='teacher'>Helen Jones</div></td><td><div class='subject'>Mathematics</div><div class='teacher'>Helen White</div></td><td><div class='subject'>Science</div><div class='teacher'>David Smith</div></td><td><div class='subject'>Social Studies</div><div class='teacher'>Brian Ramirez</div></td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td><div class='subject'>Hindi</div><div class='teacher'>Helen Jones</div></td><td><div class='subject'>Mathematics</div><div class='teacher'>Helen White</div></td><td><div class='subject'>Science</div><div class='teacher'>David Smith</div></td><td><div class='subject'>Social Studies</div><div class='teacher'>Brian Ramirez</div></td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td><div class='subject'>Hindi</div><div class='teacher'>Helen Jones</div></td><td><div class='subject'>Mathematics</div><div class='teacher'>Helen White</div></td><td><div class='subject'>Science</div><div class='teacher'>David Smith</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td><div class='subject'>Hindi</div><div class='teacher'>Helen Jones</div></td><td><div class='subject'>Mathematics</div><div class='teacher'>Helen White</div></td><td><div class='subject'>Science</div><div class='teacher'>David Smith</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td><div class='subject'>Physical Education</div><div class='teacher'>Lisa Thomas</div></td><td><div class='subject'>Mathematics</div><div class='teacher'>Helen White</div></td><td><div class='subject'>Science</div><div class='teacher'>David Smith</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td><div class='subject'>Physical Education</div><div class='teacher'>Lisa Thomas</div></td><td><div class='subject'>French</div><div class='teacher'>Carol Wilson</div></td><td><div class='subject'>Science</div><div class='teacher'>David Smith</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td><div class='subject'>Physical Education</div><div class='teacher'>Lisa Thomas</div></td><td><div class='subject'>French</div><div class='teacher'>Carol Wilson</div></td><td><div class='subject'>Social Studies</div><div class='teacher'>Brian Ramirez</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Helen White</div></td><td><div class='subject'>French</div><div class='teacher'>Carol Wilson</div></td><td><div class='subject'>Social Studies</div><div class='teacher'>Brian Ramirez</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="class-CLASS_005" class="tab-content ">
+                <div class="class-title">Grade 7B - Weekly Schedule</div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td><div class='subject'>Social Studies</div><div class='teacher'>Carol Miller</div></td><td><div class='subject'>French</div><div class='teacher'>Sarah Wright</div></td><td><div class='subject'>English</div><div class='teacher'>George Walker</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td><div class='subject'>Social Studies</div><div class='teacher'>Carol Miller</div></td><td><div class='subject'>French</div><div class='teacher'>Sarah Wright</div></td><td><div class='subject'>Science</div><div class='teacher'>Carol Wilson</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td><div class='subject'>Social Studies</div><div class='teacher'>Carol Miller</div></td><td><div class='subject'>Music</div><div class='teacher'>Anthony Ramirez</div></td><td><div class='subject'>Science</div><div class='teacher'>Carol Wilson</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td><div class='subject'>Social Studies</div><div class='teacher'>Carol Miller</div></td><td><div class='subject'>Music</div><div class='teacher'>Anthony Ramirez</div></td><td><div class='subject'>Science</div><div class='teacher'>Carol Wilson</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td><div class='subject'>Physical Education</div><div class='teacher'>Christopher Wright</div></td><td><div class='subject'>English</div><div class='teacher'>George Walker</div></td><td><div class='subject'>Science</div><div class='teacher'>Carol Wilson</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td><div class='subject'>Physical Education</div><div class='teacher'>Christopher Wright</div></td><td><div class='subject'>English</div><div class='teacher'>George Walker</div></td><td><div class='subject'>Science</div><div class='teacher'>Carol Wilson</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td><div class='subject'>Physical Education</div><div class='teacher'>Christopher Wright</div></td><td><div class='subject'>English</div><div class='teacher'>George Walker</div></td><td><div class='subject'>Science</div><div class='teacher'>Carol Wilson</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td><div class='subject'>French</div><div class='teacher'>Sarah Wright</div></td><td><div class='subject'>English</div><div class='teacher'>George Walker</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="class-CLASS_006" class="tab-content ">
+                <div class="class-title">Grade 7C - Weekly Schedule</div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td><div class='subject'>Social Studies</div><div class='teacher'>Sarah Hernandez</div></td><td><div class='subject'>Mathematics</div><div class='teacher'>Nancy Thomas</div></td><td><div class='subject'>Science</div><div class='teacher'>Ronald Garcia</div></td><td><div class='subject'>Physical Education</div><div class='teacher'>Timothy Taylor</div></td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td><div class='subject'>Social Studies</div><div class='teacher'>Sarah Hernandez</div></td><td><div class='subject'>Mathematics</div><div class='teacher'>Nancy Thomas</div></td><td><div class='subject'>Science</div><div class='teacher'>Ronald Garcia</div></td><td><div class='subject'>Physical Education</div><div class='teacher'>Timothy Taylor</div></td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td><div class='subject'>Social Studies</div><div class='teacher'>Sarah Hernandez</div></td><td><div class='subject'>Computer Science</div><div class='teacher'>Nancy Thomas</div></td><td><div class='subject'>Science</div><div class='teacher'>Ronald Garcia</div></td><td><div class='subject'>Physical Education</div><div class='teacher'>Timothy Taylor</div></td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td><div class='subject'>Social Studies</div><div class='teacher'>Sarah Hernandez</div></td><td><div class='subject'>Computer Science</div><div class='teacher'>Nancy Thomas</div></td><td><div class='subject'>Science</div><div class='teacher'>Ronald Garcia</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Nancy Thomas</div></td><td><div class='subject'>Computer Science</div><div class='teacher'>Nancy Thomas</div></td><td><div class='subject'>Hindi</div><div class='teacher'>Mark Taylor</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Nancy Thomas</div></td><td><div class='subject'>Computer Science</div><div class='teacher'>Nancy Thomas</div></td><td><div class='subject'>Hindi</div><div class='teacher'>Mark Taylor</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Nancy Thomas</div></td><td><div class='subject'>Science</div><div class='teacher'>Ronald Garcia</div></td><td><div class='subject'>Hindi</div><div class='teacher'>Mark Taylor</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Nancy Thomas</div></td><td><div class='subject'>Science</div><div class='teacher'>Ronald Garcia</div></td><td><div class='subject'>Hindi</div><div class='teacher'>Mark Taylor</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="class-CLASS_007" class="tab-content ">
+                <div class="class-title">Grade 8A - Weekly Schedule</div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Joshua Clark</div></td><td><div class='subject'>French</div><div class='teacher'>Robert Ramirez</div></td><td><div class='subject'>Social Studies</div><div class='teacher'>Lisa Martin</div></td><td><div class='subject'>Physical Education</div><div class='teacher'>Kimberly Young</div></td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Joshua Clark</div></td><td><div class='subject'>Science</div><div class='teacher'>Anthony Ramirez</div></td><td><div class='subject'>Social Studies</div><div class='teacher'>Lisa Martin</div></td><td><div class='subject'>Physical Education</div><div class='teacher'>Kimberly Young</div></td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Joshua Clark</div></td><td><div class='subject'>Science</div><div class='teacher'>Anthony Ramirez</div></td><td><div class='subject'>Social Studies</div><div class='teacher'>Lisa Martin</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Joshua Clark</div></td><td><div class='subject'>Science</div><div class='teacher'>Anthony Ramirez</div></td><td><div class='subject'>Hindi</div><div class='teacher'>Lisa Miller</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Joshua Clark</div></td><td><div class='subject'>Science</div><div class='teacher'>Anthony Ramirez</div></td><td><div class='subject'>Hindi</div><div class='teacher'>Lisa Miller</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Joshua Clark</div></td><td><div class='subject'>Science</div><div class='teacher'>Anthony Ramirez</div></td><td><div class='subject'>Hindi</div><div class='teacher'>Lisa Miller</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td><div class='subject'>French</div><div class='teacher'>Robert Ramirez</div></td><td><div class='subject'>Science</div><div class='teacher'>Anthony Ramirez</div></td><td><div class='subject'>Hindi</div><div class='teacher'>Lisa Miller</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td><div class='subject'>French</div><div class='teacher'>Robert Ramirez</div></td><td><div class='subject'>Social Studies</div><div class='teacher'>Lisa Martin</div></td><td><div class='subject'>Physical Education</div><div class='teacher'>Kimberly Young</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="class-CLASS_008" class="tab-content ">
+                <div class="class-title">Grade 8B - Weekly Schedule</div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td><div class='subject'>Hindi</div><div class='teacher'>Dorothy Torres</div></td><td><div class='subject'>Physical Education</div><div class='teacher'>Steven Taylor</div></td><td><div class='subject'>Art</div><div class='teacher'>Sandra Jackson</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td><div class='subject'>Hindi</div><div class='teacher'>Dorothy Torres</div></td><td><div class='subject'>Physical Education</div><div class='teacher'>Steven Taylor</div></td><td><div class='subject'>Art</div><div class='teacher'>Sandra Jackson</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td><div class='subject'>Hindi</div><div class='teacher'>Dorothy Torres</div></td><td><div class='subject'>Social Studies</div><div class='teacher'>Dorothy Thomas</div></td><td><div class='subject'>Art</div><div class='teacher'>Sandra Jackson</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td><div class='subject'>Hindi</div><div class='teacher'>Dorothy Torres</div></td><td><div class='subject'>Social Studies</div><div class='teacher'>Dorothy Thomas</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td><div class='subject'>French</div><div class='teacher'>Nancy Miller</div></td><td><div class='subject'>Social Studies</div><div class='teacher'>Dorothy Thomas</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td><div class='subject'>French</div><div class='teacher'>Nancy Miller</div></td><td><div class='subject'>Social Studies</div><div class='teacher'>Dorothy Thomas</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td><div class='subject'>French</div><div class='teacher'>Nancy Miller</div></td><td><div class='subject'>Music</div><div class='teacher'>Helen Taylor</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td><div class='subject'>Physical Education</div><div class='teacher'>Steven Taylor</div></td><td><div class='subject'>Music</div><div class='teacher'>Helen Taylor</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="class-CLASS_009" class="tab-content ">
+                <div class="class-title">Grade 8C - Weekly Schedule</div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td><div class='subject'>Music</div><div class='teacher'>Paul Robinson</div></td><td><div class='subject'>Computer Science</div><div class='teacher'>Dorothy Thomas</div></td><td><div class='subject'>English</div><div class='teacher'>Matthew Rodriguez</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td><div class='subject'>Music</div><div class='teacher'>Paul Robinson</div></td><td><div class='subject'>Computer Science</div><div class='teacher'>Dorothy Thomas</div></td><td><div class='subject'>English</div><div class='teacher'>Matthew Rodriguez</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td><div class='subject'>Science</div><div class='teacher'>Michelle Lopez</div></td><td><div class='subject'>Computer Science</div><div class='teacher'>Dorothy Thomas</div></td><td><div class='subject'>English</div><div class='teacher'>Matthew Rodriguez</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td><div class='subject'>Science</div><div class='teacher'>Michelle Lopez</div></td><td><div class='subject'>Computer Science</div><div class='teacher'>Dorothy Thomas</div></td><td><div class='subject'>English</div><div class='teacher'>Matthew Rodriguez</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td><div class='subject'>Science</div><div class='teacher'>Michelle Lopez</div></td><td><div class='subject'>Art</div><div class='teacher'>Helen Taylor</div></td><td><div class='subject'>French</div><div class='teacher'>Matthew Rodriguez</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td><div class='subject'>Science</div><div class='teacher'>Michelle Lopez</div></td><td><div class='subject'>Art</div><div class='teacher'>Helen Taylor</div></td><td><div class='subject'>French</div><div class='teacher'>Matthew Rodriguez</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td><div class='subject'>Science</div><div class='teacher'>Michelle Lopez</div></td><td><div class='subject'>Art</div><div class='teacher'>Helen Taylor</div></td><td><div class='subject'>French</div><div class='teacher'>Matthew Rodriguez</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td><div class='subject'>Science</div><div class='teacher'>Michelle Lopez</div></td><td><div class='subject'>English</div><div class='teacher'>Matthew Rodriguez</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="class-CLASS_010" class="tab-content ">
+                <div class="class-title">Grade 9A - Weekly Schedule</div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td><div class='subject'>Hindi</div><div class='teacher'>Robert Ramirez</div></td><td><div class='subject'>French</div><div class='teacher'>Sarah Nguyen</div></td><td><div class='subject'>Science</div><div class='teacher'>Andrew Wright</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td><div class='subject'>Hindi</div><div class='teacher'>Robert Ramirez</div></td><td><div class='subject'>French</div><div class='teacher'>Sarah Nguyen</div></td><td><div class='subject'>Science</div><div class='teacher'>Andrew Wright</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td><div class='subject'>Hindi</div><div class='teacher'>Robert Ramirez</div></td><td><div class='subject'>French</div><div class='teacher'>Sarah Nguyen</div></td><td><div class='subject'>Science</div><div class='teacher'>Andrew Wright</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td><div class='subject'>Hindi</div><div class='teacher'>Robert Ramirez</div></td><td><div class='subject'>Art</div><div class='teacher'>Helen White</div></td><td><div class='subject'>Science</div><div class='teacher'>Andrew Wright</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td><div class='subject'>Computer Science</div><div class='teacher'>Steven Taylor</div></td><td><div class='subject'>Art</div><div class='teacher'>Helen White</div></td><td><div class='subject'>Social Studies</div><div class='teacher'>Brian Ramirez</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td><div class='subject'>Computer Science</div><div class='teacher'>Steven Taylor</div></td><td><div class='subject'>Art</div><div class='teacher'>Helen White</div></td><td><div class='subject'>Social Studies</div><div class='teacher'>Brian Ramirez</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td><div class='subject'>Computer Science</div><div class='teacher'>Steven Taylor</div></td><td><div class='subject'>Science</div><div class='teacher'>Andrew Wright</div></td><td><div class='subject'>Social Studies</div><div class='teacher'>Brian Ramirez</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td><div class='subject'>Computer Science</div><div class='teacher'>Steven Taylor</div></td><td><div class='subject'>Science</div><div class='teacher'>Andrew Wright</div></td><td><div class='subject'>Social Studies</div><div class='teacher'>Brian Ramirez</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="class-CLASS_011" class="tab-content ">
+                <div class="class-title">Grade 9B - Weekly Schedule</div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td><div class='subject'>Physical Education</div><div class='teacher'>Paul Robinson</div></td><td><div class='subject'>Mathematics</div><div class='teacher'>Karen Gonzalez</div></td><td><div class='subject'>Social Studies</div><div class='teacher'>Michael Smith</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td><div class='subject'>Physical Education</div><div class='teacher'>Paul Robinson</div></td><td><div class='subject'>Science</div><div class='teacher'>Karen Gonzalez</div></td><td><div class='subject'>Social Studies</div><div class='teacher'>Michael Smith</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td><div class='subject'>Physical Education</div><div class='teacher'>Paul Robinson</div></td><td><div class='subject'>Science</div><div class='teacher'>Karen Gonzalez</div></td><td><div class='subject'>Social Studies</div><div class='teacher'>Michael Smith</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Karen Gonzalez</div></td><td><div class='subject'>Science</div><div class='teacher'>Karen Gonzalez</div></td><td><div class='subject'>Music</div><div class='teacher'>Ronald King</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Karen Gonzalez</div></td><td><div class='subject'>Science</div><div class='teacher'>Karen Gonzalez</div></td><td><div class='subject'>Music</div><div class='teacher'>Ronald King</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Karen Gonzalez</div></td><td><div class='subject'>Science</div><div class='teacher'>Karen Gonzalez</div></td><td><div class='subject'>Art</div><div class='teacher'>David Smith</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Karen Gonzalez</div></td><td><div class='subject'>Science</div><div class='teacher'>Karen Gonzalez</div></td><td><div class='subject'>Art</div><div class='teacher'>David Smith</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Karen Gonzalez</div></td><td><div class='subject'>Social Studies</div><div class='teacher'>Michael Smith</div></td><td><div class='subject'>Art</div><div class='teacher'>David Smith</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="class-CLASS_012" class="tab-content ">
+                <div class="class-title">Grade 9C - Weekly Schedule</div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Helen Jones</div></td><td><div class='subject'>Art</div><div class='teacher'>Lisa Thomas</div></td><td><div class='subject'>Social Studies</div><div class='teacher'>Sarah Lee</div></td><td><div class='subject'>Computer Science</div><div class='teacher'>Matthew Davis</div></td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Helen Jones</div></td><td><div class='subject'>Science</div><div class='teacher'>Kenneth Walker</div></td><td><div class='subject'>Social Studies</div><div class='teacher'>Sarah Lee</div></td><td><div class='subject'>Computer Science</div><div class='teacher'>Matthew Davis</div></td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Helen Jones</div></td><td><div class='subject'>Science</div><div class='teacher'>Kenneth Walker</div></td><td><div class='subject'>Social Studies</div><div class='teacher'>Sarah Lee</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Helen Jones</div></td><td><div class='subject'>Science</div><div class='teacher'>Kenneth Walker</div></td><td><div class='subject'>French</div><div class='teacher'>Matthew Davis</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Helen Jones</div></td><td><div class='subject'>Science</div><div class='teacher'>Kenneth Walker</div></td><td><div class='subject'>French</div><div class='teacher'>Matthew Davis</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Helen Jones</div></td><td><div class='subject'>Science</div><div class='teacher'>Kenneth Walker</div></td><td><div class='subject'>French</div><div class='teacher'>Matthew Davis</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td><div class='subject'>Art</div><div class='teacher'>Lisa Thomas</div></td><td><div class='subject'>Science</div><div class='teacher'>Kenneth Walker</div></td><td><div class='subject'>Computer Science</div><div class='teacher'>Matthew Davis</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td><div class='subject'>Art</div><div class='teacher'>Lisa Thomas</div></td><td><div class='subject'>Social Studies</div><div class='teacher'>Sarah Lee</div></td><td><div class='subject'>Computer Science</div><div class='teacher'>Matthew Davis</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="class-CLASS_013" class="tab-content ">
+                <div class="class-title">Grade 10A - Weekly Schedule</div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td><div class='subject'>Computer Science</div><div class='teacher'>Kenneth Walker</div></td><td><div class='subject'>Mathematics</div><div class='teacher'>George Walker</div></td><td><div class='subject'>Art</div><div class='teacher'>Michael Wright</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td><div class='subject'>Computer Science</div><div class='teacher'>Kenneth Walker</div></td><td><div class='subject'>Mathematics</div><div class='teacher'>George Walker</div></td><td><div class='subject'>Art</div><div class='teacher'>Michael Wright</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td><div class='subject'>Computer Science</div><div class='teacher'>Kenneth Walker</div></td><td><div class='subject'>Mathematics</div><div class='teacher'>George Walker</div></td><td><div class='subject'>Art</div><div class='teacher'>Michael Wright</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td><div class='subject'>Computer Science</div><div class='teacher'>Kenneth Walker</div></td><td><div class='subject'>Mathematics</div><div class='teacher'>George Walker</div></td><td><div class='subject'>Physical Education</div><div class='teacher'>Kimberly Young</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td><div class='subject'>Music</div><div class='teacher'>Sarah Nguyen</div></td><td><div class='subject'>Hindi</div><div class='teacher'>James Brown</div></td><td><div class='subject'>Physical Education</div><div class='teacher'>Kimberly Young</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td><div class='subject'>Music</div><div class='teacher'>Sarah Nguyen</div></td><td><div class='subject'>Hindi</div><div class='teacher'>James Brown</div></td><td><div class='subject'>Physical Education</div><div class='teacher'>Kimberly Young</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>George Walker</div></td><td><div class='subject'>Hindi</div><div class='teacher'>James Brown</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>George Walker</div></td><td><div class='subject'>Hindi</div><div class='teacher'>James Brown</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="class-CLASS_014" class="tab-content ">
+                <div class="class-title">Grade 10B - Weekly Schedule</div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td><div class='subject'>Science</div><div class='teacher'>Nancy Miller</div></td><td><div class='subject'>Hindi</div><div class='teacher'>Christopher Wright</div></td><td><div class='subject'>Mathematics</div><div class='teacher'>Lisa Miller</div></td><td><div class='subject'>Computer Science</div><div class='teacher'>Lisa Ramirez</div></td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td><div class='subject'>Science</div><div class='teacher'>Nancy Miller</div></td><td><div class='subject'>Hindi</div><div class='teacher'>Christopher Wright</div></td><td><div class='subject'>Mathematics</div><div class='teacher'>Lisa Miller</div></td><td><div class='subject'>Computer Science</div><div class='teacher'>Lisa Ramirez</div></td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td><div class='subject'>Science</div><div class='teacher'>Nancy Miller</div></td><td><div class='subject'>Physical Education</div><div class='teacher'>James Brown</div></td><td><div class='subject'>Mathematics</div><div class='teacher'>Lisa Miller</div></td><td><div class='subject'>Computer Science</div><div class='teacher'>Lisa Ramirez</div></td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td><div class='subject'>Science</div><div class='teacher'>Nancy Miller</div></td><td><div class='subject'>Physical Education</div><div class='teacher'>James Brown</div></td><td><div class='subject'>Social Studies</div><div class='teacher'>Sandra Jackson</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td><div class='subject'>Science</div><div class='teacher'>Nancy Miller</div></td><td><div class='subject'>Physical Education</div><div class='teacher'>James Brown</div></td><td><div class='subject'>Social Studies</div><div class='teacher'>Sandra Jackson</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td><div class='subject'>Science</div><div class='teacher'>Nancy Miller</div></td><td><div class='subject'>Mathematics</div><div class='teacher'>Lisa Miller</div></td><td><div class='subject'>Social Studies</div><div class='teacher'>Sandra Jackson</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td><div class='subject'>Hindi</div><div class='teacher'>Christopher Wright</div></td><td><div class='subject'>Mathematics</div><div class='teacher'>Lisa Miller</div></td><td><div class='subject'>Social Studies</div><div class='teacher'>Sandra Jackson</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td><div class='subject'>Hindi</div><div class='teacher'>Christopher Wright</div></td><td><div class='subject'>Mathematics</div><div class='teacher'>Lisa Miller</div></td><td><div class='subject'>Computer Science</div><div class='teacher'>Lisa Ramirez</div></td><td class='free-period'>Free Period</td><td class='free-period'>Free Period</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h2>👨‍🏫 Teacher Timetables</h2>
+            <div class="nav-tabs" id="teacherTabs">
+<button class="nav-tab active" onclick="showTab('teacher', 'TEACHER_001')">Dorothy Torres</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_002')">Joshua Clark</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_003')">Robert Ramirez</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_004')">Paul Robinson</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_005')">Nancy Miller</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_006')">Carol Miller</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_007')">Christopher Wright</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_008')">Michelle Lopez</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_009')">Helen Jones</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_010')">Sarah Wright</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_011')">Lisa Thomas</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_012')">Kenneth Walker</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_013')">Sarah Hernandez</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_014')">Steven Taylor</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_015')">Anthony Ramirez</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_016')">Karen Gonzalez</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_017')">Sarah Nguyen</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_018')">Sarah Lee</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_019')">George Walker</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_020')">James Brown</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_021')">Nancy Jones</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_022')">Nancy Thomas</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_023')">Dorothy Thomas</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_024')">Ronald Garcia</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_025')">Mark Taylor</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_026')">Helen Taylor</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_027')">Lisa Martin</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_028')">Michael Smith</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_029')">Michael Wright</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_030')">Matthew Rodriguez</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_031')">Helen White</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_032')">Andrew Wright</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_033')">Ronald King</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_034')">Lisa Miller</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_035')">Matthew Davis</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_036')">Sandra Jackson</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_037')">Carol Wilson</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_038')">Kimberly Young</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_039')">Lisa Ramirez</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_040')">David Smith</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_041')">Timothy Taylor</button>
+<button class="nav-tab " onclick="showTab('teacher', 'TEACHER_042')">Brian Ramirez</button>
+
+            </div>
+
+            <div id="teacher-TEACHER_001" class="tab-content active">
+                <div class="class-title">Dorothy Torres - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: HIN, MATH</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 6B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 6B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 6B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 6B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 6B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 6B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_002" class="tab-content ">
+                <div class="class-title">Joshua Clark - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: FR, MATH</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 8A</div></td><td><div class='subject'>French</div><div class='teacher'>Grade 6B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 8A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 8A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 8A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 8A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 8A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td><div class='subject'>French</div><div class='teacher'>Grade 6B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td><div class='subject'>French</div><div class='teacher'>Grade 6B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_003" class="tab-content ">
+                <div class="class-title">Robert Ramirez - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: HIN, FR</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td><div class='subject'>Hindi</div><div class='teacher'>Grade 9A</div></td><td><div class='subject'>French</div><div class='teacher'>Grade 8A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td><div class='subject'>Hindi</div><div class='teacher'>Grade 9A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td><div class='subject'>Hindi</div><div class='teacher'>Grade 9A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td><div class='subject'>Hindi</div><div class='teacher'>Grade 9A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td><div class='subject'>French</div><div class='teacher'>Grade 8A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td><div class='subject'>French</div><div class='teacher'>Grade 8A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_004" class="tab-content ">
+                <div class="class-title">Paul Robinson - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: MUS, PE</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td><div class='subject'>Music</div><div class='teacher'>Grade 8C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td><div class='subject'>Music</div><div class='teacher'>Grade 8C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td><div class='subject'>Physical Education</div><div class='teacher'>Grade 9B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_005" class="tab-content ">
+                <div class="class-title">Nancy Miller - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: SCI, FR</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td><div class='subject'>Science</div><div class='teacher'>Grade 10B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td><div class='subject'>Science</div><div class='teacher'>Grade 10B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td><div class='subject'>Science</div><div class='teacher'>Grade 10B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td><div class='subject'>Science</div><div class='teacher'>Grade 10B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td><div class='subject'>French</div><div class='teacher'>Grade 8B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td><div class='subject'>French</div><div class='teacher'>Grade 8B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td><div class='subject'>French</div><div class='teacher'>Grade 8B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_006" class="tab-content ">
+                <div class="class-title">Carol Miller - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: CS, SS</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td><div class='subject'>Computer Science</div><div class='teacher'>Grade 6A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td><div class='subject'>Computer Science</div><div class='teacher'>Grade 6A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td><div class='subject'>Computer Science</div><div class='teacher'>Grade 6A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td><div class='subject'>Computer Science</div><div class='teacher'>Grade 6A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_007" class="tab-content ">
+                <div class="class-title">Christopher Wright - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: PE, HIN</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td class='free-period'>Free</td><td><div class='subject'>Hindi</div><div class='teacher'>Grade 10B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td class='free-period'>Free</td><td><div class='subject'>Hindi</div><div class='teacher'>Grade 10B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td><div class='subject'>Physical Education</div><div class='teacher'>Grade 7B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td><div class='subject'>Physical Education</div><div class='teacher'>Grade 7B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td><div class='subject'>Physical Education</div><div class='teacher'>Grade 7B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td><div class='subject'>Hindi</div><div class='teacher'>Grade 10B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_008" class="tab-content ">
+                <div class="class-title">Michelle Lopez - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: ART, SCI</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td class='free-period'>Free</td><td><div class='subject'>Art</div><div class='teacher'>Grade 6B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td><div class='subject'>Science</div><div class='teacher'>Grade 8C</div></td><td><div class='subject'>Art</div><div class='teacher'>Grade 6B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td><div class='subject'>Science</div><div class='teacher'>Grade 8C</div></td><td><div class='subject'>Art</div><div class='teacher'>Grade 6B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td><div class='subject'>Science</div><div class='teacher'>Grade 8C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td><div class='subject'>Science</div><div class='teacher'>Grade 8C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td><div class='subject'>Science</div><div class='teacher'>Grade 8C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td><div class='subject'>Science</div><div class='teacher'>Grade 8C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_009" class="tab-content ">
+                <div class="class-title">Helen Jones - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: HIN, MATH</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td><div class='subject'>Hindi</div><div class='teacher'>Grade 7A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td><div class='subject'>Hindi</div><div class='teacher'>Grade 7A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td><div class='subject'>Hindi</div><div class='teacher'>Grade 7A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td><div class='subject'>Hindi</div><div class='teacher'>Grade 7A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 9C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 9C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_010" class="tab-content ">
+                <div class="class-title">Sarah Wright - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: FR, ENG</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td><div class='subject'>English</div><div class='teacher'>Grade 6C</div></td><td><div class='subject'>French</div><div class='teacher'>Grade 7B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td><div class='subject'>English</div><div class='teacher'>Grade 6C</div></td><td><div class='subject'>French</div><div class='teacher'>Grade 7B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td><div class='subject'>English</div><div class='teacher'>Grade 6C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td><div class='subject'>English</div><div class='teacher'>Grade 6C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td><div class='subject'>English</div><div class='teacher'>Grade 6C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td><div class='subject'>French</div><div class='teacher'>Grade 7B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_011" class="tab-content ">
+                <div class="class-title">Lisa Thomas - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: PE, ART</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td class='free-period'>Free</td><td><div class='subject'>Art</div><div class='teacher'>Grade 9C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td><div class='subject'>Physical Education</div><div class='teacher'>Grade 7A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td><div class='subject'>Physical Education</div><div class='teacher'>Grade 7A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td><div class='subject'>Physical Education</div><div class='teacher'>Grade 7A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td><div class='subject'>Art</div><div class='teacher'>Grade 9C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_012" class="tab-content ">
+                <div class="class-title">Kenneth Walker - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: SCI, CS</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td><div class='subject'>Computer Science</div><div class='teacher'>Grade 10A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td><div class='subject'>Computer Science</div><div class='teacher'>Grade 10A</div></td><td><div class='subject'>Science</div><div class='teacher'>Grade 9C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td><div class='subject'>Computer Science</div><div class='teacher'>Grade 10A</div></td><td><div class='subject'>Science</div><div class='teacher'>Grade 9C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td><div class='subject'>Computer Science</div><div class='teacher'>Grade 10A</div></td><td><div class='subject'>Science</div><div class='teacher'>Grade 9C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td class='free-period'>Free</td><td><div class='subject'>Science</div><div class='teacher'>Grade 9C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td class='free-period'>Free</td><td><div class='subject'>Science</div><div class='teacher'>Grade 9C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td class='free-period'>Free</td><td><div class='subject'>Science</div><div class='teacher'>Grade 9C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_013" class="tab-content ">
+                <div class="class-title">Sarah Hernandez - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: SS</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td><div class='subject'>Social Studies</div><div class='teacher'>Grade 7C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td><div class='subject'>Social Studies</div><div class='teacher'>Grade 7C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td><div class='subject'>Social Studies</div><div class='teacher'>Grade 7C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td><div class='subject'>Social Studies</div><div class='teacher'>Grade 7C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td class='free-period'>Free</td><td><div class='subject'>Social Studies</div><div class='teacher'>Grade 6B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td class='free-period'>Free</td><td><div class='subject'>Social Studies</div><div class='teacher'>Grade 6B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td class='free-period'>Free</td><td><div class='subject'>Social Studies</div><div class='teacher'>Grade 6B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td class='free-period'>Free</td><td><div class='subject'>Social Studies</div><div class='teacher'>Grade 6B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_014" class="tab-content ">
+                <div class="class-title">Steven Taylor - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: CS, PE</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td class='free-period'>Free</td><td><div class='subject'>Physical Education</div><div class='teacher'>Grade 8B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td class='free-period'>Free</td><td><div class='subject'>Physical Education</div><div class='teacher'>Grade 8B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td><div class='subject'>Computer Science</div><div class='teacher'>Grade 9A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td><div class='subject'>Computer Science</div><div class='teacher'>Grade 9A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td><div class='subject'>Computer Science</div><div class='teacher'>Grade 9A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td><div class='subject'>Physical Education</div><div class='teacher'>Grade 8B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_015" class="tab-content ">
+                <div class="class-title">Anthony Ramirez - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: SCI, MUS</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td class='free-period'>Free</td><td><div class='subject'>Science</div><div class='teacher'>Grade 8A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td class='free-period'>Free</td><td><div class='subject'>Music</div><div class='teacher'>Grade 7B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td class='free-period'>Free</td><td><div class='subject'>Music</div><div class='teacher'>Grade 7B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td class='free-period'>Free</td><td><div class='subject'>Science</div><div class='teacher'>Grade 8A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td class='free-period'>Free</td><td><div class='subject'>Science</div><div class='teacher'>Grade 8A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td class='free-period'>Free</td><td><div class='subject'>Science</div><div class='teacher'>Grade 8A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_016" class="tab-content ">
+                <div class="class-title">Karen Gonzalez - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: MATH, SCI</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td class='free-period'>Free</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 9B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td class='free-period'>Free</td><td><div class='subject'>Science</div><div class='teacher'>Grade 9B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td class='free-period'>Free</td><td><div class='subject'>Science</div><div class='teacher'>Grade 9B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 9B</div></td><td><div class='subject'>Science</div><div class='teacher'>Grade 9B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 9B</div></td><td><div class='subject'>Science</div><div class='teacher'>Grade 9B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 9B</div></td><td><div class='subject'>Science</div><div class='teacher'>Grade 9B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 9B</div></td><td><div class='subject'>Science</div><div class='teacher'>Grade 9B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 9B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_017" class="tab-content ">
+                <div class="class-title">Sarah Nguyen - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: MUS, FR</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td class='free-period'>Free</td><td><div class='subject'>French</div><div class='teacher'>Grade 9A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td class='free-period'>Free</td><td><div class='subject'>French</div><div class='teacher'>Grade 9A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td class='free-period'>Free</td><td><div class='subject'>French</div><div class='teacher'>Grade 9A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td><div class='subject'>Music</div><div class='teacher'>Grade 10A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td><div class='subject'>Music</div><div class='teacher'>Grade 10A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_018" class="tab-content ">
+                <div class="class-title">Sarah Lee - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: ART, SS</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Social Studies</div><div class='teacher'>Grade 9C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Social Studies</div><div class='teacher'>Grade 9C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Social Studies</div><div class='teacher'>Grade 9C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td><div class='subject'>Art</div><div class='teacher'>Grade 6C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td><div class='subject'>Art</div><div class='teacher'>Grade 6C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td><div class='subject'>Art</div><div class='teacher'>Grade 6C</div></td><td><div class='subject'>Social Studies</div><div class='teacher'>Grade 9C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_019" class="tab-content ">
+                <div class="class-title">George Walker - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: MATH, ENG</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td class='free-period'>Free</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 10A</div></td><td><div class='subject'>English</div><div class='teacher'>Grade 7B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td class='free-period'>Free</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 10A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td class='free-period'>Free</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 10A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td class='free-period'>Free</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 10A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td class='free-period'>Free</td><td><div class='subject'>English</div><div class='teacher'>Grade 7B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td class='free-period'>Free</td><td><div class='subject'>English</div><div class='teacher'>Grade 7B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 10A</div></td><td><div class='subject'>English</div><div class='teacher'>Grade 7B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 10A</div></td><td><div class='subject'>English</div><div class='teacher'>Grade 7B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_020" class="tab-content ">
+                <div class="class-title">James Brown - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: HIN, PE</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td class='free-period'>Free</td><td><div class='subject'>Physical Education</div><div class='teacher'>Grade 10B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td class='free-period'>Free</td><td><div class='subject'>Physical Education</div><div class='teacher'>Grade 10B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td class='free-period'>Free</td><td><div class='subject'>Hindi</div><div class='teacher'>Grade 10A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td class='free-period'>Free</td><td><div class='subject'>Hindi</div><div class='teacher'>Grade 10A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td class='free-period'>Free</td><td><div class='subject'>Hindi</div><div class='teacher'>Grade 10A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td class='free-period'>Free</td><td><div class='subject'>Hindi</div><div class='teacher'>Grade 10A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_021" class="tab-content ">
+                <div class="class-title">Nancy Jones - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: SCI, ENG</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td class='free-period'>Free</td><td><div class='subject'>Science</div><div class='teacher'>Grade 6C</div></td><td><div class='subject'>English</div><div class='teacher'>Grade 6B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td class='free-period'>Free</td><td><div class='subject'>Science</div><div class='teacher'>Grade 6C</div></td><td><div class='subject'>English</div><div class='teacher'>Grade 6B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td class='free-period'>Free</td><td><div class='subject'>Science</div><div class='teacher'>Grade 6C</div></td><td><div class='subject'>English</div><div class='teacher'>Grade 6B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td class='free-period'>Free</td><td><div class='subject'>Science</div><div class='teacher'>Grade 6C</div></td><td><div class='subject'>English</div><div class='teacher'>Grade 6B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td class='free-period'>Free</td><td><div class='subject'>Science</div><div class='teacher'>Grade 6C</div></td><td><div class='subject'>English</div><div class='teacher'>Grade 6B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td class='free-period'>Free</td><td><div class='subject'>Science</div><div class='teacher'>Grade 6C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_022" class="tab-content ">
+                <div class="class-title">Nancy Thomas - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: MATH, CS</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td class='free-period'>Free</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 7C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td class='free-period'>Free</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 7C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td class='free-period'>Free</td><td><div class='subject'>Computer Science</div><div class='teacher'>Grade 7C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td class='free-period'>Free</td><td><div class='subject'>Computer Science</div><div class='teacher'>Grade 7C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 7C</div></td><td><div class='subject'>Computer Science</div><div class='teacher'>Grade 7C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 7C</div></td><td><div class='subject'>Computer Science</div><div class='teacher'>Grade 7C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 7C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 7C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_023" class="tab-content ">
+                <div class="class-title">Dorothy Thomas - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: SS, CS</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td class='free-period'>Free</td><td><div class='subject'>Computer Science</div><div class='teacher'>Grade 8C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td class='free-period'>Free</td><td><div class='subject'>Computer Science</div><div class='teacher'>Grade 8C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td class='free-period'>Free</td><td><div class='subject'>Social Studies</div><div class='teacher'>Grade 8B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td class='free-period'>Free</td><td><div class='subject'>Social Studies</div><div class='teacher'>Grade 8B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td class='free-period'>Free</td><td><div class='subject'>Social Studies</div><div class='teacher'>Grade 8B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td class='free-period'>Free</td><td><div class='subject'>Social Studies</div><div class='teacher'>Grade 8B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_024" class="tab-content ">
+                <div class="class-title">Ronald Garcia - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: CS, SCI</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Science</div><div class='teacher'>Grade 7C</div></td><td><div class='subject'>Computer Science</div><div class='teacher'>Grade 6B</div></td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Science</div><div class='teacher'>Grade 7C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Science</div><div class='teacher'>Grade 7C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Science</div><div class='teacher'>Grade 7C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Computer Science</div><div class='teacher'>Grade 6B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td class='free-period'>Free</td><td><div class='subject'>Science</div><div class='teacher'>Grade 7C</div></td><td><div class='subject'>Computer Science</div><div class='teacher'>Grade 6B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td class='free-period'>Free</td><td><div class='subject'>Science</div><div class='teacher'>Grade 7C</div></td><td><div class='subject'>Computer Science</div><div class='teacher'>Grade 6B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_025" class="tab-content ">
+                <div class="class-title">Mark Taylor - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: ENG, HIN</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td class='free-period'>Free</td><td><div class='subject'>English</div><div class='teacher'>Grade 6A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td><div class='subject'>English</div><div class='teacher'>Grade 6A</div></td><td class='free-period'>Free</td><td><div class='subject'>Hindi</div><div class='teacher'>Grade 7C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td><div class='subject'>English</div><div class='teacher'>Grade 6A</div></td><td class='free-period'>Free</td><td><div class='subject'>Hindi</div><div class='teacher'>Grade 7C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td><div class='subject'>English</div><div class='teacher'>Grade 6A</div></td><td class='free-period'>Free</td><td><div class='subject'>Hindi</div><div class='teacher'>Grade 7C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td><div class='subject'>English</div><div class='teacher'>Grade 6A</div></td><td class='free-period'>Free</td><td><div class='subject'>Hindi</div><div class='teacher'>Grade 7C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_026" class="tab-content ">
+                <div class="class-title">Helen Taylor - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: MUS, ART</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td class='free-period'>Free</td><td><div class='subject'>Art</div><div class='teacher'>Grade 8C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td class='free-period'>Free</td><td><div class='subject'>Art</div><div class='teacher'>Grade 8C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td class='free-period'>Free</td><td><div class='subject'>Music</div><div class='teacher'>Grade 8B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td class='free-period'>Free</td><td><div class='subject'>Music</div><div class='teacher'>Grade 8B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_027" class="tab-content ">
+                <div class="class-title">Lisa Martin - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: MATH, SS</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Social Studies</div><div class='teacher'>Grade 8A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td class='free-period'>Free</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 6A</div></td><td><div class='subject'>Social Studies</div><div class='teacher'>Grade 8A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td class='free-period'>Free</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 6A</div></td><td><div class='subject'>Social Studies</div><div class='teacher'>Grade 8A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td class='free-period'>Free</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 6A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td class='free-period'>Free</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 6A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td class='free-period'>Free</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 6A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td class='free-period'>Free</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 6A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td class='free-period'>Free</td><td><div class='subject'>Social Studies</div><div class='teacher'>Grade 8A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_028" class="tab-content ">
+                <div class="class-title">Michael Smith - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: SS, FR</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>French</div><div class='teacher'>Grade 6A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>French</div><div class='teacher'>Grade 6A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Social Studies</div><div class='teacher'>Grade 9B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td class='free-period'>Free</td><td><div class='subject'>French</div><div class='teacher'>Grade 6A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_029" class="tab-content ">
+                <div class="class-title">Michael Wright - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: PE, ART</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Physical Education</div><div class='teacher'>Grade 6C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Art</div><div class='teacher'>Grade 10A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Art</div><div class='teacher'>Grade 10A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td class='free-period'>Free</td><td><div class='subject'>Physical Education</div><div class='teacher'>Grade 6C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td class='free-period'>Free</td><td><div class='subject'>Physical Education</div><div class='teacher'>Grade 6C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_030" class="tab-content ">
+                <div class="class-title">Matthew Rodriguez - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: ENG, FR</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>English</div><div class='teacher'>Grade 8C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>English</div><div class='teacher'>Grade 8C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>English</div><div class='teacher'>Grade 8C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>English</div><div class='teacher'>Grade 8C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>French</div><div class='teacher'>Grade 8C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>French</div><div class='teacher'>Grade 8C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>French</div><div class='teacher'>Grade 8C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td class='free-period'>Free</td><td><div class='subject'>English</div><div class='teacher'>Grade 8C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_031" class="tab-content ">
+                <div class="class-title">Helen White - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: ART, MATH</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td class='free-period'>Free</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 7A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td class='free-period'>Free</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 7A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td class='free-period'>Free</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 7A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td class='free-period'>Free</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 7A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td class='free-period'>Free</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 7A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td class='free-period'>Free</td><td><div class='subject'>Art</div><div class='teacher'>Grade 9A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 7A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_032" class="tab-content ">
+                <div class="class-title">Andrew Wright - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: SCI, MUS</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Science</div><div class='teacher'>Grade 9A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Music</div><div class='teacher'>Grade 6C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Music</div><div class='teacher'>Grade 6C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Science</div><div class='teacher'>Grade 9A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td class='free-period'>Free</td><td><div class='subject'>Science</div><div class='teacher'>Grade 9A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td class='free-period'>Free</td><td><div class='subject'>Science</div><div class='teacher'>Grade 9A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_033" class="tab-content ">
+                <div class="class-title">Ronald King - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: PE, MUS</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Physical Education</div><div class='teacher'>Grade 6A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Physical Education</div><div class='teacher'>Grade 6A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Physical Education</div><div class='teacher'>Grade 6A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_034" class="tab-content ">
+                <div class="class-title">Lisa Miller - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: HIN, MATH</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 10B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 10B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 10B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Hindi</div><div class='teacher'>Grade 8A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Hindi</div><div class='teacher'>Grade 8A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td class='free-period'>Free</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 10B</div></td><td><div class='subject'>Hindi</div><div class='teacher'>Grade 8A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td class='free-period'>Free</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 10B</div></td><td><div class='subject'>Hindi</div><div class='teacher'>Grade 8A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td class='free-period'>Free</td><td><div class='subject'>Mathematics</div><div class='teacher'>Grade 10B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_035" class="tab-content ">
+                <div class="class-title">Matthew Davis - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: FR, CS</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Computer Science</div><div class='teacher'>Grade 9C</div></td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Computer Science</div><div class='teacher'>Grade 9C</div></td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>French</div><div class='teacher'>Grade 9C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>French</div><div class='teacher'>Grade 9C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>French</div><div class='teacher'>Grade 9C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Computer Science</div><div class='teacher'>Grade 9C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Computer Science</div><div class='teacher'>Grade 9C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_036" class="tab-content ">
+                <div class="class-title">Sandra Jackson - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: SS, ART</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Art</div><div class='teacher'>Grade 8B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Art</div><div class='teacher'>Grade 8B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Art</div><div class='teacher'>Grade 8B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Social Studies</div><div class='teacher'>Grade 10B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Social Studies</div><div class='teacher'>Grade 10B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Social Studies</div><div class='teacher'>Grade 10B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Social Studies</div><div class='teacher'>Grade 10B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_037" class="tab-content ">
+                <div class="class-title">Carol Wilson - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: FR, SCI</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Science</div><div class='teacher'>Grade 7B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Science</div><div class='teacher'>Grade 7B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Science</div><div class='teacher'>Grade 7B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Science</div><div class='teacher'>Grade 7B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td class='free-period'>Free</td><td><div class='subject'>French</div><div class='teacher'>Grade 7A</div></td><td><div class='subject'>Science</div><div class='teacher'>Grade 7B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td class='free-period'>Free</td><td><div class='subject'>French</div><div class='teacher'>Grade 7A</div></td><td><div class='subject'>Science</div><div class='teacher'>Grade 7B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td class='free-period'>Free</td><td><div class='subject'>French</div><div class='teacher'>Grade 7A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_038" class="tab-content ">
+                <div class="class-title">Kimberly Young - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: PE</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Physical Education</div><div class='teacher'>Grade 8A</div></td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Physical Education</div><div class='teacher'>Grade 8A</div></td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Physical Education</div><div class='teacher'>Grade 10A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Physical Education</div><div class='teacher'>Grade 10A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Physical Education</div><div class='teacher'>Grade 10A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Physical Education</div><div class='teacher'>Grade 8A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_039" class="tab-content ">
+                <div class="class-title">Lisa Ramirez - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: CS</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Computer Science</div><div class='teacher'>Grade 10B</div></td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Computer Science</div><div class='teacher'>Grade 10B</div></td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Computer Science</div><div class='teacher'>Grade 10B</div></td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Computer Science</div><div class='teacher'>Grade 6C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Computer Science</div><div class='teacher'>Grade 6C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Computer Science</div><div class='teacher'>Grade 6C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Computer Science</div><div class='teacher'>Grade 6C</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Computer Science</div><div class='teacher'>Grade 10B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_040" class="tab-content ">
+                <div class="class-title">David Smith - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: SCI, ART</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Science</div><div class='teacher'>Grade 7A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Science</div><div class='teacher'>Grade 7A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Science</div><div class='teacher'>Grade 7A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Science</div><div class='teacher'>Grade 7A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Science</div><div class='teacher'>Grade 7A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Science</div><div class='teacher'>Grade 7A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Art</div><div class='teacher'>Grade 9B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Art</div><div class='teacher'>Grade 9B</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_041" class="tab-content ">
+                <div class="class-title">Timothy Taylor - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: PE, HIN</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Hindi</div><div class='teacher'>Grade 6A</div></td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Physical Education</div><div class='teacher'>Grade 7C</div></td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Physical Education</div><div class='teacher'>Grade 7C</div></td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Hindi</div><div class='teacher'>Grade 6A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Hindi</div><div class='teacher'>Grade 6A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Hindi</div><div class='teacher'>Grade 6A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="teacher-TEACHER_042" class="tab-content ">
+                <div class="class-title">Brian Ramirez - Weekly Schedule<br><small style="font-size: 14px; opacity: 0.9;">Subjects: SS</small></div>
+                <div class="timetable-grid">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+<tr><td class='period-cell'>Period 1<br>8:00-9:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Social Studies</div><div class='teacher'>Grade 7A</div></td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 2<br>9:00-10:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Social Studies</div><div class='teacher'>Grade 7A</div></td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 3<br>10:00-11:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 4<br>11:00-12:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 5<br>12:00-13:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Social Studies</div><div class='teacher'>Grade 9A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 6<br>13:00-14:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Social Studies</div><div class='teacher'>Grade 9A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 7<br>14:00-15:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Social Studies</div><div class='teacher'>Grade 7A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+<tr><td class='period-cell'>Period 8<br>15:00-16:00</td><td class='free-period'>Free</td><td class='free-period'>Free</td><td><div class='subject'>Social Studies</div><div class='teacher'>Grade 7A</div></td><td class='free-period'>Free</td><td class='free-period'>Free</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function showTab(type, id) {
+            // Hide all tabs of this type
+            const tabs = document.querySelectorAll(`#${type}-tabs .tab-content, [id^="${type}-"]`);
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Remove active from all buttons
+            const buttons = document.querySelectorAll(`#${type}Tabs .nav-tab`);
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Show selected tab
+            document.getElementById(`${type}-${id}`).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

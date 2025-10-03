@@ -1,0 +1,19 @@
+
+============================================================
+🚀 Generating Timetable for TT_20250930_155334_8fd6ea32
+============================================================
+
+📂 Loading CSV data...
+   Classes: 14
+   Teachers: 48
+   Subjects: 10
+   Rooms: 20
+   Assignments: 84
+   Time Slots: 40
+
+🔄 Sending to timetable engine at http://localhost:8000/generate...
+⏱️  Generation time: 0.04s
+
+❌ FAILED!
+   Status code: 500
+   Response: {"detail":"Generation failed due to internal error"}
