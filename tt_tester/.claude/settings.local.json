@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//d/Projects/React/BMTT/bm-timetable-maker/**)",
+      "Bash(python:*)",
+      "Bash(python3:*)",
+      "Bash(py:*)",
+      "Bash(/c/Users/Afzal/AppData/Local/Programs/Python/Launcher/py comprehensive_tt_generator.py TT_20251004_112839_d317628b)",
+      "Bash(export PYTHONIOENCODING=utf-8)",
+      "Bash(netstat:*)",
+      "Bash(curl:*)",
+      "Bash(start v25_timetable_TT_20251004_112839_d317628b_20251004_114659.html)",
+      "Bash(tasklist)",
+      "Bash(start ab_comparison_TT_20251004_112839_d317628b_20251004_120125.html)",
+      "Bash(start ab_comparison_TT_20251004_112839_d317628b_20251004_120919.html)",
+      "Bash(start ab_comparison_TT_20251004_121258_40b399a6_20251004_121344.html)",
+      "Bash(start summary_TT_20251004_121258_40b399a6_20251004_121844.html)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

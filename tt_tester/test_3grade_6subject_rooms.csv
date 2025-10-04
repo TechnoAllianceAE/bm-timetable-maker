@@ -1,9 +1,0 @@
-room_id,name,type,capacity,has_projector,specialization
-ROOM_001,Classroom 1,classroom,31,True,
-ROOM_002,Classroom 2,classroom,31,True,
-ROOM_003,Classroom 3,classroom,40,True,
-ROOM_004,Classroom 4,classroom,40,False,
-ROOM_005,Classroom 5,classroom,39,True,
-ROOM_006,Classroom 6,classroom,36,False,
-LAB_001,Science Lab,lab,29,True,science_lab
-LAB_002,Computer Lab,lab,27,True,computer_lab

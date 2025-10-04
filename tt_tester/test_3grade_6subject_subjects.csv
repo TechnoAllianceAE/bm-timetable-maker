@@ -1,7 +1,0 @@
-code,name,needs_lab,periods_per_week
-MATH,Mathematics,False,6
-ENG,English,False,5
-SCI,Science,True,6
-SS,Social Studies,False,4
-CS,Computer Science,True,4
-PE,Physical Education,False,3

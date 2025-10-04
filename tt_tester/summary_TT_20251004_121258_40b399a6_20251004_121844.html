@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timetable Generation Summary</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        .container { max-width: 1400px; margin: 0 auto; }
+        .header {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .header h1 { font-size: 42px; color: #2d3748; margin-bottom: 10px; }
+        .subtitle { font-size: 16px; color: #718096; margin: 5px 0; }
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .section h2 {
+            font-size: 28px;
+            color: #2d3748;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: #f7fafc;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 36px;
+            font-weight: 800;
+            color: #2d3748;
+            margin-bottom: 5px;
+        }
+        .stat-label {
+            font-size: 14px;
+            color: #718096;
+            font-weight: 600;
+        }
+        .variation-card {
+            background: #f7fafc;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 5px solid #667eea;
+        }
+        .variation-card.best {
+            border-left-color: #48bb78;
+            background: #f0fff4;
+        }
+        .variation-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .variation-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2d3748;
+        }
+        .variation-badge {
+            background: #48bb78;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .pros, .cons {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+        }
+        .pros {
+            border-left: 4px solid #48bb78;
+        }
+        .cons {
+            border-left: 4px solid #f56565;
+        }
+        .pros h4, .cons h4 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #2d3748;
+        }
+        .pros ul, .cons ul {
+            list-style: none;
+            padding: 0;
+        }
+        .pros li, .cons li {
+            padding: 5px 0;
+            font-size: 14px;
+        }
+        .pros li:before {
+            content: "✓ ";
+            color: #48bb78;
+            font-weight: 700;
+        }
+        .cons li:before {
+            content: "✗ ";
+            color: #f56565;
+            font-weight: 700;
+        }
+        .teacher-list {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 15px;
+        }
+        .teacher-list h4 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #2d3748;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        th {
+            background: #f7fafc;
+            font-weight: 700;
+            color: #4a5568;
+            font-size: 14px;
+        }
+        td {
+            font-size: 14px;
+        }
+        .success { color: #48bb78; }
+        .warning { color: #ed8936; }
+        .error { color: #f56565; }
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .badge-success { background: #c6f6d5; color: #22543d; }
+        .badge-warning { background: #feebc8; color: #7c2d12; }
+        .badge-error { background: #fed7d7; color: #742a2a; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Timetable Generation Summary</h1>
+            <div class="subtitle">Generated using V25 Engine</div>
+            <div class="subtitle">October 04, 2025 at 12:18 PM</div>
+            <div class="subtitle">TT ID: TT_20251004_121258_40b399a6</div>
+        </div>
+
+        <div class="section">
+            <h2>Overview</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">3</div>
+                    <div class="stat-label">Variations Generated</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">8.35s</div>
+                    <div class="stat-label">Generation Time</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">50</div>
+                    <div class="stat-label">Classes</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">230</div>
+                    <div class="stat-label">Teachers</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="variation-card  best">
+                <div class="variation-header">
+                    <div class="variation-title">Variation #1</div>
+                    <div class="variation-badge">RECOMMENDED</div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">2000</div>
+                        <div class="stat-label">Periods Scheduled</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value error">8</div>
+                        <div class="stat-label">Total Violations</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value success">0</div>
+                        <div class="stat-label">Overworked Teachers</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value warning">24</div>
+                        <div class="stat-label">Underutilized Teachers</div>
+                    </div>
+                </div>
+
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>Pros</h4>
+                        <ul>
+<li>No teacher scheduling conflicts</li>
+<li>No room double-booking</li>
+<li>No class conflicts</li>
+<li>No overworked teachers (>90% capacity)</li>
+
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>Cons</h4>
+                        <ul>
+<li>8 consecutive period violations</li>
+<li>24 teachers underutilized (<15%)</li>
+
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="teacher-list">
+                    <h4>Underutilized Teachers (<15% capacity)</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Teacher</th>
+                                <th>Periods Assigned</th>
+                                <th>Max Capacity</th>
+                                <th>Utilization</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr>
+                                <td>Dorothy Garcia</td>
+                                <td>1</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">3.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Dorothy Young</td>
+                                <td>1</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">3.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Joshua Allen</td>
+                                <td>2</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">6.7%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Steven Jones</td>
+                                <td>3</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">10.0%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Betty Davis</td>
+                                <td>3</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">10.0%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Donna Hernandez</td>
+                                <td>3</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">10.0%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Carol White</td>
+                                <td>3</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">10.0%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Laura Gonzalez</td>
+                                <td>3</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">10.0%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Donna Wilson</td>
+                                <td>3</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">10.0%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Joshua Thomas</td>
+                                <td>3</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">10.0%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Steven Clark</td>
+                                <td>3</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">10.0%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Brian Young</td>
+                                <td>3</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">10.0%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Donald Rodriguez</td>
+                                <td>4</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">13.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Sandra Martinez</td>
+                                <td>4</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">13.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Nancy White</td>
+                                <td>4</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">13.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Karen Perez</td>
+                                <td>4</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">13.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>David Sanchez</td>
+                                <td>4</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">13.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Mary Harris</td>
+                                <td>4</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">13.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Betty Taylor</td>
+                                <td>4</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">13.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Mark Wilson</td>
+                                <td>4</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">13.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Christopher Flores</td>
+                                <td>4</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">13.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Donna Johnson</td>
+                                <td>4</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">13.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Kevin White</td>
+                                <td>4</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">13.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Mark Lopez</td>
+                                <td>4</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">13.3%</span></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="variation-card">
+                <div class="variation-header">
+                    <div class="variation-title">Variation #2</div>
+                    
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">2000</div>
+                        <div class="stat-label">Periods Scheduled</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value error">8</div>
+                        <div class="stat-label">Total Violations</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value success">0</div>
+                        <div class="stat-label">Overworked Teachers</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value warning">24</div>
+                        <div class="stat-label">Underutilized Teachers</div>
+                    </div>
+                </div>
+
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>Pros</h4>
+                        <ul>
+<li>No teacher scheduling conflicts</li>
+<li>No room double-booking</li>
+<li>No class conflicts</li>
+<li>No overworked teachers (>90% capacity)</li>
+
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>Cons</h4>
+                        <ul>
+<li>8 consecutive period violations</li>
+<li>24 teachers underutilized (<15%)</li>
+
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="teacher-list">
+                    <h4>Underutilized Teachers (<15% capacity)</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Teacher</th>
+                                <th>Periods Assigned</th>
+                                <th>Max Capacity</th>
+                                <th>Utilization</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr>
+                                <td>Dorothy Garcia</td>
+                                <td>1</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">3.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Dorothy Young</td>
+                                <td>1</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">3.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Joshua Allen</td>
+                                <td>2</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">6.7%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Steven Jones</td>
+                                <td>3</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">10.0%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Betty Davis</td>
+                                <td>3</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">10.0%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Donna Hernandez</td>
+                                <td>3</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">10.0%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Carol White</td>
+                                <td>3</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">10.0%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Laura Gonzalez</td>
+                                <td>3</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">10.0%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Donna Wilson</td>
+                                <td>3</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">10.0%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Joshua Thomas</td>
+                                <td>3</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">10.0%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Steven Clark</td>
+                                <td>3</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">10.0%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Brian Young</td>
+                                <td>3</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">10.0%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Donald Rodriguez</td>
+                                <td>4</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">13.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Sandra Martinez</td>
+                                <td>4</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">13.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Nancy White</td>
+                                <td>4</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">13.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Karen Perez</td>
+                                <td>4</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">13.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>David Sanchez</td>
+                                <td>4</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">13.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Mary Harris</td>
+                                <td>4</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">13.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Betty Taylor</td>
+                                <td>4</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">13.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Mark Wilson</td>
+                                <td>4</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">13.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Christopher Flores</td>
+                                <td>4</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">13.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Donna Johnson</td>
+                                <td>4</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">13.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Kevin White</td>
+                                <td>4</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">13.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Mark Lopez</td>
+                                <td>4</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">13.3%</span></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="variation-card">
+                <div class="variation-header">
+                    <div class="variation-title">Variation #3</div>
+                    
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">2000</div>
+                        <div class="stat-label">Periods Scheduled</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value error">8</div>
+                        <div class="stat-label">Total Violations</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value success">0</div>
+                        <div class="stat-label">Overworked Teachers</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value warning">24</div>
+                        <div class="stat-label">Underutilized Teachers</div>
+                    </div>
+                </div>
+
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>Pros</h4>
+                        <ul>
+<li>No teacher scheduling conflicts</li>
+<li>No room double-booking</li>
+<li>No class conflicts</li>
+<li>No overworked teachers (>90% capacity)</li>
+
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>Cons</h4>
+                        <ul>
+<li>8 consecutive period violations</li>
+<li>24 teachers underutilized (<15%)</li>
+
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="teacher-list">
+                    <h4>Underutilized Teachers (<15% capacity)</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Teacher</th>
+                                <th>Periods Assigned</th>
+                                <th>Max Capacity</th>
+                                <th>Utilization</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr>
+                                <td>Dorothy Garcia</td>
+                                <td>1</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">3.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Dorothy Young</td>
+                                <td>1</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">3.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Joshua Allen</td>
+                                <td>2</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">6.7%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Steven Jones</td>
+                                <td>3</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">10.0%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Betty Davis</td>
+                                <td>3</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">10.0%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Donna Hernandez</td>
+                                <td>3</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">10.0%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Carol White</td>
+                                <td>3</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">10.0%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Laura Gonzalez</td>
+                                <td>3</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">10.0%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Donna Wilson</td>
+                                <td>3</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">10.0%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Joshua Thomas</td>
+                                <td>3</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">10.0%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Steven Clark</td>
+                                <td>3</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">10.0%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Brian Young</td>
+                                <td>3</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">10.0%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Donald Rodriguez</td>
+                                <td>4</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">13.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Sandra Martinez</td>
+                                <td>4</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">13.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Nancy White</td>
+                                <td>4</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">13.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Karen Perez</td>
+                                <td>4</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">13.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>David Sanchez</td>
+                                <td>4</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">13.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Mary Harris</td>
+                                <td>4</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">13.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Betty Taylor</td>
+                                <td>4</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">13.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Mark Wilson</td>
+                                <td>4</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">13.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Christopher Flores</td>
+                                <td>4</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">13.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Donna Johnson</td>
+                                <td>4</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">13.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Kevin White</td>
+                                <td>4</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">13.3%</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Mark Lopez</td>
+                                <td>4</td>
+                                <td>30</td>
+                                <td><span class="badge badge-warning">13.3%</span></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

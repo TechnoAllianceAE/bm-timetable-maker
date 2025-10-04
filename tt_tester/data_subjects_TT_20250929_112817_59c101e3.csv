@@ -1,8 +1,0 @@
-code,name,needs_lab,periods_per_week
-MATH,Mathematics,False,6
-ENG,English,False,6
-SCI,Science,True,5
-HIST,History,False,4
-GEO,Geography,False,3
-MUS,Music,False,2
-ART,Art,False,2
