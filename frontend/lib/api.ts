@@ -157,6 +157,7 @@ export const timetableAPI = {
   activate: (id: string) => apiClient.post(`/timetables/${id}/activate`),
   deactivate: (id: string) => apiClient.post(`/timetables/${id}/deactivate`),
   generate: (payload: GenerateTimetablePayload) => apiClient.post('/timetables/generate', payload),
+  getSummary: (id: string) => apiClient.get(`/timetables/${id}/summary`),
 };
 
 export const timeslotAPI = {

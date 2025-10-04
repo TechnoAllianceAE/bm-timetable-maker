@@ -165,6 +165,8 @@ export default function GenerateTimetablePage() {
         schoolId: params.schoolId,
         academicYearId: params.academicYearId,
         name: params.name,
+        startDate: params.startDate,
+        endDate: params.endDate,
         constraints: {
           // Basic constraints
           maxConsecutiveTeachingHours: params.constraints.maxConsecutiveTeachingHours,

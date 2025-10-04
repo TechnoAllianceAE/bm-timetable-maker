@@ -33,6 +33,22 @@ export class TimetablesController {
     return this.timetablesService.findAll(schoolId, status, page, limit);
   }
 
+  @Get(':id/entries')
+  @ApiOperation({ summary: 'Get timetable entries with details' })
+  @ApiResponse({ status: 200, description: 'Return timetable entries with class, teacher, subject, room, and timeslot details' })
+  @ApiResponse({ status: 404, description: 'Timetable not found' })
+  getEntries(@Param('id') id: string) {
+    return this.timetablesService.getEntries(id);
+  }
+
+  @Get(':id/summary')
+  @ApiOperation({ summary: 'Get timetable summary with subject period counts and curriculum compliance' })
+  @ApiResponse({ status: 200, description: 'Return timetable summary with period counts per subject' })
+  @ApiResponse({ status: 404, description: 'Timetable not found' })
+  getSummary(@Param('id') id: string) {
+    return this.timetablesService.getSummary(id);
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Get a timetable by ID' })
   @ApiResponse({ status: 200, description: 'Return the timetable' })
@@ -71,13 +87,5 @@ export class TimetablesController {
   @ApiResponse({ status: 404, description: 'Timetable not found' })
   deactivate(@Param('id') id: string) {
     return this.timetablesService.deactivate(id);
-  }
-
-  @Get(':id/entries')
-  @ApiOperation({ summary: 'Get timetable entries with details' })
-  @ApiResponse({ status: 200, description: 'Return timetable entries with class, teacher, subject, room, and timeslot details' })
-  @ApiResponse({ status: 404, description: 'Timetable not found' })
-  getEntries(@Param('id') id: string) {
-    return this.timetablesService.getEntries(id);
   }
 }

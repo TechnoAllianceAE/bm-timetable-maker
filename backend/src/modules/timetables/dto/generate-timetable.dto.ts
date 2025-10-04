@@ -1,4 +1,4 @@
-import { IsString, IsOptional, IsObject } from 'class-validator';
+import { IsString, IsOptional, IsObject, IsDateString } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class GenerateTimetableDto {
@@ -14,6 +14,16 @@ export class GenerateTimetableDto {
   @IsOptional()
   @IsString()
   name?: string;
+
+  @ApiPropertyOptional({ example: '2024-01-01' })
+  @IsOptional()
+  @IsDateString()
+  startDate?: string;
+
+  @ApiPropertyOptional({ example: '2024-12-31' })
+  @IsOptional()
+  @IsDateString()
+  endDate?: string;
 
   @ApiPropertyOptional({
     example: {

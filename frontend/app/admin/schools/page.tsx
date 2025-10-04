@@ -7,13 +7,14 @@ import { schoolAPI } from '@/lib/api';
 interface School {
   id: string;
   name: string;
-  address: string;
-  contactEmail: string;
-  contactPhone: string;
-  principalName: string;
-  totalStudents: number;
-  academicYearStart: string;
-  academicYearEnd: string;
+  address: string | null;
+  contactEmail: string | null;
+  contactPhone: string | null;
+  principalName: string | null;
+  totalStudents: number | null;
+  academicYearStart: string | null;
+  academicYearEnd: string | null;
+  settings: string | null;
   createdAt: string;
 }
 
@@ -28,7 +29,7 @@ export default function SchoolsPage() {
     contactEmail: '',
     contactPhone: '',
     principalName: '',
-    totalStudents: 0,
+    totalStudents: '',
     academicYearStart: '',
     academicYearEnd: '',
   });
@@ -51,10 +52,15 @@ export default function SchoolsPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      const payload = {
+        ...formData,
+        totalStudents: formData.totalStudents ? parseInt(formData.totalStudents) : null,
+      };
+
       if (editingSchool) {
-        await schoolAPI.update(editingSchool.id, formData);
+        await schoolAPI.update(editingSchool.id, payload);
       } else {
-        await schoolAPI.create(formData);
+        await schoolAPI.create(payload);
       }
       fetchSchools();
       setShowModal(false);
@@ -68,13 +74,13 @@ export default function SchoolsPage() {
     setEditingSchool(school);
     setFormData({
       name: school.name,
-      address: school.address,
-      contactEmail: school.contactEmail,
-      contactPhone: school.contactPhone,
-      principalName: school.principalName,
-      totalStudents: school.totalStudents,
-      academicYearStart: school.academicYearStart,
-      academicYearEnd: school.academicYearEnd,
+      address: school.address || '',
+      contactEmail: school.contactEmail || '',
+      contactPhone: school.contactPhone || '',
+      principalName: school.principalName || '',
+      totalStudents: school.totalStudents?.toString() || '',
+      academicYearStart: school.academicYearStart ? new Date(school.academicYearStart).toISOString().split('T')[0] : '',
+      academicYearEnd: school.academicYearEnd ? new Date(school.academicYearEnd).toISOString().split('T')[0] : '',
     });
     setShowModal(true);
   };
@@ -98,7 +104,7 @@ export default function SchoolsPage() {
       contactEmail: '',
       contactPhone: '',
       principalName: '',
-      totalStudents: 0,
+      totalStudents: '',
       academicYearStart: '',
       academicYearEnd: '',
     });
@@ -142,21 +148,10 @@ export default function SchoolsPage() {
                             {school.name}
                           </div>
                         </div>
-                        <div className="mt-2 sm:flex sm:justify-between">
-                          <div className="sm:flex sm:space-x-6">
-                            <p className="flex items-center text-sm text-gray-500">
-                              📍 {school.address}
-                            </p>
-                            <p className="flex items-center text-sm text-gray-500">
-                              📧 {school.contactEmail}
-                            </p>
-                            <p className="flex items-center text-sm text-gray-500">
-                              📞 {school.contactPhone}
-                            </p>
-                          </div>
-                          <div className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
-                            <p>👨‍💼 {school.principalName}</p>
-                          </div>
+                        <div className="mt-2">
+                          <p className="flex items-center text-sm text-gray-500">
+                            📍 {school.address || 'No address provided'}
+                          </p>
                         </div>
                       </div>
                       <div className="ml-4 flex-shrink-0 flex space-x-2">
@@ -208,7 +203,6 @@ export default function SchoolsPage() {
                   </label>
                   <input
                     type="text"
-                    required
                     value={formData.address}
                     onChange={(e) =>
                       setFormData({ ...formData, address: e.target.value })
@@ -222,7 +216,6 @@ export default function SchoolsPage() {
                   </label>
                   <input
                     type="email"
-                    required
                     value={formData.contactEmail}
                     onChange={(e) =>
                       setFormData({ ...formData, contactEmail: e.target.value })
@@ -236,7 +229,6 @@ export default function SchoolsPage() {
                   </label>
                   <input
                     type="tel"
-                    required
                     value={formData.contactPhone}
                     onChange={(e) =>
                       setFormData({ ...formData, contactPhone: e.target.value })
@@ -250,7 +242,6 @@ export default function SchoolsPage() {
                   </label>
                   <input
                     type="text"
-                    required
                     value={formData.principalName}
                     onChange={(e) =>
                       setFormData({ ...formData, principalName: e.target.value })
@@ -264,52 +255,38 @@ export default function SchoolsPage() {
                   </label>
                   <input
                     type="number"
-                    required
                     value={formData.totalStudents}
                     onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        totalStudents: parseInt(e.target.value),
-                      })
+                      setFormData({ ...formData, totalStudents: e.target.value })
                     }
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
                   />
                 </div>
-                <div className="flex space-x-4">
-                  <div className="flex-1">
-                    <label className="block text-sm font-medium text-gray-700">
-                      Academic Year Start
-                    </label>
-                    <input
-                      type="date"
-                      required
-                      value={formData.academicYearStart}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          academicYearStart: e.target.value,
-                        })
-                      }
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <label className="block text-sm font-medium text-gray-700">
-                      Academic Year End
-                    </label>
-                    <input
-                      type="date"
-                      required
-                      value={formData.academicYearEnd}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          academicYearEnd: e.target.value,
-                        })
-                      }
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
-                    />
-                  </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">
+                    Academic Year Start
+                  </label>
+                  <input
+                    type="date"
+                    value={formData.academicYearStart}
+                    onChange={(e) =>
+                      setFormData({ ...formData, academicYearStart: e.target.value })
+                    }
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">
+                    Academic Year End
+                  </label>
+                  <input
+                    type="date"
+                    value={formData.academicYearEnd}
+                    onChange={(e) =>
+                      setFormData({ ...formData, academicYearEnd: e.target.value })
+                    }
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+                  />
                 </div>
                 <div className="flex justify-end space-x-3">
                   <button

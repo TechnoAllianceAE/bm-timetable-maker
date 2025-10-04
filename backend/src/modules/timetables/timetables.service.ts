@@ -245,6 +245,22 @@ export class TimetablesService {
       const isSuccessful = pythonStatus === 'success';
       const isInfeasible = pythonStatus === 'infeasible';
 
+      // Update academic year dates if provided
+      if (generateTimetableDto.startDate || generateTimetableDto.endDate) {
+        console.log('Updating academic year dates...');
+        await this.prisma.academicYear.update({
+          where: { id: generateTimetableDto.academicYearId },
+          data: {
+            ...(generateTimetableDto.startDate && { startDate: new Date(generateTimetableDto.startDate) }),
+            ...(generateTimetableDto.endDate && { endDate: new Date(generateTimetableDto.endDate) }),
+          },
+        });
+        console.log('Updated academic year with dates:', {
+          startDate: generateTimetableDto.startDate,
+          endDate: generateTimetableDto.endDate,
+        });
+      }
+
       // Save timetable to database
       const timetable = await this.prisma.timetable.create({
         data: {
@@ -257,6 +273,81 @@ export class TimetablesService {
 
       console.log('Saved timetable to database with ID:', timetable.id);
       console.log('Python status:', pythonStatus);
+
+      // If successful, persist timetable entries
+      if (isSuccessful && response.data?.solutions?.length > 0) {
+        console.log('Persisting timetable entries from solution...');
+        const bestSolution = response.data.solutions[0];
+        const entries = bestSolution.timetable?.entries || [];
+        console.log('Found', entries.length, 'entries in best solution');
+
+        if (entries.length > 0) {
+          // First, create time slots if they don't exist
+          const timeSlotMap = new Map();
+          for (const entry of entries) {
+            const timeSlotId = entry.time_slot_id;
+            if (!timeSlotMap.has(timeSlotId)) {
+              const matchingSlot = timeSlots.find(ts => ts.id === timeSlotId);
+              if (matchingSlot) {
+                timeSlotMap.set(timeSlotId, matchingSlot);
+              }
+            }
+          }
+
+          // Create time slots in database
+          const createdTimeSlots = new Map();
+          for (const [slotId, slotData] of timeSlotMap) {
+            try {
+              const existingSlot = await this.prisma.timeSlot.findFirst({
+                where: {
+                  schoolId: slotData.school_id,
+                  day: slotData.day_of_week,
+                  startTime: slotData.start_time,
+                },
+              });
+
+              if (existingSlot) {
+                createdTimeSlots.set(slotId, existingSlot.id);
+              } else {
+                const newSlot = await this.prisma.timeSlot.create({
+                  data: {
+                    schoolId: slotData.school_id,
+                    day: slotData.day_of_week,
+                    startTime: slotData.start_time,
+                    endTime: slotData.end_time,
+                  },
+                });
+                createdTimeSlots.set(slotId, newSlot.id);
+              }
+            } catch (error) {
+              console.warn('Failed to create time slot:', slotId, error.message);
+            }
+          }
+
+          // Create timetable entries
+          const entriesToCreate = [];
+          for (const entry of entries) {
+            const timeSlotDbId = createdTimeSlots.get(entry.time_slot_id);
+            if (timeSlotDbId) {
+              entriesToCreate.push({
+                timetableId: timetable.id,
+                classId: entry.class_id,
+                subjectId: entry.subject_id,
+                teacherId: entry.teacher_id,
+                roomId: entry.room_id,
+                timeSlotId: timeSlotDbId,
+              });
+            }
+          }
+
+          if (entriesToCreate.length > 0) {
+            await this.prisma.timetableEntry.createMany({
+              data: entriesToCreate,
+            });
+            console.log('Created', entriesToCreate.length, 'timetable entries');
+          }
+        }
+      }
 
       // Return diagnostics even if generation failed
       const result = {
@@ -354,6 +445,7 @@ export class TimetablesService {
         take: limitNum,
         include: {
           school: true,
+          academicYear: true,
         },
         orderBy: {
           createdAt: 'desc',
@@ -455,6 +547,8 @@ export class TimetablesService {
   }
 
   async getEntries(id: string) {
+    console.log('🔍 [getEntries] Fetching entries for timetable ID:', id);
+
     // First check if timetable exists
     const timetable = await this.prisma.timetable.findUnique({
       where: { id },
@@ -463,6 +557,8 @@ export class TimetablesService {
     if (!timetable) {
       throw new NotFoundException(`Timetable with ID ${id} not found`);
     }
+
+    console.log('✅ [getEntries] Timetable found:', timetable.id);
 
     // Fetch all entries with related data
     const entries = await this.prisma.timetableEntry.findMany({
@@ -479,6 +575,8 @@ export class TimetablesService {
         timeSlot: true,
       },
     });
+
+    console.log('📊 [getEntries] Found', entries.length, 'entries from database');
 
     // Transform to match frontend expectations (compatible with TimetableViewer component)
     const transformedEntries = entries.map(entry => ({
@@ -505,6 +603,10 @@ export class TimetablesService {
         roomNumber: entry.room.name, // Use name as roomNumber since we don't have a separate field
       } : null,
     }));
+
+    console.log('🔄 [getEntries] Transformed', transformedEntries.length, 'entries');
+    console.log('📦 [getEntries] First entry sample:', transformedEntries[0]);
+    console.log('📤 [getEntries] Returning response with structure: { data: [...] }');
 
     return { data: transformedEntries };
   }
@@ -540,6 +642,88 @@ export class TimetablesService {
     }
 
     return 1; // Default fallback
+  }
+
+  async getSummary(id: string) {
+    // Verify timetable exists
+    const timetable = await this.prisma.timetable.findUnique({
+      where: { id },
+      include: { school: true },
+    });
+
+    if (!timetable) {
+      throw new NotFoundException(`Timetable with ID ${id} not found`);
+    }
+
+    // Get all timetable entries with subject details
+    const entries = await this.prisma.timetableEntry.findMany({
+      where: { timetableId: id },
+      include: {
+        subject: true,
+      },
+    });
+
+    // Group entries by subject and count
+    const subjectCounts = new Map<string, {
+      subjectId: string;
+      subjectName: string;
+      actualPeriods: number;
+      requiredPeriods: number | null;
+      recommendedPeriods: number | null;
+    }>();
+
+    for (const entry of entries) {
+      if (entry.subject) {
+        const existing = subjectCounts.get(entry.subjectId);
+        if (existing) {
+          existing.actualPeriods += 1;
+        } else {
+          subjectCounts.set(entry.subjectId, {
+            subjectId: entry.subjectId,
+            subjectName: entry.subject.name,
+            actualPeriods: 1,
+            requiredPeriods: entry.subject.minPeriodsPerYear,
+            recommendedPeriods: entry.subject.recommendedPeriodsPerYear,
+          });
+        }
+      }
+    }
+
+    // Convert to array and calculate compliance status
+    const subjects = Array.from(subjectCounts.values()).map(subject => {
+      let status: 'below' | 'meets' | 'exceeds' | 'no-requirement' = 'no-requirement';
+      let percentage = 0;
+
+      if (subject.requiredPeriods) {
+        percentage = (subject.actualPeriods / subject.requiredPeriods) * 100;
+
+        if (subject.actualPeriods < subject.requiredPeriods) {
+          status = 'below';
+        } else if (subject.actualPeriods >= subject.requiredPeriods) {
+          status = 'meets';
+        }
+
+        if (subject.recommendedPeriods && subject.actualPeriods > subject.recommendedPeriods) {
+          status = 'exceeds';
+        }
+      }
+
+      return {
+        ...subject,
+        status,
+        percentage: Math.round(percentage),
+      };
+    });
+
+    // Sort by subject name
+    subjects.sort((a, b) => a.subjectName.localeCompare(b.subjectName));
+
+    return {
+      data: {
+        totalPeriods: entries.length,
+        subjects,
+      },
+    };
   }
 
   private transformTeacherSubjects(subjects: string[] | any): string[] {

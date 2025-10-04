@@ -9,6 +9,7 @@ import { SubjectsModule } from './modules/subjects/subjects.module';
 import { RoomsModule } from './modules/rooms/rooms.module';
 import { TimetablesModule } from './modules/timetables/timetables.module';
 import { PrismaModule } from './modules/prisma/prisma.module';
+import { HealthModule } from './modules/health/health.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { PrismaModule } from './modules/prisma/prisma.module';
       isGlobal: true,
     }),
     PrismaModule,
+    HealthModule,
     AuthModule,
     UsersModule,
     SchoolsModule,

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import AdminLayout from '@/components/AdminLayout';
 import TimetableViewer from '@/components/TimetableViewer';
+import TimetableSummary from '@/components/TimetableSummary';
 import { timetableAPI } from '@/lib/api';
 
 interface Timetable {
@@ -12,9 +13,12 @@ interface Timetable {
   description?: string;
   schoolId: string;
   school?: { name: string };
+  academicYear?: {
+    year: string;
+    startDate: string | null;
+    endDate: string | null;
+  };
   isActive: boolean;
-  startDate: string;
-  endDate: string;
   createdAt: string;
 }
 
@@ -23,7 +27,7 @@ export default function TimetablesPage() {
   const [loading, setLoading] = useState(true);
   const [selectedTimetable, setSelectedTimetable] = useState<Timetable | null>(null);
   const [viewMode, setViewMode] = useState<'list' | 'view'>('list');
-  const [currentTab, setCurrentTab] = useState<'class' | 'teacher'>('class');
+  const [currentTab, setCurrentTab] = useState<'class' | 'teacher' | 'room' | 'summary'>('class');
 
   useEffect(() => {
     fetchTimetables();
@@ -121,13 +125,16 @@ export default function TimetablesPage() {
                         <div className="flex-1">
                           <div className="flex items-center">
                             <div className="text-lg font-medium text-blue-600">
-                              {timetable.name}
+                              {timetable.name || 'Untitled Timetable'}
                             </div>
                             {timetable.isActive && (
                               <span className="ml-3 px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">
                                 Active
                               </span>
                             )}
+                          </div>
+                          <div className="mt-1 text-xs font-mono text-gray-500">
+                            ID: {timetable.id}
                           </div>
                           {timetable.description && (
                             <p className="mt-1 text-sm text-gray-600">
@@ -140,8 +147,9 @@ export default function TimetablesPage() {
                                 🏫 {timetable.school?.name || 'N/A'}
                               </p>
                               <p className="flex items-center text-sm text-gray-500">
-                                📅 {new Date(timetable.startDate).toLocaleDateString()} -{' '}
-                                {new Date(timetable.endDate).toLocaleDateString()}
+                                📅 {timetable.academicYear?.startDate && timetable.academicYear?.endDate
+                                      ? `${new Date(timetable.academicYear.startDate).toLocaleDateString()} - ${new Date(timetable.academicYear.endDate).toLocaleDateString()}`
+                                      : (timetable.academicYear?.year || 'Dates Not Set')}
                               </p>
                             </div>
                             <div className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
@@ -210,6 +218,30 @@ export default function TimetablesPage() {
                   >
                     👨‍🏫 Teacher Timetables
                   </button>
+                  <button
+                    onClick={() => setCurrentTab('room')}
+                    className={`
+                      py-4 px-1 border-b-2 font-medium text-sm
+                      ${currentTab === 'room'
+                        ? 'border-blue-500 text-blue-600'
+                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                      }
+                    `}
+                  >
+                    🏫 Room Utilization
+                  </button>
+                  <button
+                    onClick={() => setCurrentTab('summary')}
+                    className={`
+                      py-4 px-1 border-b-2 font-medium text-sm
+                      ${currentTab === 'summary'
+                        ? 'border-blue-500 text-blue-600'
+                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                      }
+                    `}
+                  >
+                    📊 Summary & Analytics
+                  </button>
                 </nav>
               </div>
 
@@ -246,6 +278,35 @@ export default function TimetablesPage() {
                       allowViewSwitching={false}
                       allowFilterChange={true}
                     />
+                  </div>
+                )}
+
+                {currentTab === 'room' && (
+                  <div>
+                    <div className="mb-4">
+                      <h2 className="text-lg font-medium text-gray-900">Room Utilization</h2>
+                      <p className="text-sm text-gray-600">
+                        View room-wise timetable and utilization - select a room to view its schedule
+                      </p>
+                    </div>
+                    <TimetableViewer
+                      timetableId={selectedTimetable.id}
+                      viewMode="room"
+                      allowViewSwitching={false}
+                      allowFilterChange={true}
+                    />
+                  </div>
+                )}
+
+                {currentTab === 'summary' && (
+                  <div>
+                    <div className="mb-4">
+                      <h2 className="text-lg font-medium text-gray-900">Timetable Summary & Analytics</h2>
+                      <p className="text-sm text-gray-600">
+                        Overview of subject distribution and curriculum alignment
+                      </p>
+                    </div>
+                    <TimetableSummary timetableId={selectedTimetable.id} />
                   </div>
                 )}
               </div>

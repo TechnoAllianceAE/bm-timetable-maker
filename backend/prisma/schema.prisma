@@ -14,6 +14,12 @@ model School {
   id              String   @id @default(cuid())
   name            String
   address         String?
+  contactEmail    String?
+  contactPhone    String?
+  principalName   String?
+  totalStudents   Int?
+  academicYearStart DateTime?
+  academicYearEnd   DateTime?
   settings        String?
   wellnessConfig  String?
   subscriptionTier String? // e.g., basic, premium, enterprise
@@ -90,6 +96,8 @@ model Subject {
   credits         Int
   minPeriodsPerWeek Int?
   maxPeriodsPerWeek Int?
+  minPeriodsPerYear Int?   // Curriculum requirement - minimum periods per year
+  recommendedPeriodsPerYear Int? // Recommended periods per year
   prepTime        Int?     // minutes
   correctionWorkload Float? // time per student
   requiresLab     Boolean  @default(false)

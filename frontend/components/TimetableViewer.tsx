@@ -111,12 +111,21 @@ export default function TimetableViewer({
 
     const fetchTimeslots = async () => {
       try {
+        console.log('🔍 [TimetableViewer] Fetching entries for timetable ID:', timetableId);
         const response = await timeslotAPI.list(timetableId);
+        console.log('📦 [TimetableViewer] API Response:', response);
+        console.log('📊 [TimetableViewer] Response data:', response.data);
+
         if (!isMounted) return;
-        const data = Array.isArray(response.data) ? response.data : [];
+        // Backend returns { data: [...] }, so we need to access response.data.data
+        const rawData = response.data?.data || response.data || [];
+        const data = Array.isArray(rawData) ? rawData : [];
+        console.log('✅ [TimetableViewer] Processed data array length:', data.length);
+        console.log('📋 [TimetableViewer] First 3 entries:', data.slice(0, 3));
+
         setTimeslots(data);
       } catch (err) {
-        console.error('Failed to fetch timeslots:', err);
+        console.error('❌ [TimetableViewer] Failed to fetch timeslots:', err);
         if (isMounted) {
           setError('Unable to load timetable data right now.');
           setTimeslots([]);
@@ -129,8 +138,10 @@ export default function TimetableViewer({
     };
 
     if (timetableId) {
+      console.log('🚀 [TimetableViewer] Starting fetch for timetable ID:', timetableId);
       fetchTimeslots();
     } else {
+      console.warn('⚠️ [TimetableViewer] No timetable ID provided');
       setTimeslots([]);
       setLoading(false);
     }
