@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A/B Test Results: v2.0 vs v2.5</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .comparison {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .version {
+            flex: 1;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .version.v20 { border-left: 5px solid #4ecdc4; }
+        .version.v25 { border-left: 5px solid #ff6b6b; }
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .metric:last-child { border-bottom: none; }
+        .metric.winner { background: #e8f5e8; }
+        .metric.loser { background: #ffeaea; }
+        .value {
+            font-weight: bold;
+        }
+        .badge {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .badge.success { background: #4ecdc4; color: white; }
+        .badge.failed { background: #ff6b6b; color: white; }
+        .badge.better { background: #45b7d1; color: white; }
+        .summary {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+        .error-details {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧪 A/B Test Results</h1>
+            <h2>Timetable Generator: v2.0 vs v2.5</h2>
+            <p>Test Data: TT_20251004_102303_1163e6f3</p>
+            <p><strong>30 classes, 120 teachers, 35 rooms, 10 subjects</strong></p>
+        </div>
+
+        <div class="comparison">
+            <div class="version v20">
+                <h2>✅ Version 2.0 - FUNCTIONAL</h2>
+                <div class="metric winner">
+                    <span>Status</span>
+                    <span class="value"><span class="badge success">SUCCESS</span></span>
+                </div>
+                <div class="metric">
+                    <span>CSP Generation Time</span>
+                    <span class="value">0.71s</span>
+                </div>
+                <div class="metric">
+                    <span>GA Optimization Time</span>
+                    <span class="value">1.88s</span>
+                </div>
+                <div class="metric">
+                    <span>Total Time</span>
+                    <span class="value">2.59s</span>
+                </div>
+                <div class="metric">
+                    <span>Solutions Generated</span>
+                    <span class="value">3</span>
+                </div>
+                <div class="metric">
+                    <span>Coverage</span>
+                    <span class="value">100% (1200/1200 entries)</span>
+                </div>
+                <div class="metric">
+                    <span>Metadata Coverage</span>
+                    <span class="value">100%</span>
+                </div>
+            </div>
+
+            <div class="version v25">
+                <h2>❌ Version 2.5 - FAILED</h2>
+                <div class="metric loser">
+                    <span>Status</span>
+                    <span class="value"><span class="badge failed">FAILED</span></span>
+                </div>
+                <div class="metric">
+                    <span>CSP Generation</span>
+                    <span class="value">Completed successfully</span>
+                </div>
+                <div class="metric">
+                    <span>GA Optimization</span>
+                    <span class="value">Completed successfully</span>
+                </div>
+                <div class="metric">
+                    <span>Failure Point</span>
+                    <span class="value">Response construction</span>
+                </div>
+                <div class="metric">
+                    <span>Error Type</span>
+                    <span class="value">Pydantic validation</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="summary">
+            <h2>📊 Analysis</h2>
+
+            <h3>Current Status</h3>
+            <ul>
+                <li><strong>🏆 Version 2.0 is currently functional</strong> and can generate complete timetables</li>
+                <li><strong>❌ Version 2.5 has implementation issues</strong> preventing successful execution</li>
+                <li><strong>⚡ Version 2.0 Performance:</strong> 2.59 seconds for enterprise-scale problem (30 classes, 1200 assignments)</li>
+                <li><strong>🎯 Version 2.0 Quality:</strong> 100% coverage, guaranteed no gaps</li>
+            </ul>
+
+            <h3>Version 2.5 Issues</h3>
+            <p>Version 2.5 failed during response construction with Pydantic validation errors:</p>
+
+            <div class="error-details">9 validation errors for GenerateResponse
+solutions.0.timetable - Field required [type=missing]
+solutions.0.total_score - Field required [type=missing]
+solutions.0.feasible - Field required [type=missing]
+solutions.1.timetable - Field required [type=missing]
+solutions.1.total_score - Field required [type=missing]
+solutions.1.feasible - Field required [type=missing]
+solutions.2.timetable - Field required [type=missing]
+solutions.2.total_score - Field required [type=missing]
+solutions.2.feasible - Field required [type=missing]</div>
+
+            <h3>Root Cause</h3>
+            <p>The GA optimizer in v2.5 is returning Timetable objects instead of TimetableSolution objects, causing validation failures in the response construction.</p>
+
+            <h3>Recommendation</h3>
+            <ul>
+                <li><strong>Use Version 2.0 for production</strong> until v2.5 issues are resolved</li>
+                <li><strong>Fix v2.5 GA optimizer</strong> to return properly formatted TimetableSolution objects</li>
+                <li><strong>Test v2.5 response construction</strong> separately from the full pipeline</li>
+            </ul>
+
+            <h3>Version 2.5 Intended Features (Not Yet Working)</h3>
+            <ul>
+                <li>Metadata-driven optimization</li>
+                <li>Language-agnostic subject preferences</li>
+                <li>School-customizable period structures</li>
+                <li>Per-teacher consecutive limits</li>
+                <li>Zero hardcoded business logic</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
