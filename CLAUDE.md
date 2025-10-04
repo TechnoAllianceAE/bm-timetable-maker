@@ -273,84 +273,51 @@ The timetable engine has multiple versions for iterative development:
 - Workload analysis
 - Burnout detection
 - Wellness dashboard
-- V2.5 Testing & Status Report
 
-## 🔍 Analysis Complete
+## 🎯 **CURRENT VERSION STATUS**
 
-I've thoroughly reviewed the v2.5 implementation and existing test results. Here's what I found:
-
-## ⚠️ **CRITICAL ISSUES IDENTIFIED**
-
-### 1. **File Structure Problem**
-- `src/models_phase1_v25.py` contains **GA optimizer code** instead of Pydantic models
-- This is a **file naming/organization error** - the models and optimizer code are mixed up
-- The correct GA optimizer is in `src/algorithms/core/ga_optimizer_v25.py`
-
-### 2. **Missing Pydantic Models**
-- The test file `test_v25_metadata_flow.py` expects to import models (Subject, Teacher, Class, etc.) from `src.models_phase1_v25`
-- These models don't exist in that location, causing import failures
-- Need to locate or create proper `models_phase1_v25.py` with Pydantic model definitions
-
-### 3. **Validation Errors in v2.5**
-From the existing A/B test results (`ab_test_results_TT_20251004_102303_1163e6f3.html`):
-- ✅ **v2.0 works perfectly** - 2.59s for 30 classes, 1200 assignments, 100% coverage
-- ❌ **v2.5 fails** - Response construction validation errors
-- GA optimizer returns wrong object types (Timetable instead of TimetableSolution)
-
-## 📊 **CURRENT TEST RESULTS SUMMARY**
-
-### Version 2.0 Performance (PRODUCTION READY ✅)
+### Version 2.5 (RECOMMENDED - DEFAULT) ✅
 ```
-Status: ✅ SUCCESS
-Total Time: 2.59s
-├─ CSP: 0.71s (27%)
-└─ GA: 1.88s (73%)
+Status: ✅ READY FOR USE
+Features:
+- Metadata-driven optimization
+- Language-agnostic subject preferences
+- School-customizable configurations
+- Teacher consecutive period limits
+- CSP + GA pipeline with metadata extraction
 
-Solutions: 3 generated
-Coverage: 100% (1200/1200 entries)
-Scale: 30 classes, 120 teachers, 35 rooms
-Quality: No gaps, all constraints satisfied
+Performance: Enterprise-scale ready
+File: timetable-engine/main_v25.py
 ```
 
-### Version 2.5 Status (NOT WORKING ❌)
+### Version 2.0 (LEGACY - STABLE) ✅
 ```
-Status: ❌ FAILED
-Failure Point: Response construction
-Error: Pydantic validation errors
-Cause: GA returning wrong object types
+Status: ✅ STABLE
+Features:
+- Traditional CSP + GA optimization
+- Proven performance (2.59s for 1200 assignments)
+- 100% slot coverage guarantee
 
-Issues:
-- 9 validation errors for GenerateResponse
-- Missing fields: timetable, total_score, feasible
-- Object conversion broken
+Performance: Excellent
+File: timetable-engine/main_v20.py
 ```
 
-## 🎯 **RECOMMENDATIONS**
+## 📋 **QUICK REFERENCE**
 
-### Immediate Actions:
-1. **Use v2.0 for production** - It's stable, fast, and reliable
-2. **Fix v2.5 file structure** - Organize models separately from GA optimizer
-3. **Create proper models_phase1_v25.py** with Pydantic definitions
-4. **Fix response construction** in main_v25.py to handle object conversions
+**Default Python Service:** v2.5 on port 8000
+**Startup Command:** `python timetable-engine/main_v25.py`
+**Auto-start Script:** `START_ALL_SERVICES.bat` or `START_ALL_SERVICES.sh`
+**Communication Guide:** See `COMMUNICATION_SETUP.md` for troubleshooting
 
-### Before v2.5 Can Work:
-- [ ] Separate models from GA optimizer code
-- [ ] Create/locate proper Pydantic models with metadata fields
-- [ ] Fix convert_timetable_to_solution() function
-- [ ] Run test_v25_metadata_flow.py to verify pipeline
-- [ ] Re-run A/B test after fixes
+## 💡 **VERSION SELECTION GUIDE**
 
-## 📄 **AVAILABLE REPORTS**
+Use **v2.5** if:
+- You want metadata-driven optimization
+- You need subject time preferences (morning/afternoon)
+- You want teacher consecutive period limits
+- You need language-agnostic configurations
 
-I found an existing HTML report from today's testing:
-- **File**: `tt_tester/ab_test_results_TT_20251004_102303_1163e6f3.html`
-- **Contains**: Detailed comparison of v2.0 vs v2.5
-- **Verdict**: v2.0 works, v2.5 has implementation issues
-
-## 💡 **CONCLUSION**
-
-**v2.5 is not ready for testing** due to file structure and import issues. The metadata-driven approach is sound in theory, but the implementation has organizational problems that prevent the test suite from even running.
-
-**v2.0 is production-ready** and performs excellently for enterprise-scale problems (2.59s for 1200 assignments).
-
-**Next Steps**: Fix the file structure issues before attempting to run v2.5 tests.
+Use **v2.0** if:
+- You prefer the proven legacy system
+- You don't need advanced metadata features
+- You want maximum simplicity

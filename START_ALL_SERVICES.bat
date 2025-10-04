@@ -4,8 +4,8 @@ echo Starting All Services
 echo ========================================
 echo.
 
-echo [1/3] Starting Python Timetable Engine (v2.0)...
-start "Python Engine" cmd /k "cd timetable-engine && python main_v20.py"
+echo [1/3] Starting Python Timetable Engine (v2.5)...
+start "Python Engine" cmd /k "cd timetable-engine && python main_v25.py"
 timeout /t 3 >nul
 
 echo [2/3] Starting Backend (NestJS)...

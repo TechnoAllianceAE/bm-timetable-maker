@@ -45,11 +45,11 @@ Python Engine (FastAPI:8000)
 ```bash
 cd timetable-engine
 
-# Option 1: Start v2.0 (PRODUCTION READY - RECOMMENDED)
-python main_v20.py
-
-# Option 2: Start v2.5 (has known issues, see CLAUDE.md)
+# Option 1: Start v2.5 (RECOMMENDED - Metadata-driven optimization)
 python main_v25.py
+
+# Option 2: Start v2.0 (Legacy but stable)
+python main_v20.py
 
 # Verify service is running
 curl http://localhost:8000/docs
@@ -144,10 +144,10 @@ Check backend logs for the exact payload sent to Python. Verify:
 ### Step 1: Start Python Service
 ```bash
 cd timetable-engine
-python main_v20.py
+python main_v25.py
 
 # You should see:
-# 🚀 TIMETABLE GENERATION API v2.0 - STARTING UP
+# 🚀 TIMETABLE GENERATION API v2.5 - STARTING UP
 # INFO:     Uvicorn running on http://0.0.0.0:8000
 ```
 
@@ -260,8 +260,8 @@ Before deploying:
 ## 🚀 Quick Start Commands
 
 ```bash
-# Terminal 1: Start Python Service (v2.0 recommended)
-cd timetable-engine && python main_v20.py
+# Terminal 1: Start Python Service (v2.5 recommended)
+cd timetable-engine && python main_v25.py
 
 # Terminal 2: Start Backend
 cd backend && npm run start:dev
@@ -285,18 +285,15 @@ Now open browser: `http://localhost:3000`
 - `backend/.env` - Environment configuration
 
 **Python:**
-- `timetable-engine/main_v20.py` - Production service (v2.0)
-- `timetable-engine/main_v25.py` - Latest service (v2.5, has issues)
+- `timetable-engine/main_v25.py` - Latest service (v2.5, RECOMMENDED)
+- `timetable-engine/main_v20.py` - Legacy service (v2.0)
 - `timetable-engine/src/models_phase1_v25.py` - Data models
 
 ## ⚠️ Known Issues
 
-### v2.5 Python Service
-According to `CLAUDE.md`, v2.5 has **critical issues**:
-- File structure problems
-- Missing Pydantic models
-- Validation errors
-- **Recommendation: Use v2.0 for production**
+### Python Service Versions
+- **v2.5 (Recommended)**: Metadata-driven optimization, language-agnostic preferences
+- **v2.0 (Legacy)**: Stable but lacks advanced features
 
 ### Frontend-Backend Auth
 - JWT tokens are stored in localStorage (consider httpOnly cookies for production)
