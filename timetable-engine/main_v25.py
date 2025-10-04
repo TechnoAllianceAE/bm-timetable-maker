@@ -108,10 +108,12 @@ def convert_timetable_to_solution(
     metrics: dict = None
 ) -> TimetableSolution:
     """
-    Convert Timetable object to TimetableSolution with scoring.
+    Convert Timetable object or dict to TimetableSolution with scoring.
+    
+    VERSION 2.5: Handles both Pydantic objects and plain dicts.
     
     Args:
-        timetable: Timetable object from CSP or GA
+        timetable: Timetable object or dict from CSP/GA
         score: Fitness score (0-1000)
         feasible: Whether solution is valid
         conflicts: List of constraint violations
@@ -120,15 +122,36 @@ def convert_timetable_to_solution(
     Returns:
         TimetableSolution with all fields populated
     """
-    # Convert to dict if needed
-    if hasattr(timetable, 'dict'):
+    # timetable should already be a dict from GA optimizer
+    # If it's somehow still an object, convert it
+    if isinstance(timetable, dict):
+        timetable_dict = timetable
+    elif hasattr(timetable, 'dict'):
         timetable_dict = timetable.dict()
     elif hasattr(timetable, '__dict__'):
-        timetable_dict = timetable.__dict__
-    elif isinstance(timetable, dict):
-        timetable_dict = timetable
+        # Manual conversion for objects
+        timetable_dict = {
+            'id': getattr(timetable, 'id', 'unknown'),
+            'school_id': getattr(timetable, 'school_id', ''),
+            'academic_year_id': getattr(timetable, 'academic_year_id', ''),
+            'name': getattr(timetable, 'name', ''),
+            'status': getattr(timetable, 'status', 'DRAFT'),
+            'entries': [],
+            'metadata': getattr(timetable, 'metadata', {})
+        }
+        
+        # Convert entries
+        if hasattr(timetable, 'entries'):
+            for entry in timetable.entries:
+                if isinstance(entry, dict):
+                    timetable_dict['entries'].append(entry)
+                elif hasattr(entry, 'dict'):
+                    timetable_dict['entries'].append(entry.dict())
+                elif hasattr(entry, '__dict__'):
+                    timetable_dict['entries'].append(entry.__dict__)
     else:
-        timetable_dict = {"entries": []}
+        # Last resort: empty dict
+        timetable_dict = {"entries": [], "id": "unknown"}
     
     return TimetableSolution(
         timetable=timetable_dict,
@@ -429,11 +452,32 @@ async def generate_timetable(request: GenerateRequest):
         print(f"   Crossover rate: 0.7")
         print(f"   Elitism: 2 best solutions preserved")
         
+        # Convert Timetable objects to dicts for GA processing
+        base_solutions_dicts = []
+        for timetable in base_solutions:
+            if hasattr(timetable, 'dict'):
+                base_solutions_dicts.append(timetable.dict())
+            elif hasattr(timetable, '__dict__'):
+                # Convert object to dict
+                tt_dict = {
+                    'id': timetable.id,
+                    'school_id': timetable.school_id,
+                    'academic_year_id': timetable.academic_year_id,
+                    'name': timetable.name,
+                    'status': timetable.status,
+                    'entries': [e.dict() if hasattr(e, 'dict') else e.__dict__ 
+                               for e in timetable.entries],
+                    'metadata': timetable.metadata if hasattr(timetable, 'metadata') else {}
+                }
+                base_solutions_dicts.append(tt_dict)
+            else:
+                base_solutions_dicts.append(timetable)
+        
         # CRITICAL: Offload to thread pool to prevent blocking
         # GA evolution is CPU-intensive
         optimized_timetables = await asyncio.to_thread(
             ga_optimizer.evolve,
-            population=base_solutions,
+            population=base_solutions_dicts,
             generations=30,
             mutation_rate=0.15,
             crossover_rate=0.7,
@@ -453,7 +497,25 @@ async def generate_timetable(request: GenerateRequest):
     except Exception as e:
         print(f"⚠️  GA optimization failed: {e}")
         print(f"   Falling back to CSP solutions")
-        optimized_timetables = base_solutions
+        # Convert to dicts for consistency
+        optimized_timetables = []
+        for timetable in base_solutions:
+            if hasattr(timetable, 'dict'):
+                optimized_timetables.append(timetable.dict())
+            elif hasattr(timetable, '__dict__'):
+                tt_dict = {
+                    'id': timetable.id,
+                    'school_id': timetable.school_id,
+                    'academic_year_id': timetable.academic_year_id,
+                    'name': timetable.name,
+                    'status': timetable.status,
+                    'entries': [e.dict() if hasattr(e, 'dict') else e.__dict__ 
+                               for e in timetable.entries],
+                    'metadata': timetable.metadata if hasattr(timetable, 'metadata') else {}
+                }
+                optimized_timetables.append(tt_dict)
+            else:
+                optimized_timetables.append(timetable)
         ga_duration = 0.0
     
     # ==================================================================
