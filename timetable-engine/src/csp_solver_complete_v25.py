@@ -57,13 +57,14 @@ class CSPSolverCompleteV25:
         time_slots: List[TimeSlot],
         rooms: List[Room],
         constraints: List[Constraint],
-        num_solutions: int = 3
+        num_solutions: int = 3,
+        subject_requirements: Optional[List[Dict]] = None
     ) -> Tuple[List[Timetable], float, Optional[List[str]], Optional[List[str]]]:
         """
         Generate COMPLETE timetables with no gaps.
-        
+
         VERSION 2.5: Now includes metadata in each TimetableEntry.
-        
+
         Args:
             classes: List of classes to schedule
             subjects: List of subjects (with v2.5 preferences)
@@ -72,7 +73,9 @@ class CSPSolverCompleteV25:
             rooms: List of available rooms
             constraints: List of constraints to satisfy
             num_solutions: Number of solutions to generate
-        
+            subject_requirements: Optional list of grade-subject period requirements
+                                 [{"grade": int, "subject_id": str, "periods_per_week": int}]
+
         Returns:
             Tuple of (timetables, generation_time, conflicts, suggestions)
             Each timetable entry includes subject_metadata and teacher_metadata
@@ -86,6 +89,20 @@ class CSPSolverCompleteV25:
         subject_lookup = {s.id: s for s in subjects}
         teacher_lookup = {t.id: t for t in teachers}
 
+        # Build grade-subject requirement map
+        requirement_map = {}
+        if subject_requirements:
+            for req in subject_requirements:
+                key = (req['grade'], req['subject_id'])
+                requirement_map[key] = req['periods_per_week']
+
+            if self.debug:
+                print(f"\n[CSP v{self.version}] Grade-Subject Requirements: {len(subject_requirements)}")
+                for req in subject_requirements:
+                    subj = subject_lookup.get(req['subject_id'])
+                    subj_name = subj.name if subj else req['subject_id']
+                    print(f"  Grade {req['grade']} - {subj_name}: {req['periods_per_week']} periods/week")
+
         if self.debug:
             print(f"\n[CSP v{self.version}] Starting generation")
             print(f"  Classes: {len(classes)}")
@@ -93,24 +110,32 @@ class CSPSolverCompleteV25:
             print(f"  Teachers: {len(teachers)}")
             print(f"  Active Slots per week: {len(active_slots)}")
             print(f"  Total assignments needed: {len(classes) * len(active_slots)}")
-            print(f"  Metadata tracking: ENABLED ✓")
+            print(f"  Metadata tracking: ENABLED [OK]")
+            print(f"  Subject Requirements: {'ENABLED' if requirement_map else 'DISABLED'}")
 
         # Build teacher-subject mapping
         teacher_subjects = self._build_teacher_subject_map(teachers, subjects)
 
         # Calculate how many periods each subject needs per class
-        subject_distribution = self._calculate_subject_distribution(
-            len(active_slots), subjects
-        )
+        # Now supports per-class requirements based on grade
+        class_subject_distributions = {}
+        for cls in classes:
+            subject_distribution = self._calculate_subject_distribution(
+                len(active_slots), subjects, cls.grade, requirement_map
+            )
+            class_subject_distributions[cls.id] = subject_distribution
 
         if self.debug:
-            print(f"\n[CSP v{self.version}] Subject distribution per class:")
-            for subject_id, periods in subject_distribution.items():
-                subject = subject_lookup.get(subject_id)
-                subject_name = subject.name if subject else subject_id
-                prefer_morning = subject.prefer_morning if subject else False
-                print(f"  {subject_name}: {periods} periods/week "
-                      f"{'[MORNING PREF]' if prefer_morning else ''}")
+            print(f"\n[CSP v{self.version}] Subject distribution per class (based on grade requirements):")
+            for cls in classes:
+                print(f"  {cls.name} (Grade {cls.grade}):")
+                subject_distribution = class_subject_distributions[cls.id]
+                for subject_id, periods in subject_distribution.items():
+                    subject = subject_lookup.get(subject_id)
+                    subject_name = subject.name if subject else subject_id
+                    prefer_morning = subject.prefer_morning if subject else False
+                    print(f"    {subject_name}: {periods} periods/week "
+                          f"{'[MORNING PREF]' if prefer_morning else ''}")
 
         # Generate solutions
         solutions = []
@@ -120,7 +145,7 @@ class CSPSolverCompleteV25:
 
             solution = self._generate_complete_solution(
                 classes, subjects, teachers, active_slots, rooms,
-                teacher_subjects, subject_distribution,
+                teacher_subjects, class_subject_distributions,
                 subject_lookup, teacher_lookup  # v2.5: Pass lookups for metadata
             )
 
@@ -134,7 +159,7 @@ class CSPSolverCompleteV25:
                     metadata_count = sum(1 for e in solution.entries 
                                        if e.subject_metadata is not None)
                     
-                    print(f"  ✓ Generated {entries_count}/{expected} entries")
+                    print(f"  [OK] Generated {entries_count}/{expected} entries")
                     print(f"  Coverage: {(entries_count/expected)*100:.1f}%")
                     print(f"  Metadata: {metadata_count}/{entries_count} entries "
                           f"({(metadata_count/entries_count)*100:.1f}%)")
@@ -170,29 +195,38 @@ class CSPSolverCompleteV25:
                     teacher_subjects[subject.id].append(teacher)
             
             if self.debug and not teacher_subjects[subject.id]:
-                print(f"  ⚠️  No teachers found for {subject.name}")
+                print(f"  [WARNING] No teachers found for {subject.name}")
         
         return teacher_subjects
 
-    def _calculate_subject_distribution(self, total_slots: int, subjects: List[Subject]) -> Dict:
+    def _calculate_subject_distribution(self, total_slots: int, subjects: List[Subject],
+                                       grade: int, requirement_map: Dict) -> Dict:
         """
         Calculate how many periods each subject should get to fill all slots.
+        Uses grade-specific requirements when available, falls back to subject defaults.
         Ensures total equals exactly the number of slots available.
-        
+
         Args:
             total_slots: Total number of periods available per class per week
             subjects: List of subjects with periods_per_week
-        
+            grade: Grade level of the class
+            requirement_map: Dict[(grade, subject_id)] -> required periods per week
+
         Returns:
             Dict[subject_id] -> int (number of periods)
         """
-        # Start with requested periods
+        # Start with requested periods (use requirements if available, otherwise subject defaults)
         distribution = {}
         total_requested = 0
 
         for subject in subjects:
-            distribution[subject.id] = subject.periods_per_week
-            total_requested += subject.periods_per_week
+            # Check if there's a grade-specific requirement
+            key = (grade, subject.id)
+            if key in requirement_map:
+                distribution[subject.id] = requirement_map[key]
+            else:
+                distribution[subject.id] = subject.periods_per_week
+            total_requested += distribution[subject.id]
 
         # If we have fewer periods than slots, proportionally increase
         if total_requested < total_slots:
@@ -243,20 +277,21 @@ class CSPSolverCompleteV25:
 
     def _generate_complete_solution(
         self, classes, subjects, teachers, active_slots, rooms,
-        teacher_subjects, subject_distribution,
+        teacher_subjects, class_subject_distributions,
         subject_lookup, teacher_lookup  # v2.5: NEW - for metadata extraction
     ):
         """
         Generate a complete timetable with NO GAPS.
-        
+
         VERSION 2.5: Now extracts and includes metadata in each TimetableEntry.
-        
+        Uses per-class subject distributions based on grade-specific requirements.
+
         METADATA EXTRACTION:
         - For each entry, extracts subject preferences from Subject model
         - For each entry, extracts teacher constraints from Teacher model
         - Stores in subject_metadata and teacher_metadata fields
         - GA optimizer uses this for penalty calculations
-        
+
         Args:
             classes: Classes to schedule
             subjects: Subject list
@@ -264,10 +299,10 @@ class CSPSolverCompleteV25:
             active_slots: Available time slots
             rooms: Available rooms
             teacher_subjects: Subject -> Teacher mapping
-            subject_distribution: Subject -> period count mapping
+            class_subject_distributions: Dict[class_id] -> (Subject -> period count mapping)
             subject_lookup: Dict[subject_id] -> Subject (v2.5)
             teacher_lookup: Dict[teacher_id] -> Teacher (v2.5)
-        
+
         Returns:
             Complete Timetable with metadata-enriched entries
         """
@@ -291,6 +326,9 @@ class CSPSolverCompleteV25:
         for class_obj in classes:
             if self.debug:
                 print(f"\n  Scheduling {class_obj.name}:")
+
+            # Get the subject distribution specific to this class's grade
+            subject_distribution = class_subject_distributions[class_obj.id]
 
             # Create list of subjects to assign based on distribution
             subjects_to_assign = []
@@ -414,8 +452,8 @@ class CSPSolverCompleteV25:
                     class_subject_count[(class_obj.id, subject.id)] += 1
 
                     if self.debug:
-                        morning_tag = "🌅" if subject_metadata.get("prefer_morning") else ""
-                        print(f"    ✓ {slot.day_of_week[:3]} P{slot.period_number}: "
+                        morning_tag = "[MORNING]" if subject_metadata.get("prefer_morning") else ""
+                        print(f"    [OK] {slot.day_of_week[:3]} P{slot.period_number}: "
                               f"{subject.name} {morning_tag}")
                 
                 else:
@@ -423,7 +461,7 @@ class CSPSolverCompleteV25:
                     # FALLBACK: Create self-study/library period to avoid gaps
                     # =============================================================
                     if self.debug:
-                        print(f"    ⚠️  {slot.day_of_week[:3]} P{slot.period_number}: "
+                        print(f"    [WARNING] {slot.day_of_week[:3]} P{slot.period_number}: "
                               f"No resources, assigning self-study")
 
                     # Find any available room
@@ -533,7 +571,7 @@ class CSPSolverCompleteV25:
             return metadata
         except Exception as e:
             if self.debug:
-                print(f"  ⚠️  Could not extract subject metadata: {e}")
+                print(f"  [WARNING] Could not extract subject metadata: {e}")
             # Fallback: return empty metadata
             return {
                 "prefer_morning": False,
@@ -564,7 +602,7 @@ class CSPSolverCompleteV25:
             return metadata
         except Exception as e:
             if self.debug:
-                print(f"  ⚠️  Could not extract teacher metadata: {e}")
+                print(f"  [WARNING] Could not extract teacher metadata: {e}")
             # Fallback: return default metadata
             return {
                 "max_consecutive_periods": 3

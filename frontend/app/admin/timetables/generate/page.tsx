@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import AdminLayout from '@/components/AdminLayout';
-import { timetableAPI, schoolAPI, academicYearAPI } from '@/lib/api';
+import { timetableAPI, schoolAPI, academicYearAPI, subjectAPI, classAPI } from '@/lib/api';
 
 interface School {
   id: string;
@@ -15,6 +15,24 @@ interface AcademicYear {
   year: string;
   startDate?: string;
   endDate?: string;
+}
+
+interface Subject {
+  id: string;
+  name: string;
+  code: string;
+}
+
+interface Class {
+  id: string;
+  name: string;
+  grade: number;
+}
+
+interface GradeSubjectRequirement {
+  grade: number;
+  subjectId: string;
+  periodsPerWeek: number;
 }
 
 interface GenerationParams {
@@ -60,6 +78,9 @@ export default function GenerateTimetablePage() {
   const router = useRouter();
   const [schools, setSchools] = useState<School[]>([]);
   const [academicYears, setAcademicYears] = useState<AcademicYear[]>([]);
+  const [subjects, setSubjects] = useState<Subject[]>([]);
+  const [classes, setClasses] = useState<Class[]>([]);
+  const [subjectRequirements, setSubjectRequirements] = useState<GradeSubjectRequirement[]>([]);
   const [loading, setLoading] = useState(false);
   const [generating, setGenerating] = useState(false);
   const [generationResult, setGenerationResult] = useState<any>(null);
@@ -112,6 +133,8 @@ export default function GenerateTimetablePage() {
   useEffect(() => {
     if (params.schoolId) {
       fetchAcademicYears(params.schoolId);
+      fetchSubjects(params.schoolId);
+      fetchClasses(params.schoolId);
     }
   }, [params.schoolId]);
 
@@ -152,6 +175,26 @@ export default function GenerateTimetablePage() {
     }
   };
 
+  const fetchSubjects = async (schoolId: string) => {
+    try {
+      const response = await subjectAPI.list();
+      const subjectsData = response.data.data || [];
+      setSubjects(subjectsData);
+    } catch (error) {
+      console.error('Failed to fetch subjects:', error);
+    }
+  };
+
+  const fetchClasses = async (schoolId: string) => {
+    try {
+      const response = await classAPI.list();
+      const classesData = response.data.data || [];
+      setClasses(classesData);
+    } catch (error) {
+      console.error('Failed to fetch classes:', error);
+    }
+  };
+
   const handleGenerate = async (e: React.FormEvent) => {
     e.preventDefault();
     setGenerating(true);
@@ -187,7 +230,9 @@ export default function GenerateTimetablePage() {
 
           // Soft rules
           softRules: params.softRules,
-        }
+        },
+        // Subject requirements (optional)
+        subjectRequirements: subjectRequirements.length > 0 ? subjectRequirements : undefined
       };
 
       console.log('Sending timetable generation payload:', payload);
@@ -252,6 +297,44 @@ export default function GenerateTimetablePage() {
       },
     }));
   };
+
+  // Subject Requirements Management
+  const addRequirement = () => {
+    if (subjects.length === 0) {
+      setError('Please wait for subjects to load');
+      return;
+    }
+
+    // Get unique grades from classes
+    const grades = Array.from(new Set(classes.map(c => c.grade))).sort((a, b) => a - b);
+    const defaultGrade = grades[0] || 1;
+
+    setSubjectRequirements([...subjectRequirements, {
+      grade: defaultGrade,
+      subjectId: subjects[0]?.id || '',
+      periodsPerWeek: 5
+    }]);
+  };
+
+  const updateRequirement = (index: number, field: keyof GradeSubjectRequirement, value: any) => {
+    const updated = [...subjectRequirements];
+    updated[index] = { ...updated[index], [field]: value };
+    setSubjectRequirements(updated);
+  };
+
+  const removeRequirement = (index: number) => {
+    setSubjectRequirements(subjectRequirements.filter((_, i) => i !== index));
+  };
+
+  // Get total required periods for a grade
+  const getGradeTotalPeriods = (grade: number): number => {
+    return subjectRequirements
+      .filter(req => req.grade === grade)
+      .reduce((sum, req) => sum + req.periodsPerWeek, 0);
+  };
+
+  // Get available periods per week
+  const totalPeriodsPerWeek = params.periodsPerDay * params.daysPerWeek;
 
   return (
     <AdminLayout>
@@ -697,6 +780,113 @@ export default function GenerateTimetablePage() {
                   </span>
                 </label>
               </div>
+            </div>
+
+            {/* Subject Hour Requirements */}
+            <div>
+              <h2 className="text-lg font-medium text-gray-900 mb-2">
+                Subject Hour Requirements
+                <span className="text-sm text-gray-600 ml-2">(Optional)</span>
+              </h2>
+              <p className="text-sm text-gray-600 mb-4">
+                Specify required periods per week for each subject in each grade. If not specified, default values from subject configuration will be used.
+              </p>
+
+              {subjectRequirements.length > 0 && (
+                <div className="mb-4 overflow-x-auto">
+                  <table className="min-w-full divide-y divide-gray-200 border border-gray-200">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase">Grade</th>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase">Subject</th>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase">Periods/Week</th>
+                        <th className="px-4 py-3"></th>
+                      </tr>
+                    </thead>
+                    <tbody className="bg-white divide-y divide-gray-200">
+                      {subjectRequirements.map((req, index) => {
+                        const gradeTotal = getGradeTotalPeriods(req.grade);
+                        const isOverLimit = gradeTotal > totalPeriodsPerWeek;
+
+                        return (
+                          <tr key={index} className={isOverLimit ? 'bg-red-50' : ''}>
+                            <td className="px-4 py-3">
+                              <select
+                                value={req.grade}
+                                onChange={(e) => updateRequirement(index, 'grade', parseInt(e.target.value))}
+                                className="border border-gray-300 rounded px-2 py-1 text-sm"
+                              >
+                                {Array.from(new Set(classes.map(c => c.grade))).sort((a, b) => a - b).map(g => (
+                                  <option key={g} value={g}>Grade {g}</option>
+                                ))}
+                              </select>
+                            </td>
+                            <td className="px-4 py-3">
+                              <select
+                                value={req.subjectId}
+                                onChange={(e) => updateRequirement(index, 'subjectId', e.target.value)}
+                                className="border border-gray-300 rounded px-2 py-1 text-sm w-full"
+                              >
+                                {subjects.map(s => (
+                                  <option key={s.id} value={s.id}>{s.name}</option>
+                                ))}
+                              </select>
+                            </td>
+                            <td className="px-4 py-3">
+                              <input
+                                type="number"
+                                min="1"
+                                max="40"
+                                value={req.periodsPerWeek}
+                                onChange={(e) => updateRequirement(index, 'periodsPerWeek', parseInt(e.target.value) || 1)}
+                                className="border border-gray-300 rounded px-2 py-1 text-sm w-20"
+                              />
+                            </td>
+                            <td className="px-4 py-3 text-right">
+                              <button
+                                onClick={() => removeRequirement(index)}
+                                className="text-red-600 hover:text-red-800 text-sm font-medium"
+                              >
+                                Remove
+                              </button>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+
+              <button
+                onClick={addRequirement}
+                disabled={subjects.length === 0 || classes.length === 0}
+                className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-sm font-medium"
+              >
+                + Add Requirement
+              </button>
+
+              {/* Grade totals summary */}
+              {subjectRequirements.length > 0 && (
+                <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded">
+                  <h4 className="text-sm font-medium text-blue-900 mb-2">Total Periods per Grade</h4>
+                  <div className="space-y-1">
+                    {Array.from(new Set(subjectRequirements.map(r => r.grade))).sort((a, b) => a - b).map(grade => {
+                      const total = getGradeTotalPeriods(grade);
+                      const isOverLimit = total > totalPeriodsPerWeek;
+                      return (
+                        <div key={grade} className={`text-sm ${isOverLimit ? 'text-red-700 font-bold' : 'text-blue-700'}`}>
+                          Grade {grade}: {total}/{totalPeriodsPerWeek} periods
+                          {isOverLimit && <span className="ml-2 text-red-600">(Exceeds limit!)</span>}
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <p className="text-xs text-blue-600 mt-2">
+                    Available periods per week: {params.periodsPerDay} periods/day × {params.daysPerWeek} days = {totalPeriodsPerWeek} periods
+                  </p>
+                </div>
+              )}
             </div>
 
             {/* Error Display with Diagnostics */}

@@ -171,6 +171,7 @@ The system uses **metadata-driven optimization** with multiple solver versions:
 #### Key Features (v2.5)
 - **Metadata-driven optimization**: Subject preferences (prefer_morning), teacher constraints (max_consecutive_periods)
 - **Language-agnostic**: Customizable preference configurations per school
+- **Grade-specific subject requirements**: Define custom period allocations per subject per grade level
 - **CSP + GA Pipeline**: Complete solver followed by genetic algorithm refinement
 - **100% Slot Coverage**: No gaps in timetables, self-study periods as fallback
 
@@ -230,6 +231,7 @@ PYTHON_TIMETABLE_URL=http://localhost:8000
 - Authentication pages (login/register)
 - Admin dashboard with timetable generation
 - Constraint configuration UI (hard/soft constraints)
+- Subject hour requirements with grade-specific allocations
 - CSV data import interface
 - Teacher and student portals
 - Real-world data integration (116 teachers, 30 classes, 35 rooms, 10 subjects)
@@ -248,6 +250,24 @@ The timetable engine has multiple versions for iterative development:
 2. Python service expects specific structure (see `models_phase1_v25.py`)
 3. Metadata fields (prefer_morning, max_consecutive_periods) must be preserved
 4. Response includes timetable entries with subject_metadata and teacher_metadata
+
+### Subject Hour Requirements (Grade-Specific Allocations)
+This feature allows schools to specify different period allocations for subjects based on grade level.
+
+**Implementation:**
+- **Frontend** (`frontend/app/admin/timetables/generate/page.tsx`): Dynamic table with grade/subject/periods inputs and real-time validation
+- **Backend** (`backend/src/modules/timetables/timetables.service.ts:215-219`): Transforms camelCase to snake_case for Python service
+- **CSP Solver** (`timetable-engine/src/csp_solver_complete_v25.py`): Enforces exact period counts per grade-subject combination
+
+**Key Points:**
+- Requirements are optional - if not specified, default subject values are used
+- Validation prevents exceeding available time slots (periods/day × days/week)
+- CSP solver creates per-class distributions based on each class's grade
+- Stored in database via `SubjectRequirement` table with upsert pattern
+
+**Testing:**
+- Unit tests: `timetable-engine/test_subject_requirements.py` and `test_subject_requirements_simple.py`
+- All tests pass with grade-specific allocations (e.g., Grade 6: Math=6, Grade 7: Math=8)
 
 ### Testing Strategy
 - **Unit tests**: pytest in `timetable-engine/`

@@ -27,6 +27,7 @@ METADATA FEATURES:
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from contextlib import asynccontextmanager
 import asyncio
 import time
@@ -59,11 +60,11 @@ async def lifespan(app: FastAPI):
     """
     # Startup
     print("\n" + "=" * 70)
-    print("🚀 TIMETABLE GENERATION API v2.5 - STARTING UP")
+    print(">>> TIMETABLE GENERATION API v2.5 - STARTING UP")
     print("=" * 70)
-    print("✓ Metadata-driven optimization enabled")
-    print("✓ Language-agnostic preferences")
-    print("✓ School-customizable configurations")
+    print("[*] Metadata-driven optimization enabled")
+    print("[*] Language-agnostic preferences")
+    print("[*] School-customizable configurations")
     print("=" * 70 + "\n")
     
     # Initialize solvers globally (reused across requests)
@@ -74,7 +75,7 @@ async def lifespan(app: FastAPI):
     
     # Shutdown
     print("\n" + "=" * 70)
-    print("🛑 TIMETABLE GENERATION API v2.5 - SHUTTING DOWN")
+    print("<<< TIMETABLE GENERATION API v2.5 - SHUTTING DOWN")
     print("=" * 70 + "\n")
 
 
@@ -126,6 +127,8 @@ def convert_timetable_to_solution(
     # If it's somehow still an object, convert it
     if isinstance(timetable, dict):
         timetable_dict = timetable
+    elif hasattr(timetable, 'model_dump'):
+        timetable_dict = timetable.model_dump()
     elif hasattr(timetable, 'dict'):
         timetable_dict = timetable.dict()
     elif hasattr(timetable, '__dict__'):
@@ -332,7 +335,7 @@ async def generate_timetable(request: GenerateRequest):
     # PHASE 0: Input Validation & Configuration
     # ==================================================================
     print("\n" + "=" * 70)
-    print("📋 PHASE 0: Input Validation & Configuration")
+    print("[PHASE 0] Input Validation & Configuration")
     print("=" * 70)
     
     try:
@@ -345,7 +348,7 @@ async def generate_timetable(request: GenerateRequest):
         constraints = request.constraints
         weights = request.weights
         
-        print(f"✓ Request validated")
+        print(f"[OK] Request validated")
         print(f"  Classes: {len(classes)}")
         print(f"  Subjects: {len(subjects)}")
         print(f"  Teachers: {len(teachers)}")
@@ -355,7 +358,7 @@ async def generate_timetable(request: GenerateRequest):
         
         # v2.5: Show metadata configuration
         subjects_with_preferences = sum(1 for s in subjects if s.prefer_morning)
-        print(f"\n📊 v2.5 Metadata Configuration:")
+        print(f"\n[CONFIG] v2.5 Metadata Configuration:")
         print(f"  Subjects with morning preference: {subjects_with_preferences}/{len(subjects)}")
         print(f"  Morning period cutoff: Period {weights.morning_period_cutoff}")
         print(f"  Optimization weights:")
@@ -365,14 +368,14 @@ async def generate_timetable(request: GenerateRequest):
         print(f"    Consecutive periods: {weights.consecutive_periods}")
         
     except Exception as e:
-        print(f"✗ Validation failed: {e}")
+        print(f"[FAILED] Validation failed: {e}")
         raise HTTPException(status_code=400, detail=f"Invalid request: {str(e)}")
     
     # ==================================================================
     # PHASE 1: CSP Solver - Generate Base Solutions
     # ==================================================================
     print("\n" + "=" * 70)
-    print("🧩 PHASE 1: CSP Solver - Generating Base Solutions")
+    print("[PHASE 1] CSP Solver - Generating Base Solutions")
     print("=" * 70)
     
     csp_start_time = time.time()
@@ -383,9 +386,21 @@ async def generate_timetable(request: GenerateRequest):
         
         # CRITICAL: Offload to thread pool to prevent blocking
         # CSP solving is CPU-intensive and synchronous
-        print(f"⏳ Running CSP solver in thread pool...")
+        print(f"[RUNNING] CSP solver in thread pool...")
         print(f"   Generating {request.options} base solutions...")
         
+        # Convert subject_requirements to dict format for CSP solver
+        subject_requirements_dict = None
+        if request.subject_requirements:
+            subject_requirements_dict = [
+                {
+                    'grade': req.grade,
+                    'subject_id': req.subject_id,
+                    'periods_per_week': req.periods_per_week
+                }
+                for req in request.subject_requirements
+            ]
+
         base_solutions, csp_time, csp_conflicts, csp_suggestions = await asyncio.to_thread(
             csp_solver.solve,
             classes=classes,
@@ -394,14 +409,15 @@ async def generate_timetable(request: GenerateRequest):
             time_slots=time_slots,
             rooms=rooms,
             constraints=constraints,
-            num_solutions=request.options
+            num_solutions=request.options,
+            subject_requirements=subject_requirements_dict
         )
         
         csp_end_time = time.time()
         csp_duration = csp_end_time - csp_start_time
         
         if not base_solutions:
-            print(f"✗ CSP solver failed to generate solutions")
+            print(f"[FAILED] CSP solver failed to generate solutions")
             print(f"  Conflicts: {csp_conflicts}")
             print(f"  Suggestions: {csp_suggestions}")
             
@@ -412,13 +428,13 @@ async def generate_timetable(request: GenerateRequest):
                 suggestions=csp_suggestions
             )
         
-        print(f"✓ CSP solver completed successfully")
+        print(f"[OK] CSP solver completed successfully")
         print(f"  Solutions generated: {len(base_solutions)}")
         print(f"  Time: {csp_duration:.2f}s")
         
         # v2.5: Verify metadata coverage
         metadata_stats = calculate_metadata_coverage(base_solutions[0])
-        print(f"\n📊 Metadata Coverage:")
+        print(f"\n[METADATA] Coverage:")
         print(f"  Total entries: {metadata_stats['total_entries']}")
         print(f"  Subject metadata: {metadata_stats['subject_metadata_count']} "
               f"({metadata_stats['subject_coverage']:.1f}%)")
@@ -426,19 +442,19 @@ async def generate_timetable(request: GenerateRequest):
               f"({metadata_stats['teacher_coverage']:.1f}%)")
         
         if metadata_stats['subject_coverage'] < 100:
-            print(f"  ⚠️  Warning: Not all entries have subject metadata")
+            print(f"  [WARNING] Not all entries have subject metadata")
         if metadata_stats['teacher_coverage'] < 100:
-            print(f"  ⚠️  Warning: Not all entries have teacher metadata")
+            print(f"  [WARNING] Not all entries have teacher metadata")
     
     except Exception as e:
-        print(f"✗ CSP solver error: {e}")
+        print(f"[ERROR] CSP solver error: {e}")
         raise HTTPException(status_code=500, detail=f"CSP solver failed: {str(e)}")
     
     # ==================================================================
     # PHASE 2: GA Optimizer - Refine Solutions
     # ==================================================================
     print("\n" + "=" * 70)
-    print("🧬 PHASE 2: Genetic Algorithm Optimization")
+    print("[PHASE 2] Genetic Algorithm Optimization")
     print("=" * 70)
     
     ga_start_time = time.time()
@@ -447,7 +463,7 @@ async def generate_timetable(request: GenerateRequest):
         # Get GA optimizer from app state
         ga_optimizer = app.state.ga_optimizer
         
-        print(f"⏳ Evolving {len(base_solutions)} solutions over 30 generations...")
+        print(f"[RUNNING] Evolving {len(base_solutions)} solutions over 30 generations...")
         print(f"   Mutation rate: 0.15")
         print(f"   Crossover rate: 0.7")
         print(f"   Elitism: 2 best solutions preserved")
@@ -456,7 +472,7 @@ async def generate_timetable(request: GenerateRequest):
         base_solutions_dicts = []
         for timetable in base_solutions:
             if hasattr(timetable, 'dict'):
-                base_solutions_dicts.append(timetable.dict())
+                base_solutions_dicts.append(timetable.model_dump() if hasattr(timetable, 'model_dump') else timetable.dict())
             elif hasattr(timetable, '__dict__'):
                 # Convert object to dict
                 tt_dict = {
@@ -488,19 +504,21 @@ async def generate_timetable(request: GenerateRequest):
         ga_end_time = time.time()
         ga_duration = ga_end_time - ga_start_time
         
-        print(f"✓ GA optimization complete")
+        print(f"[OK] GA optimization complete")
         print(f"  Time: {ga_duration:.2f}s")
         
         # Print evolution report
         print(ga_optimizer.get_evolution_report())
     
     except Exception as e:
-        print(f"⚠️  GA optimization failed: {e}")
+        print(f"[WARNING] GA optimization failed: {e}")
         print(f"   Falling back to CSP solutions")
         # Convert to dicts for consistency
         optimized_timetables = []
         for timetable in base_solutions:
-            if hasattr(timetable, 'dict'):
+            if hasattr(timetable, 'model_dump'):
+                optimized_timetables.append(timetable.model_dump())
+            elif hasattr(timetable, 'dict'):
                 optimized_timetables.append(timetable.dict())
             elif hasattr(timetable, '__dict__'):
                 tt_dict = {
@@ -509,7 +527,7 @@ async def generate_timetable(request: GenerateRequest):
                     'academic_year_id': timetable.academic_year_id,
                     'name': timetable.name,
                     'status': timetable.status,
-                    'entries': [e.dict() if hasattr(e, 'dict') else e.__dict__ 
+                    'entries': [e.model_dump() if hasattr(e, 'model_dump') else (e.dict() if hasattr(e, 'dict') else e.__dict__)
                                for e in timetable.entries],
                     'metadata': timetable.metadata if hasattr(timetable, 'metadata') else {}
                 }
@@ -522,14 +540,14 @@ async def generate_timetable(request: GenerateRequest):
     # PHASE 3: Solution Selection & Packaging
     # ==================================================================
     print("\n" + "=" * 70)
-    print("📦 PHASE 3: Solution Selection & Packaging")
+    print("[PHASE 3] Solution Selection & Packaging")
     print("=" * 70)
     
     try:
         # Select requested number of solutions
         final_solutions = optimized_timetables[:request.options]
         
-        print(f"✓ Selected top {len(final_solutions)} solutions")
+        print(f"[OK] Selected top {len(final_solutions)} solutions")
         
         # Convert to TimetableSolution format
         packaged_solutions = []
@@ -561,30 +579,33 @@ async def generate_timetable(request: GenerateRequest):
         overall_end_time = time.time()
         total_duration = overall_end_time - overall_start_time
         
-        print(f"\n✓ Packaging complete")
+        print(f"\n[OK] Packaging complete")
         print(f"  Total time: {total_duration:.2f}s")
         
     except Exception as e:
-        print(f"✗ Solution packaging failed: {e}")
+        print(f"[FAILED] Solution packaging failed: {e}")
         raise HTTPException(status_code=500, detail=f"Failed to package solutions: {str(e)}")
     
     # ==================================================================
     # PHASE 4: Response Construction
     # ==================================================================
     print("\n" + "=" * 70)
-    print("📤 PHASE 4: Response Construction")
+    print("[PHASE 4] Response Construction")
     print("=" * 70)
-    
-    # Build comprehensive response
-    response = GenerateResponse(
-        solutions=packaged_solutions,
-        generation_time=total_duration,
-        conflicts=None,
-        suggestions=None
-    )
-    
-    # Add diagnostics (custom metadata)
-    # Note: This won't be in the Pydantic model, but useful for debugging
+
+    # Convert packaged solutions to plain dicts for JSON serialization
+    solutions_dicts = []
+    for solution in packaged_solutions:
+        # Convert Pydantic model to dict
+        if hasattr(solution, 'model_dump'):
+            sol_dict = solution.model_dump()
+        elif hasattr(solution, 'dict'):
+            sol_dict = solution.dict()
+        else:
+            sol_dict = solution
+        solutions_dicts.append(sol_dict)
+
+    # Build diagnostics
     diagnostics = {
         "version": "2.5.0",
         "metadata_enabled": True,
@@ -602,8 +623,8 @@ async def generate_timetable(request: GenerateRequest):
             "ga": {
                 "generations": 30,
                 "time": round(ga_duration, 2),
-                "improvement": ga_optimizer.stats_history[-1].best_fitness - 
-                              ga_optimizer.stats_history[0].best_fitness 
+                "improvement": ga_optimizer.stats_history[-1].best_fitness -
+                              ga_optimizer.stats_history[0].best_fitness
                               if ga_optimizer.stats_history else 0
             }
         },
@@ -620,25 +641,35 @@ async def generate_timetable(request: GenerateRequest):
             "language_agnostic": True
         }
     }
-    
-    print(f"✓ Response ready")
-    print(f"  Solutions: {len(packaged_solutions)}")
-    print(f"  Best score: {packaged_solutions[0].total_score:.2f}")
+
+    # Return plain dict instead of Pydantic model for JSON serialization
+    response_dict = {
+        "status": "success",  # This is checked by backend at timetables.service.ts:244
+        "solutions": solutions_dicts,
+        "generation_time": total_duration,
+        "conflicts": None,
+        "suggestions": None,
+        "diagnostics": diagnostics
+    }
+
+    print(f"[OK] Response ready")
+    print(f"  Solutions: {len(solutions_dicts)}")
+    print(f"  Best score: {solutions_dicts[0]['total_score']:.2f}")
     print(f"  Metadata coverage: {metadata_stats['subject_coverage']:.1f}%")
-    
+
     print("\n" + "=" * 70)
-    print("✅ GENERATION COMPLETE")
+    print("[SUCCESS] GENERATION COMPLETE")
     print("=" * 70)
     print(f"Total time: {total_duration:.2f}s")
-    print(f"  CSP: {csp_duration:.2f}s ({(csp_duration/total_duration)*100:.1f}%)")
-    print(f"  GA:  {ga_duration:.2f}s ({(ga_duration/total_duration)*100:.1f}%)")
+    if total_duration > 0:
+        print(f"  CSP: {csp_duration:.2f}s ({(csp_duration/total_duration)*100:.1f}%)")
+        print(f"  GA:  {ga_duration:.2f}s ({(ga_duration/total_duration)*100:.1f}%)")
+    else:
+        print(f"  CSP: {csp_duration:.2f}s")
+        print(f"  GA:  {ga_duration:.2f}s")
     print("=" * 70 + "\n")
-    
-    # Attach diagnostics as custom attribute (for logging/debugging)
-    # In production, you might log this separately
-    response._diagnostics = diagnostics
-    
-    return response
+
+    return JSONResponse(content=response_dict)
 
 
 # =============================================================================
@@ -647,21 +678,21 @@ async def generate_timetable(request: GenerateRequest):
 
 if __name__ == "__main__":
     import uvicorn
-    
+
     print("""
-    ╔═══════════════════════════════════════════════════════════════╗
-    ║  TIMETABLE GENERATION API v2.5                                ║
-    ║  Metadata-Driven Optimization                                 ║
-    ╠═══════════════════════════════════════════════════════════════╣
-    ║  Features:                                                    ║
-    ║    ✓ Language-agnostic subject preferences                   ║
-    ║    ✓ School-customizable period structures                   ║
-    ║    ✓ Per-teacher consecutive limits                          ║
-    ║    ✓ Optimized async workflow                                ║
-    ║    ✓ Zero hardcoded business logic                           ║
-    ╠═══════════════════════════════════════════════════════════════╣
-    ║  Starting server...                                           ║
-    ╚═══════════════════════════════════════════════════════════════╝
+    ================================================================
+      TIMETABLE GENERATION API v2.5
+      Metadata-Driven Optimization
+    ================================================================
+      Features:
+        * Language-agnostic subject preferences
+        * School-customizable period structures
+        * Per-teacher consecutive limits
+        * Optimized async workflow
+        * Zero hardcoded business logic
+    ================================================================
+      Starting server...
+    ================================================================
     """)
     
     uvicorn.run(

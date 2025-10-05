@@ -212,6 +212,11 @@ export class TimetablesService {
         })),
         time_slots: timeSlots,
         constraints: constraints,
+        subject_requirements: generateTimetableDto.subjectRequirements?.map(req => ({
+          grade: req.grade,
+          subject_id: req.subjectId,
+          periods_per_week: req.periodsPerWeek,
+        })) || null,
         options: 3,
         timeout: 60,
       };
@@ -273,6 +278,36 @@ export class TimetablesService {
 
       console.log('Saved timetable to database with ID:', timetable.id);
       console.log('Python status:', pythonStatus);
+
+      // Store subject requirements if provided
+      if (generateTimetableDto.subjectRequirements && generateTimetableDto.subjectRequirements.length > 0) {
+        console.log('Storing subject requirements...');
+        for (const req of generateTimetableDto.subjectRequirements) {
+          try {
+            await this.prisma.gradeSubjectRequirement.upsert({
+              where: {
+                schoolId_grade_subjectId: {
+                  schoolId,
+                  grade: req.grade,
+                  subjectId: req.subjectId,
+                },
+              },
+              update: {
+                periodsPerWeek: req.periodsPerWeek,
+              },
+              create: {
+                schoolId,
+                grade: req.grade,
+                subjectId: req.subjectId,
+                periodsPerWeek: req.periodsPerWeek,
+              },
+            });
+          } catch (error) {
+            console.warn('Failed to save subject requirement:', req, error.message);
+          }
+        }
+        console.log('Stored', generateTimetableDto.subjectRequirements.length, 'subject requirements');
+      }
 
       // If successful, persist timetable entries
       if (isSuccessful && response.data?.solutions?.length > 0) {
@@ -655,73 +690,121 @@ export class TimetablesService {
       throw new NotFoundException(`Timetable with ID ${id} not found`);
     }
 
-    // Get all timetable entries with subject details
+    // Get all timetable entries with class and subject details
     const entries = await this.prisma.timetableEntry.findMany({
       where: { timetableId: id },
       include: {
         subject: true,
+        class: true,
       },
     });
 
-    // Group entries by subject and count
-    const subjectCounts = new Map<string, {
-      subjectId: string;
-      subjectName: string;
-      actualPeriods: number;
-      requiredPeriods: number | null;
-      recommendedPeriods: number | null;
+    // Get all grade-subject requirements for this school
+    const requirements = await this.prisma.gradeSubjectRequirement.findMany({
+      where: { schoolId: timetable.schoolId },
+      include: { subject: true },
+    });
+
+    // Create a map for quick lookup: grade_subjectId -> periodsPerWeek
+    const requirementMap = new Map<string, number>();
+    for (const req of requirements) {
+      requirementMap.set(`${req.grade}_${req.subjectId}`, req.periodsPerWeek);
+    }
+
+    // Group entries by class
+    const classMap = new Map<string, {
+      classId: string;
+      className: string;
+      grade: number;
+      subjects: Map<string, {
+        subjectId: string;
+        subjectName: string;
+        actualPeriods: number;
+        requiredPeriods: number | null;
+      }>;
     }>();
 
     for (const entry of entries) {
-      if (entry.subject) {
-        const existing = subjectCounts.get(entry.subjectId);
-        if (existing) {
-          existing.actualPeriods += 1;
-        } else {
-          subjectCounts.set(entry.subjectId, {
+      if (entry.class && entry.subject) {
+        let classData = classMap.get(entry.classId);
+        if (!classData) {
+          classData = {
+            classId: entry.classId,
+            className: entry.class.name,
+            grade: entry.class.grade,
+            subjects: new Map(),
+          };
+          classMap.set(entry.classId, classData);
+        }
+
+        const subjectKey = entry.subjectId;
+        let subjectData = classData.subjects.get(subjectKey);
+        if (!subjectData) {
+          const requiredPeriods = requirementMap.get(`${entry.class.grade}_${entry.subjectId}`) || null;
+          subjectData = {
             subjectId: entry.subjectId,
             subjectName: entry.subject.name,
-            actualPeriods: 1,
-            requiredPeriods: entry.subject.minPeriodsPerYear,
-            recommendedPeriods: entry.subject.recommendedPeriodsPerYear,
-          });
+            actualPeriods: 0,
+            requiredPeriods,
+          };
+          classData.subjects.set(subjectKey, subjectData);
         }
+        subjectData.actualPeriods += 1;
       }
     }
 
-    // Convert to array and calculate compliance status
-    const subjects = Array.from(subjectCounts.values()).map(subject => {
-      let status: 'below' | 'meets' | 'exceeds' | 'no-requirement' = 'no-requirement';
-      let percentage = 0;
+    // Convert to array format with compliance status
+    const classes = Array.from(classMap.values()).map(classData => {
+      const subjects = Array.from(classData.subjects.values()).map(subject => {
+        let status: 'below' | 'meets' | 'exceeds' | 'no-requirement' = 'no-requirement';
+        let percentage = 0;
 
-      if (subject.requiredPeriods) {
-        percentage = (subject.actualPeriods / subject.requiredPeriods) * 100;
+        if (subject.requiredPeriods) {
+          percentage = (subject.actualPeriods / subject.requiredPeriods) * 100;
 
-        if (subject.actualPeriods < subject.requiredPeriods) {
-          status = 'below';
-        } else if (subject.actualPeriods >= subject.requiredPeriods) {
-          status = 'meets';
+          if (subject.actualPeriods < subject.requiredPeriods) {
+            status = 'below';
+          } else if (subject.actualPeriods === subject.requiredPeriods) {
+            status = 'meets';
+          } else {
+            status = 'exceeds';
+          }
         }
 
-        if (subject.recommendedPeriods && subject.actualPeriods > subject.recommendedPeriods) {
-          status = 'exceeds';
-        }
-      }
+        return {
+          ...subject,
+          status,
+          percentage: Math.round(percentage),
+        };
+      });
+
+      // Sort subjects by name
+      subjects.sort((a, b) => a.subjectName.localeCompare(b.subjectName));
+
+      // Calculate totals for this class
+      const totalActual = subjects.reduce((sum, s) => sum + s.actualPeriods, 0);
+      const totalRequired = subjects.reduce((sum, s) => sum + (s.requiredPeriods || 0), 0);
 
       return {
-        ...subject,
-        status,
-        percentage: Math.round(percentage),
+        classId: classData.classId,
+        className: classData.className,
+        grade: classData.grade,
+        subjects,
+        totalActual,
+        totalRequired,
       };
     });
 
-    // Sort by subject name
-    subjects.sort((a, b) => a.subjectName.localeCompare(b.subjectName));
+    // Sort classes by grade then name
+    classes.sort((a, b) => {
+      if (a.grade !== b.grade) return a.grade - b.grade;
+      return a.className.localeCompare(b.className);
+    });
 
     return {
       data: {
         totalPeriods: entries.length,
-        subjects,
+        classes,
       },
     };
   }

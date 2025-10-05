@@ -35,6 +35,7 @@ model School {
   rooms           Room[]
   constraints     Constraint[]
   departmentWellnessSummaries DepartmentWellnessSummary[]
+  gradeSubjectRequirements GradeSubjectRequirement[]
 
   @@map("schools")
 }
@@ -104,6 +105,7 @@ model Subject {
 
   school          School   @relation(fields: [schoolId], references: [id])
   timetableEntries TimetableEntry[]
+  gradeRequirements GradeSubjectRequirement[]
 
   @@map("subjects")
 }
@@ -325,6 +327,22 @@ model Constraint {
   school School @relation(fields: [schoolId], references: [id])
 
   @@map("constraints")
+}
+
+model GradeSubjectRequirement {
+  id              String   @id @default(cuid())
+  schoolId        String
+  grade           Int      // e.g., 1, 2, 3... 12
+  subjectId       String
+  periodsPerWeek  Int      // Required periods per week for this subject in this grade
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  school          School   @relation(fields: [schoolId], references: [id])
+  subject         Subject  @relation(fields: [subjectId], references: [id])
+
+  @@unique([schoolId, grade, subjectId])
+  @@map("grade_subject_requirements")
 }
 
 model DepartmentWellnessSummary {

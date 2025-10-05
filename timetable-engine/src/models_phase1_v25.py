@@ -170,6 +170,15 @@ class Timetable(BaseModel):
     entries: List[TimetableEntry] = []
 
 # API Request/Response Models
+class GradeSubjectRequirement(BaseModel):
+    """
+    Defines required periods per week for a subject in a specific grade.
+    Used to enforce curriculum requirements in timetable generation.
+    """
+    grade: int = Field(ge=1, le=12)
+    subject_id: str
+    periods_per_week: int = Field(ge=1, le=40)
+
 class OptimizationWeights(BaseModel):
     """
     v2.5 ENHANCEMENTS:
@@ -192,6 +201,7 @@ class GenerateRequest(BaseModel):
     time_slots: List[TimeSlot]
     rooms: List[Room]
     constraints: List[Constraint]
+    subject_requirements: Optional[List[GradeSubjectRequirement]] = None  # Grade-subject period requirements
     options: int = Field(3, ge=1, le=5)
     timeout: int = Field(60, ge=10, le=300)
     weights: OptimizationWeights = OptimizationWeights()

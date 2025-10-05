@@ -8,14 +8,22 @@ interface SubjectSummary {
   subjectName: string;
   actualPeriods: number;
   requiredPeriods: number | null;
-  recommendedPeriods: number | null;
   status: 'below' | 'meets' | 'exceeds' | 'no-requirement';
   percentage: number;
 }
 
+interface ClassSummary {
+  classId: string;
+  className: string;
+  grade: number;
+  subjects: SubjectSummary[];
+  totalActual: number;
+  totalRequired: number;
+}
+
 interface TimetableSummaryData {
   totalPeriods: number;
-  subjects: SubjectSummary[];
+  classes: ClassSummary[];
 }
 
 interface TimetableSummaryProps {
@@ -105,10 +113,23 @@ export default function TimetableSummary({ timetableId }: TimetableSummaryProps)
     );
   }
 
-  const belowCount = summary.subjects.filter(s => s.status === 'below').length;
-  const meetsCount = summary.subjects.filter(s => s.status === 'meets').length;
-  const exceedsCount = summary.subjects.filter(s => s.status === 'exceeds').length;
-  const noRequirementCount = summary.subjects.filter(s => s.status === 'no-requirement').length;
+  // Handle case where classes might not exist (backward compatibility)
+  if (!summary.classes || summary.classes.length === 0) {
+    return (
+      <div className="rounded-md border border-gray-200 bg-gray-50 p-4 text-gray-700">
+        No class data available. This timetable may have been generated before classwise analytics were implemented.
+      </div>
+    );
+  }
+
+  // Calculate overall stats from all classes
+  const allSubjects = summary.classes.flatMap(c => c.subjects);
+  const belowCount = allSubjects.filter(s => s.status === 'below').length;
+  const meetsCount = allSubjects.filter(s => s.status === 'meets').length;
+  const exceedsCount = allSubjects.filter(s => s.status === 'exceeds').length;
+
+  // Get all unique subjects across all classes
+  const uniqueSubjects = new Set(allSubjects.map(s => s.subjectName));
 
   return (
     <div className="space-y-6">
@@ -127,70 +148,72 @@ export default function TimetableSummary({ timetableId }: TimetableSummaryProps)
           <div className="mt-2 text-3xl font-semibold text-red-900">{belowCount}</div>
         </div>
         <div className="bg-blue-50 rounded-lg border border-blue-200 p-4">
-          <div className="text-sm font-medium text-blue-700">Exceeds Recommended</div>
+          <div className="text-sm font-medium text-blue-700">Exceeds Required</div>
           <div className="mt-2 text-3xl font-semibold text-blue-900">{exceedsCount}</div>
         </div>
       </div>
 
-      {/* Subject Period Breakdown */}
+      {/* Classwise Subject Period Distribution Table */}
       <div className="bg-white rounded-lg border border-gray-200 p-6">
-        <h3 className="text-lg font-medium text-gray-900 mb-4">Subject Period Distribution</h3>
+        <h3 className="text-lg font-medium text-gray-900 mb-4">Subject Period Distribution by Class</h3>
 
-        <div className="space-y-4">
-          {summary.subjects.map((subject) => (
-            <div key={subject.subjectId} className="border-b border-gray-200 pb-4 last:border-0">
-              <div className="flex items-center justify-between mb-2">
-                <div className="flex-1">
-                  <div className="flex items-center space-x-2">
-                    <h4 className="font-medium text-gray-900">{subject.subjectName}</h4>
-                    <span className={`px-2 py-1 text-xs font-medium rounded ${getStatusBadgeColor(subject.status)}`}>
-                      {getStatusLabel(subject.status)}
-                    </span>
-                  </div>
-                  <div className="mt-1 text-sm text-gray-600">
-                    <span className="font-semibold">{subject.actualPeriods}</span> periods
-                    {subject.requiredPeriods && (
-                      <span className="ml-2">
-                        / <span className="font-semibold">{subject.requiredPeriods}</span> required
-                      </span>
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider sticky left-0 bg-gray-50">
+                  Class
+                </th>
+                {Array.from(uniqueSubjects).sort().map(subjectName => (
+                  <th key={subjectName} className="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    {subjectName}
+                  </th>
+                ))}
+                <th className="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider bg-gray-100">
+                  Total
+                </th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {summary.classes.map((classData) => (
+                <tr key={classData.classId} className="hover:bg-gray-50">
+                  <td className="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900 sticky left-0 bg-white">
+                    {classData.className}
+                  </td>
+                  {Array.from(uniqueSubjects).sort().map(subjectName => {
+                    const subject = classData.subjects.find(s => s.subjectName === subjectName);
+                    if (!subject) {
+                      return <td key={subjectName} className="px-4 py-3 text-center text-sm text-gray-400">-</td>;
+                    }
+
+                    const cellColor = subject.status === 'below' ? 'text-red-600 font-semibold'
+                      : subject.status === 'meets' ? 'text-green-600 font-semibold'
+                      : subject.status === 'exceeds' ? 'text-blue-600 font-semibold'
+                      : 'text-gray-600';
+
+                    return (
+                      <td key={subjectName} className={`px-4 py-3 text-center text-sm ${cellColor}`}>
+                        {subject.actualPeriods}
+                        {subject.requiredPeriods && (
+                          <span className="text-xs text-gray-500">/{subject.requiredPeriods}</span>
+                        )}
+                      </td>
+                    );
+                  })}
+                  <td className="px-4 py-3 text-center text-sm font-semibold bg-gray-50">
+                    {classData.totalActual}
+                    {classData.totalRequired > 0 && (
+                      <span className="text-xs text-gray-500">/{classData.totalRequired}</span>
                     )}
-                    {subject.recommendedPeriods && (
-                      <span className="ml-2 text-gray-500">
-                        ({subject.recommendedPeriods} recommended)
-                      </span>
-                    )}
-                  </div>
-                </div>
-              </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
-              {/* Progress Bar */}
-              {subject.requiredPeriods && (
-                <div className="relative mt-3">
-                  <div className="overflow-hidden h-6 text-xs flex rounded bg-gray-200">
-                    <div
-                      style={{ width: `${Math.min(subject.percentage, 100)}%` }}
-                      className={`shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center ${getStatusColor(subject.status)} transition-all duration-500`}
-                    >
-                      {subject.percentage > 10 && (
-                        <span className="font-semibold">{subject.percentage}%</span>
-                      )}
-                    </div>
-                  </div>
-                  {subject.percentage > 100 && (
-                    <div className="mt-1 text-xs text-blue-600">
-                      {subject.percentage}% of requirement (exceeds by {subject.actualPeriods - subject.requiredPeriods} periods)
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {!subject.requiredPeriods && (
-                <div className="mt-2 text-sm text-gray-500 italic">
-                  No curriculum requirement set for this subject
-                </div>
-              )}
-            </div>
-          ))}
+        <div className="mt-4 text-xs text-gray-500">
+          <p><span className="text-red-600 font-semibold">Red</span> = Below requirement | <span className="text-green-600 font-semibold">Green</span> = Meets requirement | <span className="text-blue-600 font-semibold">Blue</span> = Exceeds requirement</p>
         </div>
       </div>
 
@@ -207,7 +230,7 @@ export default function TimetableSummary({ timetableId }: TimetableSummaryProps)
               <h3 className="text-sm font-medium text-yellow-800">Curriculum Compliance Warning</h3>
               <div className="mt-2 text-sm text-yellow-700">
                 <p>
-                  {belowCount} subject{belowCount > 1 ? 's do' : ' does'} not meet the minimum curriculum requirements.
+                  {belowCount} subject assignment{belowCount > 1 ? 's do' : ' does'} not meet the minimum curriculum requirements across all classes.
                   Consider adjusting the timetable to ensure all subjects meet their required period counts.
                 </p>
               </div>
@@ -216,7 +239,7 @@ export default function TimetableSummary({ timetableId }: TimetableSummaryProps)
         </div>
       )}
 
-      {belowCount === 0 && summary.subjects.some(s => s.requiredPeriods) && (
+      {belowCount === 0 && allSubjects.some(s => s.requiredPeriods) && (
         <div className="bg-green-50 border border-green-200 rounded-lg p-4">
           <div className="flex items-start">
             <div className="flex-shrink-0">
@@ -228,7 +251,7 @@ export default function TimetableSummary({ timetableId }: TimetableSummaryProps)
               <h3 className="text-sm font-medium text-green-800">Curriculum Compliant</h3>
               <div className="mt-2 text-sm text-green-700">
                 <p>
-                  All subjects with curriculum requirements meet or exceed their minimum period counts.
+                  All subject assignments across all classes meet or exceed their minimum period requirements.
                 </p>
               </div>
             </div>
