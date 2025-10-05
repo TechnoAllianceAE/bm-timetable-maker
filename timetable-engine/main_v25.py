@@ -43,6 +43,9 @@ from src.models_phase1_v25 import (
 from src.csp_solver_complete_v25 import CSPSolverCompleteV25
 from src.algorithms.core.ga_optimizer_v25 import GAOptimizerV25
 
+# v2.5: Import validators for pre and post verification
+from src.validators import validate_request, validate_timetable
+
 
 # =============================================================================
 # APPLICATION LIFECYCLE & CONFIGURATION
@@ -366,7 +369,41 @@ async def generate_timetable(request: GenerateRequest):
         print(f"    Gap minimization: {weights.gap_minimization}")
         print(f"    Time preferences: {weights.time_preferences}")
         print(f"    Consecutive periods: {weights.consecutive_periods}")
-        
+
+        # PRE-VALIDATION: Check constraints and resource feasibility
+        print(f"\n[PRE-VALIDATION] Checking constraints and resources...")
+        is_valid, validation_result = validate_request(request)
+
+        if not is_valid:
+            print(f"[FAILED] Pre-validation failed")
+            print(f"  Errors: {len(validation_result['errors'])}")
+            for error in validation_result['errors']:
+                print(f"    - {error}")
+
+            if validation_result['warnings']:
+                print(f"  Warnings: {len(validation_result['warnings'])}")
+                for warning in validation_result['warnings']:
+                    print(f"    - {warning}")
+
+            # Return error response with validation details
+            return JSONResponse(
+                status_code=400,
+                content={
+                    "status": "error",
+                    "solutions": [],
+                    "generation_time": 0.0,
+                    "conflicts": validation_result['errors'],
+                    "suggestions": validation_result['warnings'],
+                    "validation": validation_result
+                }
+            )
+
+        print(f"[OK] Pre-validation passed")
+        if validation_result['warnings']:
+            print(f"  Warnings: {len(validation_result['warnings'])}")
+            for warning in validation_result['warnings']:
+                print(f"    - {warning}")
+
     except Exception as e:
         print(f"[FAILED] Validation failed: {e}")
         raise HTTPException(status_code=400, detail=f"Invalid request: {str(e)}")
@@ -445,7 +482,59 @@ async def generate_timetable(request: GenerateRequest):
             print(f"  [WARNING] Not all entries have subject metadata")
         if metadata_stats['teacher_coverage'] < 100:
             print(f"  [WARNING] Not all entries have teacher metadata")
-    
+
+        # POST-VALIDATION: Verify generated timetable meets mandatory criteria
+        print(f"\n[POST-VALIDATION] Validating generated timetable...")
+        post_validation = validate_timetable(
+            timetable=base_solutions[0],
+            classes=classes,
+            subjects=subjects,
+            teachers=teachers,
+            time_slots=time_slots,
+            rooms=rooms,
+            subject_requirements=request.subject_requirements
+        )
+
+        print(f"[{'OK' if post_validation['is_valid'] else 'FAILED'}] Post-validation "
+              f"{'passed' if post_validation['is_valid'] else 'failed'}")
+        print(f"  Checks: {post_validation['summary']['checks_passed']}/{post_validation['summary']['total_checks']} passed")
+
+        if post_validation['critical_violations']:
+            print(f"  CRITICAL VIOLATIONS: {len(post_validation['critical_violations'])}")
+            for violation in post_validation['critical_violations']:
+                print(f"    - {violation}")
+
+        if post_validation['warnings']:
+            print(f"  Warnings: {len(post_validation['warnings'])}")
+            for warning in post_validation['warnings'][:5]:  # Show first 5 warnings
+                print(f"    - {warning}")
+            if len(post_validation['warnings']) > 5:
+                print(f"    ... and {len(post_validation['warnings']) - 5} more")
+
+        # If critical checks failed, return error
+        if not post_validation['is_valid']:
+            print(f"\n[FAILED] Timetable generation failed post-validation")
+            print(f"  The generated timetable has critical issues and cannot be used.")
+
+            return JSONResponse(
+                status_code=500,
+                content={
+                    "status": "failure",
+                    "solutions": [],
+                    "generation_time": csp_duration,
+                    "conflicts": post_validation['critical_violations'],
+                    "suggestions": post_validation['warnings'],
+                    "validation": post_validation,
+                    "diagnostics": {
+                        "version": "2.5.0",
+                        "phase_failed": "post_validation",
+                        "validation_details": post_validation
+                    }
+                }
+            )
+
+        print(f"[OK] Post-validation passed - timetable is valid")
+
     except Exception as e:
         print(f"[ERROR] CSP solver error: {e}")
         raise HTTPException(status_code=500, detail=f"CSP solver failed: {str(e)}")
@@ -639,8 +728,27 @@ async def generate_timetable(request: GenerateRequest):
             },
             "subjects_with_preferences": subjects_with_preferences,
             "language_agnostic": True
+        },
+        "validation": {
+            "pre_validation": validation_result if 'validation_result' in locals() else None,
+            "post_validation": post_validation if 'post_validation' in locals() else None
         }
     }
+
+    # Extract warnings and suggestions from validation for easy frontend access
+    validation_warnings = []
+    validation_suggestions = []
+    validation_info = []
+
+    if 'post_validation' in locals() and post_validation:
+        validation_warnings = post_validation.get('warnings', [])
+        validation_suggestions = post_validation.get('suggestions', [])
+
+        # Add pre-validation warnings and suggestions too
+        if 'validation_result' in locals() and validation_result:
+            validation_warnings.extend(validation_result.get('warnings', []))
+            validation_suggestions.extend(validation_result.get('suggestions', []))
+            validation_info.extend(validation_result.get('errors', []))  # Errors from pre-validation are info
 
     # Return plain dict instead of Pydantic model for JSON serialization
     response_dict = {
@@ -648,7 +756,9 @@ async def generate_timetable(request: GenerateRequest):
         "solutions": solutions_dicts,
         "generation_time": total_duration,
         "conflicts": None,
-        "suggestions": None,
+        "suggestions": validation_suggestions,  # Specific actionable suggestions
+        "warnings": validation_warnings,  # Validation warnings for frontend
+        "info": validation_info,  # Informational messages from pre-validation
         "diagnostics": diagnostics
     }
 

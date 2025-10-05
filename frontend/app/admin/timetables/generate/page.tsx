@@ -62,6 +62,8 @@ interface GenerationParams {
     maxPeriodsPerDayPerTeacher: boolean;
     roomCapacityConstraints: boolean;
     labRequirements: boolean;
+    oneTeacherPerSubject: boolean;
+    useHomeClassroom: boolean;
   };
   softRules: {
     minimizeTeacherGaps: boolean;
@@ -114,6 +116,8 @@ export default function GenerateTimetablePage() {
       maxPeriodsPerDayPerTeacher: true,
       roomCapacityConstraints: true,
       labRequirements: true,
+      oneTeacherPerSubject: true,
+      useHomeClassroom: true,
     },
     softRules: {
       minimizeTeacherGaps: true,
@@ -692,6 +696,28 @@ export default function GenerateTimetablePage() {
                     Lab requirements - Assign lab subjects to appropriate lab rooms
                   </span>
                 </label>
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={params.hardRules.oneTeacherPerSubject}
+                    onChange={(e) => handleHardRuleChange('oneTeacherPerSubject', e.target.checked)}
+                    className="rounded border-gray-300 text-red-600 shadow-sm mr-3"
+                  />
+                  <span className="text-sm font-medium text-gray-700">
+                    One teacher per subject per class - Same teacher teaches all periods of a subject to the same class
+                  </span>
+                </label>
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={params.hardRules.useHomeClassroom}
+                    onChange={(e) => handleHardRuleChange('useHomeClassroom', e.target.checked)}
+                    className="rounded border-gray-300 text-red-600 shadow-sm mr-3"
+                  />
+                  <span className="text-sm font-medium text-gray-700">
+                    Use home classrooms - Regular subjects use dedicated home classroom, labs remain shared
+                  </span>
+                </label>
               </div>
             </div>
 
@@ -1108,15 +1134,39 @@ export default function GenerateTimetablePage() {
                           </div>
                         )}
 
-                        {/* Warnings (if any) */}
-                        {generationResult.diagnostics.warnings && generationResult.diagnostics.warnings.length > 0 && (
+                        {/* Warnings (if any) - Check both top-level and diagnostics */}
+                        {((generationResult.warnings && generationResult.warnings.length > 0) ||
+                          (generationResult.diagnostics?.warnings && generationResult.diagnostics.warnings.length > 0)) && (
                           <div className="bg-yellow-50 border border-yellow-200 rounded p-3 mb-3">
-                            <h5 className="text-xs font-medium text-yellow-800 mb-2 uppercase tracking-wide">⚠️ Optimization Notes</h5>
+                            <h5 className="text-xs font-medium text-yellow-800 mb-2 uppercase tracking-wide">⚠️ Validation Warnings</h5>
                             <ul className="text-xs text-yellow-700 space-y-1">
-                              {generationResult.diagnostics.warnings.map((warning: string, index: number) => (
-                                <li key={index} className="flex items-start">
+                              {/* Display top-level warnings first */}
+                              {generationResult.warnings && generationResult.warnings.map((warning: string, index: number) => (
+                                <li key={`w-${index}`} className="flex items-start">
                                   <span className="mr-1">•</span>
                                   <span>{warning}</span>
+                                </li>
+                              ))}
+                              {/* Display diagnostics warnings */}
+                              {generationResult.diagnostics?.warnings && generationResult.diagnostics.warnings.map((warning: string, index: number) => (
+                                <li key={`d-${index}`} className="flex items-start">
+                                  <span className="mr-1">•</span>
+                                  <span>{warning}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+
+                        {/* Informational Messages (if any) */}
+                        {generationResult.info && generationResult.info.length > 0 && (
+                          <div className="bg-blue-50 border border-blue-200 rounded p-3 mb-3">
+                            <h5 className="text-xs font-medium text-blue-800 mb-2 uppercase tracking-wide">ℹ️ Information</h5>
+                            <ul className="text-xs text-blue-700 space-y-1">
+                              {generationResult.info.map((info: string, index: number) => (
+                                <li key={index} className="flex items-start">
+                                  <span className="mr-1">•</span>
+                                  <span>{info}</span>
                                 </li>
                               ))}
                             </ul>
@@ -1149,15 +1199,22 @@ export default function GenerateTimetablePage() {
                           </div>
                         )}
 
-                        {/* Conflicts */}
-                        {generationResult.diagnostics.conflicts && generationResult.diagnostics.conflicts.length > 0 && (
+                        {/* Conflicts - Check both top-level and diagnostics */}
+                        {((generationResult.conflicts && generationResult.conflicts.length > 0) ||
+                          (generationResult.diagnostics?.conflicts && generationResult.diagnostics.conflicts.length > 0)) && (
                           <div className={`rounded p-3 mb-3 ${generationResult.status === 'infeasible' ? 'bg-orange-100' : 'bg-red-100'}`}>
                             <h5 className={`text-xs font-medium mb-2 uppercase tracking-wide ${generationResult.status === 'infeasible' ? 'text-orange-800' : 'text-red-800'}`}>
                               Detected Conflicts
                             </h5>
                             <ul className={`text-xs space-y-1 ${generationResult.status === 'infeasible' ? 'text-orange-700' : 'text-red-700'}`}>
-                              {generationResult.diagnostics.conflicts.map((conflict: string, index: number) => (
-                                <li key={index} className="flex items-start">
+                              {generationResult.conflicts && generationResult.conflicts.map((conflict: string, index: number) => (
+                                <li key={`c-${index}`} className="flex items-start">
+                                  <span className="mr-1">•</span>
+                                  <span className="capitalize">{conflict.replace('_', ' ')}</span>
+                                </li>
+                              ))}
+                              {generationResult.diagnostics?.conflicts && generationResult.diagnostics.conflicts.map((conflict: string, index: number) => (
+                                <li key={`dc-${index}`} className="flex items-start">
                                   <span className="mr-1">•</span>
                                   <span className="capitalize">{conflict.replace('_', ' ')}</span>
                                 </li>
@@ -1166,15 +1223,22 @@ export default function GenerateTimetablePage() {
                           </div>
                         )}
 
-                        {/* Suggestions */}
-                        {generationResult.diagnostics.suggestions && generationResult.diagnostics.suggestions.length > 0 && (
+                        {/* Suggestions - Check both top-level and diagnostics */}
+                        {((generationResult.suggestions && generationResult.suggestions.length > 0) ||
+                          (generationResult.diagnostics?.suggestions && generationResult.diagnostics.suggestions.length > 0)) && (
                           <div className={`rounded p-3 ${generationResult.status === 'infeasible' ? 'bg-orange-100' : 'bg-red-100'}`}>
                             <h5 className={`text-xs font-medium mb-2 uppercase tracking-wide ${generationResult.status === 'infeasible' ? 'text-orange-800' : 'text-red-800'}`}>
                               💡 Suggested Actions
                             </h5>
                             <ul className={`text-xs space-y-1 ${generationResult.status === 'infeasible' ? 'text-orange-700' : 'text-red-700'}`}>
-                              {generationResult.diagnostics.suggestions.map((suggestion: string, index: number) => (
-                                <li key={index} className="flex items-start">
+                              {generationResult.suggestions && generationResult.suggestions.map((suggestion: string, index: number) => (
+                                <li key={`s-${index}`} className="flex items-start">
+                                  <span className="mr-1">▶</span>
+                                  <span>{suggestion}</span>
+                                </li>
+                              ))}
+                              {generationResult.diagnostics?.suggestions && generationResult.diagnostics.suggestions.map((suggestion: string, index: number) => (
+                                <li key={`ds-${index}`} className="flex items-start">
                                   <span className="mr-1">▶</span>
                                   <span>{suggestion}</span>
                                 </li>

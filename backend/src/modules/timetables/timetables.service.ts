@@ -47,7 +47,10 @@ export class TimetablesService {
 
       // Fetch school data separately to avoid include issues
       const [classes, subjects, rooms, teachers] = await Promise.all([
-        this.prisma.class.findMany({ where: { schoolId } }),
+        this.prisma.class.findMany({
+          where: { schoolId },
+          include: { homeRoom: true },
+        }),
         this.prisma.subject.findMany({ where: { schoolId } }),
         this.prisma.room.findMany({ where: { schoolId } }),
         this.prisma.teacher.findMany({
@@ -155,6 +158,18 @@ export class TimetablesService {
         });
       }
 
+      if (hardRules.oneTeacherPerSubject) {
+        constraints.push({
+          id: 'one_teacher_per_subject',
+          school_id: school.id,
+          type: 'ONE_TEACHER_PER_SUBJECT',
+          priority: 'MANDATORY',
+          entity_type: 'TEACHER',
+          parameters: {},
+          description: 'One teacher should teach a subject consistently to the same class',
+        });
+      }
+
       // Add soft constraints
       if (softRules.minimizeTeacherGaps) {
         constraints.push({
@@ -180,6 +195,7 @@ export class TimetablesService {
           section: cls.section || 'A',
           stream: cls.stream || null,
           student_count: cls.studentCount || 30,
+          home_room_id: cls.homeRoomId || null,
         })),
         subjects: subjects.map(subj => ({
           id: subj.id,
@@ -394,6 +410,11 @@ export class TimetablesService {
         diagnostics: response.data?.diagnostics,
         solutions: response.data?.solutions,
         message: response.data?.message || (isInfeasible ? 'Timetable generation is mathematically infeasible with current constraints' : undefined),
+        // Include validation results from Python service
+        validation: response.data?.validation,
+        conflicts: response.data?.conflicts || [],
+        warnings: response.data?.warnings || [],
+        suggestions: response.data?.suggestions || [],
       };
 
       // If infeasible or failed, include detailed diagnostic info
