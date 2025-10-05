@@ -253,6 +253,7 @@ model Timetable {
   id                  String             @id @default(cuid())
   schoolId            String
   academicYearId      String
+  name                String?
   version             Int                @default(1)
   status              String
   wellnessScore       Float?

@@ -708,34 +708,34 @@ class GAOptimizerV25:
         
         improvement = last_gen.best_fitness - first_gen.best_fitness
         improvement_pct = (improvement / max(first_gen.best_fitness, 1)) * 100
-        
+
         report = f"""
-╔═══════════════════════════════════════════════════════════════╗
-║  GENETIC ALGORITHM v{self.version} - EVOLUTION REPORT                   ║
-╠═══════════════════════════════════════════════════════════════╣
-║  Configuration:                                               ║
-║    Metadata-Driven: ✓ ENABLED                                ║
-║    Morning Cutoff: Period {getattr(self.weights, 'morning_period_cutoff', 4)}                                      ║
-║    Generations: {len(self.stats_history)}                                             ║
-╠═══════════════════════════════════════════════════════════════╣
-║  Initial State (Gen 1):                                       ║
-║    Best Fitness:  {first_gen.best_fitness:8.2f}                                  ║
-║    Avg Fitness:   {first_gen.avg_fitness:8.2f}                                  ║
-╠═══════════════════════════════════════════════════════════════╣
-║  Final State (Gen {len(self.stats_history)}):                                      ║
-║    Best Fitness:  {last_gen.best_fitness:8.2f}                                  ║
-║    Avg Fitness:   {last_gen.avg_fitness:8.2f}                                  ║
-╠═══════════════════════════════════════════════════════════════╣
-║  Improvement:                                                 ║
-║    Absolute: {improvement:+8.2f}                                       ║
-║    Relative: {improvement_pct:+7.1f}%                                       ║
-╠═══════════════════════════════════════════════════════════════╣
-║  Optimization Focus (Weights):                                ║
-║    Workload Balance:      {getattr(self.weights, 'workload_balance', 0):5.1f}                      ║
-║    Gap Minimization:      {getattr(self.weights, 'gap_minimization', 0):5.1f}                      ║
-║    Time Preferences:      {getattr(self.weights, 'time_preferences', 0):5.1f}                      ║
-║    Consecutive Periods:   {getattr(self.weights, 'consecutive_periods', 0):5.1f}                      ║
-╚═══════════════════════════════════════════════════════════════╝
+===============================================================
+  GENETIC ALGORITHM v{self.version} - EVOLUTION REPORT
+===============================================================
+  Configuration:
+    Metadata-Driven: [ENABLED]
+    Morning Cutoff: Period {getattr(self.weights, 'morning_period_cutoff', 4)}
+    Generations: {len(self.stats_history)}
+===============================================================
+  Initial State (Gen 1):
+    Best Fitness:  {first_gen.best_fitness:8.2f}
+    Avg Fitness:   {first_gen.avg_fitness:8.2f}
+===============================================================
+  Final State (Gen {len(self.stats_history)}):
+    Best Fitness:  {last_gen.best_fitness:8.2f}
+    Avg Fitness:   {last_gen.avg_fitness:8.2f}
+===============================================================
+  Improvement:
+    Absolute: {improvement:+8.2f}
+    Relative: {improvement_pct:+7.1f}%
+===============================================================
+  Optimization Focus (Weights):
+    Workload Balance:      {getattr(self.weights, 'workload_balance', 0):5.1f}
+    Gap Minimization:      {getattr(self.weights, 'gap_minimization', 0):5.1f}
+    Time Preferences:      {getattr(self.weights, 'time_preferences', 0):5.1f}
+    Consecutive Periods:   {getattr(self.weights, 'consecutive_periods', 0):5.1f}
+===============================================================
         """
         
         return report.strip()

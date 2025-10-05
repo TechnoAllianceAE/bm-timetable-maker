@@ -6,11 +6,12 @@ import { userAPI } from '@/lib/api';
 
 interface User {
   id: string;
-  name: string;
+  name?: string;
   email: string;
   role: 'ADMIN' | 'PRINCIPAL' | 'TEACHER' | 'STUDENT' | 'PARENT';
+  profile?: string | { name?: string };
   createdAt: string;
-  updatedAt: string;
+  updatedAt?: string;
 }
 
 export default function UsersPage() {
@@ -45,9 +46,9 @@ export default function UsersPage() {
     try {
       if (editingUser) {
         await userAPI.update(editingUser.id, {
-          name: formData.name,
           email: formData.email,
           role: formData.role,
+          profile: JSON.stringify({ name: formData.name }),
         });
       } else {
         await userAPI.create(formData);
@@ -62,8 +63,23 @@ export default function UsersPage() {
 
   const handleEdit = (user: User) => {
     setEditingUser(user);
+    // Parse name from profile JSON if available
+    let userName = '';
+    try {
+      if (user.profile) {
+        const profile = typeof user.profile === 'string'
+          ? JSON.parse(user.profile)
+          : user.profile;
+        userName = profile.name || user.name || '';
+      } else {
+        userName = user.name || '';
+      }
+    } catch {
+      userName = user.name || '';
+    }
+
     setFormData({
-      name: user.name,
+      name: userName,
       email: user.email,
       password: '',
       role: user.role,
@@ -90,6 +106,21 @@ export default function UsersPage() {
       password: '',
       role: 'TEACHER',
     });
+  };
+
+  const getUserName = (user: User): string => {
+    if (user.name) return user.name;
+    if (user.profile) {
+      try {
+        const profile = typeof user.profile === 'string'
+          ? JSON.parse(user.profile)
+          : user.profile;
+        return profile.name || user.email;
+      } catch {
+        return user.email;
+      }
+    }
+    return user.email;
   };
 
   const getRoleBadgeColor = (role: User['role']) => {
@@ -144,7 +175,7 @@ export default function UsersPage() {
                       <div className="flex-1">
                         <div className="flex items-center">
                           <div className="text-lg font-medium text-gray-900">
-                            {user.name}
+                            {getUserName(user)}
                           </div>
                           <span
                             className={`ml-3 px-2 py-1 text-xs rounded-full ${getRoleBadgeColor(

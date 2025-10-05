@@ -1,9 +1,9 @@
 # Product Requirements Document (PRD)
 ## School Timetable Management SaaS Platform
 
-**Version:** 2.1
-**Date:** September 30, 2025
-**Status:** Phase 1 Complete - Python Engine v2.0.0 Production Ready
+**Version:** 2.5
+**Date:** October 5, 2025
+**Status:** Phase 1 Complete - Python Engine v2.5 Production Ready with Grade-Specific Requirements
 
 ---
 
@@ -11,7 +11,7 @@
 
 The School Timetable Management SaaS Platform is a fully integrated, enterprise-ready solution for automated timetable generation and management in educational institutions. The platform combines advanced constraint satisfaction algorithms with intelligent diagnostic capabilities to deliver conflict-free schedules in under one second.
 
-### Current Status: **✅ PRODUCTION READY - Python Engine v2.0.0**
+### Current Status: **✅ PRODUCTION READY - Python Engine v2.5**
 
 **Key Achievements:**
 - ✅ Full end-to-end integration between all components
@@ -20,10 +20,42 @@ The School Timetable Management SaaS Platform is a fully integrated, enterprise-
 - ✅ Complete frontend with rule configuration and diagnostics
 - ✅ Real-world dataset imported and ready for testing
 - ✅ Diagnostic intelligence with actionable feedback
-- ✅ **NEW**: Python Engine v2.0.0 with critical concurrency fixes
-- ✅ **NEW**: Thread-safe per-request instances preventing data leaks
-- ✅ **NEW**: Real metrics calculation replacing hardcoded scores
-- ✅ **NEW**: Robust input validation and error handling
+- ✅ **LATEST**: Grade-specific subject hour requirements with CSP enforcement
+- ✅ **LATEST**: Per-class subject distributions based on grade level
+- ✅ **LATEST**: User management with profile-based storage
+- ✅ **LATEST**: Timetable naming and cascading deletion
+- ✅ Python Engine v2.5 with metadata-driven optimization
+- ✅ Thread-safe per-request instances preventing data leaks
+- ✅ Real metrics calculation replacing hardcoded scores
+- ✅ Robust input validation and error handling
+
+---
+
+## 🎯 Python Engine v2.5 Updates (October 5, 2025)
+
+### Grade-Specific Subject Requirements Feature
+The platform now supports grade-level curriculum customization, allowing schools to define different period allocations for each subject based on grade level.
+
+#### Implementation Highlights
+- **Frontend**: Dynamic requirement table with real-time validation
+  - Add/remove grade-subject-period mappings
+  - Total period validation per grade
+  - Visual feedback for over-allocation
+- **Backend**: Database storage with upsert pattern
+  - `GradeSubjectRequirement` model with unique constraint
+  - Automatic transformation between camelCase (frontend) and snake_case (Python)
+- **CSP Solver**: Per-class distribution enforcement
+  - Requirement map lookup: (grade, subject_id) → periods_per_week
+  - Fallback to default subject values if no grade-specific requirement
+  - Class-level distribution calculation based on grade
+
+**Testing**: All unit tests passing with different grade configurations (e.g., Grade 6: Math=6, Grade 7: Math=8)
+
+### Bug Fixes & Improvements
+- **User Management**: Fixed user update to use profile JSON field instead of separate name field
+- **Timetable Deletion**: Implemented cascading delete for timetable entries
+- **Timetable Naming**: Added name field to database schema and persistence logic
+- **Timestamp Display**: Updated UI to show creation date + time instead of just date
 
 ---
 
@@ -174,27 +206,32 @@ Our platform eliminates the traditional pain points of academic scheduling by pr
 
 ### ✅ Phase 1: Core Timetable Generation (COMPLETE)
 
-#### Python Timetable Engine v2.0.0 - **PRODUCTION READY**
+#### Python Timetable Engine v2.5 - **PRODUCTION READY**
 - ✅ FastAPI service with comprehensive endpoints
 - ✅ CSP Complete Solver with 100% slot coverage guarantee
+- ✅ **Grade-specific subject requirements** enforcement in CSP solver
+- ✅ Per-class subject distributions based on grade-level allocations
+- ✅ Metadata-driven optimization with subject/teacher preferences
 - ✅ Diagnostic Intelligence Layer with transparent solving
 - ✅ Enterprise scale performance (1,600 assignments in <1 second)
 - ✅ Resource Advisor with pre-computation feasibility analysis
 - ✅ Running on port 8000 with full diagnostic capabilities
-- ✅ **NEW**: Thread-safe per-request instances (prevents cross-request data leaks)
-- ✅ **NEW**: CPU-bound work offloaded to thread pool (prevents event loop blocking)
-- ✅ **NEW**: Real metrics calculation (no more hardcoded fake scores)
-- ✅ **NEW**: Robust weights handling (supports dict/Pydantic v1/v2)
-- ✅ **NEW**: Input validation (prevents negative/excessive options)
+- ✅ Thread-safe per-request instances (prevents cross-request data leaks)
+- ✅ CPU-bound work offloaded to thread pool (prevents event loop blocking)
+- ✅ Real metrics calculation (no more hardcoded fake scores)
+- ✅ Robust weights handling (supports dict/Pydantic v1/v2)
+- ✅ Input validation (prevents negative/excessive options)
 - ⚠️ **LIMITATION**: GA Optimizer is placeholder (returns CSP solutions unchanged)
 
 #### Backend Services - **FULLY OPERATIONAL**
 - ✅ NestJS application structure with TypeScript
 - ✅ Authentication service with JWT (Passport.js)
 - ✅ User management with Role-Based Access Control
-- ✅ Complete timetable CRUD operations
+- ✅ Complete timetable CRUD operations with cascading deletes
+- ✅ **Grade-specific subject requirements** database storage with upsert pattern
+- ✅ Timetable naming and metadata persistence
 - ✅ Python service integration layer with error handling
-- ✅ Data transformation pipeline for service compatibility
+- ✅ Data transformation pipeline for service compatibility (camelCase ↔ snake_case)
 - ✅ Comprehensive API endpoints (/api/v1/timetables/generate)
 - ✅ Running on port 5000 with Swagger documentation
 
@@ -203,9 +240,12 @@ Our platform eliminates the traditional pain points of academic scheduling by pr
 - ✅ Authentication pages (login/register)
 - ✅ Comprehensive timetable generation form with rule configuration
 - ✅ Hard/soft constraint input areas
+- ✅ **Grade-specific subject hour requirements** with real-time validation
 - ✅ Diagnostic UI with failure analysis
 - ✅ CSV data import functionality
 - ✅ Teacher management with JSON field support
+- ✅ User management with profile-based data storage
+- ✅ Timetable list with creation timestamps (date + time)
 - ✅ Running on port 3000 with live reload
 
 #### Data Management - **FULLY POPULATED**

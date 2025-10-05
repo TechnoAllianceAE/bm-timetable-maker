@@ -225,6 +225,10 @@ PYTHON_TIMETABLE_URL=http://localhost:8000
 - Timetable generation integration with Python service
 - CSV data import for bulk operations
 - Swagger API documentation available
+- **Recent Fixes**:
+  - User profile data now stored in JSON profile field (not separate name field)
+  - Timetable deletion with cascading entry removal
+  - Timetable name persistence in database
 
 ### Frontend - CORE FEATURES COMPLETE ✅
 - Next.js 15 with App Router
@@ -235,6 +239,10 @@ PYTHON_TIMETABLE_URL=http://localhost:8000
 - CSV data import interface
 - Teacher and student portals
 - Real-world data integration (116 teachers, 30 classes, 35 rooms, 10 subjects)
+- **Recent Fixes**:
+  - User edit/update now correctly handles profile JSON data
+  - Timetable list displays creation timestamp (date + time)
+  - Timetable names properly displayed instead of "Untitled"
 
 ## Important Implementation Details
 

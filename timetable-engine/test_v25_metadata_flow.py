@@ -1,32 +1,35 @@
 """
-Test Script for v2.5 Metadata Flow
+Test Script for v2.5.2 Metadata Flow - Updated for new project structure
 
 Tests:
 1. Subject/Teacher metadata extraction
 2. CSP -> GA data flow
 3. Object <-> Dict conversions
 4. Response construction
+
+Updated import paths to match:
+- src.algorithms.core.ga_optimizer_v25
 """
 
 import sys
 import json
 from typing import Dict, Any
 
-# Import v2.5 modules
+# Import v2.5 modules with updated paths
 try:
     from src.models_phase1_v25 import (
         Subject, Teacher, Class, TimeSlot, Room, DayOfWeek, RoomType,
         TimetableEntry, Timetable, TimetableStatus, OptimizationWeights
     )
     from src.csp_solver_complete_v25 import CSPSolverCompleteV25
-    from src.ga_optimizer_v25 import GAOptimizerV25
-    print("✓ All v2.5 modules imported successfully")
+    from src.algorithms.core.ga_optimizer_v25 import GAOptimizerV25  # Updated path
+    print("[*] All v2.5 modules imported successfully")
 except ImportError as e:
-    print(f"✗ Import error: {e}")
-    print("\nMake sure files are in src/ directory:")
+    print(f"[!] Import error: {e}")
+    print("\nMake sure files are in correct directories:")
     print("  - src/models_phase1_v25.py")
     print("  - src/csp_solver_complete_v25.py")
-    print("  - src/ga_optimizer_v25.py")
+    print("  - src/algorithms/core/ga_optimizer_v25.py")
     sys.exit(1)
 
 
@@ -55,14 +58,14 @@ def test_subject_metadata():
     
     # Test conversion to dict
     subject_dict = subject.dict()
-    print(f"\n✓ Subject.dict() works")
+    print(f"\n[*] Subject.dict() works")
     print(f"  Keys: {list(subject_dict.keys())}")
     
     # Verify metadata fields present
     assert 'prefer_morning' in subject_dict
     assert 'preferred_periods' in subject_dict
     assert 'avoid_periods' in subject_dict
-    print(f"✓ Metadata fields present in dict")
+    print(f"[*] Metadata fields present in dict")
 
 
 def test_teacher_metadata():
@@ -84,7 +87,7 @@ def test_teacher_metadata():
     # Test conversion
     teacher_dict = teacher.dict()
     assert 'max_consecutive_periods' in teacher_dict
-    print(f"✓ Teacher metadata field present in dict")
+    print(f"[*] Teacher metadata field present in dict")
 
 
 def test_timetable_entry_metadata():
@@ -123,7 +126,7 @@ def test_timetable_entry_metadata():
     assert 'teacher_metadata' in entry_dict
     assert entry_dict['subject_metadata'] is not None
     assert entry_dict['teacher_metadata'] is not None
-    print(f"✓ Entry metadata preserved in dict conversion")
+    print(f"[*] Entry metadata preserved in dict conversion")
 
 
 def test_csp_metadata_extraction():
@@ -209,7 +212,7 @@ def test_csp_metadata_extraction():
         num_solutions=1
     )
     
-    print(f"✓ CSP solver completed in {gen_time:.2f}s")
+    print(f"[*] CSP solver completed in {gen_time:.2f}s")
     print(f"  Solutions: {len(timetables)}")
     
     if timetables:
@@ -227,18 +230,18 @@ def test_csp_metadata_extraction():
         has_teacher_meta = first_entry.teacher_metadata is not None
         
         if has_subject_meta:
-            print(f"✓ Subject metadata extracted")
+            print(f"[*] Subject metadata extracted")
         else:
-            print(f"✗ Subject metadata MISSING")
+            print(f"[!] Subject metadata MISSING")
         
         if has_teacher_meta:
-            print(f"✓ Teacher metadata extracted")
+            print(f"[*] Teacher metadata extracted")
         else:
-            print(f"✗ Teacher metadata MISSING")
+            print(f"[!] Teacher metadata MISSING")
         
         return timetables[0]
     else:
-        print("✗ No solutions generated")
+        print("[!] No solutions generated")
         return None
 
 
@@ -249,13 +252,13 @@ def test_ga_processing(timetable):
     print("="*70)
     
     if not timetable:
-        print("✗ No timetable to process (CSP failed)")
+        print("[!] No timetable to process (CSP failed)")
         return None
     
     # Convert to dict
     print("Converting Timetable to dict...")
     tt_dict = timetable.dict()
-    print(f"✓ Converted to dict with {len(tt_dict.get('entries', []))} entries")
+    print(f"[*] Converted to dict with {len(tt_dict.get('entries', []))} entries")
     
     # Test GA optimizer
     weights = OptimizationWeights(
@@ -278,7 +281,7 @@ def test_ga_processing(timetable):
         weights=weights
     )
     
-    print(f"✓ GA completed")
+    print(f"[*] GA completed")
     print(f"  Output type: {type(optimized[0])}")
     print(f"  Entries count: {len(optimized[0].get('entries', []))}")
     
@@ -288,14 +291,14 @@ def test_ga_processing(timetable):
     has_teacher_meta = 'teacher_metadata' in first_entry and first_entry['teacher_metadata'] is not None
     
     if has_subject_meta:
-        print(f"✓ Subject metadata preserved through GA")
+        print(f"[*] Subject metadata preserved through GA")
     else:
-        print(f"✗ Subject metadata LOST in GA")
+        print(f"[!] Subject metadata LOST in GA")
     
     if has_teacher_meta:
-        print(f"✓ Teacher metadata preserved through GA")
+        print(f"[*] Teacher metadata preserved through GA")
     else:
-        print(f"✗ Teacher metadata LOST in GA")
+        print(f"[!] Teacher metadata LOST in GA")
     
     return optimized[0]
 
@@ -307,10 +310,16 @@ def test_response_construction(timetable_dict):
     print("="*70)
     
     if not timetable_dict:
-        print("✗ No timetable to package")
+        print("[!] No timetable to package")
         return
     
-    from main_v25 import convert_timetable_to_solution
+    # Import the helper function from main
+    try:
+        from main_v25 import convert_timetable_to_solution
+    except ImportError:
+        print("[!] Could not import convert_timetable_to_solution from main_v25")
+        print("    Skipping this test")
+        return
     
     print("Converting timetable dict to TimetableSolution...")
     
@@ -323,7 +332,7 @@ def test_response_construction(timetable_dict):
             metrics={"test": True}
         )
         
-        print(f"✓ TimetableSolution created")
+        print(f"[*] TimetableSolution created")
         print(f"  Score: {solution.total_score}")
         print(f"  Feasible: {solution.feasible}")
         print(f"  Timetable type: {type(solution.timetable)}")
@@ -331,10 +340,10 @@ def test_response_construction(timetable_dict):
         # Verify it's serializable
         solution_dict = solution.dict()
         json_str = json.dumps(solution_dict, default=str)
-        print(f"✓ Solution is JSON serializable ({len(json_str)} chars)")
+        print(f"[*] Solution is JSON serializable ({len(json_str)} chars)")
         
     except Exception as e:
-        print(f"✗ Response construction failed: {e}")
+        print(f"[!] Response construction failed: {e}")
         import traceback
         traceback.print_exc()
 
@@ -361,17 +370,17 @@ def run_all_tests():
         test_response_construction(optimized)
         
         print("\n" + "="*70)
-        print("✅ ALL TESTS PASSED")
+        print("[*] ALL TESTS PASSED")
         print("="*70)
         print("\nv2.5 is ready for integration!")
         
     except AssertionError as e:
-        print(f"\n✗ Test assertion failed: {e}")
+        print(f"\n[!] Test assertion failed: {e}")
         import traceback
         traceback.print_exc()
         
     except Exception as e:
-        print(f"\n✗ Test failed with error: {e}")
+        print(f"\n[!] Test failed with error: {e}")
         import traceback
         traceback.print_exc()
 

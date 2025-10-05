@@ -271,6 +271,7 @@ export class TimetablesService {
         data: {
           schoolId,
           academicYearId: generateTimetableDto.academicYearId,
+          name: generateTimetableDto.name || null,
           status: isSuccessful ? 'DRAFT' : 'FAILED',
           metadata: JSON.stringify(response.data),
         },
@@ -541,6 +542,12 @@ export class TimetablesService {
 
   async remove(id: string) {
     try {
+      // First, delete all timetable entries
+      await this.prisma.timetableEntry.deleteMany({
+        where: { timetableId: id },
+      });
+
+      // Then delete the timetable
       return await this.prisma.timetable.delete({
         where: { id },
       });
