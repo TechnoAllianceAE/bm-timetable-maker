@@ -438,6 +438,18 @@ async def generate_timetable(request: GenerateRequest):
                 for req in request.subject_requirements
             ]
 
+        # Extract one_teacher_per_subject constraint flag
+        enforce_teacher_consistency = True  # Default to enabled
+        if constraints:
+            for constraint in constraints:
+                # Check if constraint is a dict or object
+                constraint_dict = constraint.dict() if hasattr(constraint, 'dict') else constraint
+                if constraint_dict.get('type') == 'ONE_TEACHER_PER_SUBJECT':
+                    # Check if constraint is enabled (default to True if not specified)
+                    enforce_teacher_consistency = constraint_dict.get('enabled', True)
+                    print(f"[CONFIG] One teacher per subject constraint: {'ENABLED' if enforce_teacher_consistency else 'DISABLED'}")
+                    break
+
         base_solutions, csp_time, csp_conflicts, csp_suggestions = await asyncio.to_thread(
             csp_solver.solve,
             classes=classes,
@@ -447,7 +459,8 @@ async def generate_timetable(request: GenerateRequest):
             rooms=rooms,
             constraints=constraints,
             num_solutions=request.options,
-            subject_requirements=subject_requirements_dict
+            subject_requirements=subject_requirements_dict,
+            enforce_teacher_consistency=enforce_teacher_consistency
         )
         
         csp_end_time = time.time()

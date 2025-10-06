@@ -141,10 +141,12 @@ Our platform eliminates the traditional pain points of academic scheduling by pr
                           │ HTTP Service Communication
                           │
 ┌─────────────────────────▼───────────────────────────────────┐
-│          Python Timetable Engine v2.0.0 (FastAPI)           │
+│          Python Timetable Engine v2.5 (FastAPI)             │
 │                 Port: 8000                                  │
 │  ┌─────────────────────────────────────────────────────────┐ │
 │  │ ✅ CSP Complete Solver (100% Coverage Guarantee)       │ │
+│  │ ✅ Grade-Specific Subject Requirements Enforcement     │ │
+│  │ ✅ Metadata-Driven Optimization                        │ │
 │  │ ✅ Diagnostic Intelligence Layer                       │ │
 │  │ ✅ Resource Advisor with Feasibility Analysis         │ │
 │  │ ✅ Enterprise Scale Performance (<1s generation)       │ │
@@ -310,12 +312,12 @@ Our platform eliminates the traditional pain points of academic scheduling by pr
 ```
 Frontend:  http://localhost:3000 (Next.js dev server)
 Backend:   http://localhost:5000 (NestJS production build)
-Python:    http://localhost:8000 (FastAPI v2.0.0 with uvicorn)
+Python:    http://localhost:8000 (FastAPI v2.5 with uvicorn)
 Database:  PostgreSQL with imported test data
 ```
 
-**Python Engine v2.0.0 Endpoints:**
-- `POST /generate` - Full timetable generation with diagnostic intelligence
+**Python Engine v2.5 Endpoints:**
+- `POST /generate` - Full timetable generation with diagnostic intelligence and grade-specific requirements
 - `POST /validate` - Quick feasibility check (no solving)
 - `GET /health` - Service status and feature availability
 
@@ -508,17 +510,21 @@ POST /api/v1/auth/register
 - ✅ Production-ready architecture
 - ✅ Comprehensive diagnostic capabilities
 - ✅ Real-world dataset integration
-- ✅ **NEW**: Python Engine v2.0.0 with critical concurrency fixes
-- ✅ **NEW**: Thread-safe, production-ready implementation
+- ✅ Python Engine v2.5 with metadata-driven optimization
+- ✅ Grade-specific subject requirements feature complete
+- ✅ Thread-safe, production-ready implementation
+- ✅ User management and timetable naming improvements
 
 **Current Limitations:**
 - ⚠️ GA Optimizer is placeholder (returns CSP solutions unchanged)
 - ⚠️ Soft constraint optimization not yet implemented
+- ⚠️ No authentication/authorization for Python service
+- ⚠️ No rate limiting (vulnerable to DoS attacks)
 
 **Ready for:** Production deployment, user acceptance testing, and Phase 2 GA optimizer implementation.
 
 ---
 
-*Document Version: 2.1*  
-*Last Updated: September 30, 2025*  
-*Status: Phase 1 Complete - Production Ready*
+*Document Version: 2.5*  
+*Last Updated: October 5, 2025*  
+*Status: Phase 1 Complete - Production Ready with Grade-Specific Requirements*

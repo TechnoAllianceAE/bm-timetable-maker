@@ -58,12 +58,14 @@ class CSPSolverCompleteV25:
         rooms: List[Room],
         constraints: List[Constraint],
         num_solutions: int = 3,
-        subject_requirements: Optional[List[Dict]] = None
+        subject_requirements: Optional[List[Dict]] = None,
+        enforce_teacher_consistency: bool = True
     ) -> Tuple[List[Timetable], float, Optional[List[str]], Optional[List[str]]]:
         """
         Generate COMPLETE timetables with no gaps.
 
         VERSION 2.5: Now includes metadata in each TimetableEntry.
+        VERSION 2.6: Added enforce_teacher_consistency parameter.
 
         Args:
             classes: List of classes to schedule
@@ -75,6 +77,7 @@ class CSPSolverCompleteV25:
             num_solutions: Number of solutions to generate
             subject_requirements: Optional list of grade-subject period requirements
                                  [{"grade": int, "subject_id": str, "periods_per_week": int}]
+            enforce_teacher_consistency: If True, ensures one teacher per subject per class
 
         Returns:
             Tuple of (timetables, generation_time, conflicts, suggestions)
@@ -137,6 +140,22 @@ class CSPSolverCompleteV25:
                     print(f"    {subject_name}: {periods} periods/week "
                           f"{'[MORNING PREF]' if prefer_morning else ''}")
 
+        # Pre-assign teachers to (class, subject) pairs if consistency is enforced
+        try:
+            class_subject_teacher_map = self._pre_assign_teachers(
+                classes, subjects, teachers, teacher_subjects,
+                class_subject_distributions, enforce_teacher_consistency
+            )
+        except ValueError as e:
+            # Pre-assignment failed - return error with diagnostics
+            generation_time = time.time() - start_time
+            return [], generation_time, [str(e)], [
+                "Add more qualified teachers",
+                "Increase teacher max_periods_per_week",
+                "Reduce subject period requirements",
+                "Disable one-teacher-per-subject constraint if flexibility is acceptable"
+            ]
+
         # Generate solutions
         solutions = []
         for attempt in range(num_solutions):
@@ -146,7 +165,8 @@ class CSPSolverCompleteV25:
             solution = self._generate_complete_solution(
                 classes, subjects, teachers, active_slots, rooms,
                 teacher_subjects, class_subject_distributions,
-                subject_lookup, teacher_lookup  # v2.5: Pass lookups for metadata
+                subject_lookup, teacher_lookup,  # v2.5: Pass lookups for metadata
+                class_subject_teacher_map  # v2.6: Pass pre-assigned teachers
             )
 
             if solution:
@@ -198,6 +218,162 @@ class CSPSolverCompleteV25:
                 print(f"  [WARNING] No teachers found for {subject.name}")
         
         return teacher_subjects
+
+    def _pre_assign_teachers(
+        self,
+        classes: List[Class],
+        subjects: List[Subject],
+        teachers: List[Teacher],
+        teacher_subjects: Dict[str, List[Teacher]],
+        class_subject_distributions: Dict[str, Dict[str, int]],
+        enforce_consistency: bool
+    ) -> Dict[Tuple[str, str], str]:
+        """
+        Pre-assign one teacher to each (class, subject) pair.
+        
+        This ensures that the same teacher teaches all periods of a subject to a class,
+        providing consistency for students.
+        
+        Args:
+            classes: List of classes to schedule
+            subjects: List of subjects
+            teachers: List of teachers
+            teacher_subjects: Mapping of subject_id -> qualified teachers
+            class_subject_distributions: Per-class subject period requirements
+            enforce_consistency: Whether to enforce one teacher per subject per class
+            
+        Returns:
+            Dictionary mapping (class_id, subject_id) -> teacher_id
+            
+        Raises:
+            ValueError: If no qualified teacher available for a (class, subject) pair
+                       or if teacher capacity is exceeded
+        """
+        if not enforce_consistency:
+            # Skip pre-assignment if constraint is disabled
+            return {}
+        
+        if self.debug:
+            print(f"\n[CSP v{self.version}] Pre-assigning teachers to (class, subject) pairs")
+        
+        class_subject_teacher_map = {}
+        teacher_assignment_count = {t.id: 0 for t in teachers}  # Track periods assigned per teacher
+        
+        # Process each class
+        for class_obj in classes:
+            if self.debug:
+                print(f"\n  Processing {class_obj.name} (Grade {class_obj.grade}):")
+            
+            # Get subjects this class needs
+            subject_distribution = class_subject_distributions.get(class_obj.id, {})
+            
+            for subject_id, periods_needed in subject_distribution.items():
+                if periods_needed == 0:
+                    continue
+                
+                # Get subject details
+                subject = next((s for s in subjects if s.id == subject_id), None)
+                if not subject:
+                    continue
+                
+                # Get qualified teachers for this subject
+                qualified_teachers = teacher_subjects.get(subject_id, [])
+                
+                if not qualified_teachers:
+                    error_msg = (
+                        f"No qualified teacher available for {class_obj.name} - {subject.name}. "
+                        f"Please add teachers qualified to teach {subject.name}."
+                    )
+                    if self.debug:
+                        print(f"    ❌ {error_msg}")
+                    raise ValueError(error_msg)
+                
+                # Select best teacher based on current workload (load balancing)
+                best_teacher = None
+                min_load = float('inf')
+                
+                for teacher in qualified_teachers:
+                    current_load = teacher_assignment_count[teacher.id]
+                    
+                    # Check if teacher has capacity
+                    if current_load + periods_needed <= teacher.max_periods_per_week:
+                        if current_load < min_load:
+                            min_load = current_load
+                            best_teacher = teacher
+                
+                if not best_teacher:
+                    # No teacher has capacity
+                    teacher_loads = [
+                        f"{t.name}: {teacher_assignment_count[t.id]}/{t.max_periods_per_week}"
+                        for t in qualified_teachers
+                    ]
+                    error_msg = (
+                        f"All qualified teachers for {subject.name} are at capacity. "
+                        f"Current loads: {', '.join(teacher_loads)}. "
+                        f"Suggestions: Hire additional teachers, increase max_periods_per_week, "
+                        f"or reduce subject period requirements."
+                    )
+                    if self.debug:
+                        print(f"    ❌ {error_msg}")
+                    raise ValueError(error_msg)
+                
+                # Assign teacher to this (class, subject) pair
+                class_subject_teacher_map[(class_obj.id, subject_id)] = best_teacher.id
+                teacher_assignment_count[best_teacher.id] += periods_needed
+                
+                if self.debug:
+                    print(f"    ✓ {subject.name}: {best_teacher.name} "
+                          f"({periods_needed} periods, total: {teacher_assignment_count[best_teacher.id]})")
+        
+        if self.debug:
+            print(f"\n[CSP v{self.version}] Pre-assignment complete:")
+            print(f"  Total (class, subject) pairs: {len(class_subject_teacher_map)}")
+            print(f"  Teacher workload distribution:")
+            for teacher in teachers:
+                load = teacher_assignment_count[teacher.id]
+                if load > 0:
+                    percentage = (load / teacher.max_periods_per_week) * 100
+                    print(f"    {teacher.name}: {load}/{teacher.max_periods_per_week} periods ({percentage:.1f}%)")
+        
+        return class_subject_teacher_map
+
+    def _check_teacher_limits(
+        self,
+        teacher: Teacher,
+        slot: TimeSlot,
+        teacher_busy: Dict,
+        active_slots: List[TimeSlot]
+    ) -> bool:
+        """
+        Check if a teacher can accept more assignments without exceeding limits.
+        
+        Verifies both daily and weekly period limits for the teacher.
+        
+        Args:
+            teacher: The teacher to check
+            slot: The time slot being considered
+            teacher_busy: Dictionary tracking (teacher_id, slot_id) -> class_id assignments
+            active_slots: List of all active time slots
+            
+        Returns:
+            True if teacher can accept more assignments, False otherwise
+        """
+        # Check daily limit
+        day_count = sum(1 for k in teacher_busy
+                      if k[0] == teacher.id and
+                      any(s.id == k[1] and s.day_of_week == slot.day_of_week
+                          for s in active_slots))
+        
+        if day_count >= teacher.max_periods_per_day:
+            return False
+        
+        # Check weekly limit
+        week_count = sum(1 for k in teacher_busy if k[0] == teacher.id)
+        
+        if week_count >= teacher.max_periods_per_week:
+            return False
+        
+        return True
 
     def _calculate_subject_distribution(self, total_slots: int, subjects: List[Subject],
                                        grade: int, requirement_map: Dict) -> Dict:
@@ -278,12 +454,14 @@ class CSPSolverCompleteV25:
     def _generate_complete_solution(
         self, classes, subjects, teachers, active_slots, rooms,
         teacher_subjects, class_subject_distributions,
-        subject_lookup, teacher_lookup  # v2.5: NEW - for metadata extraction
+        subject_lookup, teacher_lookup,  # v2.5: NEW - for metadata extraction
+        class_subject_teacher_map  # v2.6: NEW - pre-assigned teachers
     ):
         """
         Generate a complete timetable with NO GAPS.
 
         VERSION 2.5: Now extracts and includes metadata in each TimetableEntry.
+        VERSION 2.6: Uses pre-assigned teachers for consistency.
         Uses per-class subject distributions based on grade-specific requirements.
 
         METADATA EXTRACTION:
@@ -291,6 +469,11 @@ class CSPSolverCompleteV25:
         - For each entry, extracts teacher constraints from Teacher model
         - Stores in subject_metadata and teacher_metadata fields
         - GA optimizer uses this for penalty calculations
+
+        TEACHER CONSISTENCY (v2.6):
+        - If class_subject_teacher_map is provided, uses pre-assigned teachers
+        - Ensures same teacher teaches all periods of a subject to a class
+        - Falls back to any qualified teacher if map is empty
 
         Args:
             classes: Classes to schedule
@@ -302,6 +485,7 @@ class CSPSolverCompleteV25:
             class_subject_distributions: Dict[class_id] -> (Subject -> period count mapping)
             subject_lookup: Dict[subject_id] -> Subject (v2.5)
             teacher_lookup: Dict[teacher_id] -> Teacher (v2.5)
+            class_subject_teacher_map: Dict[(class_id, subject_id)] -> teacher_id (v2.6)
 
         Returns:
             Complete Timetable with metadata-enriched entries
@@ -361,34 +545,50 @@ class CSPSolverCompleteV25:
                     continue
 
                 # Find available teacher
+                # v2.6: Use pre-assigned teacher if available
                 available_teacher = None
-                qualified_teachers = teacher_subjects.get(subject.id, [])
+                
+                if class_subject_teacher_map:
+                    # Use pre-assigned teacher for consistency
+                    assigned_teacher_id = class_subject_teacher_map.get((class_obj.id, subject.id))
+                    
+                    if assigned_teacher_id:
+                        assigned_teacher = teacher_lookup.get(assigned_teacher_id)
+                        
+                        if assigned_teacher:
+                            # Check if pre-assigned teacher is available at this slot
+                            if (assigned_teacher.id, slot.id) not in teacher_busy:
+                                # Use helper method to check limits
+                                if self._check_teacher_limits(assigned_teacher, slot, teacher_busy, active_slots):
+                                    available_teacher = assigned_teacher
+                                    if self.debug:
+                                        print(f"    [CONSISTENT] Using pre-assigned teacher: {assigned_teacher.name}")
+                
+                # Fallback: If no pre-assignment or pre-assigned teacher unavailable
+                if not available_teacher:
+                    qualified_teachers = teacher_subjects.get(subject.id, [])
+                    
+                    # Shuffle for variety
+                    random.shuffle(qualified_teachers)
 
-                # Shuffle for variety
-                random.shuffle(qualified_teachers)
-
-                for teacher in qualified_teachers:
-                    # Check if teacher is free at this slot
-                    if (teacher.id, slot.id) not in teacher_busy:
-                        # Check daily limit
-                        day_count = sum(1 for k in teacher_busy
-                                      if k[0] == teacher.id and
-                                      any(s.id == k[1] and s.day_of_week == slot.day_of_week
-                                          for s in active_slots))
-
-                        if day_count < teacher.max_periods_per_day:
-                            # Check weekly limit
-                            week_count = sum(1 for k in teacher_busy if k[0] == teacher.id)
-                            if week_count < teacher.max_periods_per_week:
+                    for teacher in qualified_teachers:
+                        # Check if teacher is free at this slot
+                        if (teacher.id, slot.id) not in teacher_busy:
+                            # Use helper method to check limits
+                            if self._check_teacher_limits(teacher, slot, teacher_busy, active_slots):
                                 available_teacher = teacher
+                                if self.debug and class_subject_teacher_map:
+                                    print(f"    [FALLBACK] Pre-assigned teacher unavailable, using: {teacher.name}")
                                 break
 
-                # If no qualified teacher available, try any teacher as substitute
-                if not available_teacher:
-                    for teacher in teachers:
-                        if (teacher.id, slot.id) not in teacher_busy:
-                            available_teacher = teacher
-                            break
+                    # If no qualified teacher available, try any teacher as substitute
+                    if not available_teacher:
+                        for teacher in teachers:
+                            if (teacher.id, slot.id) not in teacher_busy:
+                                available_teacher = teacher
+                                if self.debug:
+                                    print(f"    [SUBSTITUTE] No qualified teacher, using: {teacher.name}")
+                                break
 
                 # Find available room
                 available_room = None
