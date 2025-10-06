@@ -17,7 +17,7 @@ const SUBJECT_CODE_MAP: Record<string, string> = {
   'ART': 'Art',
   'MUS': 'Music',
   'HIN': 'Hindi',
-  'FRE': 'French',
+  'FR': 'French',  // Fixed: Changed from 'FRE' to 'FR' to match teacher assignments
 };
 
 @Injectable()
@@ -60,6 +60,10 @@ export class TimetablesService {
       ]);
 
       console.log('Found', classes.length, 'classes,', subjects.length, 'subjects,', rooms.length, 'rooms,', teachers.length, 'teachers');
+      console.log('Sample teacher from database:', teachers[0] ? { id: teachers[0].id, user: teachers[0].user } : 'none');
+
+      // Debug: Check if user relation is loaded
+      console.log('Teachers with user data:', teachers.filter(t => t.user).length, '/', teachers.length);
 
       // Prepare data for Python service with better error handling
       const mappedTeachers = teachers.map(teacher => {
@@ -91,6 +95,9 @@ export class TimetablesService {
           };
         }
       });
+
+      // Debug: Log first 3 mapped teachers to verify name field
+      console.log('First 3 mapped teachers:', JSON.stringify(mappedTeachers.slice(0, 3), null, 2));
 
       // Generate time slots (Monday-Friday, 8 periods per day)
       const timeSlots = [];
@@ -209,6 +216,7 @@ export class TimetablesService {
         teachers: mappedTeachers.map(teacher => ({
           id: teacher.id,
           user_id: teacher.id, // Using same ID for simplicity
+          name: teacher.name, // Teacher name for display and debugging
           subjects: this.transformTeacherSubjects(teacher.subjects),
           availability: typeof teacher.availability === 'string'
             ? JSON.parse(teacher.availability)
@@ -247,6 +255,9 @@ export class TimetablesService {
         timeSlotsCount: timetableData.time_slots.length,
         constraintsCount: timetableData.constraints.length,
       });
+
+      // Debug: Log first 3 teachers being sent to Python
+      console.log('First 3 teachers being sent to Python:', JSON.stringify(timetableData.teachers.slice(0, 3), null, 2));
 
       // Call Python timetable generation service
       const pythonUrl = this.configService.get('PYTHON_TIMETABLE_URL') || 'http://localhost:8000';

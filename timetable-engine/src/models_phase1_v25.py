@@ -58,6 +58,7 @@ class ConstraintType(str, Enum):
     PREFERRED_TIME_SLOT = "PREFERRED_TIME_SLOT"
     NO_GAPS = "NO_GAPS"
     LUNCH_BREAK = "LUNCH_BREAK"
+    ONE_TEACHER_PER_SUBJECT = "ONE_TEACHER_PER_SUBJECT"
 
 class ConstraintPriority(str, Enum):
     MANDATORY = "MANDATORY"
@@ -75,6 +76,7 @@ class School(BaseModel):
 class Teacher(BaseModel):
     id: str
     user_id: str
+    name: Optional[str] = None  # Teacher name for display purposes
     subjects: List[str]  # List of subject names/codes they can teach
     availability: Optional[Dict[str, Any]] = {}
     max_periods_per_day: int = 6
@@ -89,6 +91,7 @@ class Class(BaseModel):
     section: str
     stream: Optional[Stream] = None
     student_count: Optional[int] = None
+    home_room_id: Optional[str] = None  # Dedicated home classroom
 
 class Subject(BaseModel):
     """
