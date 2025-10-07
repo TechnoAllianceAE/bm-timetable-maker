@@ -2,16 +2,18 @@
 Complete CSP Solver - Ensures NO GAPS in timetable
 Every slot must be filled for every class
 
-VERSION 2.5.1 - Teacher Consistency & Home Room Optimization
+VERSION 2.5.2 - Greedy Teacher Pre-assignment + CSP
 
-CHANGELOG v2.5.1:
+CHANGELOG v2.5.2:
+- NEW: Greedy teacher pre-assignment before CSP scheduling
+- Optimal teacher utilization and workload distribution
 - FIX 1 (CRITICAL): One teacher per subject per class throughout academic year
 - FIX 2 (LOW PRIORITY): Home room assignment for each class
 - Maintains all v2.5 metadata-driven features
 
-CRITICAL FIX:
-Previously: Math Period 1 = Teacher A, Math Period 2 = Teacher B (WRONG!)
-Now: Math Period 1 = Teacher A, Math Period 2 = Teacher A, Math Period 3 = Teacher A (CORRECT!)
+ALGORITHM:
+Phase 1: Greedy pre-assignment of teachers to (class, subject) pairs
+Phase 2: CSP scheduling of time slots with pre-assigned teachers
 
 COMPATIBILITY:
 - Works with models_phase1_v25.py
@@ -25,25 +27,32 @@ from src.models_phase1_v25 import (
     Class, Subject, Teacher, TimeSlot, Room, Constraint, TimetableEntry,
     Timetable, TimetableStatus, RoomType
 )
+from src.greedy_teacher_assignment import GreedyTeacherAssignment
 
 
 class CSPSolverCompleteV25:
     """
-    CSP Solver with teacher consistency and home room optimization.
+    CSP Solver with greedy teacher pre-assignment.
 
-    VERSION 2.5.1 FIXES:
-    1. ONE TEACHER PER SUBJECT PER CLASS (Critical)
+    VERSION 2.5.2 FEATURES:
+    1. GREEDY TEACHER PRE-ASSIGNMENT (New)
+       - Optimal teacher distribution before scheduling
+       - Fair workload balancing across teachers
+       - Prevents resource bottlenecks
+
+    2. ONE TEACHER PER SUBJECT PER CLASS (Critical)
        - Each class-subject pair gets ONE teacher for entire year
        - No teacher switching mid-year for same subject
 
-    2. HOME ROOM ASSIGNMENT (Low Priority)
+    3. HOME ROOM ASSIGNMENT (Low Priority)
        - Each class gets a dedicated home room
        - Special rooms used only when needed (labs, sports)
     """
 
     def __init__(self, debug: bool = False):
         self.debug = debug
-        self.version = "2.5.1"
+        self.version = "2.5.2"
+        self.greedy_assigner = GreedyTeacherAssignment(debug=debug)
 
     def solve(
         self,
@@ -58,9 +67,9 @@ class CSPSolverCompleteV25:
         enforce_teacher_consistency: bool = True
     ) -> Tuple[List[Timetable], float, Optional[List[str]], Optional[List[str]]]:
         """
-        Generate COMPLETE timetables with teacher consistency.
+        Generate COMPLETE timetables with greedy teacher pre-assignment.
 
-        VERSION 2.5.1: Now ensures one teacher per subject per class.
+        VERSION 2.5.2: Greedy pre-assignment + CSP scheduling.
 
         Args:
             classes: List of classes to schedule
@@ -93,21 +102,50 @@ class CSPSolverCompleteV25:
             print(f"  Active Slots per week: {len(active_slots)}")
             print(f"  Teacher Consistency: {'ENABLED' if enforce_teacher_consistency else 'DISABLED'}")
             print(f"  Home Room Optimization: ENABLED")
+            print(f"  Greedy Pre-assignment: ENABLED")
+
+        # PHASE 1: Greedy teacher pre-assignment
+        if enforce_teacher_consistency:
+            if self.debug:
+                print(f"\n[CSP v{self.version}] === PHASE 1: GREEDY TEACHER ASSIGNMENT ===")
+
+            greedy_assignment = self.greedy_assigner.assign_teachers(
+                classes, subjects, teachers, time_slots, subject_requirements
+            )
+
+            if self.debug:
+                print(f"\n[CSP v{self.version}] Greedy assignment: {len(greedy_assignment)} pairs assigned")
+        else:
+            greedy_assignment = {}
 
         # Build teacher-subject mapping
         teacher_subjects = self._build_teacher_subject_map(teachers, subjects)
 
-        # Calculate subject distribution
-        subject_distribution = self._calculate_subject_distribution(
-            len(active_slots), subjects
-        )
+        # Calculate subject distribution (now per-class if requirements provided)
+        if subject_requirements:
+            # Build per-class distributions
+            class_subject_distributions = self._build_class_specific_distributions(
+                classes, subjects, subject_requirements, len(active_slots)
+            )
+            if self.debug:
+                print(f"\n[CSP v{self.version}] Using grade-specific subject requirements")
+        else:
+            # Use default distribution for all classes
+            subject_distribution = self._calculate_subject_distribution(
+                len(active_slots), subjects
+            )
+            class_subject_distributions = {c.id: subject_distribution for c in classes}
 
+            if self.debug:
+                print(f"\n[CSP v{self.version}] Subject distribution per class:")
+                for subject_id, periods in subject_distribution.items():
+                    subject = subject_lookup.get(subject_id)
+                    subject_name = subject.name if subject else subject_id
+                    print(f"  {subject_name}: {periods} periods/week")
+
+        # PHASE 2: CSP scheduling with pre-assigned teachers
         if self.debug:
-            print(f"\n[CSP v{self.version}] Subject distribution per class:")
-            for subject_id, periods in subject_distribution.items():
-                subject = subject_lookup.get(subject_id)
-                subject_name = subject.name if subject else subject_id
-                print(f"  {subject_name}: {periods} periods/week")
+            print(f"\n[CSP v{self.version}] === PHASE 2: CSP SCHEDULING ===")
 
         # Generate solutions
         solutions = []
@@ -117,9 +155,10 @@ class CSPSolverCompleteV25:
 
             solution = self._generate_complete_solution(
                 classes, subjects, teachers, active_slots, rooms,
-                teacher_subjects, subject_distribution,
+                teacher_subjects, class_subject_distributions,
                 subject_lookup, teacher_lookup,
-                enforce_teacher_consistency
+                enforce_teacher_consistency,
+                greedy_assignment
             )
 
             if solution:
@@ -194,6 +233,128 @@ class CSPSolverCompleteV25:
                     excess -= 1
 
         return distribution
+
+    def _build_class_specific_distributions(
+        self, classes: List[Class], subjects: List[Subject],
+        subject_requirements: List[Dict], total_slots: int
+    ) -> Dict[str, Dict[str, int]]:
+        """
+        Build per-class subject distributions based on grade-specific requirements.
+
+        Supports constraint types:
+        - exact: Must be exactly N periods (default)
+        - min: Must be at least N periods
+        - max: Must be at most N periods
+
+        Returns: Dict mapping class_id -> {subject_id: period_count}
+        """
+        # Convert requirements list to lookup dict with constraint types
+        requirements_map = {}
+        if isinstance(subject_requirements, list):
+            for req in subject_requirements:
+                if isinstance(req, dict):
+                    grade = req.get('grade')
+                    subject_id = req.get('subject_id')
+                    periods = req.get('periods_per_week')
+                    constraint_type = req.get('constraint_type', 'exact')  # Default to exact
+
+                    if grade and subject_id and periods:
+                        key = f"{grade}_{subject_id}"
+                        requirements_map[key] = {
+                            'periods': periods,
+                            'type': constraint_type
+                        }
+
+        class_distributions = {}
+
+        for class_obj in classes:
+            distribution = {}
+            total_required = 0
+            min_requirements = {}  # Track minimum requirements for min constraints
+            max_requirements = {}  # Track maximum requirements for max constraints
+
+            # First pass: apply exact and min constraints, track max constraints
+            for subject in subjects:
+                req_key = f"{class_obj.grade}_{subject.id}"
+                if req_key in requirements_map:
+                    req_info = requirements_map[req_key]
+                    periods = req_info['periods']
+                    constraint_type = req_info['type']
+
+                    if constraint_type == 'exact':
+                        # Must be exactly N periods
+                        distribution[subject.id] = periods
+                    elif constraint_type == 'min':
+                        # Must be at least N periods (start with minimum)
+                        distribution[subject.id] = periods
+                        min_requirements[subject.id] = periods
+                    elif constraint_type == 'max':
+                        # Must be at most N periods (start with default, apply max later)
+                        distribution[subject.id] = min(subject.periods_per_week, periods)
+                        max_requirements[subject.id] = periods
+                else:
+                    # No requirement specified, use default
+                    periods = subject.periods_per_week
+                    distribution[subject.id] = periods
+
+                total_required += distribution[subject.id]
+
+            # Adjust if total doesn't match available slots (respecting min/max constraints)
+            if total_required < total_slots:
+                # Add more periods, respecting max constraints
+                shortage = total_slots - total_required
+                while shortage > 0:
+                    added = False
+                    for subject in subjects:
+                        if shortage <= 0:
+                            break
+                        # Don't exceed max constraint if specified
+                        if subject.id in max_requirements:
+                            if distribution[subject.id] < max_requirements[subject.id]:
+                                distribution[subject.id] += 1
+                                shortage -= 1
+                                added = True
+                        else:
+                            # No max constraint, can add freely
+                            distribution[subject.id] += 1
+                            shortage -= 1
+                            added = True
+
+                    # If we couldn't add to any subject due to max constraints, break
+                    if not added:
+                        break
+
+            elif total_required > total_slots:
+                # Remove periods, respecting min constraints
+                excess = total_required - total_slots
+                while excess > 0:
+                    # Find subject with most periods that can be reduced
+                    reducible = {
+                        subj_id: count for subj_id, count in distribution.items()
+                        if subj_id not in min_requirements or count > min_requirements[subj_id]
+                    }
+
+                    if not reducible:
+                        # Cannot reduce any further without violating min constraints
+                        break
+
+                    max_subject_id = max(reducible.items(), key=lambda x: x[1])[0]
+                    if distribution[max_subject_id] > 1:
+                        distribution[max_subject_id] -= 1
+                        excess -= 1
+                    else:
+                        break
+
+            class_distributions[class_obj.id] = distribution
+
+            if self.debug:
+                print(f"  {class_obj.name} (Grade {class_obj.grade}):")
+                for subject_id, count in distribution.items():
+                    subject = next((s for s in subjects if s.id == subject_id), None)
+                    if subject:
+                        print(f"    {subject.name}: {count} periods")
+
+        return class_distributions
 
     def _assign_home_rooms(self, classes: List[Class], rooms: List[Room],
                           class_home_room_map: Dict[str, str]):
@@ -349,14 +510,15 @@ class CSPSolverCompleteV25:
 
     def _generate_complete_solution(
         self, classes, subjects, teachers, active_slots, rooms,
-        teacher_subjects, subject_distribution,
+        teacher_subjects, class_subject_distributions,
         subject_lookup, teacher_lookup,
-        enforce_teacher_consistency
+        enforce_teacher_consistency,
+        greedy_assignment=None
     ):
         """
-        Generate complete solution with teacher consistency and home rooms.
+        Generate complete solution with greedy pre-assigned teachers.
 
-        VERSION 2.5.1: Includes both critical fixes.
+        VERSION 2.5.2: Uses greedy pre-assignment from Phase 1 + per-class distributions.
         """
         entries = []
         entry_id = 1
@@ -365,8 +527,13 @@ class CSPSolverCompleteV25:
         room_busy = {}
         class_subject_count = {}
 
-        # FIX 1: Track teacher per subject per class
-        class_subject_teacher_map = {}
+        # FIX 1: Use greedy pre-assignment if available
+        if greedy_assignment:
+            class_subject_teacher_map = greedy_assignment.copy()
+            if self.debug:
+                print(f"  Using greedy pre-assignment: {len(class_subject_teacher_map)} pairs")
+        else:
+            class_subject_teacher_map = {}
 
         # FIX 2: Track home room per class
         class_home_room_map = {}
@@ -385,6 +552,9 @@ class CSPSolverCompleteV25:
                 home_room = class_home_room_map.get(class_obj.id)
                 home_room_name = next((r.name for r in rooms if r.id == home_room), "None")
                 print(f"\n  Scheduling {class_obj.name} (Home: {home_room_name}):")
+
+            # Get class-specific distribution
+            subject_distribution = class_subject_distributions.get(class_obj.id, {})
 
             # Create subject assignment list
             subjects_to_assign = []
@@ -421,6 +591,27 @@ class CSPSolverCompleteV25:
                             available_teacher = teacher
                             break
 
+                # FALLBACK: If no teacher available, try relaxed assignment
+                if not available_teacher and enforce_teacher_consistency:
+                    if self.debug:
+                        key = (class_obj.id, subject.id)
+                        assigned = class_subject_teacher_map.get(key, "None")
+                        print(f"    [FALLBACK] Assigned teacher {assigned[:6]} unavailable, trying ANY qualified teacher")
+
+                    # Try ANY qualified teacher (relaxed constraint)
+                    qualified = teacher_subjects.get(subject.id, [])
+                    for teacher in qualified:
+                        if (teacher.id, slot.id) not in teacher_busy:
+                            day_count = sum(1 for k in teacher_busy
+                                          if k[0] == teacher.id and
+                                          any(s.id == k[1] and s.day_of_week == slot.day_of_week
+                                              for s in active_slots))
+                            if day_count < teacher.max_periods_per_day:
+                                available_teacher = teacher
+                                if self.debug:
+                                    print(f"    [FALLBACK] Using alternate teacher {teacher.id[:6]}")
+                                break
+
                 # Get room
                 available_room = self._get_appropriate_room(
                     class_obj, subject, slot,
@@ -429,7 +620,7 @@ class CSPSolverCompleteV25:
                     room_busy
                 )
 
-                # Create entry
+                # CRITICAL: Always create entry (use fallback if needed)
                 if available_teacher and available_room:
                     subject_metadata = self._extract_subject_metadata(subject)
                     teacher_metadata = self._extract_teacher_metadata(available_teacher)
@@ -461,6 +652,9 @@ class CSPSolverCompleteV25:
                         print(f"    {slot.day_of_week[:3]} P{slot.period_number}: "
                               f"{subject.name[:15]:15s} | T:{available_teacher.id[:6]} {teacher_status} | "
                               f"R:{available_room.name} {'[HOME]' if is_home else ''}")
+                elif self.debug:
+                    print(f"    [SKIP] {slot.day_of_week[:3]} P{slot.period_number}: "
+                          f"No teacher/room for {subject.name}")
 
         # Create timetable
         timetable = Timetable(

@@ -33,6 +33,7 @@ interface GradeSubjectRequirement {
   grade: number;
   subjectId: string;
   periodsPerWeek: number;
+  constraintType?: 'exact' | 'min' | 'max';  // New field
 }
 
 interface GenerationParams {
@@ -50,9 +51,6 @@ interface GenerationParams {
   constraints: {
     maxConsecutiveTeachingHours: number;
     minBreaksBetweenClasses: number;
-    avoidBackToBackDifficultSubjects: boolean;
-    preferMorningForDifficultSubjects: boolean;
-    balanceTeacherWorkload: boolean;
   };
   hardRules: {
     noTeacherConflicts: boolean;
@@ -73,6 +71,9 @@ interface GenerationParams {
     minimizeRoomChanges: boolean;
     preferredTimeSlots: boolean;
     teacherPreferences: boolean;
+    avoidBackToBackDifficultSubjects: boolean;
+    preferMorningForDifficultSubjects: boolean;
+    balanceTeacherWorkload: boolean;
   };
 }
 
@@ -104,9 +105,6 @@ export default function GenerateTimetablePage() {
     constraints: {
       maxConsecutiveTeachingHours: 3,
       minBreaksBetweenClasses: 1,
-      avoidBackToBackDifficultSubjects: true,
-      preferMorningForDifficultSubjects: true,
-      balanceTeacherWorkload: true,
     },
     hardRules: {
       noTeacherConflicts: true,
@@ -127,6 +125,9 @@ export default function GenerateTimetablePage() {
       minimizeRoomChanges: true,
       preferredTimeSlots: false,
       teacherPreferences: false,
+      avoidBackToBackDifficultSubjects: false,  // Unchecked by default
+      preferMorningForDifficultSubjects: false,  // Unchecked by default
+      balanceTeacherWorkload: false,  // Unchecked by default
     },
   });
 
@@ -218,9 +219,9 @@ export default function GenerateTimetablePage() {
           // Basic constraints
           maxConsecutiveTeachingHours: params.constraints.maxConsecutiveTeachingHours,
           minBreaksBetweenClasses: params.constraints.minBreaksBetweenClasses,
-          avoidBackToBackDifficultSubjects: params.constraints.avoidBackToBackDifficultSubjects,
-          preferMorningForDifficultSubjects: params.constraints.preferMorningForDifficultSubjects,
-          balanceTeacherWorkload: params.constraints.balanceTeacherWorkload,
+          avoidBackToBackDifficultSubjects: params.softRules.avoidBackToBackDifficultSubjects,
+          preferMorningForDifficultSubjects: params.softRules.preferMorningForDifficultSubjects,
+          balanceTeacherWorkload: params.softRules.balanceTeacherWorkload,
 
           // Schedule structure
           periodsPerDay: params.periodsPerDay,
@@ -316,7 +317,8 @@ export default function GenerateTimetablePage() {
     setSubjectRequirements([...subjectRequirements, {
       grade: defaultGrade,
       subjectId: subjects[0]?.id || '',
-      periodsPerWeek: 5
+      periodsPerWeek: 5,
+      constraintType: 'exact'  // Default to exact constraint
     }]);
   };
 
@@ -562,53 +564,6 @@ export default function GenerateTimetablePage() {
                     />
                   </div>
                 </div>
-                <div className="space-y-3">
-                  <label className="flex items-center">
-                    <input
-                      type="checkbox"
-                      checked={params.constraints.avoidBackToBackDifficultSubjects}
-                      onChange={(e) =>
-                        handleConstraintChange(
-                          'avoidBackToBackDifficultSubjects',
-                          e.target.checked
-                        )
-                      }
-                      className="rounded border-gray-300 text-blue-600 shadow-sm mr-3"
-                    />
-                    <span className="text-sm font-medium text-gray-700">
-                      Avoid back-to-back difficult subjects
-                    </span>
-                  </label>
-                  <label className="flex items-center">
-                    <input
-                      type="checkbox"
-                      checked={params.constraints.preferMorningForDifficultSubjects}
-                      onChange={(e) =>
-                        handleConstraintChange(
-                          'preferMorningForDifficultSubjects',
-                          e.target.checked
-                        )
-                      }
-                      className="rounded border-gray-300 text-blue-600 shadow-sm mr-3"
-                    />
-                    <span className="text-sm font-medium text-gray-700">
-                      Schedule difficult subjects in morning periods
-                    </span>
-                  </label>
-                  <label className="flex items-center">
-                    <input
-                      type="checkbox"
-                      checked={params.constraints.balanceTeacherWorkload}
-                      onChange={(e) =>
-                        handleConstraintChange('balanceTeacherWorkload', e.target.checked)
-                      }
-                      className="rounded border-gray-300 text-blue-600 shadow-sm mr-3"
-                    />
-                    <span className="text-sm font-medium text-gray-700">
-                      Balance teacher workload across days
-                    </span>
-                  </label>
-                </div>
               </div>
             </div>
 
@@ -618,29 +573,27 @@ export default function GenerateTimetablePage() {
                 Hard Rules
                 <span className="text-sm text-red-600 ml-2">(Must be satisfied)</span>
               </h2>
+
+              {/* Always enforced constraints */}
+              <div className="mb-4 p-3 bg-gray-50 border border-gray-200 rounded">
+                <h3 className="text-sm font-semibold text-gray-700 mb-2">Always Enforced (Cannot be disabled)</h3>
+                <div className="space-y-1 text-sm text-gray-600">
+                  <div className="flex items-center">
+                    <span className="mr-2">✓</span>
+                    <span>No teacher conflicts - A teacher cannot be in two places at once</span>
+                  </div>
+                  <div className="flex items-center">
+                    <span className="mr-2">✓</span>
+                    <span>No room conflicts - A room cannot host multiple classes simultaneously</span>
+                  </div>
+                  <div className="flex items-center">
+                    <span className="mr-2">✓</span>
+                    <span>Complete slot coverage - All class periods must be filled (no gaps)</span>
+                  </div>
+                </div>
+              </div>
+
               <div className="space-y-3">
-                <label className="flex items-center">
-                  <input
-                    type="checkbox"
-                    checked={params.hardRules.noTeacherConflicts}
-                    onChange={(e) => handleHardRuleChange('noTeacherConflicts', e.target.checked)}
-                    className="rounded border-gray-300 text-red-600 shadow-sm mr-3"
-                  />
-                  <span className="text-sm font-medium text-gray-700">
-                    No teacher conflicts - A teacher cannot be in two places at once
-                  </span>
-                </label>
-                <label className="flex items-center">
-                  <input
-                    type="checkbox"
-                    checked={params.hardRules.noRoomConflicts}
-                    onChange={(e) => handleHardRuleChange('noRoomConflicts', e.target.checked)}
-                    className="rounded border-gray-300 text-red-600 shadow-sm mr-3"
-                  />
-                  <span className="text-sm font-medium text-gray-700">
-                    No room conflicts - A room cannot host multiple classes simultaneously
-                  </span>
-                </label>
                 <label className="flex items-center">
                   <input
                     type="checkbox"
@@ -805,6 +758,39 @@ export default function GenerateTimetablePage() {
                     Teacher preferences - Consider individual teacher scheduling preferences
                   </span>
                 </label>
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={params.softRules.avoidBackToBackDifficultSubjects}
+                    onChange={(e) => handleSoftRuleChange('avoidBackToBackDifficultSubjects', e.target.checked)}
+                    className="rounded border-gray-300 text-blue-600 shadow-sm mr-3"
+                  />
+                  <span className="text-sm font-medium text-gray-700">
+                    Avoid back-to-back difficult subjects
+                  </span>
+                </label>
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={params.softRules.preferMorningForDifficultSubjects}
+                    onChange={(e) => handleSoftRuleChange('preferMorningForDifficultSubjects', e.target.checked)}
+                    className="rounded border-gray-300 text-blue-600 shadow-sm mr-3"
+                  />
+                  <span className="text-sm font-medium text-gray-700">
+                    Schedule difficult subjects in morning periods
+                  </span>
+                </label>
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={params.softRules.balanceTeacherWorkload}
+                    onChange={(e) => handleSoftRuleChange('balanceTeacherWorkload', e.target.checked)}
+                    className="rounded border-gray-300 text-blue-600 shadow-sm mr-3"
+                  />
+                  <span className="text-sm font-medium text-gray-700">
+                    Balance teacher workload across days
+                  </span>
+                </label>
               </div>
             </div>
 
@@ -825,6 +811,7 @@ export default function GenerateTimetablePage() {
                       <tr>
                         <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase">Grade</th>
                         <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase">Subject</th>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase">Type</th>
                         <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase">Periods/Week</th>
                         <th className="px-4 py-3"></th>
                       </tr>
@@ -859,6 +846,17 @@ export default function GenerateTimetablePage() {
                               </select>
                             </td>
                             <td className="px-4 py-3">
+                              <select
+                                value={req.constraintType || 'exact'}
+                                onChange={(e) => updateRequirement(index, 'constraintType', e.target.value as 'exact' | 'min' | 'max')}
+                                className="border border-gray-300 rounded px-2 py-1 text-sm"
+                              >
+                                <option value="exact">Exact</option>
+                                <option value="min">Min</option>
+                                <option value="max">Max</option>
+                              </select>
+                            </td>
+                            <td className="px-4 py-3">
                               <input
                                 type="number"
                                 min="1"
@@ -870,6 +868,7 @@ export default function GenerateTimetablePage() {
                             </td>
                             <td className="px-4 py-3 text-right">
                               <button
+                                type="button"
                                 onClick={() => removeRequirement(index)}
                                 className="text-red-600 hover:text-red-800 text-sm font-medium"
                               >
@@ -885,6 +884,7 @@ export default function GenerateTimetablePage() {
               )}
 
               <button
+                type="button"
                 onClick={addRequirement}
                 disabled={subjects.length === 0 || classes.length === 0}
                 className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-sm font-medium"

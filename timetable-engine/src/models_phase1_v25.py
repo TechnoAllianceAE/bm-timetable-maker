@@ -177,10 +177,16 @@ class GradeSubjectRequirement(BaseModel):
     """
     Defines required periods per week for a subject in a specific grade.
     Used to enforce curriculum requirements in timetable generation.
+
+    constraint_type options:
+    - 'exact': Must be exactly periods_per_week (default)
+    - 'min': Must be at least periods_per_week
+    - 'max': Must be at most periods_per_week
     """
     grade: int = Field(ge=1, le=12)
     subject_id: str
     periods_per_week: int = Field(ge=1, le=40)
+    constraint_type: str = Field(default='exact', pattern='^(exact|min|max)$')
 
 class OptimizationWeights(BaseModel):
     """

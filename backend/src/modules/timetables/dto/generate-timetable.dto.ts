@@ -1,6 +1,12 @@
-import { IsString, IsOptional, IsObject, IsDateString, IsArray, ValidateNested, IsInt } from 'class-validator';
+import { IsString, IsOptional, IsObject, IsDateString, IsArray, ValidateNested, IsInt, IsEnum } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
+
+export enum ConstraintType {
+  EXACT = 'exact',
+  MIN = 'min',
+  MAX = 'max',
+}
 
 export class GradeSubjectRequirementDto {
   @ApiProperty({ example: 1, description: 'Grade number (1-12)' })
@@ -14,6 +20,16 @@ export class GradeSubjectRequirementDto {
   @ApiProperty({ example: 6, description: 'Required periods per week' })
   @IsInt()
   periodsPerWeek: number;
+
+  @ApiPropertyOptional({
+    enum: ConstraintType,
+    example: 'exact',
+    description: 'Constraint type: exact (must be exactly N), min (at least N), max (at most N)',
+    default: 'exact'
+  })
+  @IsOptional()
+  @IsEnum(ConstraintType)
+  constraintType?: ConstraintType;
 }
 
 export class GenerateTimetableDto {

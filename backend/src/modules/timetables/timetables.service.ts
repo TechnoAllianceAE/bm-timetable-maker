@@ -128,30 +128,39 @@ export class TimetablesService {
       const hardRules = generateTimetableDto.constraints?.hardRules || {};
       const softRules = generateTimetableDto.constraints?.softRules || {};
 
-      // Add hard constraints
-      if (hardRules.noTeacherConflicts) {
-        constraints.push({
-          id: 'no_teacher_conflicts',
-          school_id: school.id,
-          type: 'TEACHER_AVAILABILITY',
-          priority: 'MANDATORY',
-          entity_type: 'TEACHER',
-          parameters: {},
-          description: 'No teacher should be assigned to multiple classes at the same time',
-        });
-      }
+      // ALWAYS ENFORCED: Core physical constraints (cannot be disabled)
+      // These are fundamental impossibilities, not preferences
+      constraints.push({
+        id: 'no_teacher_conflicts',
+        school_id: school.id,
+        type: 'TEACHER_AVAILABILITY',
+        priority: 'MANDATORY',
+        entity_type: 'TEACHER',
+        parameters: {},
+        description: 'No teacher should be assigned to multiple classes at the same time',
+      });
 
-      if (hardRules.noRoomConflicts) {
-        constraints.push({
-          id: 'no_room_conflicts',
-          school_id: school.id,
-          type: 'ROOM_CAPACITY',
-          priority: 'MANDATORY',
-          entity_type: 'ROOM',
-          parameters: {},
-          description: 'No room should be assigned to multiple classes at the same time',
-        });
-      }
+      constraints.push({
+        id: 'no_room_conflicts',
+        school_id: school.id,
+        type: 'ROOM_CAPACITY',
+        priority: 'MANDATORY',
+        entity_type: 'ROOM',
+        parameters: {},
+        description: 'No room should be assigned to multiple classes at the same time',
+      });
+
+      constraints.push({
+        id: 'complete_slot_coverage',
+        school_id: school.id,
+        type: 'SLOT_COVERAGE',
+        priority: 'MANDATORY',
+        entity_type: 'CLASS',
+        parameters: {},
+        description: 'All class periods must be filled with no gaps',
+      });
+
+      // Configurable hard constraints
 
       if (hardRules.maxPeriodsPerDayPerTeacher) {
         constraints.push({
@@ -240,6 +249,7 @@ export class TimetablesService {
           grade: req.grade,
           subject_id: req.subjectId,
           periods_per_week: req.periodsPerWeek,
+          constraint_type: req.constraintType || 'exact', // Default to exact if not specified
         })) || null,
         options: 3,
         timeout: 60,
@@ -448,7 +458,31 @@ export class TimetablesService {
         // Extract the detailed error from Python service
         let errorMessage = 'Unknown error from Python service';
 
-        if (error.response.data?.detail) {
+        // Check for validation failure (v2.5.1 format)
+        if (error.response.data?.validation && error.response.data?.conflicts) {
+          const validation = error.response.data.validation;
+          const conflicts = error.response.data.conflicts;
+
+          // Build user-friendly error message
+          errorMessage = `Timetable generation completed but failed validation:\n`;
+          errorMessage += `- ${conflicts.length} critical issues found\n`;
+
+          // Show first few critical issues
+          if (conflicts.length > 0) {
+            errorMessage += `\nCritical Issues:\n`;
+            conflicts.slice(0, 5).forEach((issue, idx) => {
+              errorMessage += `${idx + 1}. ${issue}\n`;
+            });
+            if (conflicts.length > 5) {
+              errorMessage += `... and ${conflicts.length - 5} more issues\n`;
+            }
+          }
+
+          // Add summary stats
+          if (validation.stats) {
+            errorMessage += `\nStats: ${JSON.stringify(validation.stats)}\n`;
+          }
+        } else if (error.response.data?.detail) {
           if (Array.isArray(error.response.data.detail)) {
             // FastAPI validation errors
             const validationErrors = error.response.data.detail.map(err =>

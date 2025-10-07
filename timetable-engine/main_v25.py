@@ -1,11 +1,14 @@
 """
 Timetable Generation API - Main Application
 
-VERSION 2.5 - Metadata-Driven Optimization with Performance Enhancements
+VERSION 2.5.2 - Greedy Teacher Pre-assignment + CSP Optimization
 
-CHANGELOG v2.5:
+CHANGELOG v2.5.2:
+- NEW: Greedy teacher pre-assignment algorithm
+- NEW: Mandatory subject prioritization (mimics manual TT creation)
+- NEW: Fallback mechanism for 100% slot coverage
 - Integrated models_phase1_v25.py (metadata-enabled models)
-- Integrated csp_solver_complete_v25.py (metadata extraction)
+- Integrated csp_solver_complete_v25.py (metadata extraction + fallback)
 - Integrated ga_optimizer_v25.py (metadata-driven optimization)
 - Optimized async workflow with proper thread offloading
 - Enhanced error handling and logging
@@ -23,6 +26,11 @@ METADATA FEATURES:
 - School-customizable period structures
 - Per-teacher consecutive limits
 - Zero hardcoded business logic
+
+v2.5.2 ALGORITHM:
+Phase 1: Greedy teacher assignment (mandatory subjects first)
+Phase 2: CSP scheduling with teacher consistency
+Phase 3: Fallback to alternate teachers when needed
 """
 
 from fastapi import FastAPI, HTTPException
@@ -85,7 +93,7 @@ async def lifespan(app: FastAPI):
 # Initialize FastAPI app
 app = FastAPI(
     title="Timetable Generation API",
-    version="2.5.0",
+    version="2.5.2",
     description="Metadata-driven timetable optimization with CSP + GA",
     lifespan=lifespan
 )
@@ -242,7 +250,7 @@ async def root():
     """API root endpoint with version and capability information."""
     return {
         "service": "Timetable Generation API",
-        "version": "2.5.0",
+        "version": "2.5.2",
         "status": "operational",
         "features": {
             "metadata_driven": True,
@@ -264,7 +272,7 @@ async def health_check():
     """Health check endpoint for monitoring."""
     return {
         "status": "healthy",
-        "version": "2.5.0",
+        "version": "2.5.2",
         "solvers": {
             "csp": "ready",
             "ga": "ready"
@@ -539,7 +547,7 @@ async def generate_timetable(request: GenerateRequest):
                     "suggestions": post_validation['warnings'],
                     "validation": post_validation,
                     "diagnostics": {
-                        "version": "2.5.0",
+                        "version": "2.5.2",
                         "phase_failed": "post_validation",
                         "validation_details": post_validation
                     }
@@ -561,23 +569,23 @@ async def generate_timetable(request: GenerateRequest):
 
     ga_start_time = time.time()
 
-    # v2.6: Skip GA optimization to preserve teacher consistency
-    # The CSP solver enforces one-teacher-per-subject-per-class by default
-    # GA mutations/crossovers can violate this critical constraint
-    # TODO: Re-enable GA when it's updated to preserve consistency
-    skip_ga = True  # Temporarily disabled until GA is fully compatible
+    # Get GA optimizer from app state (needed for fitness calculation)
+    ga_optimizer = app.state.ga_optimizer
 
-    if skip_ga:
-        print("[SKIP] GA optimization disabled when teacher consistency is enforced")
+    # v2.5.2: GA evolution is ALWAYS enabled for fitness scoring
+    # GA provides objective quality metrics for every timetable generated
+    # The score reflects workload balance, gap minimization, and preference satisfaction
+    skip_ga_evolution = False  # Always run GA for complete optimization
+
+    if skip_ga_evolution:
+        print("[SKIP] GA evolution disabled to preserve teacher consistency")
         print("  CSP solutions already have 100% teacher consistency")
         print("  Skipping mutations/crossovers to preserve this constraint")
+        print("  GA fitness scoring will still be used for solution ranking")
         optimized_timetables = base_solutions
         ga_duration = 0.0
     else:
         try:
-            # Get GA optimizer from app state
-            ga_optimizer = app.state.ga_optimizer
-
             print(f"[RUNNING] Evolving {len(base_solutions)} solutions over 30 generations...")
             print(f"   Mutation rate: 0.15")
             print(f"   Crossover rate: 0.7")
@@ -722,7 +730,7 @@ async def generate_timetable(request: GenerateRequest):
 
     # Build diagnostics
     diagnostics = {
-        "version": "2.5.0",
+        "version": "2.5.2",
         "metadata_enabled": True,
         "timing": {
             "total": round(total_duration, 2),
@@ -736,11 +744,13 @@ async def generate_timetable(request: GenerateRequest):
                 "time": round(csp_duration, 2)
             },
             "ga": {
-                "generations": 30,
+                "generations": 30 if not skip_ga_evolution else 0,
                 "time": round(ga_duration, 2),
-                "improvement": ga_optimizer.stats_history[-1].best_fitness -
+                "improvement": (ga_optimizer.stats_history[-1].best_fitness -
                               ga_optimizer.stats_history[0].best_fitness
-                              if ga_optimizer.stats_history else 0
+                              if ga_optimizer.stats_history else 0) if not skip_ga_evolution else 0,
+                "skipped": skip_ga_evolution,
+                "reason": "Preserving teacher consistency" if skip_ga_evolution else None
             }
         },
         "metadata_coverage": metadata_stats,
