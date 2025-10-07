@@ -449,14 +449,10 @@ class CSPSolverCompleteV25:
                             print(f"      [ASSIGN] {class_obj.name} {subject.name} → Teacher {teacher.id[:6]}")
                         return teacher
 
-        # No qualified teacher available - try any teacher
-        for teacher in teachers:
-            if (teacher.id, slot.id) not in teacher_busy:
-                class_subject_teacher_map[key] = teacher.id
-                if self.debug:
-                    print(f"      [SUBSTITUTE] Using {teacher.id[:6]} for {subject.name}")
-                return teacher
-
+        # CRITICAL: DO NOT use substitute teachers - this violates teacher consistency
+        # Instead, return None and let the subject rotation logic try a different subject
+        if self.debug:
+            print(f"      [NO TEACHER] No qualified teacher available for {class_obj.name} {subject.name}")
         return None
 
     def _get_appropriate_room(
@@ -565,96 +561,98 @@ class CSPSolverCompleteV25:
             subjects_to_assign = subjects_to_assign[:len(active_slots)]
 
             # Assign each slot
+            # Track which subjects have been used in each slot position
+            used_subject_ids = set()
+
             for slot_index, slot in enumerate(active_slots):
-                subject_id = subjects_to_assign[slot_index]
-                subject = subject_lookup.get(subject_id)
+                # CRITICAL FIX: Try multiple subjects until we find one whose teacher is available
+                # This preserves teacher consistency while ensuring no gaps
+                assigned = False
 
-                if not subject:
-                    continue
+                for try_index in range(len(subjects_to_assign)):
+                    # Calculate which subject to try (rotate through the list)
+                    actual_index = (slot_index + try_index) % len(subjects_to_assign)
+                    subject_id = subjects_to_assign[actual_index]
+                    subject = subject_lookup.get(subject_id)
 
-                # Get teacher (with consistency if enabled)
-                if enforce_teacher_consistency:
-                    available_teacher = self._get_consistent_teacher(
-                        class_obj, subject, slot,
-                        class_subject_teacher_map,
-                        teacher_subjects,
-                        teachers,
-                        teacher_busy,
-                        active_slots
-                    )
-                else:
-                    # Old behavior - any available teacher
-                    available_teacher = None
-                    qualified = teacher_subjects.get(subject.id, [])
-                    for teacher in qualified:
-                        if (teacher.id, slot.id) not in teacher_busy:
-                            available_teacher = teacher
-                            break
+                    if not subject:
+                        continue
 
-                # FALLBACK: If no teacher available, try relaxed assignment
-                if not available_teacher and enforce_teacher_consistency:
-                    if self.debug:
-                        key = (class_obj.id, subject.id)
-                        assigned = class_subject_teacher_map.get(key, "None")
-                        print(f"    [FALLBACK] Assigned teacher {assigned[:6]} unavailable, trying ANY qualified teacher")
+                    # Skip if we've already assigned enough periods for this subject
+                    current_count = class_subject_count.get((class_obj.id, subject.id), 0)
+                    target_count = subject_distribution.get(subject.id, 0)
+                    if current_count >= target_count:
+                        continue
 
-                    # Try ANY qualified teacher (relaxed constraint)
-                    qualified = teacher_subjects.get(subject.id, [])
-                    for teacher in qualified:
-                        if (teacher.id, slot.id) not in teacher_busy:
-                            day_count = sum(1 for k in teacher_busy
-                                          if k[0] == teacher.id and
-                                          any(s.id == k[1] and s.day_of_week == slot.day_of_week
-                                              for s in active_slots))
-                            if day_count < teacher.max_periods_per_day:
+                    # Get teacher (with consistency if enabled)
+                    if enforce_teacher_consistency:
+                        available_teacher = self._get_consistent_teacher(
+                            class_obj, subject, slot,
+                            class_subject_teacher_map,
+                            teacher_subjects,
+                            teachers,
+                            teacher_busy,
+                            active_slots
+                        )
+                    else:
+                        # Old behavior - any available teacher
+                        available_teacher = None
+                        qualified = teacher_subjects.get(subject.id, [])
+                        for teacher in qualified:
+                            if (teacher.id, slot.id) not in teacher_busy:
                                 available_teacher = teacher
-                                if self.debug:
-                                    print(f"    [FALLBACK] Using alternate teacher {teacher.id[:6]}")
                                 break
 
-                # Get room
-                available_room = self._get_appropriate_room(
-                    class_obj, subject, slot,
-                    class_home_room_map,
-                    rooms,
-                    room_busy
-                )
+                    # Get room if teacher is available
+                    available_room = None
+                    if available_teacher:
+                        available_room = self._get_appropriate_room(
+                            class_obj, subject, slot,
+                            class_home_room_map,
+                            rooms,
+                            room_busy
+                        )
 
-                # CRITICAL: Always create entry (use fallback if needed)
-                if available_teacher and available_room:
-                    subject_metadata = self._extract_subject_metadata(subject)
-                    teacher_metadata = self._extract_teacher_metadata(available_teacher)
+                    # If both teacher and room available, create entry
+                    if available_teacher and available_room:
+                        subject_metadata = self._extract_subject_metadata(subject)
+                        teacher_metadata = self._extract_teacher_metadata(available_teacher)
 
-                    entry = TimetableEntry(
-                        id=f"entry_{entry_id}",
-                        timetable_id="solution",
-                        class_id=class_obj.id,
-                        subject_id=subject.id,
-                        time_slot_id=slot.id,
-                        teacher_id=available_teacher.id,
-                        room_id=available_room.id,
-                        day_of_week=slot.day_of_week,
-                        period_number=slot.period_number,
-                        is_fixed=False,
-                        subject_metadata=subject_metadata,
-                        teacher_metadata=teacher_metadata
-                    )
-                    entries.append(entry)
-                    entry_id += 1
+                        entry = TimetableEntry(
+                            id=f"entry_{entry_id}",
+                            timetable_id="solution",
+                            class_id=class_obj.id,
+                            subject_id=subject.id,
+                            time_slot_id=slot.id,
+                            teacher_id=available_teacher.id,
+                            room_id=available_room.id,
+                            day_of_week=slot.day_of_week,
+                            period_number=slot.period_number,
+                            is_fixed=False,
+                            subject_metadata=subject_metadata,
+                            teacher_metadata=teacher_metadata
+                        )
+                        entries.append(entry)
+                        entry_id += 1
 
-                    teacher_busy[(available_teacher.id, slot.id)] = class_obj.id
-                    room_busy[(available_room.id, slot.id)] = class_obj.id
-                    class_subject_count[(class_obj.id, subject.id)] += 1
+                        teacher_busy[(available_teacher.id, slot.id)] = class_obj.id
+                        room_busy[(available_room.id, slot.id)] = class_obj.id
+                        class_subject_count[(class_obj.id, subject.id)] += 1
+                        assigned = True
 
-                    if self.debug:
-                        is_home = available_room.id == class_home_room_map.get(class_obj.id)
-                        teacher_status = "[OK]" if enforce_teacher_consistency else ""
-                        print(f"    {slot.day_of_week[:3]} P{slot.period_number}: "
-                              f"{subject.name[:15]:15s} | T:{available_teacher.id[:6]} {teacher_status} | "
-                              f"R:{available_room.name} {'[HOME]' if is_home else ''}")
-                elif self.debug:
+                        if self.debug:
+                            is_home = available_room.id == class_home_room_map.get(class_obj.id)
+                            teacher_status = "[OK]" if enforce_teacher_consistency else ""
+                            alt_status = f" [ALT:{try_index}]" if try_index > 0 else ""
+                            print(f"    {slot.day_of_week[:3]} P{slot.period_number}: "
+                                  f"{subject.name[:15]:15s} | T:{available_teacher.id[:6]} {teacher_status}{alt_status} | "
+                                  f"R:{available_room.name} {'[HOME]' if is_home else ''}")
+                        break
+
+                # If no subject could be assigned to this slot, log it
+                if not assigned and self.debug:
                     print(f"    [SKIP] {slot.day_of_week[:3]} P{slot.period_number}: "
-                          f"No teacher/room for {subject.name}")
+                          f"No available teacher/room for any remaining subject")
 
         # Create timetable
         timetable = Timetable(

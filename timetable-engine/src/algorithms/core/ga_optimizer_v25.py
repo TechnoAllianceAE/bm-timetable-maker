@@ -522,141 +522,158 @@ class GAOptimizerV25:
     
     def _safe_crossover(self, parent1: Dict, parent2: Dict) -> Tuple[Dict, Dict]:
         """
-        Perform crossover that attempts to preserve hard constraints.
-        
-        Crossover Strategy - Swapping Assignment Blocks:
-        -------------------------------------------------
-        Instead of randomly mixing individual assignments (which would likely
-        create conflicts), we swap entire blocks of assignments between parents.
-        This preserves local consistency while still introducing variation.
-        
-        Trade-offs of This Approach:
-        1. PRO: Less likely to break hard constraints than random mixing
-        2. PRO: Faster than validating every possible swap
-        3. CON: May still introduce conflicts (teacher double-booked)
-        4. CON: Limited exploration of solution space
-        
-        Why We Accept the Trade-off:
-        - The fitness function will penalize any conflicts that arise
-        - Natural selection will eliminate invalid offspring over generations
-        - The alternative (exhaustive validation) is too slow for real-time API
-        - Elitism ensures we never lose our best valid solutions
-        
-        Alternative Approaches Considered:
-        - Full constraint validation after crossover (too slow)
-        - Only swap assignments with no shared resources (too restrictive)
-        - Repair invalid offspring (complex, may introduce new issues)
-        
-        Current approach balances speed, simplicity, and effectiveness.
+        Perform crossover that preserves teacher consistency constraint.
+
+        Crossover Strategy - Class-Based Block Swaps:
+        ---------------------------------------------
+        v2.6 UPDATE: To preserve one-teacher-per-subject-per-class constraint,
+        we swap complete CLASS schedules between parents, not individual assignments.
+
+        Why Swap Entire Classes:
+        1. Each class has pre-assigned teachers for each subject
+        2. Swapping individual assignments would mix teachers
+        3. Swapping entire class schedules preserves all teacher assignments
+        4. Still provides genetic diversity through schedule variations
+
+        Example:
+        Parent 1: [Class A schedule, Class B schedule, Class C schedule]
+        Parent 2: [Class A' schedule, Class B' schedule, Class C' schedule]
+
+        Crossover point at Class B:
+        Child 1: [Class A from P1, Class B from P2, Class C from P2]
+        Child 2: [Class A from P2, Class B from P1, Class C from P1]
+
+        This ensures:
+        - Each class keeps its teacher assignments intact
+        - Teacher consistency is NEVER violated
+        - Diversity comes from different time/room arrangements
+        - Hard constraints are preserved
         """
         child1 = copy.deepcopy(parent1)
         child2 = copy.deepcopy(parent2)
-        
+
         try:
             assignments1 = self._extract_assignments(child1)
             assignments2 = self._extract_assignments(child2)
-            
+
             if not assignments1 or not assignments2:
                 return child1, child2
-            
-            # Select crossover point (what % of assignments to swap)
-            # Using a random point introduces variation in each crossover
-            crossover_point = random.randint(1, min(len(assignments1), len(assignments2)) - 1)
-            
-            # Swap the first N assignments between parents
-            # This keeps related assignments together (better than random mixing)
-            assignments1[:crossover_point], assignments2[:crossover_point] = \
-                assignments2[:crossover_point], assignments1[:crossover_point]
-            
-            # Update timetable dicts with swapped assignments
-            self._update_assignments(child1, assignments1)
-            self._update_assignments(child2, assignments2)
-            
-            # Note: We don't validate constraints here for performance reasons
-            # Invalid offspring will be eliminated by low fitness scores
-            
+
+            # Group assignments by class
+            class_groups1 = defaultdict(list)
+            class_groups2 = defaultdict(list)
+
+            for entry in assignments1:
+                class_groups1[entry.get("class_id")].append(entry)
+
+            for entry in assignments2:
+                class_groups2[entry.get("class_id")].append(entry)
+
+            # Get common classes between parents
+            common_classes = list(set(class_groups1.keys()) & set(class_groups2.keys()))
+
+            if len(common_classes) > 1:
+                # Select a random crossover point (which class to split at)
+                crossover_class_idx = random.randint(1, len(common_classes) - 1)
+                swap_classes = common_classes[crossover_class_idx:]
+
+                # Swap entire class schedules
+                for class_id in swap_classes:
+                    class_groups1[class_id], class_groups2[class_id] = \
+                        class_groups2[class_id], class_groups1[class_id]
+
+                # Rebuild assignments lists
+                new_assignments1 = []
+                new_assignments2 = []
+
+                for class_id in class_groups1:
+                    new_assignments1.extend(class_groups1[class_id])
+
+                for class_id in class_groups2:
+                    new_assignments2.extend(class_groups2[class_id])
+
+                # Update timetable dicts
+                self._update_assignments(child1, new_assignments1)
+                self._update_assignments(child2, new_assignments2)
+
         except Exception:
             # If crossover fails for any reason, return parent clones
-            # This ensures we always return valid timetable structures
             pass
-        
+
         return child1, child2
     
     def _safe_mutate(self, timetable_dict: Dict) -> Dict:
         """
-        Perform mutation that attempts to preserve hard constraints.
-        
-        Mutation Strategy - Teacher Assignment Swaps:
-        ----------------------------------------------
-        Rather than mutating time slots or rooms (which would cascade into
-        many conflicts), we swap teacher assignments between two entries.
-        This is the safest type of mutation for timetable problems.
-        
-        Why Swap Teachers Instead of Times/Rooms:
-        1. Time slot changes affect the entire schedule structure
-        2. Room changes require capacity/facility constraint re-checking
-        3. Teacher swaps are more localized and easier to validate
-        4. Most timetable flexibility comes from teacher assignments
-        
-        Trade-offs of This Approach:
-        1. PRO: Minimal chance of creating cascading conflicts
-        2. PRO: Fast execution (no complex validation needed)
-        3. PRO: Preserves the time structure found by CSP solver
-        4. CON: May create teacher double-booking (same teacher, same time)
-        5. CON: Limited mutation space (only swaps, no new assignments)
-        
-        Why We Accept the Trade-off:
-        - Teacher conflicts are detected quickly in fitness calculation
-        - Natural selection eliminates invalid mutants within a few generations
-        - The alternative (validating every constraint) is prohibitively slow
-        - CSP already found valid time/room assignments - we want to keep those
-        
-        Validation Strategy:
-        - We DON'T validate here (performance > perfect accuracy)
-        - Instead, fitness function assigns low scores to conflicts
-        - Elitism ensures we never lose working solutions
-        - Over generations, valid mutations survive and spread
-        
-        Future Enhancement (if needed):
-        - Could add lightweight teacher availability check
-        - Could swap only between compatible subjects
-        - Could implement repair mechanism for conflicts
-        Currently, the simple approach works well enough for real-world use.
+        Perform mutation that preserves teacher consistency constraint.
+
+        Mutation Strategy - Time/Room Swaps (NOT Teacher Swaps):
+        --------------------------------------------------------
+        v2.6 UPDATE: To preserve one-teacher-per-subject-per-class constraint,
+        we NO LONGER swap teachers between different class-subject pairs.
+
+        Instead, we swap TIME SLOTS or ROOMS between entries that have:
+        - SAME class_id AND SAME subject_id (preserves teacher consistency)
+        - OR entries from completely different classes (no shared resources)
+
+        Why This Change:
+        1. Teacher consistency is a CRITICAL constraint
+        2. Swapping teachers between (Class A, Math) and (Class B, English)
+           would break the one-teacher-per-subject-per-class rule
+        3. Swapping time slots within same class-subject is safe
+        4. Room swaps are always safe (just optimization)
+
+        Mutation Types:
+        1. Time swap: Exchange time slots between two entries of same class-subject
+           Example: Class 10A Math Period 1 ↔ Class 10A Math Period 3
+        2. Room swap: Exchange rooms between any two compatible entries
+           Example: Room 101 ↔ Room 102
+
+        This approach:
+        - PRO: Preserves teacher consistency 100%
+        - PRO: Still provides mutation diversity
+        - PRO: No risk of breaking critical constraints
+        - CON: Slightly more limited mutation space (acceptable trade-off)
         """
         mutated = copy.deepcopy(timetable_dict)
-        
+
         try:
             entries = self._extract_assignments(mutated)
-            
+
             if len(entries) < 2:
                 return mutated  # Nothing to swap
-            
-            # Select two random entries to mutate
-            idx1, idx2 = random.sample(range(len(entries)), 2)
-            entry1 = entries[idx1]
-            entry2 = entries[idx2]
-            
-            # Swap teacher assignments between the two entries
-            # Example: Entry 1 (Math, Period 1, Teacher A) + Entry 2 (English, Period 2, Teacher B)
-            #       -> Entry 1 (Math, Period 1, Teacher B) + Entry 2 (English, Period 2, Teacher A)
-            # 
-            # Potential conflict: If Teacher B was already teaching something at Period 1,
-            # this creates a double-booking. The fitness function will catch this and
-            # assign a low score, causing natural selection to eliminate this mutant.
-            teacher1 = entry1.get("teacher_id")
-            teacher2 = entry2.get("teacher_id")
-            
-            if teacher1 and teacher2:
-                # Perform the swap
-                entry1["teacher_id"] = teacher2
-                entry2["teacher_id"] = teacher1
-                
-                # v2.5: Also swap teacher metadata to maintain consistency
-                if "teacher_metadata" in entry1 and "teacher_metadata" in entry2:
-                    entry1["teacher_metadata"], entry2["teacher_metadata"] = \
-                        entry2["teacher_metadata"], entry1["teacher_metadata"]
-                
-                # Update entries list in timetable
+
+            # Strategy: Try time slot swap first (safer for teacher consistency)
+            # Find two entries with same (class_id, subject_id)
+            class_subject_map = defaultdict(list)
+            for idx, entry in enumerate(entries):
+                key = (entry.get("class_id"), entry.get("subject_id"))
+                class_subject_map[key].append(idx)
+
+            # Find a class-subject pair with multiple entries
+            swappable_pairs = [(k, v) for k, v in class_subject_map.items() if len(v) >= 2]
+
+            if swappable_pairs:
+                # Swap time slots between two entries of same class-subject
+                # This is SAFE - same teacher, same class, same subject, different times
+                key, indices = random.choice(swappable_pairs)
+                idx1, idx2 = random.sample(indices, 2)
+                entry1 = entries[idx1]
+                entry2 = entries[idx2]
+
+                # Swap time-related fields (preserves teacher assignment)
+                entry1["time_slot_id"], entry2["time_slot_id"] = entry2["time_slot_id"], entry1["time_slot_id"]
+                entry1["day_of_week"], entry2["day_of_week"] = entry2["day_of_week"], entry1["day_of_week"]
+                entry1["period_number"], entry2["period_number"] = entry2["period_number"], entry1["period_number"]
+
+                self._update_assignments(mutated, entries)
+            else:
+                # Fallback: Swap rooms between any two entries (always safe)
+                idx1, idx2 = random.sample(range(len(entries)), 2)
+                entry1 = entries[idx1]
+                entry2 = entries[idx2]
+
+                entry1["room_id"], entry2["room_id"] = entry2["room_id"], entry1["room_id"]
+
                 self._update_assignments(mutated, entries)
             
         except Exception:

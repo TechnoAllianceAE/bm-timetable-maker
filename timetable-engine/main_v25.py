@@ -572,10 +572,10 @@ async def generate_timetable(request: GenerateRequest):
     # Get GA optimizer from app state (needed for fitness calculation)
     ga_optimizer = app.state.ga_optimizer
 
-    # v2.5.2: GA evolution is ALWAYS enabled for fitness scoring
-    # GA provides objective quality metrics for every timetable generated
-    # The score reflects workload balance, gap minimization, and preference satisfaction
-    skip_ga_evolution = False  # Always run GA for complete optimization
+    # v2.5.2: Skip GA evolution when teacher consistency is enforced
+    # GA mutations/crossovers can break the (class, subject) -> teacher mapping
+    # CSP solver already produces valid timetables with teacher consistency
+    skip_ga_evolution = enforce_teacher_consistency  # Skip GA to preserve teacher consistency
 
     if skip_ga_evolution:
         print("[SKIP] GA evolution disabled to preserve teacher consistency")
