@@ -39,7 +39,7 @@ from src.models_phase1_v25 import (
     ValidateRequest, ValidationResult, OptimizationWeights
 )
 
-# v2.5: Import metadata-enabled solvers
+# v2.5.1: Import fixed solver with teacher consistency
 from src.csp_solver_complete_v25 import CSPSolverCompleteV25
 from src.algorithms.core.ga_optimizer_v25 import GAOptimizerV25
 
@@ -558,85 +558,98 @@ async def generate_timetable(request: GenerateRequest):
     print("\n" + "=" * 70)
     print("[PHASE 2] Genetic Algorithm Optimization")
     print("=" * 70)
-    
+
     ga_start_time = time.time()
-    
-    try:
-        # Get GA optimizer from app state
-        ga_optimizer = app.state.ga_optimizer
-        
-        print(f"[RUNNING] Evolving {len(base_solutions)} solutions over 30 generations...")
-        print(f"   Mutation rate: 0.15")
-        print(f"   Crossover rate: 0.7")
-        print(f"   Elitism: 2 best solutions preserved")
-        
-        # Convert Timetable objects to dicts for GA processing
-        base_solutions_dicts = []
-        for timetable in base_solutions:
-            if hasattr(timetable, 'dict'):
-                base_solutions_dicts.append(timetable.model_dump() if hasattr(timetable, 'model_dump') else timetable.dict())
-            elif hasattr(timetable, '__dict__'):
-                # Convert object to dict
-                tt_dict = {
-                    'id': timetable.id,
-                    'school_id': timetable.school_id,
-                    'academic_year_id': timetable.academic_year_id,
-                    'name': timetable.name,
-                    'status': timetable.status,
-                    'entries': [e.dict() if hasattr(e, 'dict') else e.__dict__ 
-                               for e in timetable.entries],
-                    'metadata': timetable.metadata if hasattr(timetable, 'metadata') else {}
-                }
-                base_solutions_dicts.append(tt_dict)
-            else:
-                base_solutions_dicts.append(timetable)
-        
-        # CRITICAL: Offload to thread pool to prevent blocking
-        # GA evolution is CPU-intensive
-        optimized_timetables = await asyncio.to_thread(
-            ga_optimizer.evolve,
-            population=base_solutions_dicts,
-            generations=30,
-            mutation_rate=0.15,
-            crossover_rate=0.7,
-            elitism_count=2,
-            weights=weights
-        )
-        
-        ga_end_time = time.time()
-        ga_duration = ga_end_time - ga_start_time
-        
-        print(f"[OK] GA optimization complete")
-        print(f"  Time: {ga_duration:.2f}s")
-        
-        # Print evolution report
-        print(ga_optimizer.get_evolution_report())
-    
-    except Exception as e:
-        print(f"[WARNING] GA optimization failed: {e}")
-        print(f"   Falling back to CSP solutions")
-        # Convert to dicts for consistency
-        optimized_timetables = []
-        for timetable in base_solutions:
-            if hasattr(timetable, 'model_dump'):
-                optimized_timetables.append(timetable.model_dump())
-            elif hasattr(timetable, 'dict'):
-                optimized_timetables.append(timetable.dict())
-            elif hasattr(timetable, '__dict__'):
-                tt_dict = {
-                    'id': timetable.id,
-                    'school_id': timetable.school_id,
-                    'academic_year_id': timetable.academic_year_id,
-                    'name': timetable.name,
-                    'status': timetable.status,
-                    'entries': [e.model_dump() if hasattr(e, 'model_dump') else (e.dict() if hasattr(e, 'dict') else e.__dict__)
-                               for e in timetable.entries],
-                    'metadata': timetable.metadata if hasattr(timetable, 'metadata') else {}
-                }
-                optimized_timetables.append(tt_dict)
-            else:
-                optimized_timetables.append(timetable)
+
+    # v2.6: Skip GA optimization to preserve teacher consistency
+    # The CSP solver enforces one-teacher-per-subject-per-class by default
+    # GA mutations/crossovers can violate this critical constraint
+    # TODO: Re-enable GA when it's updated to preserve consistency
+    skip_ga = True  # Temporarily disabled until GA is fully compatible
+
+    if skip_ga:
+        print("[SKIP] GA optimization disabled when teacher consistency is enforced")
+        print("  CSP solutions already have 100% teacher consistency")
+        print("  Skipping mutations/crossovers to preserve this constraint")
+        optimized_timetables = base_solutions
         ga_duration = 0.0
+    else:
+        try:
+            # Get GA optimizer from app state
+            ga_optimizer = app.state.ga_optimizer
+
+            print(f"[RUNNING] Evolving {len(base_solutions)} solutions over 30 generations...")
+            print(f"   Mutation rate: 0.15")
+            print(f"   Crossover rate: 0.7")
+            print(f"   Elitism: 2 best solutions preserved")
+
+            # Convert Timetable objects to dicts for GA processing
+            base_solutions_dicts = []
+            for timetable in base_solutions:
+                if hasattr(timetable, 'dict'):
+                    base_solutions_dicts.append(timetable.model_dump() if hasattr(timetable, 'model_dump') else timetable.dict())
+                elif hasattr(timetable, '__dict__'):
+                    # Convert object to dict
+                    tt_dict = {
+                        'id': timetable.id,
+                        'school_id': timetable.school_id,
+                        'academic_year_id': timetable.academic_year_id,
+                        'name': timetable.name,
+                        'status': timetable.status,
+                        'entries': [e.dict() if hasattr(e, 'dict') else e.__dict__
+                                   for e in timetable.entries],
+                        'metadata': timetable.metadata if hasattr(timetable, 'metadata') else {}
+                    }
+                    base_solutions_dicts.append(tt_dict)
+                else:
+                    base_solutions_dicts.append(timetable)
+
+            # CRITICAL: Offload to thread pool to prevent blocking
+            # GA evolution is CPU-intensive
+            optimized_timetables = await asyncio.to_thread(
+                ga_optimizer.evolve,
+                population=base_solutions_dicts,
+                generations=30,
+                mutation_rate=0.15,
+                crossover_rate=0.7,
+                elitism_count=2,
+                weights=weights
+            )
+
+            ga_end_time = time.time()
+            ga_duration = ga_end_time - ga_start_time
+
+            print(f"[OK] GA optimization complete")
+            print(f"  Time: {ga_duration:.2f}s")
+
+            # Print evolution report
+            print(ga_optimizer.get_evolution_report())
+
+        except Exception as e:
+            print(f"[WARNING] GA optimization failed: {e}")
+            print(f"   Falling back to CSP solutions")
+            # Convert to dicts for consistency
+            optimized_timetables = []
+            for timetable in base_solutions:
+                if hasattr(timetable, 'model_dump'):
+                    optimized_timetables.append(timetable.model_dump())
+                elif hasattr(timetable, 'dict'):
+                    optimized_timetables.append(timetable.dict())
+                elif hasattr(timetable, '__dict__'):
+                    tt_dict = {
+                        'id': timetable.id,
+                        'school_id': timetable.school_id,
+                        'academic_year_id': timetable.academic_year_id,
+                        'name': timetable.name,
+                        'status': timetable.status,
+                        'entries': [e.model_dump() if hasattr(e, 'model_dump') else (e.dict() if hasattr(e, 'dict') else e.__dict__)
+                                   for e in timetable.entries],
+                        'metadata': timetable.metadata if hasattr(timetable, 'metadata') else {}
+                    }
+                    optimized_timetables.append(tt_dict)
+                else:
+                    optimized_timetables.append(timetable)
+            ga_duration = 0.0
     
     # ==================================================================
     # PHASE 3: Solution Selection & Packaging
