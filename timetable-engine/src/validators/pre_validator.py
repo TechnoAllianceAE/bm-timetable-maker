@@ -32,6 +32,7 @@ SUPPORTED_CONSTRAINT_TYPES = {
     ConstraintType.NO_GAPS,
     ConstraintType.LUNCH_BREAK,
     ConstraintType.ONE_TEACHER_PER_SUBJECT,
+    ConstraintType.SLOT_COVERAGE,
 }
 
 SUPPORTED_FEATURES = {
@@ -61,11 +62,17 @@ def validate_constraints(constraints: List[Constraint]) -> Tuple[bool, List[str]
     errors = []
     warnings = []
 
+    # Convert supported types to string values for comparison
+    supported_values = {ct.value if hasattr(ct, 'value') else ct for ct in SUPPORTED_CONSTRAINT_TYPES}
+
     for constraint in constraints:
-        if constraint.type not in SUPPORTED_CONSTRAINT_TYPES:
+        # Handle both string and enum constraint types
+        constraint_value = constraint.type.value if hasattr(constraint.type, 'value') else constraint.type
+
+        if constraint_value not in supported_values:
             errors.append(
-                f"Unsupported constraint type: '{constraint.type}'. "
-                f"Supported types: {[ct.value for ct in SUPPORTED_CONSTRAINT_TYPES]}"
+                f"Unsupported constraint type: '{constraint_value}'. "
+                f"Supported types: {sorted(list(supported_values))}"
             )
 
     return len(errors) == 0, errors, warnings

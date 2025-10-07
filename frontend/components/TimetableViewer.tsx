@@ -204,7 +204,18 @@ export default function TimetableViewer({
         }
       });
 
-      return Array.from(optionMap.values()).sort((a, b) => a.label.localeCompare(b.label));
+      return Array.from(optionMap.values()).sort((a, b) => {
+        // For class labels (e.g., "Grade 10A"), extract grade number for proper sorting
+        if (type === 'class') {
+          const gradeA = parseInt(a.label.match(/\d+/)?.[0] || '0');
+          const gradeB = parseInt(b.label.match(/\d+/)?.[0] || '0');
+          if (gradeA !== gradeB) {
+            return gradeA - gradeB; // Sort by grade number first
+          }
+        }
+        // Fall back to alphabetical sorting for sections or other types
+        return a.label.localeCompare(b.label);
+      });
     };
 
     return {

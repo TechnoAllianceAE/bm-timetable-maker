@@ -110,7 +110,7 @@ export const teacherAPI = {
 };
 
 export const classAPI = {
-  list: () => apiClient.get('/classes'),
+  list: (limit?: number) => apiClient.get('/classes', { params: { limit: limit || 100 } }),
   get: (id: string) => apiClient.get(`/classes/${id}`),
   create: (data: any) => apiClient.post('/classes', data),
   update: (id: string, data: any) => apiClient.put(`/classes/${id}`, data),
