@@ -21,7 +21,7 @@ COMPATIBILITY:
 from typing import List, Dict, Tuple, Optional, Any
 import time
 import random
-from models_phase1_v25 import (
+from src.models_phase1_v25 import (
     Class, Subject, Teacher, TimeSlot, Room, Constraint, TimetableEntry,
     Timetable, TimetableStatus, RoomType
 )

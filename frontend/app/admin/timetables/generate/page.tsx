@@ -94,8 +94,8 @@ export default function GenerateTimetablePage() {
     academicYearId: '',
     name: '',
     description: '',
-    startDate: '',
-    endDate: '',
+    startDate: new Date().toISOString().split('T')[0], // Today's date
+    endDate: new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0], // One year from today
     periodsPerDay: 8,
     daysPerWeek: 5,
     periodDuration: 45,
