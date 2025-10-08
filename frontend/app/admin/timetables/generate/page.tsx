@@ -89,6 +89,11 @@ export default function GenerateTimetablePage() {
   const [generationResult, setGenerationResult] = useState<any>(null);
   const [error, setError] = useState('');
   const [diagnostics, setDiagnostics] = useState<any>(null);
+  const [validationErrors, setValidationErrors] = useState<{
+    conflicts?: string[];
+    suggestions?: string[];
+    input_data?: any;
+  } | null>(null);
 
   const [params, setParams] = useState<GenerationParams>({
     schoolId: '',
@@ -206,6 +211,7 @@ export default function GenerateTimetablePage() {
     setError('');
     setGenerationResult(null);
     setDiagnostics(null);
+    setValidationErrors(null);
 
     try {
       // Transform the form data to match the backend API structure
@@ -249,12 +255,39 @@ export default function GenerateTimetablePage() {
       if (response.status === 400) {
         // Constraint validation error - expected and should be shown in UI
         console.warn('Validation error:', response.data);
-        setError(response.data.message || 'Constraint validation failed');
+
+        // Extract main error message
+        const errorMessage = response.data.message || 'Constraint validation failed';
+        setError(errorMessage);
+
+        // Extract structured validation data
+        const validationData: any = {};
+
+        // Extract conflicts array if available
+        if (response.data.conflicts && Array.isArray(response.data.conflicts)) {
+          validationData.conflicts = response.data.conflicts;
+        }
+
+        // Extract suggestions array if available
+        if (response.data.suggestions && Array.isArray(response.data.suggestions)) {
+          validationData.suggestions = response.data.suggestions;
+        }
+
+        // Extract input_data if available
+        if (response.data.input_data) {
+          validationData.input_data = response.data.input_data;
+        }
+
+        // Set validation errors if we have any structured data
+        if (Object.keys(validationData).length > 0) {
+          setValidationErrors(validationData);
+        }
 
         // Extract diagnostics if available
         if (response.data.diagnostics) {
           setDiagnostics(response.data.diagnostics);
         }
+
         return; // Don't proceed further
       }
 
@@ -938,9 +971,104 @@ export default function GenerateTimetablePage() {
                   <div className="flex-shrink-0">
                     <span className="text-red-400 text-lg">❌</span>
                   </div>
-                  <div className="ml-3">
-                    <h3 className="text-sm font-medium text-red-800">Generation Failed</h3>
-                    <p className="text-sm text-red-700 mt-1">{error}</p>
+                  <div className="ml-3 flex-1">
+                    <h3 className="text-sm font-medium text-red-800 mb-2">Generation Failed</h3>
+
+                    {/* Validation Errors (Conflicts) */}
+                    {validationErrors?.conflicts && validationErrors.conflicts.length > 0 && (
+                      <div className="mb-4">
+                        <h4 className="text-xs font-semibold text-red-800 mb-2 uppercase tracking-wide">
+                          Issues Found ({validationErrors.conflicts.length})
+                        </h4>
+                        <ul className="space-y-2">
+                          {validationErrors.conflicts.map((conflict, index) => (
+                            <li key={index} className="flex items-start bg-red-100 rounded-md p-3">
+                              <span className="text-red-600 mr-2 font-bold">{index + 1}.</span>
+                              <span className="text-sm text-red-700">{conflict}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {/* Suggestions */}
+                    {validationErrors?.suggestions && validationErrors.suggestions.length > 0 && (
+                      <div className="mb-4">
+                        <h4 className="text-xs font-semibold text-blue-800 mb-2 uppercase tracking-wide">
+                          💡 Suggestions
+                        </h4>
+                        <ul className="space-y-1">
+                          {validationErrors.suggestions.map((suggestion, index) => (
+                            <li key={index} className="flex items-start text-sm text-blue-700">
+                              <span className="mr-2">▶</span>
+                              <span>{suggestion}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {/* Input Data Summary */}
+                    {validationErrors?.input_data && (
+                      <div className="mt-4 border-t border-red-200 pt-4">
+                        <h4 className="text-xs font-semibold text-gray-800 mb-2 uppercase tracking-wide">
+                          📋 Configuration Summary
+                        </h4>
+                        <div className="bg-white rounded-md p-3 border border-red-200">
+                          <dl className="grid grid-cols-2 gap-x-4 gap-y-2 text-xs">
+                            {validationErrors.input_data.classes && (
+                              <>
+                                <dt className="font-medium text-gray-600">Classes:</dt>
+                                <dd className="text-gray-900">{validationErrors.input_data.classes.length || 0}</dd>
+                              </>
+                            )}
+                            {validationErrors.input_data.subjects && (
+                              <>
+                                <dt className="font-medium text-gray-600">Subjects:</dt>
+                                <dd className="text-gray-900">{validationErrors.input_data.subjects.length || 0}</dd>
+                              </>
+                            )}
+                            {validationErrors.input_data.teachers && (
+                              <>
+                                <dt className="font-medium text-gray-600">Teachers:</dt>
+                                <dd className="text-gray-900">{validationErrors.input_data.teachers.length || 0}</dd>
+                              </>
+                            )}
+                            {validationErrors.input_data.time_slots && (
+                              <>
+                                <dt className="font-medium text-gray-600">Time Slots:</dt>
+                                <dd className="text-gray-900">
+                                  {validationErrors.input_data.time_slots.total || 0} total
+                                  ({validationErrors.input_data.time_slots.active || 0} active)
+                                </dd>
+                              </>
+                            )}
+                            {validationErrors.input_data.rooms && (
+                              <>
+                                <dt className="font-medium text-gray-600">Rooms:</dt>
+                                <dd className="text-gray-900">{validationErrors.input_data.rooms.length || 0}</dd>
+                              </>
+                            )}
+                            {validationErrors.input_data.constraints && (
+                              <>
+                                <dt className="font-medium text-gray-600">Constraints:</dt>
+                                <dd className="text-gray-900">{validationErrors.input_data.constraints.length || 0}</dd>
+                              </>
+                            )}
+                          </dl>
+
+                          {/* Expandable detailed view */}
+                          <details className="mt-3">
+                            <summary className="cursor-pointer text-xs font-medium text-gray-600 hover:text-gray-900">
+                              View Detailed Configuration
+                            </summary>
+                            <pre className="mt-2 p-2 bg-gray-50 rounded text-xs overflow-x-auto max-h-64 overflow-y-auto border border-gray-200">
+                              {JSON.stringify(validationErrors.input_data, null, 2)}
+                            </pre>
+                          </details>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
 
