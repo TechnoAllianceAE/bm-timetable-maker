@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException, HttpException, HttpStatus } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { ConfigService } from '@nestjs/config';
 import { PrismaService } from '../prisma/prisma.service';
@@ -503,20 +503,29 @@ export class TimetablesService {
         console.error('Extracted error message:', errorMessage);
         console.error('=== TIMETABLE GENERATION ERROR END ===');
 
+        // Extract structured error data from Python service
+        const pythonResponse = error.response.data;
+        const conflicts = pythonResponse?.conflicts || [];
+        const suggestions = pythonResponse?.suggestions || [];
+        const inputData = pythonResponse?.input_data || null;
+        const validationData = pythonResponse?.validation || null;
+
         // Create a user-friendly error message
-        const userFriendlyMessage = error.response.data?.detail?.message || errorMessage;
-        const suggestions = error.response.data?.detail?.suggestions || [];
-        const conflicts = error.response.data?.detail?.conflicts || [];
+        const userFriendlyMessage = errorMessage;
 
-        let fullMessage = `Timetable generation failed: ${userFriendlyMessage}`;
-        if (conflicts.length > 0) {
-          fullMessage += `\n\nIssues found: ${conflicts.join(', ')}`;
-        }
-        if (suggestions.length > 0) {
-          fullMessage += `\n\nSuggestions: ${suggestions.join(', ')}`;
-        }
-
-        throw new BadRequestException(fullMessage);
+        // Throw structured error response for frontend
+        throw new HttpException(
+          {
+            statusCode: HttpStatus.BAD_REQUEST,
+            message: `Timetable generation failed: ${userFriendlyMessage}`,
+            error: 'Bad Request',
+            conflicts: conflicts,
+            suggestions: suggestions,
+            input_data: inputData,
+            validation: validationData,
+          },
+          HttpStatus.BAD_REQUEST,
+        );
       }
 
       if (error.code === 'ECONNREFUSED') {
