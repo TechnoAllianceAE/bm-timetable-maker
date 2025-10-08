@@ -393,7 +393,17 @@ async def generate_timetable(request: GenerateRequest):
                 for warning in validation_result['warnings']:
                     print(f"    - {warning}")
 
-            # Return error response with validation details
+            # Build input data summary for debugging
+            input_summary = {
+                "classes": [{"id": c.id, "name": c.name, "grade": c.grade, "section": c.section, "student_count": c.student_count} for c in classes],
+                "subjects": [{"id": s.id, "name": s.name, "code": s.code, "periods_per_week": s.periods_per_week, "requires_lab": s.requires_lab} for s in subjects],
+                "teachers": [{"id": t.id, "name": getattr(t, 'name', f'Teacher-{t.id}'), "subjects": t.subjects, "max_periods_per_day": t.max_periods_per_day, "max_periods_per_week": t.max_periods_per_week} for t in teachers],
+                "time_slots": {"total": len(time_slots), "active": len([ts for ts in time_slots if not ts.is_break]), "breaks": len([ts for ts in time_slots if ts.is_break])},
+                "rooms": [{"id": r.id, "name": r.name, "type": r.type, "capacity": r.capacity} for r in rooms],
+                "constraints": [{"type": c.type if hasattr(c, 'type') else str(c), "priority": getattr(c, 'priority', 'N/A')} for c in constraints] if constraints else []
+            }
+
+            # Return error response with validation details and input data
             return JSONResponse(
                 status_code=400,
                 content={
@@ -402,7 +412,8 @@ async def generate_timetable(request: GenerateRequest):
                     "generation_time": 0.0,
                     "conflicts": validation_result['errors'],
                     "suggestions": validation_result['warnings'],
-                    "validation": validation_result
+                    "validation": validation_result,
+                    "input_data": input_summary
                 }
             )
 
@@ -537,6 +548,17 @@ async def generate_timetable(request: GenerateRequest):
             print(f"\n[FAILED] Timetable generation failed post-validation")
             print(f"  The generated timetable has critical issues and cannot be used.")
 
+            # Build input data summary for debugging
+            input_summary = {
+                "classes": [{"id": c.id, "name": c.name, "grade": c.grade, "section": c.section, "student_count": c.student_count} for c in classes],
+                "subjects": [{"id": s.id, "name": s.name, "code": s.code, "periods_per_week": s.periods_per_week, "requires_lab": s.requires_lab} for s in subjects],
+                "teachers": [{"id": t.id, "name": getattr(t, 'name', f'Teacher-{t.id}'), "subjects": t.subjects, "max_periods_per_day": t.max_periods_per_day, "max_periods_per_week": t.max_periods_per_week} for t in teachers],
+                "time_slots": {"total": len(time_slots), "active": len([ts for ts in time_slots if not ts.is_break]), "breaks": len([ts for ts in time_slots if ts.is_break])},
+                "rooms": [{"id": r.id, "name": r.name, "type": r.type, "capacity": r.capacity} for r in rooms],
+                "constraints": [{"type": c.type if hasattr(c, 'type') else str(c), "priority": getattr(c, 'priority', 'N/A')} for c in constraints] if constraints else [],
+                "subject_requirements": request.subject_requirements if hasattr(request, 'subject_requirements') and request.subject_requirements else None
+            }
+
             return JSONResponse(
                 status_code=500,
                 content={
@@ -546,10 +568,12 @@ async def generate_timetable(request: GenerateRequest):
                     "conflicts": post_validation['critical_violations'],
                     "suggestions": post_validation['warnings'],
                     "validation": post_validation,
+                    "input_data": input_summary,
                     "diagnostics": {
                         "version": "2.5.2",
                         "phase_failed": "post_validation",
-                        "validation_details": post_validation
+                        "validation_details": post_validation,
+                        "input_summary": input_summary
                     }
                 }
             )

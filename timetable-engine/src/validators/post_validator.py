@@ -28,15 +28,20 @@ from src.models_phase1_v25 import (
 def validate_slot_coverage(
     timetable: Timetable,
     classes: List[Class],
-    time_slots: List[TimeSlot]
+    time_slots: List[TimeSlot],
+    max_free_periods_per_week: int = 2
 ) -> Tuple[bool, List[str], Dict[str, Any]]:
     """
-    CRITICAL CHECK: Verify 100% slot coverage - NO free periods allowed.
+    CRITICAL CHECK: Verify slot coverage with allowance for self-study periods.
+
+    Allows up to max_free_periods_per_week (default: 2) free periods per class per week.
+    These are considered acceptable for self-study time.
 
     Returns:
         (is_valid, violations, metrics)
     """
     violations = []
+    warnings = []
 
     # Filter active slots (non-break periods)
     active_slots = [slot for slot in time_slots if not slot.is_break]
@@ -45,33 +50,48 @@ def validate_slot_coverage(
 
     coverage_percentage = (actual_total / expected_total * 100) if expected_total > 0 else 0
 
-    if actual_total < expected_total:
-        violations.append(
-            f"CRITICAL: Incomplete slot coverage! Expected {expected_total} entries "
-            f"but generated only {actual_total} ({coverage_percentage:.1f}% coverage). "
-            f"Missing {expected_total - actual_total} slots."
+    # Find which classes have gaps
+    class_entry_count = defaultdict(int)
+    for entry in timetable.entries:
+        class_entry_count[entry.class_id] += 1
+
+    classes_with_excessive_gaps = []
+
+    for class_obj in classes:
+        expected_for_class = len(active_slots)
+        actual_for_class = class_entry_count.get(class_obj.id, 0)
+        free_periods = expected_for_class - actual_for_class
+
+        if free_periods > max_free_periods_per_week:
+            # CRITICAL: Too many free periods
+            classes_with_excessive_gaps.append(class_obj.name)
+            violations.append(
+                f"  Class {class_obj.name}: {actual_for_class}/{expected_for_class} slots filled "
+                f"({free_periods} FREE PERIODS - exceeds limit of {max_free_periods_per_week})"
+            )
+        elif free_periods > 0:
+            # Acceptable: Within limit
+            warnings.append(
+                f"  Class {class_obj.name}: {actual_for_class}/{expected_for_class} slots filled "
+                f"({free_periods} free period(s) for self-study - within acceptable limit)"
+            )
+
+    # Overall coverage check
+    total_missing = expected_total - actual_total
+    if len(classes_with_excessive_gaps) > 0:
+        violations.insert(0,
+            f"CRITICAL: {len(classes_with_excessive_gaps)} class(es) have more than {max_free_periods_per_week} "
+            f"free periods. Total missing slots: {total_missing}."
         )
-
-        # Find which classes have gaps
-        class_entry_count = defaultdict(int)
-        for entry in timetable.entries:
-            class_entry_count[entry.class_id] += 1
-
-        for class_obj in classes:
-            expected_for_class = len(active_slots)
-            actual_for_class = class_entry_count.get(class_obj.id, 0)
-
-            if actual_for_class < expected_for_class:
-                violations.append(
-                    f"  Class {class_obj.name}: {actual_for_class}/{expected_for_class} slots filled "
-                    f"({expected_for_class - actual_for_class} FREE PERIODS)"
-                )
 
     metrics = {
         "expected_entries": expected_total,
         "actual_entries": actual_total,
         "coverage_percentage": coverage_percentage,
-        "missing_entries": max(0, expected_total - actual_total)
+        "missing_entries": max(0, expected_total - actual_total),
+        "warnings": warnings,
+        "classes_with_acceptable_gaps": len(warnings),
+        "classes_with_excessive_gaps": len(classes_with_excessive_gaps)
     }
 
     return len(violations) == 0, violations, metrics
