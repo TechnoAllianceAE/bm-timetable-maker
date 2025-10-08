@@ -244,6 +244,21 @@ export default function GenerateTimetablePage() {
       console.log('Auth token available:', !!localStorage.getItem('token'));
 
       const response = await timetableAPI.generate(payload);
+
+      // Check if response indicates an error (400 is now treated as valid response, not thrown)
+      if (response.status === 400) {
+        // Constraint validation error - expected and should be shown in UI
+        console.warn('Validation error:', response.data);
+        setError(response.data.message || 'Constraint validation failed');
+
+        // Extract diagnostics if available
+        if (response.data.diagnostics) {
+          setDiagnostics(response.data.diagnostics);
+        }
+        return; // Don't proceed further
+      }
+
+      // Success case
       setGenerationResult(response.data);
 
       // Extract diagnostics if available
@@ -257,6 +272,7 @@ export default function GenerateTimetablePage() {
         }, 3000);
       }
     } catch (err: any) {
+      // Handle actual errors (network issues, 500 errors, etc.)
       console.error('Timetable generation error:', err);
       console.error('Error response:', err.response?.data);
       console.error('Error status:', err.response?.status);

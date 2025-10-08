@@ -156,7 +156,11 @@ export const timetableAPI = {
   delete: (id: string) => apiClient.delete(`/timetables/${id}`),
   activate: (id: string) => apiClient.post(`/timetables/${id}/activate`),
   deactivate: (id: string) => apiClient.post(`/timetables/${id}/deactivate`),
-  generate: (payload: GenerateTimetablePayload) => apiClient.post('/timetables/generate', payload),
+  generate: (payload: GenerateTimetablePayload) =>
+    apiClient.post('/timetables/generate', payload, {
+      // Treat 400 as a valid response (constraint validation errors are expected)
+      validateStatus: (status) => status < 500,
+    }),
   getSummary: (id: string) => apiClient.get(`/timetables/${id}/summary`),
 };
 
