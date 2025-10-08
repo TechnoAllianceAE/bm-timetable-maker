@@ -1,0 +1,1576 @@
+assignment_id,class_name,subject_name,subject_code,teacher_name,day,period,time,room_name,room_type,is_shared_room,home_classroom,uses_home_classroom,requires_lab
+entry_1,LKG-A,English,ENG,Mrs. Sharma,MONDAY,P1,8:00-9:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_2,LKG-A,English,ENG,Mrs. Sharma,MONDAY,P2,9:00-10:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_3,LKG-A,Science,SCI,Ms. Gupta,MONDAY,P3,10:00-11:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_4,LKG-A,Physical Education,PE,Mr. Kumar,MONDAY,P4,11:00-12:00,Sports Field,SPORTS,True,Room 01,NO,NO
+entry_5,LKG-A,Social Studies,SST,Mrs. Sharma,MONDAY,P5,12:00-13:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_6,LKG-A,Mathematics,MATH,Mr. Kumar,MONDAY,P6,13:00-14:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_7,LKG-A,Science,SCI,Ms. Gupta,MONDAY,P7,14:00-15:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_8,LKG-A,Physical Education,PE,Mr. Kumar,TUESDAY,P1,8:00-9:00,Sports Field,SPORTS,True,Room 01,NO,NO
+entry_9,LKG-A,Mathematics,MATH,Mr. Kumar,TUESDAY,P2,9:00-10:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_10,LKG-A,Hindi,HIN,Mrs. Verma,TUESDAY,P3,10:00-11:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_11,LKG-A,Hindi,HIN,Mrs. Verma,TUESDAY,P4,11:00-12:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_12,LKG-A,Hindi,HIN,Mrs. Verma,TUESDAY,P5,12:00-13:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_13,LKG-A,Science,SCI,Ms. Gupta,TUESDAY,P6,13:00-14:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_14,LKG-A,English,ENG,Mrs. Sharma,TUESDAY,P7,14:00-15:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_15,LKG-A,English,ENG,Mrs. Sharma,WEDNESDAY,P1,8:00-9:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_16,LKG-A,English,ENG,Mrs. Sharma,WEDNESDAY,P2,9:00-10:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_17,LKG-A,Hindi,HIN,Mrs. Verma,WEDNESDAY,P3,10:00-11:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_18,LKG-A,English,ENG,Mrs. Sharma,WEDNESDAY,P4,11:00-12:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_19,LKG-A,Mathematics,MATH,Mr. Kumar,WEDNESDAY,P5,12:00-13:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_20,LKG-A,Mathematics,MATH,Mr. Kumar,WEDNESDAY,P6,13:00-14:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_21,LKG-A,Mathematics,MATH,Mr. Kumar,WEDNESDAY,P7,14:00-15:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_22,LKG-A,Mathematics,MATH,Mr. Kumar,THURSDAY,P1,8:00-9:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_23,LKG-A,Science,SCI,Ms. Gupta,THURSDAY,P2,9:00-10:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_24,LKG-A,Physical Education,PE,Mr. Kumar,THURSDAY,P3,10:00-11:00,Sports Field,SPORTS,True,Room 01,NO,NO
+entry_25,LKG-A,Social Studies,SST,Mrs. Sharma,THURSDAY,P4,11:00-12:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_26,LKG-A,Social Studies,SST,Mrs. Sharma,THURSDAY,P5,12:00-13:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_27,LKG-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P6,13:00-14:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_28,LKG-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_29,LKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P1,8:00-9:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_30,LKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P2,9:00-10:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_31,LKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_32,LKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_33,LKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_34,LKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_35,LKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_36,LKG-B,Mathematics,MATH,Mrs. Desai,MONDAY,P1,8:00-9:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_37,LKG-B,Science,SCI,Mr. Reddy,MONDAY,P2,9:00-10:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_38,LKG-B,Social Studies,SST,Ms. Patel,MONDAY,P3,10:00-11:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_39,LKG-B,Science,SCI,Mr. Reddy,MONDAY,P4,11:00-12:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_40,LKG-B,Science,SCI,Mr. Reddy,MONDAY,P5,12:00-13:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_41,LKG-B,Social Studies,SST,Ms. Patel,MONDAY,P6,13:00-14:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_42,LKG-B,Science,SCI,Mr. Reddy,MONDAY,P7,14:00-15:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_43,LKG-B,English,ENG,Ms. Patel,TUESDAY,P1,8:00-9:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_44,LKG-B,Mathematics,MATH,Mrs. Desai,TUESDAY,P2,9:00-10:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_45,LKG-B,Mathematics,MATH,Mrs. Desai,TUESDAY,P3,10:00-11:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_46,LKG-B,Physical Education,PE,Mrs. Desai,TUESDAY,P4,11:00-12:00,Sports Field,SPORTS,True,Room 02,NO,NO
+entry_47,LKG-B,Mathematics,MATH,Mrs. Desai,TUESDAY,P5,12:00-13:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_48,LKG-B,Social Studies,SST,Ms. Patel,TUESDAY,P6,13:00-14:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_49,LKG-B,English,ENG,Ms. Patel,TUESDAY,P7,14:00-15:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_50,LKG-B,English,ENG,Ms. Patel,WEDNESDAY,P1,8:00-9:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_51,LKG-B,Physical Education,PE,Mrs. Desai,WEDNESDAY,P2,9:00-10:00,Sports Field,SPORTS,True,Room 02,NO,NO
+entry_52,LKG-B,English,ENG,Ms. Patel,WEDNESDAY,P3,10:00-11:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_53,LKG-B,Mathematics,MATH,Mrs. Desai,WEDNESDAY,P4,11:00-12:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_54,LKG-B,English,ENG,Ms. Patel,WEDNESDAY,P5,12:00-13:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_55,LKG-B,English,ENG,Ms. Patel,WEDNESDAY,P6,13:00-14:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_56,LKG-B,Mathematics,MATH,Mrs. Desai,WEDNESDAY,P7,14:00-15:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_57,LKG-B,Hindi,HIN,Mr. Chopra,THURSDAY,P1,8:00-9:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_58,LKG-B,Hindi,HIN,Mr. Chopra,THURSDAY,P2,9:00-10:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_59,LKG-B,Hindi,HIN,Mr. Chopra,THURSDAY,P3,10:00-11:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_60,LKG-B,Hindi,HIN,Mr. Chopra,THURSDAY,P4,11:00-12:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_61,LKG-B,Physical Education,PE,Mrs. Desai,THURSDAY,P5,12:00-13:00,Sports Field,SPORTS,True,Room 02,NO,NO
+entry_62,LKG-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P6,13:00-14:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_63,LKG-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_64,LKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P1,8:00-9:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_65,LKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P2,9:00-10:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_66,LKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_67,LKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_68,LKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_69,LKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_70,LKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_71,LKG-C,English,ENG,Mr. Singh,MONDAY,P1,8:00-9:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_72,LKG-C,Science,SCI,Mrs. Rao,MONDAY,P2,9:00-10:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_73,LKG-C,Hindi,HIN,Ms. Malhotra,MONDAY,P3,10:00-11:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_74,LKG-C,Hindi,HIN,Ms. Malhotra,MONDAY,P4,11:00-12:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_75,LKG-C,Hindi,HIN,Ms. Malhotra,MONDAY,P5,12:00-13:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_76,LKG-C,Hindi,HIN,Ms. Malhotra,MONDAY,P6,13:00-14:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_77,LKG-C,Science,SCI,Mrs. Rao,MONDAY,P7,14:00-15:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_78,LKG-C,Science,SCI,Mrs. Rao,TUESDAY,P1,8:00-9:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_79,LKG-C,English,ENG,Mr. Singh,TUESDAY,P2,9:00-10:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_80,LKG-C,Mathematics,MATH,Ms. Gupta,TUESDAY,P3,10:00-11:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_81,LKG-C,English,ENG,Mr. Singh,TUESDAY,P4,11:00-12:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_82,LKG-C,English,ENG,Mr. Singh,TUESDAY,P5,12:00-13:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_83,LKG-C,English,ENG,Mr. Singh,TUESDAY,P6,13:00-14:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_84,LKG-C,Mathematics,MATH,Ms. Gupta,TUESDAY,P7,14:00-15:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_85,LKG-C,Mathematics,MATH,Ms. Gupta,WEDNESDAY,P1,8:00-9:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_86,LKG-C,Mathematics,MATH,Ms. Gupta,WEDNESDAY,P2,9:00-10:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_87,LKG-C,English,ENG,Mr. Singh,WEDNESDAY,P3,10:00-11:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_88,LKG-C,Mathematics,MATH,Ms. Gupta,WEDNESDAY,P4,11:00-12:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_89,LKG-C,Social Studies,SST,Mr. Singh,WEDNESDAY,P5,12:00-13:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_90,LKG-C,Physical Education,PE,Ms. Gupta,WEDNESDAY,P6,13:00-14:00,Sports Field,SPORTS,True,Room 03,NO,NO
+entry_91,LKG-C,Social Studies,SST,Mr. Singh,WEDNESDAY,P7,14:00-15:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_92,LKG-C,Mathematics,MATH,Ms. Gupta,THURSDAY,P1,8:00-9:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_93,LKG-C,Science,SCI,Mrs. Rao,THURSDAY,P2,9:00-10:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_94,LKG-C,Social Studies,SST,Mr. Singh,THURSDAY,P3,10:00-11:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_95,LKG-C,Physical Education,PE,Ms. Gupta,THURSDAY,P4,11:00-12:00,Sports Field,SPORTS,True,Room 03,NO,NO
+entry_96,LKG-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P5,12:00-13:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_97,LKG-C,Physical Education,PE,Ms. Gupta,THURSDAY,P6,13:00-14:00,Sports Field,SPORTS,True,Room 03,NO,NO
+entry_98,LKG-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_99,LKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P1,8:00-9:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_100,LKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P2,9:00-10:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_101,LKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_102,LKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_103,LKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_104,LKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_105,LKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_106,UKG-A,Physical Education,PE,Mrs. Rao,MONDAY,P1,8:00-9:00,Sports Field,SPORTS,True,Room 04,NO,NO
+entry_107,UKG-A,Science,SCI,Ms. Mehta,MONDAY,P2,9:00-10:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_108,UKG-A,Mathematics,MATH,Mrs. Rao,MONDAY,P3,10:00-11:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_109,UKG-A,Science,SCI,Ms. Mehta,MONDAY,P4,11:00-12:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_110,UKG-A,Science,SCI,Ms. Mehta,MONDAY,P5,12:00-13:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_111,UKG-A,Science,SCI,Ms. Mehta,MONDAY,P6,13:00-14:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_112,UKG-A,Hindi,HIN,Mr. Iyer,MONDAY,P7,14:00-15:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_113,UKG-A,Hindi,HIN,Mr. Iyer,TUESDAY,P1,8:00-9:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_114,UKG-A,Mathematics,MATH,Mrs. Rao,TUESDAY,P2,9:00-10:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_115,UKG-A,Mathematics,MATH,Mrs. Rao,TUESDAY,P3,10:00-11:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_116,UKG-A,Mathematics,MATH,Mrs. Rao,TUESDAY,P4,11:00-12:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_117,UKG-A,Mathematics,MATH,Mrs. Rao,TUESDAY,P5,12:00-13:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_118,UKG-A,English,ENG,Mr. Reddy,TUESDAY,P6,13:00-14:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_119,UKG-A,English,ENG,Mr. Reddy,TUESDAY,P7,14:00-15:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_120,UKG-A,English,ENG,Mr. Reddy,WEDNESDAY,P1,8:00-9:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_121,UKG-A,Hindi,HIN,Mr. Iyer,WEDNESDAY,P2,9:00-10:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_122,UKG-A,Hindi,HIN,Mr. Iyer,WEDNESDAY,P3,10:00-11:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_123,UKG-A,Social Studies,SST,Mr. Reddy,WEDNESDAY,P4,11:00-12:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_124,UKG-A,Mathematics,MATH,Mrs. Rao,WEDNESDAY,P5,12:00-13:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_125,UKG-A,English,ENG,Mr. Reddy,WEDNESDAY,P6,13:00-14:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_126,UKG-A,English,ENG,Mr. Reddy,WEDNESDAY,P7,14:00-15:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_127,UKG-A,English,ENG,Mr. Reddy,THURSDAY,P1,8:00-9:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_128,UKG-A,Social Studies,SST,Mr. Reddy,THURSDAY,P2,9:00-10:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_129,UKG-A,Social Studies,SST,Mr. Reddy,THURSDAY,P3,10:00-11:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_130,UKG-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P4,11:00-12:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_131,UKG-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P5,12:00-13:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_132,UKG-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P6,13:00-14:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_133,UKG-A,Physical Education,PE,Mrs. Rao,THURSDAY,P7,14:00-15:00,Sports Field,SPORTS,True,Room 04,NO,NO
+entry_134,UKG-A,Physical Education,PE,Mrs. Rao,FRIDAY,P1,8:00-9:00,Sports Field,SPORTS,True,Room 04,NO,NO
+entry_135,UKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P2,9:00-10:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_136,UKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_137,UKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_138,UKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_139,UKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_140,UKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_141,UKG-B,Science,SCI,Mr. Joshi,MONDAY,P1,8:00-9:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_142,UKG-B,Physical Education,PE,Mr. Joshi,MONDAY,P2,9:00-10:00,Sports Field,SPORTS,True,Room 05,NO,NO
+entry_143,UKG-B,Physical Education,PE,Mr. Joshi,MONDAY,P3,10:00-11:00,Sports Field,SPORTS,True,Room 05,NO,NO
+entry_144,UKG-B,Mathematics,MATH,Mr. Joshi,MONDAY,P4,11:00-12:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_145,UKG-B,Science,SCI,Mr. Joshi,MONDAY,P5,12:00-13:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_146,UKG-B,Science,SCI,Mr. Joshi,MONDAY,P6,13:00-14:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_147,UKG-B,Hindi,HIN,Mrs. Nair,MONDAY,P7,14:00-15:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_148,UKG-B,English,ENG,Ms. Mehta,TUESDAY,P1,8:00-9:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_149,UKG-B,Physical Education,PE,Mr. Joshi,TUESDAY,P2,9:00-10:00,Sports Field,SPORTS,True,Room 05,NO,NO
+entry_150,UKG-B,Social Studies,SST,Ms. Mehta,TUESDAY,P3,10:00-11:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_151,UKG-B,Hindi,HIN,Mrs. Nair,TUESDAY,P4,11:00-12:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_152,UKG-B,Mathematics,MATH,Mr. Joshi,TUESDAY,P5,12:00-13:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_153,UKG-B,Hindi,HIN,Mrs. Nair,TUESDAY,P6,13:00-14:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_154,UKG-B,Computer Science,CS,Mrs. Sinha,TUESDAY,P7,14:00-15:00,Computer Lab 1,LAB,True,Room 05,NO,YES
+entry_155,UKG-B,Science,SCI,Mr. Joshi,WEDNESDAY,P1,8:00-9:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_156,UKG-B,English,ENG,Ms. Mehta,WEDNESDAY,P2,9:00-10:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_157,UKG-B,English,ENG,Ms. Mehta,WEDNESDAY,P3,10:00-11:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_158,UKG-B,English,ENG,Ms. Mehta,WEDNESDAY,P4,11:00-12:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_159,UKG-B,English,ENG,Ms. Mehta,WEDNESDAY,P5,12:00-13:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_160,UKG-B,Computer Science,CS,Mrs. Sinha,WEDNESDAY,P6,13:00-14:00,Computer Lab 1,LAB,True,Room 05,NO,YES
+entry_161,UKG-B,Social Studies,SST,Ms. Mehta,WEDNESDAY,P7,14:00-15:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_162,UKG-B,Social Studies,SST,Ms. Mehta,THURSDAY,P1,8:00-9:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_163,UKG-B,English,ENG,Ms. Mehta,THURSDAY,P2,9:00-10:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_164,UKG-B,Mathematics,MATH,Mr. Joshi,THURSDAY,P3,10:00-11:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_165,UKG-B,Mathematics,MATH,Mr. Joshi,THURSDAY,P4,11:00-12:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_166,UKG-B,Mathematics,MATH,Mr. Joshi,THURSDAY,P5,12:00-13:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_167,UKG-B,Mathematics,MATH,Mr. Joshi,THURSDAY,P6,13:00-14:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_168,UKG-B,Hindi,HIN,Mrs. Nair,THURSDAY,P7,14:00-15:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_169,UKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P1,8:00-9:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_170,UKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P2,9:00-10:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_171,UKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_172,UKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_173,UKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_174,UKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_175,UKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_176,UKG-C,Hindi,HIN,Ms. Pillai,MONDAY,P1,8:00-9:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_177,UKG-C,Social Studies,SST,Mrs. Verma,MONDAY,P2,9:00-10:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_178,UKG-C,Hindi,HIN,Ms. Pillai,MONDAY,P3,10:00-11:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_179,UKG-C,English,ENG,Mrs. Verma,MONDAY,P4,11:00-12:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_180,UKG-C,English,ENG,Mrs. Verma,MONDAY,P5,12:00-13:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_181,UKG-C,Science,SCI,Mrs. Verma,MONDAY,P6,13:00-14:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_182,UKG-C,English,ENG,Mrs. Verma,MONDAY,P7,14:00-15:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_183,UKG-C,Hindi,HIN,Ms. Pillai,TUESDAY,P1,8:00-9:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_184,UKG-C,English,ENG,Mrs. Verma,TUESDAY,P2,9:00-10:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_185,UKG-C,Mathematics,MATH,Mr. Chopra,TUESDAY,P3,10:00-11:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_186,UKG-C,Mathematics,MATH,Mr. Chopra,TUESDAY,P4,11:00-12:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_187,UKG-C,Physical Education,PE,Mr. Chopra,TUESDAY,P5,12:00-13:00,Sports Field,SPORTS,True,Room 06,NO,NO
+entry_188,UKG-C,English,ENG,Mrs. Verma,TUESDAY,P6,13:00-14:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_189,UKG-C,Physical Education,PE,Mr. Chopra,TUESDAY,P7,14:00-15:00,Sports Field,SPORTS,True,Room 06,NO,NO
+entry_190,UKG-C,Physical Education,PE,Mr. Chopra,WEDNESDAY,P1,8:00-9:00,Sports Field,SPORTS,True,Room 06,NO,NO
+entry_191,UKG-C,Mathematics,MATH,Mr. Chopra,WEDNESDAY,P2,9:00-10:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_192,UKG-C,Mathematics,MATH,Mr. Chopra,WEDNESDAY,P3,10:00-11:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_193,UKG-C,English,ENG,Mrs. Verma,WEDNESDAY,P4,11:00-12:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_194,UKG-C,Science,SCI,Mrs. Verma,WEDNESDAY,P5,12:00-13:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_195,UKG-C,Science,SCI,Mrs. Verma,WEDNESDAY,P6,13:00-14:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_196,UKG-C,Science,SCI,Mrs. Verma,WEDNESDAY,P7,14:00-15:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_197,UKG-C,Social Studies,SST,Mrs. Verma,THURSDAY,P1,8:00-9:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_198,UKG-C,Social Studies,SST,Mrs. Verma,THURSDAY,P2,9:00-10:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_199,UKG-C,Hindi,HIN,Ms. Pillai,THURSDAY,P3,10:00-11:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_200,UKG-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P4,11:00-12:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_201,UKG-C,Mathematics,MATH,Mr. Chopra,THURSDAY,P5,12:00-13:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_202,UKG-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P6,13:00-14:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_203,UKG-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_204,UKG-C,Mathematics,MATH,Mr. Chopra,FRIDAY,P1,8:00-9:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_205,UKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P2,9:00-10:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_206,UKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_207,UKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_208,UKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_209,UKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_210,UKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_211,Grade 1-A,Hindi,HIN,Mr. Khan,MONDAY,P1,8:00-9:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_212,Grade 1-A,Hindi,HIN,Mr. Khan,MONDAY,P2,9:00-10:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_213,Grade 1-A,Mathematics,MATH,Mr. Iyer,MONDAY,P3,10:00-11:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_214,Grade 1-A,Mathematics,MATH,Mr. Iyer,MONDAY,P4,11:00-12:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_215,Grade 1-A,Mathematics,MATH,Mr. Iyer,MONDAY,P5,12:00-13:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_216,Grade 1-A,Mathematics,MATH,Mr. Iyer,MONDAY,P6,13:00-14:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_217,Grade 1-A,Science,SCI,Mr. Chopra,MONDAY,P7,14:00-15:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_218,Grade 1-A,Science,SCI,Mr. Chopra,TUESDAY,P1,8:00-9:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_219,Grade 1-A,English,ENG,Ms. Malhotra,TUESDAY,P2,9:00-10:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_220,Grade 1-A,English,ENG,Ms. Malhotra,TUESDAY,P3,10:00-11:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_221,Grade 1-A,Mathematics,MATH,Mr. Iyer,TUESDAY,P4,11:00-12:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_222,Grade 1-A,Hindi,HIN,Mr. Khan,TUESDAY,P5,12:00-13:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_223,Grade 1-A,Hindi,HIN,Mr. Khan,TUESDAY,P6,13:00-14:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_224,Grade 1-A,English,ENG,Ms. Malhotra,TUESDAY,P7,14:00-15:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_225,Grade 1-A,English,ENG,Ms. Malhotra,WEDNESDAY,P1,8:00-9:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_226,Grade 1-A,English,ENG,Ms. Malhotra,WEDNESDAY,P2,9:00-10:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_227,Grade 1-A,English,ENG,Ms. Malhotra,WEDNESDAY,P3,10:00-11:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_228,Grade 1-A,Mathematics,MATH,Mr. Iyer,WEDNESDAY,P4,11:00-12:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_229,Grade 1-A,Social Studies,SST,Ms. Malhotra,WEDNESDAY,P5,12:00-13:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_230,Grade 1-A,Social Studies,SST,Ms. Malhotra,WEDNESDAY,P6,13:00-14:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_231,Grade 1-A,Physical Education,PE,Mr. Iyer,WEDNESDAY,P7,14:00-15:00,Sports Field,SPORTS,True,Room 07,NO,NO
+entry_232,Grade 1-A,Social Studies,SST,Ms. Malhotra,THURSDAY,P1,8:00-9:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_233,Grade 1-A,Physical Education,PE,Mr. Iyer,THURSDAY,P2,9:00-10:00,Sports Field,SPORTS,True,Room 07,NO,NO
+entry_234,Grade 1-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P3,10:00-11:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_235,Grade 1-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P4,11:00-12:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_236,Grade 1-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P5,12:00-13:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_237,Grade 1-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P6,13:00-14:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_238,Grade 1-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_239,Grade 1-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P1,8:00-9:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_240,Grade 1-A,Science,SCI,Mr. Chopra,FRIDAY,P2,9:00-10:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_241,Grade 1-A,Science,SCI,Mr. Chopra,FRIDAY,P3,10:00-11:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_242,Grade 1-A,Physical Education,PE,Mr. Iyer,FRIDAY,P4,11:00-12:00,Sports Field,SPORTS,True,Room 07,NO,NO
+entry_243,Grade 1-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_244,Grade 1-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_245,Grade 1-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_246,Grade 1-B,English,ENG,Mrs. Nair,MONDAY,P1,8:00-9:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_247,Grade 1-B,Mathematics,MATH,Ms. Pillai,MONDAY,P2,9:00-10:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_248,Grade 1-B,Hindi,HIN,Mrs. Bose,MONDAY,P3,10:00-11:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_249,Grade 1-B,Hindi,HIN,Mrs. Bose,MONDAY,P4,11:00-12:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_250,Grade 1-B,Hindi,HIN,Mrs. Bose,MONDAY,P5,12:00-13:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_251,Grade 1-B,Hindi,HIN,Mrs. Bose,MONDAY,P6,13:00-14:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_252,Grade 1-B,Science,SCI,Ms. Malhotra,MONDAY,P7,14:00-15:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_253,Grade 1-B,Science,SCI,Ms. Malhotra,TUESDAY,P1,8:00-9:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_254,Grade 1-B,Mathematics,MATH,Ms. Pillai,TUESDAY,P2,9:00-10:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_255,Grade 1-B,Mathematics,MATH,Ms. Pillai,TUESDAY,P3,10:00-11:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_256,Grade 1-B,Mathematics,MATH,Ms. Pillai,TUESDAY,P4,11:00-12:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_257,Grade 1-B,Science,SCI,Ms. Malhotra,TUESDAY,P5,12:00-13:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_258,Grade 1-B,Physical Education,PE,Ms. Pillai,TUESDAY,P6,13:00-14:00,Sports Field,SPORTS,True,Room 08,NO,NO
+entry_259,Grade 1-B,English,ENG,Mrs. Nair,TUESDAY,P7,14:00-15:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_260,Grade 1-B,Social Studies,SST,Mrs. Nair,WEDNESDAY,P1,8:00-9:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_261,Grade 1-B,Social Studies,SST,Mrs. Nair,WEDNESDAY,P2,9:00-10:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_262,Grade 1-B,Social Studies,SST,Mrs. Nair,WEDNESDAY,P3,10:00-11:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_263,Grade 1-B,English,ENG,Mrs. Nair,WEDNESDAY,P4,11:00-12:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_264,Grade 1-B,English,ENG,Mrs. Nair,WEDNESDAY,P5,12:00-13:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_265,Grade 1-B,Mathematics,MATH,Ms. Pillai,WEDNESDAY,P6,13:00-14:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_266,Grade 1-B,Mathematics,MATH,Ms. Pillai,WEDNESDAY,P7,14:00-15:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_267,Grade 1-B,Physical Education,PE,Ms. Pillai,THURSDAY,P1,8:00-9:00,Sports Field,SPORTS,True,Room 08,NO,NO
+entry_268,Grade 1-B,Science,SCI,Ms. Malhotra,THURSDAY,P2,9:00-10:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_269,Grade 1-B,English,ENG,Mrs. Nair,THURSDAY,P3,10:00-11:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_270,Grade 1-B,English,ENG,Mrs. Nair,THURSDAY,P4,11:00-12:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_271,Grade 1-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P5,12:00-13:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_272,Grade 1-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P6,13:00-14:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_273,Grade 1-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_274,Grade 1-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P1,8:00-9:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_275,Grade 1-B,Physical Education,PE,Ms. Pillai,FRIDAY,P2,9:00-10:00,Sports Field,SPORTS,True,Room 08,NO,NO
+entry_276,Grade 1-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_277,Grade 1-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_278,Grade 1-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_279,Grade 1-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_280,Grade 1-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_281,Grade 1-C,Mathematics,MATH,Mrs. Bose,MONDAY,P1,8:00-9:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_282,Grade 1-C,Hindi,HIN,Mr. Agarwal,MONDAY,P2,9:00-10:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_283,Grade 1-C,Social Studies,SST,Mr. Khan,MONDAY,P3,10:00-11:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_284,Grade 1-C,Social Studies,SST,Mr. Khan,MONDAY,P4,11:00-12:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_285,Grade 1-C,Hindi,HIN,Mr. Agarwal,MONDAY,P5,12:00-13:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_286,Grade 1-C,English,ENG,Mr. Khan,MONDAY,P6,13:00-14:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_287,Grade 1-C,Hindi,HIN,Mr. Agarwal,MONDAY,P7,14:00-15:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_288,Grade 1-C,Hindi,HIN,Mr. Agarwal,TUESDAY,P1,8:00-9:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_289,Grade 1-C,Social Studies,SST,Mr. Khan,TUESDAY,P2,9:00-10:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_290,Grade 1-C,Science,SCI,Mr. Iyer,TUESDAY,P3,10:00-11:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_291,Grade 1-C,Mathematics,MATH,Mrs. Bose,TUESDAY,P4,11:00-12:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_292,Grade 1-C,Science,SCI,Mr. Iyer,TUESDAY,P5,12:00-13:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_293,Grade 1-C,Science,SCI,Mr. Iyer,TUESDAY,P6,13:00-14:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_294,Grade 1-C,Mathematics,MATH,Mrs. Bose,TUESDAY,P7,14:00-15:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_295,Grade 1-C,Mathematics,MATH,Mrs. Bose,WEDNESDAY,P1,8:00-9:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_296,Grade 1-C,Mathematics,MATH,Mrs. Bose,WEDNESDAY,P2,9:00-10:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_297,Grade 1-C,Physical Education,PE,Mrs. Bose,WEDNESDAY,P3,10:00-11:00,Sports Field,SPORTS,True,Room 09,NO,NO
+entry_298,Grade 1-C,Physical Education,PE,Mrs. Bose,WEDNESDAY,P4,11:00-12:00,Sports Field,SPORTS,True,Room 09,NO,NO
+entry_299,Grade 1-C,Physical Education,PE,Mrs. Bose,WEDNESDAY,P5,12:00-13:00,Sports Field,SPORTS,True,Room 09,NO,NO
+entry_300,Grade 1-C,English,ENG,Mr. Khan,WEDNESDAY,P6,13:00-14:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_301,Grade 1-C,English,ENG,Mr. Khan,WEDNESDAY,P7,14:00-15:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_302,Grade 1-C,English,ENG,Mr. Khan,THURSDAY,P1,8:00-9:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_303,Grade 1-C,English,ENG,Mr. Khan,THURSDAY,P2,9:00-10:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_304,Grade 1-C,Science,SCI,Mr. Iyer,THURSDAY,P3,10:00-11:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_305,Grade 1-C,English,ENG,Mr. Khan,THURSDAY,P4,11:00-12:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_306,Grade 1-C,Mathematics,MATH,Mrs. Bose,THURSDAY,P5,12:00-13:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_307,Grade 1-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P6,13:00-14:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_308,Grade 1-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_309,Grade 1-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P1,8:00-9:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_310,Grade 1-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P2,9:00-10:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_311,Grade 1-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_312,Grade 1-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_313,Grade 1-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_314,Grade 1-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_315,Grade 1-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_316,Grade 2-A,Hindi,HIN,Ms. Shah,MONDAY,P1,8:00-9:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_317,Grade 2-A,Hindi,HIN,Ms. Shah,MONDAY,P2,9:00-10:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_318,Grade 2-A,Hindi,HIN,Ms. Shah,MONDAY,P3,10:00-11:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_319,Grade 2-A,Hindi,HIN,Ms. Shah,MONDAY,P4,11:00-12:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_320,Grade 2-A,Science,SCI,Mrs. Nair,MONDAY,P5,12:00-13:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_321,Grade 2-A,English,ENG,Mr. Agarwal,MONDAY,P6,13:00-14:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_322,Grade 2-A,Computer Science,CS,Mrs. Sinha,MONDAY,P7,14:00-15:00,Computer Lab 1,LAB,True,Room 10,NO,YES
+entry_323,Grade 2-A,Mathematics,MATH,Ms. Shah,TUESDAY,P1,8:00-9:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_324,Grade 2-A,Social Studies,SST,Mr. Agarwal,TUESDAY,P2,9:00-10:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_325,Grade 2-A,Social Studies,SST,Mr. Agarwal,TUESDAY,P3,10:00-11:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_326,Grade 2-A,English,ENG,Mr. Agarwal,TUESDAY,P4,11:00-12:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_327,Grade 2-A,Science,SCI,Mrs. Nair,TUESDAY,P5,12:00-13:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_328,Grade 2-A,Mathematics,MATH,Ms. Shah,TUESDAY,P6,13:00-14:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_329,Grade 2-A,Mathematics,MATH,Ms. Shah,TUESDAY,P7,14:00-15:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_330,Grade 2-A,Mathematics,MATH,Ms. Shah,WEDNESDAY,P1,8:00-9:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_331,Grade 2-A,Mathematics,MATH,Ms. Shah,WEDNESDAY,P2,9:00-10:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_332,Grade 2-A,Mathematics,MATH,Ms. Shah,WEDNESDAY,P3,10:00-11:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_333,Grade 2-A,Social Studies,SST,Mr. Agarwal,WEDNESDAY,P4,11:00-12:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_334,Grade 2-A,Computer Science,CS,Mrs. Sinha,WEDNESDAY,P5,12:00-13:00,Computer Lab 1,LAB,True,Room 10,NO,YES
+entry_335,Grade 2-A,English,ENG,Mr. Agarwal,WEDNESDAY,P6,13:00-14:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_336,Grade 2-A,English,ENG,Mr. Agarwal,WEDNESDAY,P7,14:00-15:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_337,Grade 2-A,English,ENG,Mr. Agarwal,THURSDAY,P1,8:00-9:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_338,Grade 2-A,English,ENG,Mr. Agarwal,THURSDAY,P2,9:00-10:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_339,Grade 2-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P3,10:00-11:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_340,Grade 2-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P4,11:00-12:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_341,Grade 2-A,Science,SCI,Mrs. Nair,THURSDAY,P5,12:00-13:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_342,Grade 2-A,Science,SCI,Mrs. Nair,THURSDAY,P6,13:00-14:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_343,Grade 2-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_344,Grade 2-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P1,8:00-9:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_345,Grade 2-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P2,9:00-10:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_346,Grade 2-A,Physical Education,PE,Ms. Shah,FRIDAY,P3,10:00-11:00,Sports Field,SPORTS,True,Room 10,NO,NO
+entry_347,Grade 2-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_348,Grade 2-A,Physical Education,PE,Ms. Shah,FRIDAY,P5,12:00-13:00,Sports Field,SPORTS,True,Room 10,NO,NO
+entry_349,Grade 2-A,Physical Education,PE,Ms. Shah,FRIDAY,P6,13:00-14:00,Sports Field,SPORTS,True,Room 10,NO,NO
+entry_350,Grade 2-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_351,Grade 2-B,English,ENG,Mr. Patel,MONDAY,P1,8:00-9:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_352,Grade 2-B,Mathematics,MATH,Mrs. Bhatt,MONDAY,P2,9:00-10:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_353,Grade 2-B,English,ENG,Mr. Patel,MONDAY,P3,10:00-11:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_354,Grade 2-B,Hindi,HIN,Mr. Patel,MONDAY,P4,11:00-12:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_355,Grade 2-B,Hindi,HIN,Mr. Patel,MONDAY,P5,12:00-13:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_356,Grade 2-B,Mathematics,MATH,Mrs. Bhatt,MONDAY,P6,13:00-14:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_357,Grade 2-B,Mathematics,MATH,Mrs. Bhatt,MONDAY,P7,14:00-15:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_358,Grade 2-B,Social Studies,SST,Mr. Patel,TUESDAY,P1,8:00-9:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_359,Grade 2-B,Social Studies,SST,Mr. Patel,TUESDAY,P2,9:00-10:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_360,Grade 2-B,Mathematics,MATH,Mrs. Bhatt,TUESDAY,P3,10:00-11:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_361,Grade 2-B,Mathematics,MATH,Mrs. Bhatt,TUESDAY,P4,11:00-12:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_362,Grade 2-B,English,ENG,Mr. Patel,TUESDAY,P5,12:00-13:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_363,Grade 2-B,English,ENG,Mr. Patel,TUESDAY,P6,13:00-14:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_364,Grade 2-B,Mathematics,MATH,Mrs. Bhatt,TUESDAY,P7,14:00-15:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_365,Grade 2-B,English,ENG,Mr. Patel,WEDNESDAY,P1,8:00-9:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_366,Grade 2-B,Science,SCI,Ms. Pillai,WEDNESDAY,P2,9:00-10:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_367,Grade 2-B,Science,SCI,Ms. Pillai,WEDNESDAY,P3,10:00-11:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_368,Grade 2-B,Science,SCI,Ms. Pillai,WEDNESDAY,P4,11:00-12:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_369,Grade 2-B,English,ENG,Mr. Patel,WEDNESDAY,P5,12:00-13:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_370,Grade 2-B,Hindi,HIN,Mr. Patel,WEDNESDAY,P6,13:00-14:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_371,Grade 2-B,Hindi,HIN,Mr. Patel,WEDNESDAY,P7,14:00-15:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_372,Grade 2-B,Social Studies,SST,Mr. Patel,THURSDAY,P1,8:00-9:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_373,Grade 2-B,Science,SCI,Ms. Pillai,THURSDAY,P2,9:00-10:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_374,Grade 2-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P3,10:00-11:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_375,Grade 2-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P4,11:00-12:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_376,Grade 2-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P5,12:00-13:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_377,Grade 2-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P6,13:00-14:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_378,Grade 2-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_379,Grade 2-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P1,8:00-9:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_380,Grade 2-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P2,9:00-10:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_381,Grade 2-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_382,Grade 2-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_383,Grade 2-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_384,Grade 2-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_385,Grade 2-B,Physical Education,PE,Mrs. Bhatt,FRIDAY,P7,14:00-15:00,Sports Field,SPORTS,True,Room 11,NO,NO
+entry_386,Grade 2-C,English,ENG,Ms. Trivedi,MONDAY,P1,8:00-9:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_387,Grade 2-C,English,ENG,Ms. Trivedi,MONDAY,P2,9:00-10:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_388,Grade 2-C,Hindi,HIN,Mrs. Bhatt,MONDAY,P3,10:00-11:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_389,Grade 2-C,Mathematics,MATH,Mr. Kapoor,MONDAY,P4,11:00-12:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_390,Grade 2-C,Physical Education,PE,Mr. Kapoor,MONDAY,P5,12:00-13:00,Sports Field,SPORTS,True,Room 12,NO,NO
+entry_391,Grade 2-C,Social Studies,SST,Ms. Trivedi,MONDAY,P6,13:00-14:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_392,Grade 2-C,Mathematics,MATH,Mr. Kapoor,MONDAY,P7,14:00-15:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_393,Grade 2-C,English,ENG,Ms. Trivedi,TUESDAY,P1,8:00-9:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_394,Grade 2-C,Hindi,HIN,Mrs. Bhatt,TUESDAY,P2,9:00-10:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_395,Grade 2-C,Social Studies,SST,Ms. Trivedi,TUESDAY,P3,10:00-11:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_396,Grade 2-C,Mathematics,MATH,Mr. Kapoor,TUESDAY,P4,11:00-12:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_397,Grade 2-C,Mathematics,MATH,Mr. Kapoor,TUESDAY,P5,12:00-13:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_398,Grade 2-C,Mathematics,MATH,Mr. Kapoor,TUESDAY,P6,13:00-14:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_399,Grade 2-C,Mathematics,MATH,Mr. Kapoor,TUESDAY,P7,14:00-15:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_400,Grade 2-C,English,ENG,Ms. Trivedi,WEDNESDAY,P1,8:00-9:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_401,Grade 2-C,English,ENG,Ms. Trivedi,WEDNESDAY,P2,9:00-10:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_402,Grade 2-C,English,ENG,Ms. Trivedi,WEDNESDAY,P3,10:00-11:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_403,Grade 2-C,Hindi,HIN,Mrs. Bhatt,WEDNESDAY,P4,11:00-12:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_404,Grade 2-C,Social Studies,SST,Ms. Trivedi,WEDNESDAY,P5,12:00-13:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_405,Grade 2-C,Hindi,HIN,Mrs. Bhatt,WEDNESDAY,P6,13:00-14:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_406,Grade 2-C,Unknown,Unknown,Mrs. Sharma,WEDNESDAY,P7,14:00-15:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_407,Grade 2-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P1,8:00-9:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_408,Grade 2-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P2,9:00-10:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_409,Grade 2-C,Science,SCI,Mr. Khan,THURSDAY,P3,10:00-11:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_410,Grade 2-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P4,11:00-12:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_411,Grade 2-C,Science,SCI,Mr. Khan,THURSDAY,P5,12:00-13:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_412,Grade 2-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P6,13:00-14:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_413,Grade 2-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_414,Grade 2-C,Science,SCI,Mr. Khan,FRIDAY,P1,8:00-9:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_415,Grade 2-C,Science,SCI,Mr. Khan,FRIDAY,P2,9:00-10:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_416,Grade 2-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_417,Grade 2-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_418,Grade 2-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_419,Grade 2-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_420,Grade 2-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_421,Grade 3-A,English,ENG,Mrs. Sinha,MONDAY,P1,8:00-9:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_422,Grade 3-A,English,ENG,Mrs. Sinha,MONDAY,P2,9:00-10:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_423,Grade 3-A,Mathematics,MATH,Mrs. Sharma,MONDAY,P3,10:00-11:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_424,Grade 3-A,Mathematics,MATH,Mrs. Sharma,MONDAY,P4,11:00-12:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_425,Grade 3-A,Hindi,HIN,Ms. Trivedi,MONDAY,P5,12:00-13:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_426,Grade 3-A,Mathematics,MATH,Mrs. Sharma,MONDAY,P6,13:00-14:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_427,Grade 3-A,Unknown,Unknown,Mrs. Sharma,MONDAY,P7,14:00-15:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_428,Grade 3-A,Mathematics,MATH,Mrs. Sharma,TUESDAY,P1,8:00-9:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_429,Grade 3-A,Hindi,HIN,Ms. Trivedi,TUESDAY,P2,9:00-10:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_430,Grade 3-A,Mathematics,MATH,Mrs. Sharma,TUESDAY,P3,10:00-11:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_431,Grade 3-A,Mathematics,MATH,Mrs. Sharma,TUESDAY,P4,11:00-12:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_432,Grade 3-A,English,ENG,Mrs. Sinha,TUESDAY,P5,12:00-13:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_433,Grade 3-A,English,ENG,Mrs. Sinha,TUESDAY,P6,13:00-14:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_434,Grade 3-A,Hindi,HIN,Ms. Trivedi,TUESDAY,P7,14:00-15:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_435,Grade 3-A,English,ENG,Mrs. Sinha,WEDNESDAY,P1,8:00-9:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_436,Grade 3-A,English,ENG,Mrs. Sinha,WEDNESDAY,P2,9:00-10:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_437,Grade 3-A,Social Studies,SST,Mrs. Sinha,WEDNESDAY,P3,10:00-11:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_438,Grade 3-A,Unknown,Unknown,Mrs. Sharma,WEDNESDAY,P4,11:00-12:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_439,Grade 3-A,Unknown,Unknown,Mrs. Sharma,WEDNESDAY,P5,12:00-13:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_440,Grade 3-A,Unknown,Unknown,Mrs. Sharma,WEDNESDAY,P6,13:00-14:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_441,Grade 3-A,Unknown,Unknown,Mrs. Sharma,WEDNESDAY,P7,14:00-15:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_442,Grade 3-A,Social Studies,SST,Mrs. Sinha,THURSDAY,P1,8:00-9:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_443,Grade 3-A,Social Studies,SST,Mrs. Sinha,THURSDAY,P2,9:00-10:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_444,Grade 3-A,Hindi,HIN,Ms. Trivedi,THURSDAY,P3,10:00-11:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_445,Grade 3-A,Science,SCI,Mrs. Bose,THURSDAY,P4,11:00-12:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_446,Grade 3-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P5,12:00-13:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_447,Grade 3-A,Science,SCI,Mrs. Bose,THURSDAY,P6,13:00-14:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_448,Grade 3-A,Science,SCI,Mrs. Bose,THURSDAY,P7,14:00-15:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_449,Grade 3-A,Science,SCI,Mrs. Bose,FRIDAY,P1,8:00-9:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_450,Grade 3-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P2,9:00-10:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_451,Grade 3-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_452,Grade 3-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_453,Grade 3-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_454,Grade 3-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_455,Grade 3-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_456,Grade 3-B,Mathematics,MATH,Ms. Patel,MONDAY,P1,8:00-9:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_457,Grade 3-B,English,ENG,Mr. Kumar,MONDAY,P2,9:00-10:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_458,Grade 3-B,English,ENG,Mr. Kumar,MONDAY,P3,10:00-11:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_459,Grade 3-B,Mathematics,MATH,Ms. Patel,MONDAY,P4,11:00-12:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_460,Grade 3-B,Mathematics,MATH,Ms. Patel,MONDAY,P5,12:00-13:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_461,Grade 3-B,Hindi,HIN,Mr. Kapoor,MONDAY,P6,13:00-14:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_462,Grade 3-B,Social Studies,SST,Mr. Kumar,MONDAY,P7,14:00-15:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_463,Grade 3-B,Hindi,HIN,Mr. Kapoor,TUESDAY,P1,8:00-9:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_464,Grade 3-B,Mathematics,MATH,Ms. Patel,TUESDAY,P2,9:00-10:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_465,Grade 3-B,Physical Education,PE,Ms. Patel,TUESDAY,P3,10:00-11:00,Sports Field,SPORTS,True,Room 14,NO,NO
+entry_466,Grade 3-B,English,ENG,Mr. Kumar,TUESDAY,P4,11:00-12:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_467,Grade 3-B,English,ENG,Mr. Kumar,TUESDAY,P5,12:00-13:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_468,Grade 3-B,English,ENG,Mr. Kumar,TUESDAY,P6,13:00-14:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_469,Grade 3-B,English,ENG,Mr. Kumar,TUESDAY,P7,14:00-15:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_470,Grade 3-B,Social Studies,SST,Mr. Kumar,WEDNESDAY,P1,8:00-9:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_471,Grade 3-B,Social Studies,SST,Mr. Kumar,WEDNESDAY,P2,9:00-10:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_472,Grade 3-B,Science,SCI,Mr. Agarwal,WEDNESDAY,P3,10:00-11:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_473,Grade 3-B,Mathematics,MATH,Ms. Patel,WEDNESDAY,P4,11:00-12:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_474,Grade 3-B,Hindi,HIN,Mr. Kapoor,WEDNESDAY,P5,12:00-13:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_475,Grade 3-B,Hindi,HIN,Mr. Kapoor,WEDNESDAY,P6,13:00-14:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_476,Grade 3-B,Mathematics,MATH,Ms. Patel,WEDNESDAY,P7,14:00-15:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_477,Grade 3-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P1,8:00-9:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_478,Grade 3-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P2,9:00-10:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_479,Grade 3-B,Science,SCI,Mr. Agarwal,THURSDAY,P3,10:00-11:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_480,Grade 3-B,Science,SCI,Mr. Agarwal,THURSDAY,P4,11:00-12:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_481,Grade 3-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P5,12:00-13:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_482,Grade 3-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P6,13:00-14:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_483,Grade 3-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_484,Grade 3-B,Science,SCI,Mr. Agarwal,FRIDAY,P1,8:00-9:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_485,Grade 3-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P2,9:00-10:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_486,Grade 3-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_487,Grade 3-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_488,Grade 3-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_489,Grade 3-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_490,Grade 3-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_491,Grade 3-C,Unknown,Unknown,Mrs. Sharma,MONDAY,P1,8:00-9:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_492,Grade 3-C,Mathematics,MATH,Mr. Singh,MONDAY,P2,9:00-10:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_493,Grade 3-C,Mathematics,MATH,Mr. Singh,MONDAY,P3,10:00-11:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_494,Grade 3-C,Mathematics,MATH,Mr. Singh,MONDAY,P4,11:00-12:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_495,Grade 3-C,English,ENG,Mrs. Desai,MONDAY,P5,12:00-13:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_496,Grade 3-C,English,ENG,Mrs. Desai,MONDAY,P6,13:00-14:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_497,Grade 3-C,Physical Education,PE,Mr. Singh,MONDAY,P7,14:00-15:00,Sports Field,SPORTS,True,Room 15,NO,NO
+entry_498,Grade 3-C,Hindi,HIN,Mrs. Sinha,TUESDAY,P1,8:00-9:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_499,Grade 3-C,Hindi,HIN,Mrs. Sinha,TUESDAY,P2,9:00-10:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_500,Grade 3-C,Computer Science,CS,Mr. Joshi,TUESDAY,P3,10:00-11:00,Computer Lab 1,LAB,True,Room 15,NO,YES
+entry_501,Grade 3-C,Computer Science,CS,Mr. Joshi,TUESDAY,P4,11:00-12:00,Computer Lab 1,LAB,True,Room 15,NO,YES
+entry_502,Grade 3-C,Science,SCI,Ms. Shah,TUESDAY,P5,12:00-13:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_503,Grade 3-C,English,ENG,Mrs. Desai,TUESDAY,P6,13:00-14:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_504,Grade 3-C,Mathematics,MATH,Mr. Singh,TUESDAY,P7,14:00-15:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_505,Grade 3-C,English,ENG,Mrs. Desai,WEDNESDAY,P1,8:00-9:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_506,Grade 3-C,Mathematics,MATH,Mr. Singh,WEDNESDAY,P2,9:00-10:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_507,Grade 3-C,English,ENG,Mrs. Desai,WEDNESDAY,P3,10:00-11:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_508,Grade 3-C,Science,SCI,Ms. Shah,WEDNESDAY,P4,11:00-12:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_509,Grade 3-C,English,ENG,Mrs. Desai,WEDNESDAY,P5,12:00-13:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_510,Grade 3-C,Mathematics,MATH,Mr. Singh,WEDNESDAY,P6,13:00-14:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_511,Grade 3-C,Unknown,Unknown,Mrs. Sharma,WEDNESDAY,P7,14:00-15:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_512,Grade 3-C,Social Studies,SST,Mrs. Desai,THURSDAY,P1,8:00-9:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_513,Grade 3-C,Social Studies,SST,Mrs. Desai,THURSDAY,P2,9:00-10:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_514,Grade 3-C,Hindi,HIN,Mrs. Sinha,THURSDAY,P3,10:00-11:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_515,Grade 3-C,Hindi,HIN,Mrs. Sinha,THURSDAY,P4,11:00-12:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_516,Grade 3-C,Science,SCI,Ms. Shah,THURSDAY,P5,12:00-13:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_517,Grade 3-C,Social Studies,SST,Mrs. Desai,THURSDAY,P6,13:00-14:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_518,Grade 3-C,Science,SCI,Ms. Shah,THURSDAY,P7,14:00-15:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_519,Grade 3-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P1,8:00-9:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_520,Grade 3-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P2,9:00-10:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_521,Grade 3-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_522,Grade 3-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_523,Grade 3-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_524,Grade 3-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_525,Grade 3-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_1,LKG-A,Mathematics,MATH,Mr. Kumar,MONDAY,P1,8:00-9:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_2,LKG-A,Social Studies,SST,Mrs. Sharma,MONDAY,P2,9:00-10:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_3,LKG-A,Science,SCI,Ms. Gupta,MONDAY,P3,10:00-11:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_4,LKG-A,Mathematics,MATH,Mr. Kumar,MONDAY,P4,11:00-12:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_5,LKG-A,Physical Education,PE,Mr. Kumar,MONDAY,P5,12:00-13:00,Sports Field,SPORTS,True,Room 01,NO,NO
+entry_6,LKG-A,Hindi,HIN,Mrs. Verma,MONDAY,P6,13:00-14:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_7,LKG-A,Science,SCI,Ms. Gupta,MONDAY,P7,14:00-15:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_8,LKG-A,English,ENG,Mrs. Sharma,TUESDAY,P1,8:00-9:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_9,LKG-A,Science,SCI,Ms. Gupta,TUESDAY,P2,9:00-10:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_10,LKG-A,Social Studies,SST,Mrs. Sharma,TUESDAY,P3,10:00-11:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_11,LKG-A,Science,SCI,Ms. Gupta,TUESDAY,P4,11:00-12:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_12,LKG-A,Hindi,HIN,Mrs. Verma,TUESDAY,P5,12:00-13:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_13,LKG-A,Mathematics,MATH,Mr. Kumar,TUESDAY,P6,13:00-14:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_14,LKG-A,English,ENG,Mrs. Sharma,TUESDAY,P7,14:00-15:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_15,LKG-A,Mathematics,MATH,Mr. Kumar,WEDNESDAY,P1,8:00-9:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_16,LKG-A,Physical Education,PE,Mr. Kumar,WEDNESDAY,P2,9:00-10:00,Sports Field,SPORTS,True,Room 01,NO,NO
+entry_17,LKG-A,Mathematics,MATH,Mr. Kumar,WEDNESDAY,P3,10:00-11:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_18,LKG-A,English,ENG,Mrs. Sharma,WEDNESDAY,P4,11:00-12:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_19,LKG-A,English,ENG,Mrs. Sharma,WEDNESDAY,P5,12:00-13:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_20,LKG-A,English,ENG,Mrs. Sharma,WEDNESDAY,P6,13:00-14:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_21,LKG-A,Hindi,HIN,Mrs. Verma,WEDNESDAY,P7,14:00-15:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_22,LKG-A,English,ENG,Mrs. Sharma,THURSDAY,P1,8:00-9:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_23,LKG-A,Hindi,HIN,Mrs. Verma,THURSDAY,P2,9:00-10:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_24,LKG-A,Mathematics,MATH,Mr. Kumar,THURSDAY,P3,10:00-11:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_25,LKG-A,Physical Education,PE,Mr. Kumar,THURSDAY,P4,11:00-12:00,Sports Field,SPORTS,True,Room 01,NO,NO
+entry_26,LKG-A,Social Studies,SST,Mrs. Sharma,THURSDAY,P5,12:00-13:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_27,LKG-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P6,13:00-14:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_28,LKG-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_29,LKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P1,8:00-9:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_30,LKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P2,9:00-10:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_31,LKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_32,LKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_33,LKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_34,LKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_35,LKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_36,LKG-B,Physical Education,PE,Mrs. Desai,MONDAY,P1,8:00-9:00,Sports Field,SPORTS,True,Room 02,NO,NO
+entry_37,LKG-B,English,ENG,Ms. Patel,MONDAY,P2,9:00-10:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_38,LKG-B,Hindi,HIN,Mr. Chopra,MONDAY,P3,10:00-11:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_39,LKG-B,Hindi,HIN,Mr. Chopra,MONDAY,P4,11:00-12:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_40,LKG-B,English,ENG,Ms. Patel,MONDAY,P5,12:00-13:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_41,LKG-B,Mathematics,MATH,Mrs. Desai,MONDAY,P6,13:00-14:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_42,LKG-B,Mathematics,MATH,Mrs. Desai,MONDAY,P7,14:00-15:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_43,LKG-B,Mathematics,MATH,Mrs. Desai,TUESDAY,P1,8:00-9:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_44,LKG-B,Social Studies,SST,Ms. Patel,TUESDAY,P2,9:00-10:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_45,LKG-B,Mathematics,MATH,Mrs. Desai,TUESDAY,P3,10:00-11:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_46,LKG-B,Mathematics,MATH,Mrs. Desai,TUESDAY,P4,11:00-12:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_47,LKG-B,Hindi,HIN,Mr. Chopra,TUESDAY,P5,12:00-13:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_48,LKG-B,Mathematics,MATH,Mrs. Desai,TUESDAY,P6,13:00-14:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_49,LKG-B,English,ENG,Ms. Patel,TUESDAY,P7,14:00-15:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_50,LKG-B,English,ENG,Ms. Patel,WEDNESDAY,P1,8:00-9:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_51,LKG-B,English,ENG,Ms. Patel,WEDNESDAY,P2,9:00-10:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_52,LKG-B,Hindi,HIN,Mr. Chopra,WEDNESDAY,P3,10:00-11:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_53,LKG-B,Physical Education,PE,Mrs. Desai,WEDNESDAY,P4,11:00-12:00,Sports Field,SPORTS,True,Room 02,NO,NO
+entry_54,LKG-B,English,ENG,Ms. Patel,WEDNESDAY,P5,12:00-13:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_55,LKG-B,Social Studies,SST,Ms. Patel,WEDNESDAY,P6,13:00-14:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_56,LKG-B,Physical Education,PE,Mrs. Desai,WEDNESDAY,P7,14:00-15:00,Sports Field,SPORTS,True,Room 02,NO,NO
+entry_57,LKG-B,Science,SCI,Mr. Reddy,THURSDAY,P1,8:00-9:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_58,LKG-B,Science,SCI,Mr. Reddy,THURSDAY,P2,9:00-10:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_59,LKG-B,Science,SCI,Mr. Reddy,THURSDAY,P3,10:00-11:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_60,LKG-B,Science,SCI,Mr. Reddy,THURSDAY,P4,11:00-12:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_61,LKG-B,Social Studies,SST,Ms. Patel,THURSDAY,P5,12:00-13:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_62,LKG-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P6,13:00-14:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_63,LKG-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_64,LKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P1,8:00-9:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_65,LKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P2,9:00-10:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_66,LKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_67,LKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_68,LKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_69,LKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_70,LKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_71,LKG-C,Science,SCI,Mrs. Rao,MONDAY,P1,8:00-9:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_72,LKG-C,Hindi,HIN,Ms. Malhotra,MONDAY,P2,9:00-10:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_73,LKG-C,English,ENG,Mr. Singh,MONDAY,P3,10:00-11:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_74,LKG-C,Social Studies,SST,Mr. Singh,MONDAY,P4,11:00-12:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_75,LKG-C,English,ENG,Mr. Singh,MONDAY,P5,12:00-13:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_76,LKG-C,Hindi,HIN,Ms. Malhotra,MONDAY,P6,13:00-14:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_77,LKG-C,Social Studies,SST,Mr. Singh,MONDAY,P7,14:00-15:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_78,LKG-C,Physical Education,PE,Ms. Gupta,TUESDAY,P1,8:00-9:00,Sports Field,SPORTS,True,Room 03,NO,NO
+entry_79,LKG-C,Hindi,HIN,Ms. Malhotra,TUESDAY,P2,9:00-10:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_80,LKG-C,Physical Education,PE,Ms. Gupta,TUESDAY,P3,10:00-11:00,Sports Field,SPORTS,True,Room 03,NO,NO
+entry_81,LKG-C,Hindi,HIN,Ms. Malhotra,TUESDAY,P4,11:00-12:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_82,LKG-C,Science,SCI,Mrs. Rao,TUESDAY,P5,12:00-13:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_83,LKG-C,English,ENG,Mr. Singh,TUESDAY,P6,13:00-14:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_84,LKG-C,Science,SCI,Mrs. Rao,TUESDAY,P7,14:00-15:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_85,LKG-C,Mathematics,MATH,Ms. Gupta,WEDNESDAY,P1,8:00-9:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_86,LKG-C,Mathematics,MATH,Ms. Gupta,WEDNESDAY,P2,9:00-10:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_87,LKG-C,Mathematics,MATH,Ms. Gupta,WEDNESDAY,P3,10:00-11:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_88,LKG-C,Mathematics,MATH,Ms. Gupta,WEDNESDAY,P4,11:00-12:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_89,LKG-C,Mathematics,MATH,Ms. Gupta,WEDNESDAY,P5,12:00-13:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_90,LKG-C,Mathematics,MATH,Ms. Gupta,WEDNESDAY,P6,13:00-14:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_91,LKG-C,English,ENG,Mr. Singh,WEDNESDAY,P7,14:00-15:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_92,LKG-C,Social Studies,SST,Mr. Singh,THURSDAY,P1,8:00-9:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_93,LKG-C,English,ENG,Mr. Singh,THURSDAY,P2,9:00-10:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_94,LKG-C,English,ENG,Mr. Singh,THURSDAY,P3,10:00-11:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_95,LKG-C,Science,SCI,Mrs. Rao,THURSDAY,P4,11:00-12:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_96,LKG-C,Physical Education,PE,Ms. Gupta,THURSDAY,P5,12:00-13:00,Sports Field,SPORTS,True,Room 03,NO,NO
+entry_97,LKG-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P6,13:00-14:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_98,LKG-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_99,LKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P1,8:00-9:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_100,LKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P2,9:00-10:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_101,LKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_102,LKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_103,LKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_104,LKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_105,LKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_106,UKG-A,Social Studies,SST,Mr. Reddy,MONDAY,P1,8:00-9:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_107,UKG-A,Mathematics,MATH,Mrs. Rao,MONDAY,P2,9:00-10:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_108,UKG-A,English,ENG,Mr. Reddy,MONDAY,P3,10:00-11:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_109,UKG-A,Science,SCI,Ms. Mehta,MONDAY,P4,11:00-12:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_110,UKG-A,Social Studies,SST,Mr. Reddy,MONDAY,P5,12:00-13:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_111,UKG-A,Social Studies,SST,Mr. Reddy,MONDAY,P6,13:00-14:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_112,UKG-A,Science,SCI,Ms. Mehta,MONDAY,P7,14:00-15:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_113,UKG-A,Science,SCI,Ms. Mehta,TUESDAY,P1,8:00-9:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_114,UKG-A,English,ENG,Mr. Reddy,TUESDAY,P2,9:00-10:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_115,UKG-A,Science,SCI,Ms. Mehta,TUESDAY,P3,10:00-11:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_116,UKG-A,Mathematics,MATH,Mrs. Rao,TUESDAY,P4,11:00-12:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_117,UKG-A,English,ENG,Mr. Reddy,TUESDAY,P5,12:00-13:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_118,UKG-A,Physical Education,PE,Mrs. Rao,TUESDAY,P6,13:00-14:00,Sports Field,SPORTS,True,Room 04,NO,NO
+entry_119,UKG-A,Hindi,HIN,Mr. Iyer,TUESDAY,P7,14:00-15:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_120,UKG-A,English,ENG,Mr. Reddy,WEDNESDAY,P1,8:00-9:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_121,UKG-A,Mathematics,MATH,Mrs. Rao,WEDNESDAY,P2,9:00-10:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_122,UKG-A,Hindi,HIN,Mr. Iyer,WEDNESDAY,P3,10:00-11:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_123,UKG-A,Hindi,HIN,Mr. Iyer,WEDNESDAY,P4,11:00-12:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_124,UKG-A,Hindi,HIN,Mr. Iyer,WEDNESDAY,P5,12:00-13:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_125,UKG-A,English,ENG,Mr. Reddy,WEDNESDAY,P6,13:00-14:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_126,UKG-A,English,ENG,Mr. Reddy,WEDNESDAY,P7,14:00-15:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_127,UKG-A,Mathematics,MATH,Mrs. Rao,THURSDAY,P1,8:00-9:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_128,UKG-A,Physical Education,PE,Mrs. Rao,THURSDAY,P2,9:00-10:00,Sports Field,SPORTS,True,Room 04,NO,NO
+entry_129,UKG-A,Mathematics,MATH,Mrs. Rao,THURSDAY,P3,10:00-11:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_130,UKG-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P4,11:00-12:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_131,UKG-A,Mathematics,MATH,Mrs. Rao,THURSDAY,P5,12:00-13:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_132,UKG-A,Physical Education,PE,Mrs. Rao,THURSDAY,P6,13:00-14:00,Sports Field,SPORTS,True,Room 04,NO,NO
+entry_133,UKG-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_134,UKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P1,8:00-9:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_135,UKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P2,9:00-10:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_136,UKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_137,UKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_138,UKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_139,UKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_140,UKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_141,UKG-B,Computer Science,CS,Mrs. Sinha,MONDAY,P1,8:00-9:00,Computer Lab 1,LAB,True,Room 05,NO,YES
+entry_142,UKG-B,Mathematics,MATH,Mr. Joshi,MONDAY,P2,9:00-10:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_143,UKG-B,Science,SCI,Mr. Joshi,MONDAY,P3,10:00-11:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_144,UKG-B,Mathematics,MATH,Mr. Joshi,MONDAY,P4,11:00-12:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_145,UKG-B,Mathematics,MATH,Mr. Joshi,MONDAY,P5,12:00-13:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_146,UKG-B,Social Studies,SST,Ms. Mehta,MONDAY,P6,13:00-14:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_147,UKG-B,Physical Education,PE,Mr. Joshi,MONDAY,P7,14:00-15:00,Sports Field,SPORTS,True,Room 05,NO,NO
+entry_148,UKG-B,Computer Science,CS,Mrs. Sinha,TUESDAY,P1,8:00-9:00,Computer Lab 1,LAB,True,Room 05,NO,YES
+entry_149,UKG-B,Mathematics,MATH,Mr. Joshi,TUESDAY,P2,9:00-10:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_150,UKG-B,Hindi,HIN,Mrs. Nair,TUESDAY,P3,10:00-11:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_151,UKG-B,Hindi,HIN,Mrs. Nair,TUESDAY,P4,11:00-12:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_152,UKG-B,Mathematics,MATH,Mr. Joshi,TUESDAY,P5,12:00-13:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_153,UKG-B,Hindi,HIN,Mrs. Nair,TUESDAY,P6,13:00-14:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_154,UKG-B,English,ENG,Ms. Mehta,TUESDAY,P7,14:00-15:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_155,UKG-B,English,ENG,Ms. Mehta,WEDNESDAY,P1,8:00-9:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_156,UKG-B,English,ENG,Ms. Mehta,WEDNESDAY,P2,9:00-10:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_157,UKG-B,English,ENG,Ms. Mehta,WEDNESDAY,P3,10:00-11:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_158,UKG-B,Mathematics,MATH,Mr. Joshi,WEDNESDAY,P4,11:00-12:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_159,UKG-B,Hindi,HIN,Mrs. Nair,WEDNESDAY,P5,12:00-13:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_160,UKG-B,English,ENG,Ms. Mehta,WEDNESDAY,P6,13:00-14:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_161,UKG-B,Social Studies,SST,Ms. Mehta,WEDNESDAY,P7,14:00-15:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_162,UKG-B,Science,SCI,Mr. Joshi,THURSDAY,P1,8:00-9:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_163,UKG-B,Science,SCI,Mr. Joshi,THURSDAY,P2,9:00-10:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_164,UKG-B,Science,SCI,Mr. Joshi,THURSDAY,P3,10:00-11:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_165,UKG-B,English,ENG,Ms. Mehta,THURSDAY,P4,11:00-12:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_166,UKG-B,Social Studies,SST,Ms. Mehta,THURSDAY,P5,12:00-13:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_167,UKG-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P6,13:00-14:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_168,UKG-B,Physical Education,PE,Mr. Joshi,THURSDAY,P7,14:00-15:00,Sports Field,SPORTS,True,Room 05,NO,NO
+entry_169,UKG-B,Physical Education,PE,Mr. Joshi,FRIDAY,P1,8:00-9:00,Sports Field,SPORTS,True,Room 05,NO,NO
+entry_170,UKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P2,9:00-10:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_171,UKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_172,UKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_173,UKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_174,UKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_175,UKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_176,UKG-C,Science,SCI,Mrs. Verma,MONDAY,P1,8:00-9:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_177,UKG-C,Mathematics,MATH,Mr. Chopra,MONDAY,P2,9:00-10:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_178,UKG-C,Hindi,HIN,Ms. Pillai,MONDAY,P3,10:00-11:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_179,UKG-C,Hindi,HIN,Ms. Pillai,MONDAY,P4,11:00-12:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_180,UKG-C,Science,SCI,Mrs. Verma,MONDAY,P5,12:00-13:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_181,UKG-C,Hindi,HIN,Ms. Pillai,MONDAY,P6,13:00-14:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_182,UKG-C,English,ENG,Mrs. Verma,MONDAY,P7,14:00-15:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_183,UKG-C,Hindi,HIN,Ms. Pillai,TUESDAY,P1,8:00-9:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_184,UKG-C,Science,SCI,Mrs. Verma,TUESDAY,P2,9:00-10:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_185,UKG-C,English,ENG,Mrs. Verma,TUESDAY,P3,10:00-11:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_186,UKG-C,Physical Education,PE,Mr. Chopra,TUESDAY,P4,11:00-12:00,Sports Field,SPORTS,True,Room 06,NO,NO
+entry_187,UKG-C,Unknown,Unknown,Mrs. Sharma,TUESDAY,P5,12:00-13:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_188,UKG-C,English,ENG,Mrs. Verma,TUESDAY,P6,13:00-14:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_189,UKG-C,Mathematics,MATH,Mr. Chopra,TUESDAY,P7,14:00-15:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_190,UKG-C,Mathematics,MATH,Mr. Chopra,WEDNESDAY,P1,8:00-9:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_191,UKG-C,Mathematics,MATH,Mr. Chopra,WEDNESDAY,P2,9:00-10:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_192,UKG-C,English,ENG,Mrs. Verma,WEDNESDAY,P3,10:00-11:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_193,UKG-C,English,ENG,Mrs. Verma,WEDNESDAY,P4,11:00-12:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_194,UKG-C,English,ENG,Mrs. Verma,WEDNESDAY,P5,12:00-13:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_195,UKG-C,Physical Education,PE,Mr. Chopra,WEDNESDAY,P6,13:00-14:00,Sports Field,SPORTS,True,Room 06,NO,NO
+entry_196,UKG-C,Mathematics,MATH,Mr. Chopra,WEDNESDAY,P7,14:00-15:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_197,UKG-C,Mathematics,MATH,Mr. Chopra,THURSDAY,P1,8:00-9:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_198,UKG-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P2,9:00-10:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_199,UKG-C,Social Studies,SST,Mrs. Verma,THURSDAY,P3,10:00-11:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_200,UKG-C,Social Studies,SST,Mrs. Verma,THURSDAY,P4,11:00-12:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_201,UKG-C,Social Studies,SST,Mrs. Verma,THURSDAY,P5,12:00-13:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_202,UKG-C,Science,SCI,Mrs. Verma,THURSDAY,P6,13:00-14:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_203,UKG-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_204,UKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P1,8:00-9:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_205,UKG-C,Physical Education,PE,Mr. Chopra,FRIDAY,P2,9:00-10:00,Sports Field,SPORTS,True,Room 06,NO,NO
+entry_206,UKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_207,UKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_208,UKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_209,UKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_210,UKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_211,Grade 1-A,Hindi,HIN,Mr. Khan,MONDAY,P1,8:00-9:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_212,Grade 1-A,Physical Education,PE,Mr. Iyer,MONDAY,P2,9:00-10:00,Sports Field,SPORTS,True,Room 07,NO,NO
+entry_213,Grade 1-A,English,ENG,Ms. Malhotra,MONDAY,P3,10:00-11:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_214,Grade 1-A,Mathematics,MATH,Mr. Iyer,MONDAY,P4,11:00-12:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_215,Grade 1-A,Social Studies,SST,Ms. Malhotra,MONDAY,P5,12:00-13:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_216,Grade 1-A,Hindi,HIN,Mr. Khan,MONDAY,P6,13:00-14:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_217,Grade 1-A,Hindi,HIN,Mr. Khan,MONDAY,P7,14:00-15:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_218,Grade 1-A,Science,SCI,Mr. Chopra,TUESDAY,P1,8:00-9:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_219,Grade 1-A,Physical Education,PE,Mr. Iyer,TUESDAY,P2,9:00-10:00,Sports Field,SPORTS,True,Room 07,NO,NO
+entry_220,Grade 1-A,Science,SCI,Mr. Chopra,TUESDAY,P3,10:00-11:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_221,Grade 1-A,Mathematics,MATH,Mr. Iyer,TUESDAY,P4,11:00-12:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_222,Grade 1-A,Social Studies,SST,Ms. Malhotra,TUESDAY,P5,12:00-13:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_223,Grade 1-A,Social Studies,SST,Ms. Malhotra,TUESDAY,P6,13:00-14:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_224,Grade 1-A,English,ENG,Ms. Malhotra,TUESDAY,P7,14:00-15:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_225,Grade 1-A,English,ENG,Ms. Malhotra,WEDNESDAY,P1,8:00-9:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_226,Grade 1-A,Mathematics,MATH,Mr. Iyer,WEDNESDAY,P2,9:00-10:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_227,Grade 1-A,English,ENG,Ms. Malhotra,WEDNESDAY,P3,10:00-11:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_228,Grade 1-A,English,ENG,Ms. Malhotra,WEDNESDAY,P4,11:00-12:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_229,Grade 1-A,English,ENG,Ms. Malhotra,WEDNESDAY,P5,12:00-13:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_230,Grade 1-A,Mathematics,MATH,Mr. Iyer,WEDNESDAY,P6,13:00-14:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_231,Grade 1-A,Hindi,HIN,Mr. Khan,WEDNESDAY,P7,14:00-15:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_232,Grade 1-A,Mathematics,MATH,Mr. Iyer,THURSDAY,P1,8:00-9:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_233,Grade 1-A,Mathematics,MATH,Mr. Iyer,THURSDAY,P2,9:00-10:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_234,Grade 1-A,Physical Education,PE,Mr. Iyer,THURSDAY,P3,10:00-11:00,Sports Field,SPORTS,True,Room 07,NO,NO
+entry_235,Grade 1-A,Science,SCI,Mr. Chopra,THURSDAY,P4,11:00-12:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_236,Grade 1-A,Science,SCI,Mr. Chopra,THURSDAY,P5,12:00-13:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_237,Grade 1-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P6,13:00-14:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_238,Grade 1-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_239,Grade 1-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P1,8:00-9:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_240,Grade 1-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P2,9:00-10:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_241,Grade 1-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_242,Grade 1-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_243,Grade 1-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_244,Grade 1-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_245,Grade 1-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_246,Grade 1-B,Mathematics,MATH,Ms. Pillai,MONDAY,P1,8:00-9:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_247,Grade 1-B,English,ENG,Mrs. Nair,MONDAY,P2,9:00-10:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_248,Grade 1-B,English,ENG,Mrs. Nair,MONDAY,P3,10:00-11:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_249,Grade 1-B,Social Studies,SST,Mrs. Nair,MONDAY,P4,11:00-12:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_250,Grade 1-B,Social Studies,SST,Mrs. Nair,MONDAY,P5,12:00-13:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_251,Grade 1-B,English,ENG,Mrs. Nair,MONDAY,P6,13:00-14:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_252,Grade 1-B,Hindi,HIN,Mrs. Bose,MONDAY,P7,14:00-15:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_253,Grade 1-B,English,ENG,Mrs. Nair,TUESDAY,P1,8:00-9:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_254,Grade 1-B,Social Studies,SST,Mrs. Nair,TUESDAY,P2,9:00-10:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_255,Grade 1-B,Hindi,HIN,Mrs. Bose,TUESDAY,P3,10:00-11:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_256,Grade 1-B,Mathematics,MATH,Ms. Pillai,TUESDAY,P4,11:00-12:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_257,Grade 1-B,Mathematics,MATH,Ms. Pillai,TUESDAY,P5,12:00-13:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_258,Grade 1-B,Mathematics,MATH,Ms. Pillai,TUESDAY,P6,13:00-14:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_259,Grade 1-B,Hindi,HIN,Mrs. Bose,TUESDAY,P7,14:00-15:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_260,Grade 1-B,English,ENG,Mrs. Nair,WEDNESDAY,P1,8:00-9:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_261,Grade 1-B,Science,SCI,Ms. Malhotra,WEDNESDAY,P2,9:00-10:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_262,Grade 1-B,English,ENG,Mrs. Nair,WEDNESDAY,P3,10:00-11:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_263,Grade 1-B,Mathematics,MATH,Ms. Pillai,WEDNESDAY,P4,11:00-12:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_264,Grade 1-B,Mathematics,MATH,Ms. Pillai,WEDNESDAY,P5,12:00-13:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_265,Grade 1-B,Hindi,HIN,Mrs. Bose,WEDNESDAY,P6,13:00-14:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_266,Grade 1-B,Unknown,Unknown,Mrs. Sharma,WEDNESDAY,P7,14:00-15:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_267,Grade 1-B,Physical Education,PE,Ms. Pillai,THURSDAY,P1,8:00-9:00,Sports Field,SPORTS,True,Room 08,NO,NO
+entry_268,Grade 1-B,Science,SCI,Ms. Malhotra,THURSDAY,P2,9:00-10:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_269,Grade 1-B,Science,SCI,Ms. Malhotra,THURSDAY,P3,10:00-11:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_270,Grade 1-B,Science,SCI,Ms. Malhotra,THURSDAY,P4,11:00-12:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_271,Grade 1-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P5,12:00-13:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_272,Grade 1-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P6,13:00-14:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_273,Grade 1-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_274,Grade 1-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P1,8:00-9:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_275,Grade 1-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P2,9:00-10:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_276,Grade 1-B,Physical Education,PE,Ms. Pillai,FRIDAY,P3,10:00-11:00,Sports Field,SPORTS,True,Room 08,NO,NO
+entry_277,Grade 1-B,Physical Education,PE,Ms. Pillai,FRIDAY,P4,11:00-12:00,Sports Field,SPORTS,True,Room 08,NO,NO
+entry_278,Grade 1-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_279,Grade 1-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_280,Grade 1-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_281,Grade 1-C,Hindi,HIN,Mr. Agarwal,MONDAY,P1,8:00-9:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_282,Grade 1-C,Hindi,HIN,Mr. Agarwal,MONDAY,P2,9:00-10:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_283,Grade 1-C,Hindi,HIN,Mr. Agarwal,MONDAY,P3,10:00-11:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_284,Grade 1-C,Hindi,HIN,Mr. Agarwal,MONDAY,P4,11:00-12:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_285,Grade 1-C,Science,SCI,Mr. Iyer,MONDAY,P5,12:00-13:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_286,Grade 1-C,Physical Education,PE,Mrs. Bose,MONDAY,P6,13:00-14:00,Sports Field,SPORTS,True,Room 09,NO,NO
+entry_287,Grade 1-C,Science,SCI,Mr. Iyer,MONDAY,P7,14:00-15:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_288,Grade 1-C,Mathematics,MATH,Mrs. Bose,TUESDAY,P1,8:00-9:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_289,Grade 1-C,Mathematics,MATH,Mrs. Bose,TUESDAY,P2,9:00-10:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_290,Grade 1-C,Social Studies,SST,Mr. Khan,TUESDAY,P3,10:00-11:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_291,Grade 1-C,Mathematics,MATH,Mrs. Bose,TUESDAY,P4,11:00-12:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_292,Grade 1-C,Social Studies,SST,Mr. Khan,TUESDAY,P5,12:00-13:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_293,Grade 1-C,Science,SCI,Mr. Iyer,TUESDAY,P6,13:00-14:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_294,Grade 1-C,English,ENG,Mr. Khan,TUESDAY,P7,14:00-15:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_295,Grade 1-C,Mathematics,MATH,Mrs. Bose,WEDNESDAY,P1,8:00-9:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_296,Grade 1-C,English,ENG,Mr. Khan,WEDNESDAY,P2,9:00-10:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_297,Grade 1-C,English,ENG,Mr. Khan,WEDNESDAY,P3,10:00-11:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_298,Grade 1-C,Social Studies,SST,Mr. Khan,WEDNESDAY,P4,11:00-12:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_299,Grade 1-C,Physical Education,PE,Mrs. Bose,WEDNESDAY,P5,12:00-13:00,Sports Field,SPORTS,True,Room 09,NO,NO
+entry_300,Grade 1-C,English,ENG,Mr. Khan,WEDNESDAY,P6,13:00-14:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_301,Grade 1-C,Mathematics,MATH,Mrs. Bose,WEDNESDAY,P7,14:00-15:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_302,Grade 1-C,English,ENG,Mr. Khan,THURSDAY,P1,8:00-9:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_303,Grade 1-C,English,ENG,Mr. Khan,THURSDAY,P2,9:00-10:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_304,Grade 1-C,Mathematics,MATH,Mrs. Bose,THURSDAY,P3,10:00-11:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_305,Grade 1-C,Science,SCI,Mr. Iyer,THURSDAY,P4,11:00-12:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_306,Grade 1-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P5,12:00-13:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_307,Grade 1-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P6,13:00-14:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_308,Grade 1-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_309,Grade 1-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P1,8:00-9:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_310,Grade 1-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P2,9:00-10:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_311,Grade 1-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_312,Grade 1-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_313,Grade 1-C,Physical Education,PE,Mrs. Bose,FRIDAY,P5,12:00-13:00,Sports Field,SPORTS,True,Room 09,NO,NO
+entry_314,Grade 1-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_315,Grade 1-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_316,Grade 2-A,Mathematics,MATH,Ms. Shah,MONDAY,P1,8:00-9:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_317,Grade 2-A,Mathematics,MATH,Ms. Shah,MONDAY,P2,9:00-10:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_318,Grade 2-A,Mathematics,MATH,Ms. Shah,MONDAY,P3,10:00-11:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_319,Grade 2-A,Mathematics,MATH,Ms. Shah,MONDAY,P4,11:00-12:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_320,Grade 2-A,Computer Science,CS,Mrs. Sinha,MONDAY,P5,12:00-13:00,Computer Lab 1,LAB,True,Room 10,NO,YES
+entry_321,Grade 2-A,Computer Science,CS,Mrs. Sinha,MONDAY,P6,13:00-14:00,Computer Lab 1,LAB,True,Room 10,NO,YES
+entry_322,Grade 2-A,Unknown,Unknown,Mrs. Sharma,MONDAY,P7,14:00-15:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_323,Grade 2-A,Social Studies,SST,Mr. Agarwal,TUESDAY,P1,8:00-9:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_324,Grade 2-A,Social Studies,SST,Mr. Agarwal,TUESDAY,P2,9:00-10:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_325,Grade 2-A,Mathematics,MATH,Ms. Shah,TUESDAY,P3,10:00-11:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_326,Grade 2-A,Mathematics,MATH,Ms. Shah,TUESDAY,P4,11:00-12:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_327,Grade 2-A,Hindi,HIN,Ms. Shah,TUESDAY,P5,12:00-13:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_328,Grade 2-A,Hindi,HIN,Ms. Shah,TUESDAY,P6,13:00-14:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_329,Grade 2-A,English,ENG,Mr. Agarwal,TUESDAY,P7,14:00-15:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_330,Grade 2-A,Physical Education,PE,Ms. Shah,WEDNESDAY,P1,8:00-9:00,Sports Field,SPORTS,True,Room 10,NO,NO
+entry_331,Grade 2-A,English,ENG,Mr. Agarwal,WEDNESDAY,P2,9:00-10:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_332,Grade 2-A,English,ENG,Mr. Agarwal,WEDNESDAY,P3,10:00-11:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_333,Grade 2-A,English,ENG,Mr. Agarwal,WEDNESDAY,P4,11:00-12:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_334,Grade 2-A,English,ENG,Mr. Agarwal,WEDNESDAY,P5,12:00-13:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_335,Grade 2-A,Science,SCI,Mrs. Nair,WEDNESDAY,P6,13:00-14:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_336,Grade 2-A,Science,SCI,Mrs. Nair,WEDNESDAY,P7,14:00-15:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_337,Grade 2-A,Hindi,HIN,Ms. Shah,THURSDAY,P1,8:00-9:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_338,Grade 2-A,English,ENG,Mr. Agarwal,THURSDAY,P2,9:00-10:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_339,Grade 2-A,Social Studies,SST,Mr. Agarwal,THURSDAY,P3,10:00-11:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_340,Grade 2-A,Hindi,HIN,Ms. Shah,THURSDAY,P4,11:00-12:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_341,Grade 2-A,Science,SCI,Mrs. Nair,THURSDAY,P5,12:00-13:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_342,Grade 2-A,Science,SCI,Mrs. Nair,THURSDAY,P6,13:00-14:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_343,Grade 2-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_344,Grade 2-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P1,8:00-9:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_345,Grade 2-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P2,9:00-10:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_346,Grade 2-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_347,Grade 2-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_348,Grade 2-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_349,Grade 2-A,Physical Education,PE,Ms. Shah,FRIDAY,P6,13:00-14:00,Sports Field,SPORTS,True,Room 10,NO,NO
+entry_350,Grade 2-A,Physical Education,PE,Ms. Shah,FRIDAY,P7,14:00-15:00,Sports Field,SPORTS,True,Room 10,NO,NO
+entry_351,Grade 2-B,Mathematics,MATH,Mrs. Bhatt,MONDAY,P1,8:00-9:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_352,Grade 2-B,Social Studies,SST,Mr. Patel,MONDAY,P2,9:00-10:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_353,Grade 2-B,Physical Education,PE,Mrs. Bhatt,MONDAY,P3,10:00-11:00,Sports Field,SPORTS,True,Room 11,NO,NO
+entry_354,Grade 2-B,Mathematics,MATH,Mrs. Bhatt,MONDAY,P4,11:00-12:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_355,Grade 2-B,Hindi,HIN,Mr. Patel,MONDAY,P5,12:00-13:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_356,Grade 2-B,Social Studies,SST,Mr. Patel,MONDAY,P6,13:00-14:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_357,Grade 2-B,Science,SCI,Ms. Pillai,MONDAY,P7,14:00-15:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_358,Grade 2-B,Hindi,HIN,Mr. Patel,TUESDAY,P1,8:00-9:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_359,Grade 2-B,Hindi,HIN,Mr. Patel,TUESDAY,P2,9:00-10:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_360,Grade 2-B,Mathematics,MATH,Mrs. Bhatt,TUESDAY,P3,10:00-11:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_361,Grade 2-B,English,ENG,Mr. Patel,TUESDAY,P4,11:00-12:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_362,Grade 2-B,Hindi,HIN,Mr. Patel,TUESDAY,P5,12:00-13:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_363,Grade 2-B,Mathematics,MATH,Mrs. Bhatt,TUESDAY,P6,13:00-14:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_364,Grade 2-B,Science,SCI,Ms. Pillai,TUESDAY,P7,14:00-15:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_365,Grade 2-B,Science,SCI,Ms. Pillai,WEDNESDAY,P1,8:00-9:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_366,Grade 2-B,English,ENG,Mr. Patel,WEDNESDAY,P2,9:00-10:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_367,Grade 2-B,English,ENG,Mr. Patel,WEDNESDAY,P3,10:00-11:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_368,Grade 2-B,English,ENG,Mr. Patel,WEDNESDAY,P4,11:00-12:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_369,Grade 2-B,Social Studies,SST,Mr. Patel,WEDNESDAY,P5,12:00-13:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_370,Grade 2-B,Mathematics,MATH,Mrs. Bhatt,WEDNESDAY,P6,13:00-14:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_371,Grade 2-B,Science,SCI,Ms. Pillai,WEDNESDAY,P7,14:00-15:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_372,Grade 2-B,English,ENG,Mr. Patel,THURSDAY,P1,8:00-9:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_373,Grade 2-B,English,ENG,Mr. Patel,THURSDAY,P2,9:00-10:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_374,Grade 2-B,Mathematics,MATH,Mrs. Bhatt,THURSDAY,P3,10:00-11:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_375,Grade 2-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P4,11:00-12:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_376,Grade 2-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P5,12:00-13:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_377,Grade 2-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P6,13:00-14:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_378,Grade 2-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_379,Grade 2-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P1,8:00-9:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_380,Grade 2-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P2,9:00-10:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_381,Grade 2-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_382,Grade 2-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_383,Grade 2-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_384,Grade 2-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_385,Grade 2-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_386,Grade 2-C,Social Studies,SST,Ms. Trivedi,MONDAY,P1,8:00-9:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_387,Grade 2-C,Mathematics,MATH,Mr. Kapoor,MONDAY,P2,9:00-10:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_388,Grade 2-C,English,ENG,Ms. Trivedi,MONDAY,P3,10:00-11:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_389,Grade 2-C,English,ENG,Ms. Trivedi,MONDAY,P4,11:00-12:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_390,Grade 2-C,Mathematics,MATH,Mr. Kapoor,MONDAY,P5,12:00-13:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_391,Grade 2-C,Hindi,HIN,Mrs. Bhatt,MONDAY,P6,13:00-14:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_392,Grade 2-C,Social Studies,SST,Ms. Trivedi,MONDAY,P7,14:00-15:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_393,Grade 2-C,Science,SCI,Mr. Khan,TUESDAY,P1,8:00-9:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_394,Grade 2-C,Hindi,HIN,Mrs. Bhatt,TUESDAY,P2,9:00-10:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_395,Grade 2-C,Social Studies,SST,Ms. Trivedi,TUESDAY,P3,10:00-11:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_396,Grade 2-C,Mathematics,MATH,Mr. Kapoor,TUESDAY,P4,11:00-12:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_397,Grade 2-C,Physical Education,PE,Mr. Kapoor,TUESDAY,P5,12:00-13:00,Sports Field,SPORTS,True,Room 12,NO,NO
+entry_398,Grade 2-C,Mathematics,MATH,Mr. Kapoor,TUESDAY,P6,13:00-14:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_399,Grade 2-C,Mathematics,MATH,Mr. Kapoor,TUESDAY,P7,14:00-15:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_400,Grade 2-C,Mathematics,MATH,Mr. Kapoor,WEDNESDAY,P1,8:00-9:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_401,Grade 2-C,English,ENG,Ms. Trivedi,WEDNESDAY,P2,9:00-10:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_402,Grade 2-C,English,ENG,Ms. Trivedi,WEDNESDAY,P3,10:00-11:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_403,Grade 2-C,English,ENG,Ms. Trivedi,WEDNESDAY,P4,11:00-12:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_404,Grade 2-C,English,ENG,Ms. Trivedi,WEDNESDAY,P5,12:00-13:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_405,Grade 2-C,Unknown,Unknown,Mrs. Sharma,WEDNESDAY,P6,13:00-14:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_406,Grade 2-C,Hindi,HIN,Mrs. Bhatt,WEDNESDAY,P7,14:00-15:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_407,Grade 2-C,Hindi,HIN,Mrs. Bhatt,THURSDAY,P1,8:00-9:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_408,Grade 2-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P2,9:00-10:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_409,Grade 2-C,Science,SCI,Mr. Khan,THURSDAY,P3,10:00-11:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_410,Grade 2-C,Science,SCI,Mr. Khan,THURSDAY,P4,11:00-12:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_411,Grade 2-C,Science,SCI,Mr. Khan,THURSDAY,P5,12:00-13:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_412,Grade 2-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P6,13:00-14:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_413,Grade 2-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_414,Grade 2-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P1,8:00-9:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_415,Grade 2-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P2,9:00-10:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_416,Grade 2-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_417,Grade 2-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_418,Grade 2-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_419,Grade 2-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_420,Grade 2-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_421,Grade 3-A,Science,SCI,Mrs. Bose,MONDAY,P1,8:00-9:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_422,Grade 3-A,Science,SCI,Mrs. Bose,MONDAY,P2,9:00-10:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_423,Grade 3-A,Science,SCI,Mrs. Bose,MONDAY,P3,10:00-11:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_424,Grade 3-A,English,ENG,Mrs. Sinha,MONDAY,P4,11:00-12:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_425,Grade 3-A,Mathematics,MATH,Mrs. Sharma,MONDAY,P5,12:00-13:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_426,Grade 3-A,Mathematics,MATH,Mrs. Sharma,MONDAY,P6,13:00-14:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_427,Grade 3-A,English,ENG,Mrs. Sinha,MONDAY,P7,14:00-15:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_428,Grade 3-A,Hindi,HIN,Ms. Trivedi,TUESDAY,P1,8:00-9:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_429,Grade 3-A,Social Studies,SST,Mrs. Sinha,TUESDAY,P2,9:00-10:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_430,Grade 3-A,Social Studies,SST,Mrs. Sinha,TUESDAY,P3,10:00-11:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_431,Grade 3-A,Hindi,HIN,Ms. Trivedi,TUESDAY,P4,11:00-12:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_432,Grade 3-A,Hindi,HIN,Ms. Trivedi,TUESDAY,P5,12:00-13:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_433,Grade 3-A,Social Studies,SST,Mrs. Sinha,TUESDAY,P6,13:00-14:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_434,Grade 3-A,English,ENG,Mrs. Sinha,TUESDAY,P7,14:00-15:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_435,Grade 3-A,Mathematics,MATH,Mrs. Sharma,WEDNESDAY,P1,8:00-9:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_436,Grade 3-A,Mathematics,MATH,Mrs. Sharma,WEDNESDAY,P2,9:00-10:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_437,Grade 3-A,Science,SCI,Mrs. Bose,WEDNESDAY,P3,10:00-11:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_438,Grade 3-A,English,ENG,Mrs. Sinha,WEDNESDAY,P4,11:00-12:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_439,Grade 3-A,English,ENG,Mrs. Sinha,WEDNESDAY,P5,12:00-13:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_440,Grade 3-A,English,ENG,Mrs. Sinha,WEDNESDAY,P6,13:00-14:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_441,Grade 3-A,Mathematics,MATH,Mrs. Sharma,WEDNESDAY,P7,14:00-15:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_442,Grade 3-A,Hindi,HIN,Ms. Trivedi,THURSDAY,P1,8:00-9:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_443,Grade 3-A,Mathematics,MATH,Mrs. Sharma,THURSDAY,P2,9:00-10:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_444,Grade 3-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P3,10:00-11:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_445,Grade 3-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P4,11:00-12:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_446,Grade 3-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P5,12:00-13:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_447,Grade 3-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P6,13:00-14:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_448,Grade 3-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_449,Grade 3-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P1,8:00-9:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_450,Grade 3-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P2,9:00-10:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_451,Grade 3-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_452,Grade 3-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_453,Grade 3-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_454,Grade 3-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_455,Grade 3-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_456,Grade 3-B,Mathematics,MATH,Ms. Patel,MONDAY,P1,8:00-9:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_457,Grade 3-B,English,ENG,Mr. Kumar,MONDAY,P2,9:00-10:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_458,Grade 3-B,English,ENG,Mr. Kumar,MONDAY,P3,10:00-11:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_459,Grade 3-B,Physical Education,PE,Ms. Patel,MONDAY,P4,11:00-12:00,Sports Field,SPORTS,True,Room 14,NO,NO
+entry_460,Grade 3-B,Unknown,Unknown,Mrs. Sharma,MONDAY,P5,12:00-13:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_461,Grade 3-B,Mathematics,MATH,Ms. Patel,MONDAY,P6,13:00-14:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_462,Grade 3-B,Mathematics,MATH,Ms. Patel,MONDAY,P7,14:00-15:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_463,Grade 3-B,Social Studies,SST,Mr. Kumar,TUESDAY,P1,8:00-9:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_464,Grade 3-B,Social Studies,SST,Mr. Kumar,TUESDAY,P2,9:00-10:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_465,Grade 3-B,English,ENG,Mr. Kumar,TUESDAY,P3,10:00-11:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_466,Grade 3-B,Mathematics,MATH,Ms. Patel,TUESDAY,P4,11:00-12:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_467,Grade 3-B,Mathematics,MATH,Ms. Patel,TUESDAY,P5,12:00-13:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_468,Grade 3-B,Mathematics,MATH,Ms. Patel,TUESDAY,P6,13:00-14:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_469,Grade 3-B,Social Studies,SST,Mr. Kumar,TUESDAY,P7,14:00-15:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_470,Grade 3-B,Unknown,Unknown,Mrs. Sharma,WEDNESDAY,P1,8:00-9:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_471,Grade 3-B,Hindi,HIN,Mr. Kapoor,WEDNESDAY,P2,9:00-10:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_472,Grade 3-B,Hindi,HIN,Mr. Kapoor,WEDNESDAY,P3,10:00-11:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_473,Grade 3-B,Hindi,HIN,Mr. Kapoor,WEDNESDAY,P4,11:00-12:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_474,Grade 3-B,English,ENG,Mr. Kumar,WEDNESDAY,P5,12:00-13:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_475,Grade 3-B,English,ENG,Mr. Kumar,WEDNESDAY,P6,13:00-14:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_476,Grade 3-B,Hindi,HIN,Mr. Kapoor,WEDNESDAY,P7,14:00-15:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_477,Grade 3-B,Science,SCI,Mr. Agarwal,THURSDAY,P1,8:00-9:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_478,Grade 3-B,English,ENG,Mr. Kumar,THURSDAY,P2,9:00-10:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_479,Grade 3-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P3,10:00-11:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_480,Grade 3-B,Science,SCI,Mr. Agarwal,THURSDAY,P4,11:00-12:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_481,Grade 3-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P5,12:00-13:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_482,Grade 3-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P6,13:00-14:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_483,Grade 3-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_484,Grade 3-B,Science,SCI,Mr. Agarwal,FRIDAY,P1,8:00-9:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_485,Grade 3-B,Science,SCI,Mr. Agarwal,FRIDAY,P2,9:00-10:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_486,Grade 3-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_487,Grade 3-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_488,Grade 3-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_489,Grade 3-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_490,Grade 3-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_491,Grade 3-C,Mathematics,MATH,Mr. Singh,MONDAY,P1,8:00-9:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_492,Grade 3-C,Mathematics,MATH,Mr. Singh,MONDAY,P2,9:00-10:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_493,Grade 3-C,English,ENG,Mrs. Desai,MONDAY,P3,10:00-11:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_494,Grade 3-C,English,ENG,Mrs. Desai,MONDAY,P4,11:00-12:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_495,Grade 3-C,English,ENG,Mrs. Desai,MONDAY,P5,12:00-13:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_496,Grade 3-C,Computer Science,CS,Mr. Joshi,MONDAY,P6,13:00-14:00,Computer Lab 2,LAB,True,Room 15,NO,YES
+entry_497,Grade 3-C,Unknown,Unknown,Mrs. Sharma,MONDAY,P7,14:00-15:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_498,Grade 3-C,Mathematics,MATH,Mr. Singh,TUESDAY,P1,8:00-9:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_499,Grade 3-C,Social Studies,SST,Mrs. Desai,TUESDAY,P2,9:00-10:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_500,Grade 3-C,Mathematics,MATH,Mr. Singh,TUESDAY,P3,10:00-11:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_501,Grade 3-C,Mathematics,MATH,Mr. Singh,TUESDAY,P4,11:00-12:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_502,Grade 3-C,Mathematics,MATH,Mr. Singh,TUESDAY,P5,12:00-13:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_503,Grade 3-C,Computer Science,CS,Mr. Joshi,TUESDAY,P6,13:00-14:00,Computer Lab 1,LAB,True,Room 15,NO,YES
+entry_504,Grade 3-C,English,ENG,Mrs. Desai,TUESDAY,P7,14:00-15:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_505,Grade 3-C,Hindi,HIN,Mrs. Sinha,WEDNESDAY,P1,8:00-9:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_506,Grade 3-C,English,ENG,Mrs. Desai,WEDNESDAY,P2,9:00-10:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_507,Grade 3-C,English,ENG,Mrs. Desai,WEDNESDAY,P3,10:00-11:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_508,Grade 3-C,Science,SCI,Ms. Shah,WEDNESDAY,P4,11:00-12:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_509,Grade 3-C,Science,SCI,Ms. Shah,WEDNESDAY,P5,12:00-13:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_510,Grade 3-C,Science,SCI,Ms. Shah,WEDNESDAY,P6,13:00-14:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_511,Grade 3-C,Hindi,HIN,Mrs. Sinha,WEDNESDAY,P7,14:00-15:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_512,Grade 3-C,Social Studies,SST,Mrs. Desai,THURSDAY,P1,8:00-9:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_513,Grade 3-C,Science,SCI,Ms. Shah,THURSDAY,P2,9:00-10:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_514,Grade 3-C,Social Studies,SST,Mrs. Desai,THURSDAY,P3,10:00-11:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_515,Grade 3-C,Hindi,HIN,Mrs. Sinha,THURSDAY,P4,11:00-12:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_516,Grade 3-C,Hindi,HIN,Mrs. Sinha,THURSDAY,P5,12:00-13:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_517,Grade 3-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P6,13:00-14:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_518,Grade 3-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_519,Grade 3-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P1,8:00-9:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_520,Grade 3-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P2,9:00-10:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_521,Grade 3-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_522,Grade 3-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_523,Grade 3-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_524,Grade 3-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_525,Grade 3-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_1,LKG-A,Social Studies,SST,Mrs. Sharma,MONDAY,P1,8:00-9:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_2,LKG-A,Science,SCI,Ms. Gupta,MONDAY,P2,9:00-10:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_3,LKG-A,Mathematics,MATH,Mr. Kumar,MONDAY,P3,10:00-11:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_4,LKG-A,Social Studies,SST,Mrs. Sharma,MONDAY,P4,11:00-12:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_5,LKG-A,Physical Education,PE,Mr. Kumar,MONDAY,P5,12:00-13:00,Sports Field,SPORTS,True,Room 01,NO,NO
+entry_6,LKG-A,Mathematics,MATH,Mr. Kumar,MONDAY,P6,13:00-14:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_7,LKG-A,English,ENG,Mrs. Sharma,MONDAY,P7,14:00-15:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_8,LKG-A,Hindi,HIN,Mrs. Verma,TUESDAY,P1,8:00-9:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_9,LKG-A,English,ENG,Mrs. Sharma,TUESDAY,P2,9:00-10:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_10,LKG-A,Physical Education,PE,Mr. Kumar,TUESDAY,P3,10:00-11:00,Sports Field,SPORTS,True,Room 01,NO,NO
+entry_11,LKG-A,Science,SCI,Ms. Gupta,TUESDAY,P4,11:00-12:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_12,LKG-A,Mathematics,MATH,Mr. Kumar,TUESDAY,P5,12:00-13:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_13,LKG-A,Hindi,HIN,Mrs. Verma,TUESDAY,P6,13:00-14:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_14,LKG-A,Hindi,HIN,Mrs. Verma,TUESDAY,P7,14:00-15:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_15,LKG-A,English,ENG,Mrs. Sharma,WEDNESDAY,P1,8:00-9:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_16,LKG-A,Science,SCI,Ms. Gupta,WEDNESDAY,P2,9:00-10:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_17,LKG-A,English,ENG,Mrs. Sharma,WEDNESDAY,P3,10:00-11:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_18,LKG-A,English,ENG,Mrs. Sharma,WEDNESDAY,P4,11:00-12:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_19,LKG-A,English,ENG,Mrs. Sharma,WEDNESDAY,P5,12:00-13:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_20,LKG-A,Mathematics,MATH,Mr. Kumar,WEDNESDAY,P6,13:00-14:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_21,LKG-A,Mathematics,MATH,Mr. Kumar,WEDNESDAY,P7,14:00-15:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_22,LKG-A,Mathematics,MATH,Mr. Kumar,THURSDAY,P1,8:00-9:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_23,LKG-A,Physical Education,PE,Mr. Kumar,THURSDAY,P2,9:00-10:00,Sports Field,SPORTS,True,Room 01,NO,NO
+entry_24,LKG-A,Science,SCI,Ms. Gupta,THURSDAY,P3,10:00-11:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_25,LKG-A,Hindi,HIN,Mrs. Verma,THURSDAY,P4,11:00-12:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_26,LKG-A,Social Studies,SST,Mrs. Sharma,THURSDAY,P5,12:00-13:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_27,LKG-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P6,13:00-14:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_28,LKG-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_29,LKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P1,8:00-9:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_30,LKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P2,9:00-10:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_31,LKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_32,LKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_33,LKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_34,LKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_35,LKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 01,CLASSROOM,False,Room 01,YES,NO
+entry_36,LKG-B,Physical Education,PE,Mrs. Desai,MONDAY,P1,8:00-9:00,Sports Field,SPORTS,True,Room 02,NO,NO
+entry_37,LKG-B,Physical Education,PE,Mrs. Desai,MONDAY,P2,9:00-10:00,Sports Field,SPORTS,True,Room 02,NO,NO
+entry_38,LKG-B,Physical Education,PE,Mrs. Desai,MONDAY,P3,10:00-11:00,Sports Field,SPORTS,True,Room 02,NO,NO
+entry_39,LKG-B,Science,SCI,Mr. Reddy,MONDAY,P4,11:00-12:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_40,LKG-B,English,ENG,Ms. Patel,MONDAY,P5,12:00-13:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_41,LKG-B,English,ENG,Ms. Patel,MONDAY,P6,13:00-14:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_42,LKG-B,Social Studies,SST,Ms. Patel,MONDAY,P7,14:00-15:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_43,LKG-B,Science,SCI,Mr. Reddy,TUESDAY,P1,8:00-9:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_44,LKG-B,English,ENG,Ms. Patel,TUESDAY,P2,9:00-10:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_45,LKG-B,Hindi,HIN,Mr. Chopra,TUESDAY,P3,10:00-11:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_46,LKG-B,Mathematics,MATH,Mrs. Desai,TUESDAY,P4,11:00-12:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_47,LKG-B,Mathematics,MATH,Mrs. Desai,TUESDAY,P5,12:00-13:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_48,LKG-B,Mathematics,MATH,Mrs. Desai,TUESDAY,P6,13:00-14:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_49,LKG-B,Mathematics,MATH,Mrs. Desai,TUESDAY,P7,14:00-15:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_50,LKG-B,Mathematics,MATH,Mrs. Desai,WEDNESDAY,P1,8:00-9:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_51,LKG-B,Mathematics,MATH,Mrs. Desai,WEDNESDAY,P2,9:00-10:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_52,LKG-B,Science,SCI,Mr. Reddy,WEDNESDAY,P3,10:00-11:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_53,LKG-B,Science,SCI,Mr. Reddy,WEDNESDAY,P4,11:00-12:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_54,LKG-B,English,ENG,Ms. Patel,WEDNESDAY,P5,12:00-13:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_55,LKG-B,English,ENG,Ms. Patel,WEDNESDAY,P6,13:00-14:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_56,LKG-B,Hindi,HIN,Mr. Chopra,WEDNESDAY,P7,14:00-15:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_57,LKG-B,Hindi,HIN,Mr. Chopra,THURSDAY,P1,8:00-9:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_58,LKG-B,English,ENG,Ms. Patel,THURSDAY,P2,9:00-10:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_59,LKG-B,Social Studies,SST,Ms. Patel,THURSDAY,P3,10:00-11:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_60,LKG-B,Social Studies,SST,Ms. Patel,THURSDAY,P4,11:00-12:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_61,LKG-B,Hindi,HIN,Mr. Chopra,THURSDAY,P5,12:00-13:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_62,LKG-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P6,13:00-14:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_63,LKG-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_64,LKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P1,8:00-9:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_65,LKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P2,9:00-10:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_66,LKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_67,LKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_68,LKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_69,LKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_70,LKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 02,CLASSROOM,False,Room 02,YES,NO
+entry_71,LKG-C,Science,SCI,Mrs. Rao,MONDAY,P1,8:00-9:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_72,LKG-C,Social Studies,SST,Mr. Singh,MONDAY,P2,9:00-10:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_73,LKG-C,Social Studies,SST,Mr. Singh,MONDAY,P3,10:00-11:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_74,LKG-C,Social Studies,SST,Mr. Singh,MONDAY,P4,11:00-12:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_75,LKG-C,Science,SCI,Mrs. Rao,MONDAY,P5,12:00-13:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_76,LKG-C,Science,SCI,Mrs. Rao,MONDAY,P6,13:00-14:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_77,LKG-C,Mathematics,MATH,Ms. Gupta,MONDAY,P7,14:00-15:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_78,LKG-C,Science,SCI,Mrs. Rao,TUESDAY,P1,8:00-9:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_79,LKG-C,Mathematics,MATH,Ms. Gupta,TUESDAY,P2,9:00-10:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_80,LKG-C,Mathematics,MATH,Ms. Gupta,TUESDAY,P3,10:00-11:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_81,LKG-C,English,ENG,Mr. Singh,TUESDAY,P4,11:00-12:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_82,LKG-C,Mathematics,MATH,Ms. Gupta,TUESDAY,P5,12:00-13:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_83,LKG-C,Mathematics,MATH,Ms. Gupta,TUESDAY,P6,13:00-14:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_84,LKG-C,Mathematics,MATH,Ms. Gupta,TUESDAY,P7,14:00-15:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_85,LKG-C,English,ENG,Mr. Singh,WEDNESDAY,P1,8:00-9:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_86,LKG-C,English,ENG,Mr. Singh,WEDNESDAY,P2,9:00-10:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_87,LKG-C,English,ENG,Mr. Singh,WEDNESDAY,P3,10:00-11:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_88,LKG-C,Hindi,HIN,Ms. Malhotra,WEDNESDAY,P4,11:00-12:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_89,LKG-C,English,ENG,Mr. Singh,WEDNESDAY,P5,12:00-13:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_90,LKG-C,English,ENG,Mr. Singh,WEDNESDAY,P6,13:00-14:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_91,LKG-C,Hindi,HIN,Ms. Malhotra,WEDNESDAY,P7,14:00-15:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_92,LKG-C,Hindi,HIN,Ms. Malhotra,THURSDAY,P1,8:00-9:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_93,LKG-C,Hindi,HIN,Ms. Malhotra,THURSDAY,P2,9:00-10:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_94,LKG-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P3,10:00-11:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_95,LKG-C,Physical Education,PE,Ms. Gupta,THURSDAY,P4,11:00-12:00,Sports Field,SPORTS,True,Room 03,NO,NO
+entry_96,LKG-C,Physical Education,PE,Ms. Gupta,THURSDAY,P5,12:00-13:00,Sports Field,SPORTS,True,Room 03,NO,NO
+entry_97,LKG-C,Physical Education,PE,Ms. Gupta,THURSDAY,P6,13:00-14:00,Sports Field,SPORTS,True,Room 03,NO,NO
+entry_98,LKG-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_99,LKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P1,8:00-9:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_100,LKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P2,9:00-10:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_101,LKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_102,LKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_103,LKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_104,LKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_105,LKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 03,CLASSROOM,False,Room 03,YES,NO
+entry_106,UKG-A,Hindi,HIN,Mr. Iyer,MONDAY,P1,8:00-9:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_107,UKG-A,Social Studies,SST,Mr. Reddy,MONDAY,P2,9:00-10:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_108,UKG-A,Mathematics,MATH,Mrs. Rao,MONDAY,P3,10:00-11:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_109,UKG-A,Physical Education,PE,Mrs. Rao,MONDAY,P4,11:00-12:00,Sports Field,SPORTS,True,Room 04,NO,NO
+entry_110,UKG-A,Social Studies,SST,Mr. Reddy,MONDAY,P5,12:00-13:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_111,UKG-A,English,ENG,Mr. Reddy,MONDAY,P6,13:00-14:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_112,UKG-A,English,ENG,Mr. Reddy,MONDAY,P7,14:00-15:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_113,UKG-A,Hindi,HIN,Mr. Iyer,TUESDAY,P1,8:00-9:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_114,UKG-A,Physical Education,PE,Mrs. Rao,TUESDAY,P2,9:00-10:00,Sports Field,SPORTS,True,Room 04,NO,NO
+entry_115,UKG-A,English,ENG,Mr. Reddy,TUESDAY,P3,10:00-11:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_116,UKG-A,Mathematics,MATH,Mrs. Rao,TUESDAY,P4,11:00-12:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_117,UKG-A,English,ENG,Mr. Reddy,TUESDAY,P5,12:00-13:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_118,UKG-A,English,ENG,Mr. Reddy,TUESDAY,P6,13:00-14:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_119,UKG-A,Hindi,HIN,Mr. Iyer,TUESDAY,P7,14:00-15:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_120,UKG-A,Hindi,HIN,Mr. Iyer,WEDNESDAY,P1,8:00-9:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_121,UKG-A,Mathematics,MATH,Mrs. Rao,WEDNESDAY,P2,9:00-10:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_122,UKG-A,Science,SCI,Ms. Mehta,WEDNESDAY,P3,10:00-11:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_123,UKG-A,Science,SCI,Ms. Mehta,WEDNESDAY,P4,11:00-12:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_124,UKG-A,Science,SCI,Ms. Mehta,WEDNESDAY,P5,12:00-13:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_125,UKG-A,Mathematics,MATH,Mrs. Rao,WEDNESDAY,P6,13:00-14:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_126,UKG-A,Science,SCI,Ms. Mehta,WEDNESDAY,P7,14:00-15:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_127,UKG-A,English,ENG,Mr. Reddy,THURSDAY,P1,8:00-9:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_128,UKG-A,Mathematics,MATH,Mrs. Rao,THURSDAY,P2,9:00-10:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_129,UKG-A,Mathematics,MATH,Mrs. Rao,THURSDAY,P3,10:00-11:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_130,UKG-A,Social Studies,SST,Mr. Reddy,THURSDAY,P4,11:00-12:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_131,UKG-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P5,12:00-13:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_132,UKG-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P6,13:00-14:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_133,UKG-A,Physical Education,PE,Mrs. Rao,THURSDAY,P7,14:00-15:00,Sports Field,SPORTS,True,Room 04,NO,NO
+entry_134,UKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P1,8:00-9:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_135,UKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P2,9:00-10:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_136,UKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_137,UKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_138,UKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_139,UKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_140,UKG-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 04,CLASSROOM,False,Room 04,YES,NO
+entry_141,UKG-B,Mathematics,MATH,Mr. Joshi,MONDAY,P1,8:00-9:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_142,UKG-B,Hindi,HIN,Mrs. Nair,MONDAY,P2,9:00-10:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_143,UKG-B,Science,SCI,Mr. Joshi,MONDAY,P3,10:00-11:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_144,UKG-B,Science,SCI,Mr. Joshi,MONDAY,P4,11:00-12:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_145,UKG-B,Mathematics,MATH,Mr. Joshi,MONDAY,P5,12:00-13:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_146,UKG-B,Mathematics,MATH,Mr. Joshi,MONDAY,P6,13:00-14:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_147,UKG-B,Science,SCI,Mr. Joshi,MONDAY,P7,14:00-15:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_148,UKG-B,Social Studies,SST,Ms. Mehta,TUESDAY,P1,8:00-9:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_149,UKG-B,Science,SCI,Mr. Joshi,TUESDAY,P2,9:00-10:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_150,UKG-B,English,ENG,Ms. Mehta,TUESDAY,P3,10:00-11:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_151,UKG-B,English,ENG,Ms. Mehta,TUESDAY,P4,11:00-12:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_152,UKG-B,English,ENG,Ms. Mehta,TUESDAY,P5,12:00-13:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_153,UKG-B,Mathematics,MATH,Mr. Joshi,TUESDAY,P6,13:00-14:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_154,UKG-B,English,ENG,Ms. Mehta,TUESDAY,P7,14:00-15:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_155,UKG-B,Computer Science,CS,Mrs. Sinha,WEDNESDAY,P1,8:00-9:00,Computer Lab 1,LAB,True,Room 05,NO,YES
+entry_156,UKG-B,Mathematics,MATH,Mr. Joshi,WEDNESDAY,P2,9:00-10:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_157,UKG-B,Mathematics,MATH,Mr. Joshi,WEDNESDAY,P3,10:00-11:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_158,UKG-B,Hindi,HIN,Mrs. Nair,WEDNESDAY,P4,11:00-12:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_159,UKG-B,Hindi,HIN,Mrs. Nair,WEDNESDAY,P5,12:00-13:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_160,UKG-B,English,ENG,Ms. Mehta,WEDNESDAY,P6,13:00-14:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_161,UKG-B,Hindi,HIN,Mrs. Nair,WEDNESDAY,P7,14:00-15:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_162,UKG-B,English,ENG,Ms. Mehta,THURSDAY,P1,8:00-9:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_163,UKG-B,Computer Science,CS,Mrs. Sinha,THURSDAY,P2,9:00-10:00,Computer Lab 1,LAB,True,Room 05,NO,YES
+entry_164,UKG-B,Social Studies,SST,Ms. Mehta,THURSDAY,P3,10:00-11:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_165,UKG-B,Social Studies,SST,Ms. Mehta,THURSDAY,P4,11:00-12:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_166,UKG-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P5,12:00-13:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_167,UKG-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P6,13:00-14:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_168,UKG-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_169,UKG-B,Physical Education,PE,Mr. Joshi,FRIDAY,P1,8:00-9:00,Sports Field,SPORTS,True,Room 05,NO,NO
+entry_170,UKG-B,Physical Education,PE,Mr. Joshi,FRIDAY,P2,9:00-10:00,Sports Field,SPORTS,True,Room 05,NO,NO
+entry_171,UKG-B,Physical Education,PE,Mr. Joshi,FRIDAY,P3,10:00-11:00,Sports Field,SPORTS,True,Room 05,NO,NO
+entry_172,UKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_173,UKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_174,UKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_175,UKG-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 05,CLASSROOM,False,Room 05,YES,NO
+entry_176,UKG-C,Mathematics,MATH,Mr. Chopra,MONDAY,P1,8:00-9:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_177,UKG-C,Mathematics,MATH,Mr. Chopra,MONDAY,P2,9:00-10:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_178,UKG-C,Mathematics,MATH,Mr. Chopra,MONDAY,P3,10:00-11:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_179,UKG-C,Mathematics,MATH,Mr. Chopra,MONDAY,P4,11:00-12:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_180,UKG-C,English,ENG,Mrs. Verma,MONDAY,P5,12:00-13:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_181,UKG-C,Hindi,HIN,Ms. Pillai,MONDAY,P6,13:00-14:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_182,UKG-C,Science,SCI,Mrs. Verma,MONDAY,P7,14:00-15:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_183,UKG-C,Hindi,HIN,Ms. Pillai,TUESDAY,P1,8:00-9:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_184,UKG-C,Hindi,HIN,Ms. Pillai,TUESDAY,P2,9:00-10:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_185,UKG-C,Hindi,HIN,Ms. Pillai,TUESDAY,P3,10:00-11:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_186,UKG-C,Mathematics,MATH,Mr. Chopra,TUESDAY,P4,11:00-12:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_187,UKG-C,Physical Education,PE,Mr. Chopra,TUESDAY,P5,12:00-13:00,Sports Field,SPORTS,True,Room 06,NO,NO
+entry_188,UKG-C,Mathematics,MATH,Mr. Chopra,TUESDAY,P6,13:00-14:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_189,UKG-C,Physical Education,PE,Mr. Chopra,TUESDAY,P7,14:00-15:00,Sports Field,SPORTS,True,Room 06,NO,NO
+entry_190,UKG-C,Social Studies,SST,Mrs. Verma,WEDNESDAY,P1,8:00-9:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_191,UKG-C,Social Studies,SST,Mrs. Verma,WEDNESDAY,P2,9:00-10:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_192,UKG-C,English,ENG,Mrs. Verma,WEDNESDAY,P3,10:00-11:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_193,UKG-C,Physical Education,PE,Mr. Chopra,WEDNESDAY,P4,11:00-12:00,Sports Field,SPORTS,True,Room 06,NO,NO
+entry_194,UKG-C,English,ENG,Mrs. Verma,WEDNESDAY,P5,12:00-13:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_195,UKG-C,English,ENG,Mrs. Verma,WEDNESDAY,P6,13:00-14:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_196,UKG-C,Unknown,Unknown,Mrs. Sharma,WEDNESDAY,P7,14:00-15:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_197,UKG-C,Science,SCI,Mrs. Verma,THURSDAY,P1,8:00-9:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_198,UKG-C,Science,SCI,Mrs. Verma,THURSDAY,P2,9:00-10:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_199,UKG-C,Science,SCI,Mrs. Verma,THURSDAY,P3,10:00-11:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_200,UKG-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P4,11:00-12:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_201,UKG-C,Social Studies,SST,Mrs. Verma,THURSDAY,P5,12:00-13:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_202,UKG-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P6,13:00-14:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_203,UKG-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_204,UKG-C,English,ENG,Mrs. Verma,FRIDAY,P1,8:00-9:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_205,UKG-C,English,ENG,Mrs. Verma,FRIDAY,P2,9:00-10:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_206,UKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_207,UKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_208,UKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_209,UKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_210,UKG-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 06,CLASSROOM,False,Room 06,YES,NO
+entry_211,Grade 1-A,Hindi,HIN,Mr. Khan,MONDAY,P1,8:00-9:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_212,Grade 1-A,Hindi,HIN,Mr. Khan,MONDAY,P2,9:00-10:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_213,Grade 1-A,Mathematics,MATH,Mr. Iyer,MONDAY,P3,10:00-11:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_214,Grade 1-A,English,ENG,Ms. Malhotra,MONDAY,P4,11:00-12:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_215,Grade 1-A,English,ENG,Ms. Malhotra,MONDAY,P5,12:00-13:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_216,Grade 1-A,Mathematics,MATH,Mr. Iyer,MONDAY,P6,13:00-14:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_217,Grade 1-A,English,ENG,Ms. Malhotra,MONDAY,P7,14:00-15:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_218,Grade 1-A,Hindi,HIN,Mr. Khan,TUESDAY,P1,8:00-9:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_219,Grade 1-A,Mathematics,MATH,Mr. Iyer,TUESDAY,P2,9:00-10:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_220,Grade 1-A,Hindi,HIN,Mr. Khan,TUESDAY,P3,10:00-11:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_221,Grade 1-A,Physical Education,PE,Mr. Iyer,TUESDAY,P4,11:00-12:00,Sports Field,SPORTS,True,Room 07,NO,NO
+entry_222,Grade 1-A,English,ENG,Ms. Malhotra,TUESDAY,P5,12:00-13:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_223,Grade 1-A,English,ENG,Ms. Malhotra,TUESDAY,P6,13:00-14:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_224,Grade 1-A,English,ENG,Ms. Malhotra,TUESDAY,P7,14:00-15:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_225,Grade 1-A,Science,SCI,Mr. Chopra,WEDNESDAY,P1,8:00-9:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_226,Grade 1-A,Science,SCI,Mr. Chopra,WEDNESDAY,P2,9:00-10:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_227,Grade 1-A,Mathematics,MATH,Mr. Iyer,WEDNESDAY,P3,10:00-11:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_228,Grade 1-A,Mathematics,MATH,Mr. Iyer,WEDNESDAY,P4,11:00-12:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_229,Grade 1-A,Social Studies,SST,Ms. Malhotra,WEDNESDAY,P5,12:00-13:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_230,Grade 1-A,Science,SCI,Mr. Chopra,WEDNESDAY,P6,13:00-14:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_231,Grade 1-A,Mathematics,MATH,Mr. Iyer,WEDNESDAY,P7,14:00-15:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_232,Grade 1-A,Physical Education,PE,Mr. Iyer,THURSDAY,P1,8:00-9:00,Sports Field,SPORTS,True,Room 07,NO,NO
+entry_233,Grade 1-A,Science,SCI,Mr. Chopra,THURSDAY,P2,9:00-10:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_234,Grade 1-A,Social Studies,SST,Ms. Malhotra,THURSDAY,P3,10:00-11:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_235,Grade 1-A,Social Studies,SST,Ms. Malhotra,THURSDAY,P4,11:00-12:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_236,Grade 1-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P5,12:00-13:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_237,Grade 1-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P6,13:00-14:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_238,Grade 1-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_239,Grade 1-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P1,8:00-9:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_240,Grade 1-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P2,9:00-10:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_241,Grade 1-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_242,Grade 1-A,Physical Education,PE,Mr. Iyer,FRIDAY,P4,11:00-12:00,Sports Field,SPORTS,True,Room 07,NO,NO
+entry_243,Grade 1-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_244,Grade 1-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_245,Grade 1-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 07,CLASSROOM,False,Room 07,YES,NO
+entry_246,Grade 1-B,Social Studies,SST,Mrs. Nair,MONDAY,P1,8:00-9:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_247,Grade 1-B,Mathematics,MATH,Ms. Pillai,MONDAY,P2,9:00-10:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_248,Grade 1-B,Hindi,HIN,Mrs. Bose,MONDAY,P3,10:00-11:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_249,Grade 1-B,Hindi,HIN,Mrs. Bose,MONDAY,P4,11:00-12:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_250,Grade 1-B,Mathematics,MATH,Ms. Pillai,MONDAY,P5,12:00-13:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_251,Grade 1-B,Science,SCI,Ms. Malhotra,MONDAY,P6,13:00-14:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_252,Grade 1-B,English,ENG,Mrs. Nair,MONDAY,P7,14:00-15:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_253,Grade 1-B,Hindi,HIN,Mrs. Bose,TUESDAY,P1,8:00-9:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_254,Grade 1-B,Hindi,HIN,Mrs. Bose,TUESDAY,P2,9:00-10:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_255,Grade 1-B,English,ENG,Mrs. Nair,TUESDAY,P3,10:00-11:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_256,Grade 1-B,English,ENG,Mrs. Nair,TUESDAY,P4,11:00-12:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_257,Grade 1-B,English,ENG,Mrs. Nair,TUESDAY,P5,12:00-13:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_258,Grade 1-B,Mathematics,MATH,Ms. Pillai,TUESDAY,P6,13:00-14:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_259,Grade 1-B,Mathematics,MATH,Ms. Pillai,TUESDAY,P7,14:00-15:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_260,Grade 1-B,Physical Education,PE,Ms. Pillai,WEDNESDAY,P1,8:00-9:00,Sports Field,SPORTS,True,Room 08,NO,NO
+entry_261,Grade 1-B,English,ENG,Mrs. Nair,WEDNESDAY,P2,9:00-10:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_262,Grade 1-B,English,ENG,Mrs. Nair,WEDNESDAY,P3,10:00-11:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_263,Grade 1-B,Mathematics,MATH,Ms. Pillai,WEDNESDAY,P4,11:00-12:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_264,Grade 1-B,Mathematics,MATH,Ms. Pillai,WEDNESDAY,P5,12:00-13:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_265,Grade 1-B,Physical Education,PE,Ms. Pillai,WEDNESDAY,P6,13:00-14:00,Sports Field,SPORTS,True,Room 08,NO,NO
+entry_266,Grade 1-B,Physical Education,PE,Ms. Pillai,WEDNESDAY,P7,14:00-15:00,Sports Field,SPORTS,True,Room 08,NO,NO
+entry_267,Grade 1-B,Social Studies,SST,Mrs. Nair,THURSDAY,P1,8:00-9:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_268,Grade 1-B,Social Studies,SST,Mrs. Nair,THURSDAY,P2,9:00-10:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_269,Grade 1-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P3,10:00-11:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_270,Grade 1-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P4,11:00-12:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_271,Grade 1-B,Science,SCI,Ms. Malhotra,THURSDAY,P5,12:00-13:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_272,Grade 1-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P6,13:00-14:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_273,Grade 1-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_274,Grade 1-B,Science,SCI,Ms. Malhotra,FRIDAY,P1,8:00-9:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_275,Grade 1-B,Science,SCI,Ms. Malhotra,FRIDAY,P2,9:00-10:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_276,Grade 1-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_277,Grade 1-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_278,Grade 1-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_279,Grade 1-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_280,Grade 1-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 08,CLASSROOM,False,Room 08,YES,NO
+entry_281,Grade 1-C,Mathematics,MATH,Mrs. Bose,MONDAY,P1,8:00-9:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_282,Grade 1-C,Science,SCI,Mr. Iyer,MONDAY,P2,9:00-10:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_283,Grade 1-C,Social Studies,SST,Mr. Khan,MONDAY,P3,10:00-11:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_284,Grade 1-C,Science,SCI,Mr. Iyer,MONDAY,P4,11:00-12:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_285,Grade 1-C,English,ENG,Mr. Khan,MONDAY,P5,12:00-13:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_286,Grade 1-C,English,ENG,Mr. Khan,MONDAY,P6,13:00-14:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_287,Grade 1-C,Mathematics,MATH,Mrs. Bose,MONDAY,P7,14:00-15:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_288,Grade 1-C,Hindi,HIN,Mr. Agarwal,TUESDAY,P1,8:00-9:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_289,Grade 1-C,English,ENG,Mr. Khan,TUESDAY,P2,9:00-10:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_290,Grade 1-C,Hindi,HIN,Mr. Agarwal,TUESDAY,P3,10:00-11:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_291,Grade 1-C,Hindi,HIN,Mr. Agarwal,TUESDAY,P4,11:00-12:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_292,Grade 1-C,Hindi,HIN,Mr. Agarwal,TUESDAY,P5,12:00-13:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_293,Grade 1-C,English,ENG,Mr. Khan,TUESDAY,P6,13:00-14:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_294,Grade 1-C,English,ENG,Mr. Khan,TUESDAY,P7,14:00-15:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_295,Grade 1-C,Mathematics,MATH,Mrs. Bose,WEDNESDAY,P1,8:00-9:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_296,Grade 1-C,Mathematics,MATH,Mrs. Bose,WEDNESDAY,P2,9:00-10:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_297,Grade 1-C,Mathematics,MATH,Mrs. Bose,WEDNESDAY,P3,10:00-11:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_298,Grade 1-C,Social Studies,SST,Mr. Khan,WEDNESDAY,P4,11:00-12:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_299,Grade 1-C,Social Studies,SST,Mr. Khan,WEDNESDAY,P5,12:00-13:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_300,Grade 1-C,Science,SCI,Mr. Iyer,WEDNESDAY,P6,13:00-14:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_301,Grade 1-C,English,ENG,Mr. Khan,WEDNESDAY,P7,14:00-15:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_302,Grade 1-C,Mathematics,MATH,Mrs. Bose,THURSDAY,P1,8:00-9:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_303,Grade 1-C,Science,SCI,Mr. Iyer,THURSDAY,P2,9:00-10:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_304,Grade 1-C,Physical Education,PE,Mrs. Bose,THURSDAY,P3,10:00-11:00,Sports Field,SPORTS,True,Room 09,NO,NO
+entry_305,Grade 1-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P4,11:00-12:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_306,Grade 1-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P5,12:00-13:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_307,Grade 1-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P6,13:00-14:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_308,Grade 1-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_309,Grade 1-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P1,8:00-9:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_310,Grade 1-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P2,9:00-10:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_311,Grade 1-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_312,Grade 1-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_313,Grade 1-C,Physical Education,PE,Mrs. Bose,FRIDAY,P5,12:00-13:00,Sports Field,SPORTS,True,Room 09,NO,NO
+entry_314,Grade 1-C,Physical Education,PE,Mrs. Bose,FRIDAY,P6,13:00-14:00,Sports Field,SPORTS,True,Room 09,NO,NO
+entry_315,Grade 1-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 09,CLASSROOM,False,Room 09,YES,NO
+entry_316,Grade 2-A,English,ENG,Mr. Agarwal,MONDAY,P1,8:00-9:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_317,Grade 2-A,Hindi,HIN,Ms. Shah,MONDAY,P2,9:00-10:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_318,Grade 2-A,Mathematics,MATH,Ms. Shah,MONDAY,P3,10:00-11:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_319,Grade 2-A,Mathematics,MATH,Ms. Shah,MONDAY,P4,11:00-12:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_320,Grade 2-A,Computer Science,CS,Mrs. Sinha,MONDAY,P5,12:00-13:00,Computer Lab 1,LAB,True,Room 10,NO,YES
+entry_321,Grade 2-A,Hindi,HIN,Ms. Shah,MONDAY,P6,13:00-14:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_322,Grade 2-A,Computer Science,CS,Mrs. Sinha,MONDAY,P7,14:00-15:00,Computer Lab 1,LAB,True,Room 10,NO,YES
+entry_323,Grade 2-A,Physical Education,PE,Ms. Shah,TUESDAY,P1,8:00-9:00,Sports Field,SPORTS,True,Room 10,NO,NO
+entry_324,Grade 2-A,Science,SCI,Mrs. Nair,TUESDAY,P2,9:00-10:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_325,Grade 2-A,Mathematics,MATH,Ms. Shah,TUESDAY,P3,10:00-11:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_326,Grade 2-A,Mathematics,MATH,Ms. Shah,TUESDAY,P4,11:00-12:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_327,Grade 2-A,Mathematics,MATH,Ms. Shah,TUESDAY,P5,12:00-13:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_328,Grade 2-A,Science,SCI,Mrs. Nair,TUESDAY,P6,13:00-14:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_329,Grade 2-A,Unknown,Unknown,Mrs. Sharma,TUESDAY,P7,14:00-15:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_330,Grade 2-A,Mathematics,MATH,Ms. Shah,WEDNESDAY,P1,8:00-9:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_331,Grade 2-A,Social Studies,SST,Mr. Agarwal,WEDNESDAY,P2,9:00-10:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_332,Grade 2-A,English,ENG,Mr. Agarwal,WEDNESDAY,P3,10:00-11:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_333,Grade 2-A,Social Studies,SST,Mr. Agarwal,WEDNESDAY,P4,11:00-12:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_334,Grade 2-A,Social Studies,SST,Mr. Agarwal,WEDNESDAY,P5,12:00-13:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_335,Grade 2-A,Hindi,HIN,Ms. Shah,WEDNESDAY,P6,13:00-14:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_336,Grade 2-A,Hindi,HIN,Ms. Shah,WEDNESDAY,P7,14:00-15:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_337,Grade 2-A,English,ENG,Mr. Agarwal,THURSDAY,P1,8:00-9:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_338,Grade 2-A,English,ENG,Mr. Agarwal,THURSDAY,P2,9:00-10:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_339,Grade 2-A,English,ENG,Mr. Agarwal,THURSDAY,P3,10:00-11:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_340,Grade 2-A,English,ENG,Mr. Agarwal,THURSDAY,P4,11:00-12:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_341,Grade 2-A,Science,SCI,Mrs. Nair,THURSDAY,P5,12:00-13:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_342,Grade 2-A,Science,SCI,Mrs. Nair,THURSDAY,P6,13:00-14:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_343,Grade 2-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_344,Grade 2-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P1,8:00-9:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_345,Grade 2-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P2,9:00-10:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_346,Grade 2-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_347,Grade 2-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_348,Grade 2-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_349,Grade 2-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 10,CLASSROOM,False,Room 10,YES,NO
+entry_350,Grade 2-A,Physical Education,PE,Ms. Shah,FRIDAY,P7,14:00-15:00,Sports Field,SPORTS,True,Room 10,NO,NO
+entry_351,Grade 2-B,Hindi,HIN,Mr. Patel,MONDAY,P1,8:00-9:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_352,Grade 2-B,Hindi,HIN,Mr. Patel,MONDAY,P2,9:00-10:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_353,Grade 2-B,Science,SCI,Ms. Pillai,MONDAY,P3,10:00-11:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_354,Grade 2-B,English,ENG,Mr. Patel,MONDAY,P4,11:00-12:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_355,Grade 2-B,English,ENG,Mr. Patel,MONDAY,P5,12:00-13:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_356,Grade 2-B,Mathematics,MATH,Mrs. Bhatt,MONDAY,P6,13:00-14:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_357,Grade 2-B,Mathematics,MATH,Mrs. Bhatt,MONDAY,P7,14:00-15:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_358,Grade 2-B,English,ENG,Mr. Patel,TUESDAY,P1,8:00-9:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_359,Grade 2-B,Mathematics,MATH,Mrs. Bhatt,TUESDAY,P2,9:00-10:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_360,Grade 2-B,Social Studies,SST,Mr. Patel,TUESDAY,P3,10:00-11:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_361,Grade 2-B,Mathematics,MATH,Mrs. Bhatt,TUESDAY,P4,11:00-12:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_362,Grade 2-B,English,ENG,Mr. Patel,TUESDAY,P5,12:00-13:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_363,Grade 2-B,Physical Education,PE,Mrs. Bhatt,TUESDAY,P6,13:00-14:00,Sports Field,SPORTS,True,Room 11,NO,NO
+entry_364,Grade 2-B,English,ENG,Mr. Patel,TUESDAY,P7,14:00-15:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_365,Grade 2-B,English,ENG,Mr. Patel,WEDNESDAY,P1,8:00-9:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_366,Grade 2-B,Hindi,HIN,Mr. Patel,WEDNESDAY,P2,9:00-10:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_367,Grade 2-B,Hindi,HIN,Mr. Patel,WEDNESDAY,P3,10:00-11:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_368,Grade 2-B,Mathematics,MATH,Mrs. Bhatt,WEDNESDAY,P4,11:00-12:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_369,Grade 2-B,Mathematics,MATH,Mrs. Bhatt,WEDNESDAY,P5,12:00-13:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_370,Grade 2-B,Social Studies,SST,Mr. Patel,WEDNESDAY,P6,13:00-14:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_371,Grade 2-B,Unknown,Unknown,Mrs. Sharma,WEDNESDAY,P7,14:00-15:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_372,Grade 2-B,Social Studies,SST,Mr. Patel,THURSDAY,P1,8:00-9:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_373,Grade 2-B,Science,SCI,Ms. Pillai,THURSDAY,P2,9:00-10:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_374,Grade 2-B,Science,SCI,Ms. Pillai,THURSDAY,P3,10:00-11:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_375,Grade 2-B,Science,SCI,Ms. Pillai,THURSDAY,P4,11:00-12:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_376,Grade 2-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P5,12:00-13:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_377,Grade 2-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P6,13:00-14:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_378,Grade 2-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_379,Grade 2-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P1,8:00-9:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_380,Grade 2-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P2,9:00-10:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_381,Grade 2-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_382,Grade 2-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_383,Grade 2-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_384,Grade 2-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_385,Grade 2-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 11,CLASSROOM,False,Room 11,YES,NO
+entry_386,Grade 2-C,Social Studies,SST,Ms. Trivedi,MONDAY,P1,8:00-9:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_387,Grade 2-C,Social Studies,SST,Ms. Trivedi,MONDAY,P2,9:00-10:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_388,Grade 2-C,Social Studies,SST,Ms. Trivedi,MONDAY,P3,10:00-11:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_389,Grade 2-C,Mathematics,MATH,Mr. Kapoor,MONDAY,P4,11:00-12:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_390,Grade 2-C,Mathematics,MATH,Mr. Kapoor,MONDAY,P5,12:00-13:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_391,Grade 2-C,Physical Education,PE,Mr. Kapoor,MONDAY,P6,13:00-14:00,Sports Field,SPORTS,True,Room 12,NO,NO
+entry_392,Grade 2-C,English,ENG,Ms. Trivedi,MONDAY,P7,14:00-15:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_393,Grade 2-C,English,ENG,Ms. Trivedi,TUESDAY,P1,8:00-9:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_394,Grade 2-C,English,ENG,Ms. Trivedi,TUESDAY,P2,9:00-10:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_395,Grade 2-C,English,ENG,Ms. Trivedi,TUESDAY,P3,10:00-11:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_396,Grade 2-C,English,ENG,Ms. Trivedi,TUESDAY,P4,11:00-12:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_397,Grade 2-C,Mathematics,MATH,Mr. Kapoor,TUESDAY,P5,12:00-13:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_398,Grade 2-C,Mathematics,MATH,Mr. Kapoor,TUESDAY,P6,13:00-14:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_399,Grade 2-C,Hindi,HIN,Mrs. Bhatt,TUESDAY,P7,14:00-15:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_400,Grade 2-C,Science,SCI,Mr. Khan,WEDNESDAY,P1,8:00-9:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_401,Grade 2-C,Hindi,HIN,Mrs. Bhatt,WEDNESDAY,P2,9:00-10:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_402,Grade 2-C,Mathematics,MATH,Mr. Kapoor,WEDNESDAY,P3,10:00-11:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_403,Grade 2-C,English,ENG,Ms. Trivedi,WEDNESDAY,P4,11:00-12:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_404,Grade 2-C,Mathematics,MATH,Mr. Kapoor,WEDNESDAY,P5,12:00-13:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_405,Grade 2-C,Science,SCI,Mr. Khan,WEDNESDAY,P6,13:00-14:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_406,Grade 2-C,Hindi,HIN,Mrs. Bhatt,WEDNESDAY,P7,14:00-15:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_407,Grade 2-C,Science,SCI,Mr. Khan,THURSDAY,P1,8:00-9:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_408,Grade 2-C,Hindi,HIN,Mrs. Bhatt,THURSDAY,P2,9:00-10:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_409,Grade 2-C,Science,SCI,Mr. Khan,THURSDAY,P3,10:00-11:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_410,Grade 2-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P4,11:00-12:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_411,Grade 2-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P5,12:00-13:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_412,Grade 2-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P6,13:00-14:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_413,Grade 2-C,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_414,Grade 2-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P1,8:00-9:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_415,Grade 2-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P2,9:00-10:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_416,Grade 2-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_417,Grade 2-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_418,Grade 2-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_419,Grade 2-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_420,Grade 2-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 12,CLASSROOM,False,Room 12,YES,NO
+entry_421,Grade 3-A,Social Studies,SST,Mrs. Sinha,MONDAY,P1,8:00-9:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_422,Grade 3-A,Social Studies,SST,Mrs. Sinha,MONDAY,P2,9:00-10:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_423,Grade 3-A,English,ENG,Mrs. Sinha,MONDAY,P3,10:00-11:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_424,Grade 3-A,Unknown,Unknown,Mrs. Sharma,MONDAY,P4,11:00-12:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_425,Grade 3-A,Science,SCI,Mrs. Bose,MONDAY,P5,12:00-13:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_426,Grade 3-A,Mathematics,MATH,Mrs. Sharma,MONDAY,P6,13:00-14:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_427,Grade 3-A,Unknown,Unknown,Mrs. Sharma,MONDAY,P7,14:00-15:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_428,Grade 3-A,English,ENG,Mrs. Sinha,TUESDAY,P1,8:00-9:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_429,Grade 3-A,English,ENG,Mrs. Sinha,TUESDAY,P2,9:00-10:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_430,Grade 3-A,Science,SCI,Mrs. Bose,TUESDAY,P3,10:00-11:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_431,Grade 3-A,Mathematics,MATH,Mrs. Sharma,TUESDAY,P4,11:00-12:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_432,Grade 3-A,English,ENG,Mrs. Sinha,TUESDAY,P5,12:00-13:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_433,Grade 3-A,English,ENG,Mrs. Sinha,TUESDAY,P6,13:00-14:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_434,Grade 3-A,Social Studies,SST,Mrs. Sinha,TUESDAY,P7,14:00-15:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_435,Grade 3-A,Hindi,HIN,Ms. Trivedi,WEDNESDAY,P1,8:00-9:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_436,Grade 3-A,English,ENG,Mrs. Sinha,WEDNESDAY,P2,9:00-10:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_437,Grade 3-A,Hindi,HIN,Ms. Trivedi,WEDNESDAY,P3,10:00-11:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_438,Grade 3-A,Science,SCI,Mrs. Bose,WEDNESDAY,P4,11:00-12:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_439,Grade 3-A,Science,SCI,Mrs. Bose,WEDNESDAY,P5,12:00-13:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_440,Grade 3-A,Mathematics,MATH,Mrs. Sharma,WEDNESDAY,P6,13:00-14:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_441,Grade 3-A,Hindi,HIN,Ms. Trivedi,WEDNESDAY,P7,14:00-15:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_442,Grade 3-A,Hindi,HIN,Ms. Trivedi,THURSDAY,P1,8:00-9:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_443,Grade 3-A,Mathematics,MATH,Mrs. Sharma,THURSDAY,P2,9:00-10:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_444,Grade 3-A,Mathematics,MATH,Mrs. Sharma,THURSDAY,P3,10:00-11:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_445,Grade 3-A,Mathematics,MATH,Mrs. Sharma,THURSDAY,P4,11:00-12:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_446,Grade 3-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P5,12:00-13:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_447,Grade 3-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P6,13:00-14:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_448,Grade 3-A,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_449,Grade 3-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P1,8:00-9:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_450,Grade 3-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P2,9:00-10:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_451,Grade 3-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_452,Grade 3-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_453,Grade 3-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_454,Grade 3-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_455,Grade 3-A,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 13,CLASSROOM,False,Room 13,YES,NO
+entry_456,Grade 3-B,English,ENG,Mr. Kumar,MONDAY,P1,8:00-9:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_457,Grade 3-B,Hindi,HIN,Mr. Kapoor,MONDAY,P2,9:00-10:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_458,Grade 3-B,Science,SCI,Mr. Agarwal,MONDAY,P3,10:00-11:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_459,Grade 3-B,Science,SCI,Mr. Agarwal,MONDAY,P4,11:00-12:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_460,Grade 3-B,Science,SCI,Mr. Agarwal,MONDAY,P5,12:00-13:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_461,Grade 3-B,Unknown,Unknown,Mrs. Sharma,MONDAY,P6,13:00-14:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_462,Grade 3-B,English,ENG,Mr. Kumar,MONDAY,P7,14:00-15:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_463,Grade 3-B,Mathematics,MATH,Ms. Patel,TUESDAY,P1,8:00-9:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_464,Grade 3-B,English,ENG,Mr. Kumar,TUESDAY,P2,9:00-10:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_465,Grade 3-B,Mathematics,MATH,Ms. Patel,TUESDAY,P3,10:00-11:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_466,Grade 3-B,Mathematics,MATH,Ms. Patel,TUESDAY,P4,11:00-12:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_467,Grade 3-B,Mathematics,MATH,Ms. Patel,TUESDAY,P5,12:00-13:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_468,Grade 3-B,Mathematics,MATH,Ms. Patel,TUESDAY,P6,13:00-14:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_469,Grade 3-B,English,ENG,Mr. Kumar,TUESDAY,P7,14:00-15:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_470,Grade 3-B,English,ENG,Mr. Kumar,WEDNESDAY,P1,8:00-9:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_471,Grade 3-B,Physical Education,PE,Ms. Patel,WEDNESDAY,P2,9:00-10:00,Sports Field,SPORTS,True,Room 14,NO,NO
+entry_472,Grade 3-B,Physical Education,PE,Ms. Patel,WEDNESDAY,P3,10:00-11:00,Sports Field,SPORTS,True,Room 14,NO,NO
+entry_473,Grade 3-B,English,ENG,Mr. Kumar,WEDNESDAY,P4,11:00-12:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_474,Grade 3-B,Social Studies,SST,Mr. Kumar,WEDNESDAY,P5,12:00-13:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_475,Grade 3-B,Hindi,HIN,Mr. Kapoor,WEDNESDAY,P6,13:00-14:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_476,Grade 3-B,Hindi,HIN,Mr. Kapoor,WEDNESDAY,P7,14:00-15:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_477,Grade 3-B,Hindi,HIN,Mr. Kapoor,THURSDAY,P1,8:00-9:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_478,Grade 3-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P2,9:00-10:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_479,Grade 3-B,Social Studies,SST,Mr. Kumar,THURSDAY,P3,10:00-11:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_480,Grade 3-B,Social Studies,SST,Mr. Kumar,THURSDAY,P4,11:00-12:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_481,Grade 3-B,Mathematics,MATH,Ms. Patel,THURSDAY,P5,12:00-13:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_482,Grade 3-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P6,13:00-14:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_483,Grade 3-B,Unknown,Unknown,Mrs. Sharma,THURSDAY,P7,14:00-15:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_484,Grade 3-B,Science,SCI,Mr. Agarwal,FRIDAY,P1,8:00-9:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_485,Grade 3-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P2,9:00-10:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_486,Grade 3-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_487,Grade 3-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_488,Grade 3-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_489,Grade 3-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_490,Grade 3-B,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 14,CLASSROOM,False,Room 14,YES,NO
+entry_491,Grade 3-C,Mathematics,MATH,Mr. Singh,MONDAY,P1,8:00-9:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_492,Grade 3-C,Unknown,Unknown,Mrs. Sharma,MONDAY,P2,9:00-10:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_493,Grade 3-C,Unknown,Unknown,Mrs. Sharma,MONDAY,P3,10:00-11:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_494,Grade 3-C,English,ENG,Mrs. Desai,MONDAY,P4,11:00-12:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_495,Grade 3-C,Mathematics,MATH,Mr. Singh,MONDAY,P5,12:00-13:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_496,Grade 3-C,Mathematics,MATH,Mr. Singh,MONDAY,P6,13:00-14:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_497,Grade 3-C,English,ENG,Mrs. Desai,MONDAY,P7,14:00-15:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_498,Grade 3-C,Computer Science,CS,Mr. Joshi,TUESDAY,P1,8:00-9:00,Computer Lab 1,LAB,True,Room 15,NO,YES
+entry_499,Grade 3-C,Mathematics,MATH,Mr. Singh,TUESDAY,P2,9:00-10:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_500,Grade 3-C,Mathematics,MATH,Mr. Singh,TUESDAY,P3,10:00-11:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_501,Grade 3-C,Computer Science,CS,Mr. Joshi,TUESDAY,P4,11:00-12:00,Computer Lab 1,LAB,True,Room 15,NO,YES
+entry_502,Grade 3-C,Mathematics,MATH,Mr. Singh,TUESDAY,P5,12:00-13:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_503,Grade 3-C,Unknown,Unknown,Mrs. Sharma,TUESDAY,P6,13:00-14:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_504,Grade 3-C,Unknown,Unknown,Mrs. Sharma,TUESDAY,P7,14:00-15:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_505,Grade 3-C,Unknown,Unknown,Mrs. Sharma,WEDNESDAY,P1,8:00-9:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_506,Grade 3-C,Science,SCI,Ms. Shah,WEDNESDAY,P2,9:00-10:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_507,Grade 3-C,Social Studies,SST,Mrs. Desai,WEDNESDAY,P3,10:00-11:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_508,Grade 3-C,Hindi,HIN,Mrs. Sinha,WEDNESDAY,P4,11:00-12:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_509,Grade 3-C,Hindi,HIN,Mrs. Sinha,WEDNESDAY,P5,12:00-13:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_510,Grade 3-C,Social Studies,SST,Mrs. Desai,WEDNESDAY,P6,13:00-14:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_511,Grade 3-C,Social Studies,SST,Mrs. Desai,WEDNESDAY,P7,14:00-15:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_512,Grade 3-C,English,ENG,Mrs. Desai,THURSDAY,P1,8:00-9:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_513,Grade 3-C,English,ENG,Mrs. Desai,THURSDAY,P2,9:00-10:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_514,Grade 3-C,English,ENG,Mrs. Desai,THURSDAY,P3,10:00-11:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_515,Grade 3-C,English,ENG,Mrs. Desai,THURSDAY,P4,11:00-12:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_516,Grade 3-C,Science,SCI,Ms. Shah,THURSDAY,P5,12:00-13:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_517,Grade 3-C,Science,SCI,Ms. Shah,THURSDAY,P6,13:00-14:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_518,Grade 3-C,Science,SCI,Ms. Shah,THURSDAY,P7,14:00-15:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_519,Grade 3-C,Hindi,HIN,Mrs. Sinha,FRIDAY,P1,8:00-9:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_520,Grade 3-C,Hindi,HIN,Mrs. Sinha,FRIDAY,P2,9:00-10:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_521,Grade 3-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P3,10:00-11:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_522,Grade 3-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P4,11:00-12:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_523,Grade 3-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P5,12:00-13:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_524,Grade 3-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P6,13:00-14:00,Room 15,CLASSROOM,False,Room 15,YES,NO
+entry_525,Grade 3-C,Unknown,Unknown,Mrs. Sharma,FRIDAY,P7,14:00-15:00,Room 15,CLASSROOM,False,Room 15,YES,NO

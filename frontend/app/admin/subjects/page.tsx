@@ -7,10 +7,13 @@ import { subjectAPI } from '@/lib/api';
 interface Subject {
   id: string;
   name: string;
-  code: string;
-  description?: string;
-  hoursPerWeek: number;
-  isLab: boolean;
+  department?: string;
+  credits: number;
+  minPeriodsPerWeek?: number;
+  maxPeriodsPerWeek?: number;
+  prepTime?: number;
+  correctionWorkload?: number;
+  requiresLab: boolean;
   schoolId: string;
   createdAt: string;
 }
@@ -22,10 +25,14 @@ export default function SubjectsPage() {
   const [editingSubject, setEditingSubject] = useState<Subject | null>(null);
   const [formData, setFormData] = useState({
     name: '',
-    code: '',
-    description: '',
-    hoursPerWeek: 5,
-    isLab: false,
+    department: '',
+    credits: 4,
+    minPeriodsPerWeek: 4,
+    maxPeriodsPerWeek: 6,
+    prepTime: 60,
+    correctionWorkload: 0.5,
+    requiresLab: false,
+    schoolId: '',
   });
 
   useEffect(() => {
@@ -46,16 +53,26 @@ export default function SubjectsPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      // Get schoolId from localStorage
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      const schoolId = user.schoolId || 'default-school-id';
+
+      const dataToSend = {
+        ...formData,
+        schoolId,
+      };
+
       if (editingSubject) {
-        await subjectAPI.update(editingSubject.id, formData);
+        await subjectAPI.update(editingSubject.id, dataToSend);
       } else {
-        await subjectAPI.create(formData);
+        await subjectAPI.create(dataToSend);
       }
       fetchSubjects();
       setShowModal(false);
       resetForm();
     } catch (error) {
       console.error('Failed to save subject:', error);
+      alert('Failed to save subject. Please check the console for details.');
     }
   };
 
@@ -63,10 +80,14 @@ export default function SubjectsPage() {
     setEditingSubject(subject);
     setFormData({
       name: subject.name,
-      code: subject.code,
-      description: subject.description || '',
-      hoursPerWeek: subject.hoursPerWeek,
-      isLab: subject.isLab,
+      department: subject.department || '',
+      credits: subject.credits,
+      minPeriodsPerWeek: subject.minPeriodsPerWeek || 4,
+      maxPeriodsPerWeek: subject.maxPeriodsPerWeek || 6,
+      prepTime: subject.prepTime || 60,
+      correctionWorkload: subject.correctionWorkload || 0.5,
+      requiresLab: subject.requiresLab,
+      schoolId: subject.schoolId,
     });
     setShowModal(true);
   };
@@ -86,10 +107,14 @@ export default function SubjectsPage() {
     setEditingSubject(null);
     setFormData({
       name: '',
-      code: '',
-      description: '',
-      hoursPerWeek: 5,
-      isLab: false,
+      department: '',
+      credits: 4,
+      minPeriodsPerWeek: 4,
+      maxPeriodsPerWeek: 6,
+      prepTime: 60,
+      correctionWorkload: 0.5,
+      requiresLab: false,
+      schoolId: '',
     });
   };
 
@@ -135,7 +160,7 @@ export default function SubjectsPage() {
                             <div className="text-lg font-medium text-blue-600">
                               {subject.name}
                             </div>
-                            {subject.isLab && (
+                            {subject.requiresLab && (
                               <span className="ml-2 px-2 py-1 text-xs bg-green-100 text-green-800 rounded">
                                 Lab
                               </span>
@@ -143,17 +168,17 @@ export default function SubjectsPage() {
                           </div>
                           <div className="mt-2 sm:flex sm:justify-between">
                             <div className="sm:flex sm:space-x-6">
-                              <p className="flex items-center text-sm text-gray-500">
-                                Code: {subject.code}
-                              </p>
-                              <p className="flex items-center text-sm text-gray-500">
-                                Hours/Week: {subject.hoursPerWeek}
-                              </p>
-                              {subject.description && (
+                              {subject.department && (
                                 <p className="flex items-center text-sm text-gray-500">
-                                  {subject.description}
+                                  Dept: {subject.department}
                                 </p>
                               )}
+                              <p className="flex items-center text-sm text-gray-500">
+                                Credits: {subject.credits}
+                              </p>
+                              <p className="flex items-center text-sm text-gray-500">
+                                Periods/Week: {subject.minPeriodsPerWeek || 0}-{subject.maxPeriodsPerWeek || 0}
+                              </p>
                             </div>
                           </div>
                         </div>
@@ -204,64 +229,106 @@ export default function SubjectsPage() {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700">
-                    Subject Code
+                    Department (Optional)
                   </label>
                   <input
                     type="text"
-                    required
-                    value={formData.code}
+                    value={formData.department}
                     onChange={(e) =>
-                      setFormData({ ...formData, code: e.target.value })
+                      setFormData({ ...formData, department: e.target.value })
                     }
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
-                    placeholder="e.g., MATH101"
+                    placeholder="e.g., Science, Arts"
                   />
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Description (Optional)
-                  </label>
-                  <textarea
-                    value={formData.description}
-                    onChange={(e) =>
-                      setFormData({ ...formData, description: e.target.value })
-                    }
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
-                    rows={3}
-                    placeholder="Brief description of the subject"
-                  />
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Credits
+                    </label>
+                    <input
+                      type="number"
+                      required
+                      min="1"
+                      max="10"
+                      value={formData.credits}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          credits: parseInt(e.target.value),
+                        })
+                      }
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Prep Time (min)
+                    </label>
+                    <input
+                      type="number"
+                      min="0"
+                      value={formData.prepTime}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          prepTime: parseInt(e.target.value),
+                        })
+                      }
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Hours Per Week
-                  </label>
-                  <input
-                    type="number"
-                    required
-                    min="1"
-                    max="20"
-                    value={formData.hoursPerWeek}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        hoursPerWeek: parseInt(e.target.value),
-                      })
-                    }
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
-                  />
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Min Periods/Week
+                    </label>
+                    <input
+                      type="number"
+                      min="1"
+                      max="10"
+                      value={formData.minPeriodsPerWeek}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          minPeriodsPerWeek: parseInt(e.target.value),
+                        })
+                      }
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Max Periods/Week
+                    </label>
+                    <input
+                      type="number"
+                      min="1"
+                      max="10"
+                      value={formData.maxPeriodsPerWeek}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          maxPeriodsPerWeek: parseInt(e.target.value),
+                        })
+                      }
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+                    />
+                  </div>
                 </div>
                 <div className="flex items-center">
                   <input
                     type="checkbox"
-                    id="isLab"
-                    checked={formData.isLab}
+                    id="requiresLab"
+                    checked={formData.requiresLab}
                     onChange={(e) =>
-                      setFormData({ ...formData, isLab: e.target.checked })
+                      setFormData({ ...formData, requiresLab: e.target.checked })
                     }
                     className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                   />
-                  <label htmlFor="isLab" className="ml-2 block text-sm text-gray-900">
-                    This is a lab subject
+                  <label htmlFor="requiresLab" className="ml-2 block text-sm text-gray-900">
+                    Requires Lab
                   </label>
                 </div>
                 <div className="flex justify-end space-x-3">

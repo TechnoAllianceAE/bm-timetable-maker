@@ -52,7 +52,10 @@
       "Bash(./START_ALL_SERVICES.sh:*)",
       "Bash(git log:*)",
       "Bash(kill:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Read(///**)",
+      "Bash(npm run prisma:seed:*)",
+      "Bash(tee:*)"
     ],
     "deny": [],
     "ask": []

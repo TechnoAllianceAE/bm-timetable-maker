@@ -1,0 +1,376 @@
+assignment_id,class_name,subject_name,teacher_name,day,period,time,room_name,room_type,is_shared_room,home_classroom,uses_home_classroom
+entry_1,LKG,Hindi,Mrs. Sharma,MONDAY,Period 1,8:00-9:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_2,LKG,Hindi,Mrs. Sharma,MONDAY,Period 2,9:00-10:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_3,LKG,EVS,Mr. Kumar,MONDAY,Period 3,10:00-11:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_4,LKG,Mathematics,Mr. Kumar,MONDAY,Period 4,11:00-12:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_5,LKG,Mathematics,Mr. Kumar,MONDAY,Period 5,12:00-13:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_6,LKG,English,Mrs. Sharma,TUESDAY,Period 1,8:00-9:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_7,LKG,English,Mrs. Sharma,TUESDAY,Period 2,9:00-10:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_8,LKG,EVS,Mr. Kumar,TUESDAY,Period 3,10:00-11:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_9,LKG,Mathematics,Mr. Kumar,TUESDAY,Period 4,11:00-12:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_10,LKG,Mathematics,Mr. Kumar,TUESDAY,Period 5,12:00-13:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_11,LKG,Hindi,Mrs. Sharma,WEDNESDAY,Period 1,8:00-9:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_12,LKG,English,Mrs. Sharma,WEDNESDAY,Period 2,9:00-10:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_13,LKG,EVS,Mr. Kumar,WEDNESDAY,Period 3,10:00-11:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_14,LKG,English,Mrs. Sharma,WEDNESDAY,Period 4,11:00-12:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_15,LKG,English,Mrs. Sharma,WEDNESDAY,Period 5,12:00-13:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_16,LKG,Mathematics,Mr. Kumar,THURSDAY,Period 1,8:00-9:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_17,LKG,Unknown,Mrs. Sharma,THURSDAY,Period 2,9:00-10:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_18,LKG,Unknown,Mrs. Sharma,THURSDAY,Period 3,10:00-11:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_19,LKG,Unknown,Mrs. Sharma,THURSDAY,Period 4,11:00-12:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_20,LKG,Unknown,Mrs. Sharma,THURSDAY,Period 5,12:00-13:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_21,LKG,Unknown,Mrs. Sharma,FRIDAY,Period 1,8:00-9:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_22,LKG,Unknown,Mrs. Sharma,FRIDAY,Period 2,9:00-10:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_23,LKG,Unknown,Mrs. Sharma,FRIDAY,Period 3,10:00-11:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_24,LKG,Unknown,Mrs. Sharma,FRIDAY,Period 4,11:00-12:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_25,LKG,Unknown,Mrs. Sharma,FRIDAY,Period 5,12:00-13:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_26,UKG,Hindi,Ms. Patel,MONDAY,Period 1,8:00-9:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_27,UKG,EVS,Mr. Singh,MONDAY,Period 2,9:00-10:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_28,UKG,Mathematics,Mr. Singh,MONDAY,Period 3,10:00-11:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_29,UKG,English,Ms. Patel,MONDAY,Period 4,11:00-12:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_30,UKG,English,Ms. Patel,MONDAY,Period 5,12:00-13:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_31,UKG,Mathematics,Mr. Singh,TUESDAY,Period 1,8:00-9:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_32,UKG,EVS,Mr. Singh,TUESDAY,Period 2,9:00-10:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_33,UKG,English,Ms. Patel,TUESDAY,Period 3,10:00-11:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_34,UKG,Mathematics,Mr. Singh,TUESDAY,Period 4,11:00-12:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_35,UKG,English,Ms. Patel,TUESDAY,Period 5,12:00-13:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_36,UKG,Hindi,Ms. Patel,WEDNESDAY,Period 1,8:00-9:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_37,UKG,Mathematics,Mr. Singh,WEDNESDAY,Period 2,9:00-10:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_38,UKG,English,Ms. Patel,WEDNESDAY,Period 3,10:00-11:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_39,UKG,EVS,Mr. Singh,WEDNESDAY,Period 4,11:00-12:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_40,UKG,Hindi,Ms. Patel,WEDNESDAY,Period 5,12:00-13:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_41,UKG,Mathematics,Mr. Singh,THURSDAY,Period 1,8:00-9:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_42,UKG,Unknown,Mrs. Sharma,THURSDAY,Period 2,9:00-10:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_43,UKG,Unknown,Mrs. Sharma,THURSDAY,Period 3,10:00-11:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_44,UKG,Unknown,Mrs. Sharma,THURSDAY,Period 4,11:00-12:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_45,UKG,Unknown,Mrs. Sharma,THURSDAY,Period 5,12:00-13:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_46,UKG,Unknown,Mrs. Sharma,FRIDAY,Period 1,8:00-9:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_47,UKG,Unknown,Mrs. Sharma,FRIDAY,Period 2,9:00-10:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_48,UKG,Unknown,Mrs. Sharma,FRIDAY,Period 3,10:00-11:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_49,UKG,Unknown,Mrs. Sharma,FRIDAY,Period 4,11:00-12:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_50,UKG,Unknown,Mrs. Sharma,FRIDAY,Period 5,12:00-13:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_51,Grade 1-A,Mathematics,Ms. Verma,MONDAY,Period 1,8:00-9:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_52,Grade 1-A,EVS,Ms. Verma,MONDAY,Period 2,9:00-10:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_53,Grade 1-A,Mathematics,Ms. Verma,MONDAY,Period 3,10:00-11:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_54,Grade 1-A,Mathematics,Ms. Verma,MONDAY,Period 4,11:00-12:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_55,Grade 1-A,Mathematics,Ms. Verma,MONDAY,Period 5,12:00-13:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_56,Grade 1-A,English,Mrs. Gupta,TUESDAY,Period 1,8:00-9:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_57,Grade 1-A,Mathematics,Ms. Verma,TUESDAY,Period 2,9:00-10:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_58,Grade 1-A,Hindi,Mrs. Gupta,TUESDAY,Period 3,10:00-11:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_59,Grade 1-A,English,Mrs. Gupta,TUESDAY,Period 4,11:00-12:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_60,Grade 1-A,EVS,Ms. Verma,TUESDAY,Period 5,12:00-13:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_61,Grade 1-A,EVS,Ms. Verma,WEDNESDAY,Period 1,8:00-9:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_62,Grade 1-A,Hindi,Mrs. Gupta,WEDNESDAY,Period 2,9:00-10:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_63,Grade 1-A,Hindi,Mrs. Gupta,WEDNESDAY,Period 3,10:00-11:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_64,Grade 1-A,English,Mrs. Gupta,WEDNESDAY,Period 4,11:00-12:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_65,Grade 1-A,English,Mrs. Gupta,WEDNESDAY,Period 5,12:00-13:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_66,Grade 1-A,English,Mrs. Gupta,THURSDAY,Period 1,8:00-9:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_67,Grade 1-A,Unknown,Mrs. Sharma,THURSDAY,Period 2,9:00-10:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_68,Grade 1-A,Unknown,Mrs. Sharma,THURSDAY,Period 3,10:00-11:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_69,Grade 1-A,Unknown,Mrs. Sharma,THURSDAY,Period 4,11:00-12:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_70,Grade 1-A,Unknown,Mrs. Sharma,THURSDAY,Period 5,12:00-13:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_71,Grade 1-A,Unknown,Mrs. Sharma,FRIDAY,Period 1,8:00-9:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_72,Grade 1-A,Unknown,Mrs. Sharma,FRIDAY,Period 2,9:00-10:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_73,Grade 1-A,Unknown,Mrs. Sharma,FRIDAY,Period 3,10:00-11:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_74,Grade 1-A,Unknown,Mrs. Sharma,FRIDAY,Period 4,11:00-12:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_75,Grade 1-A,Unknown,Mrs. Sharma,FRIDAY,Period 5,12:00-13:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_76,Grade 1-B,Hindi,Mr. Reddy,MONDAY,Period 1,8:00-9:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_77,Grade 1-B,EVS,Mrs. Rao,MONDAY,Period 2,9:00-10:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_78,Grade 1-B,English,Mr. Reddy,MONDAY,Period 3,10:00-11:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_79,Grade 1-B,Mathematics,Mrs. Rao,MONDAY,Period 4,11:00-12:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_80,Grade 1-B,English,Mr. Reddy,MONDAY,Period 5,12:00-13:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_81,Grade 1-B,English,Mr. Reddy,TUESDAY,Period 1,8:00-9:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_82,Grade 1-B,Hindi,Mr. Reddy,TUESDAY,Period 2,9:00-10:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_83,Grade 1-B,English,Mr. Reddy,TUESDAY,Period 3,10:00-11:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_84,Grade 1-B,Hindi,Mr. Reddy,TUESDAY,Period 4,11:00-12:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_85,Grade 1-B,Mathematics,Mrs. Rao,TUESDAY,Period 5,12:00-13:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_86,Grade 1-B,Mathematics,Mrs. Rao,WEDNESDAY,Period 1,8:00-9:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_87,Grade 1-B,EVS,Mrs. Rao,WEDNESDAY,Period 2,9:00-10:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_88,Grade 1-B,Mathematics,Mrs. Rao,WEDNESDAY,Period 3,10:00-11:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_89,Grade 1-B,EVS,Mrs. Rao,WEDNESDAY,Period 4,11:00-12:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_90,Grade 1-B,English,Mr. Reddy,WEDNESDAY,Period 5,12:00-13:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_91,Grade 1-B,Mathematics,Mrs. Rao,THURSDAY,Period 1,8:00-9:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_92,Grade 1-B,Unknown,Mrs. Sharma,THURSDAY,Period 2,9:00-10:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_93,Grade 1-B,Unknown,Mrs. Sharma,THURSDAY,Period 3,10:00-11:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_94,Grade 1-B,Unknown,Mrs. Sharma,THURSDAY,Period 4,11:00-12:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_95,Grade 1-B,Unknown,Mrs. Sharma,THURSDAY,Period 5,12:00-13:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_96,Grade 1-B,Unknown,Mrs. Sharma,FRIDAY,Period 1,8:00-9:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_97,Grade 1-B,Unknown,Mrs. Sharma,FRIDAY,Period 2,9:00-10:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_98,Grade 1-B,Unknown,Mrs. Sharma,FRIDAY,Period 3,10:00-11:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_99,Grade 1-B,Unknown,Mrs. Sharma,FRIDAY,Period 4,11:00-12:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_100,Grade 1-B,Unknown,Mrs. Sharma,FRIDAY,Period 5,12:00-13:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_101,Grade 1-C,Mathematics,Mr. Joshi,MONDAY,Period 1,8:00-9:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_102,Grade 1-C,Mathematics,Mr. Joshi,MONDAY,Period 2,9:00-10:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_103,Grade 1-C,English,Ms. Desai,MONDAY,Period 3,10:00-11:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_104,Grade 1-C,Hindi,Ms. Desai,MONDAY,Period 4,11:00-12:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_105,Grade 1-C,English,Ms. Desai,MONDAY,Period 5,12:00-13:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_106,Grade 1-C,Hindi,Ms. Desai,TUESDAY,Period 1,8:00-9:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_107,Grade 1-C,Mathematics,Mr. Joshi,TUESDAY,Period 2,9:00-10:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_108,Grade 1-C,Mathematics,Mr. Joshi,TUESDAY,Period 3,10:00-11:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_109,Grade 1-C,Hindi,Ms. Desai,TUESDAY,Period 4,11:00-12:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_110,Grade 1-C,EVS,Mr. Joshi,TUESDAY,Period 5,12:00-13:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_111,Grade 1-C,EVS,Mr. Joshi,WEDNESDAY,Period 1,8:00-9:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_112,Grade 1-C,English,Ms. Desai,WEDNESDAY,Period 2,9:00-10:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_113,Grade 1-C,English,Ms. Desai,WEDNESDAY,Period 3,10:00-11:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_114,Grade 1-C,EVS,Mr. Joshi,WEDNESDAY,Period 4,11:00-12:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_115,Grade 1-C,Mathematics,Mr. Joshi,WEDNESDAY,Period 5,12:00-13:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_116,Grade 1-C,English,Ms. Desai,THURSDAY,Period 1,8:00-9:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_117,Grade 1-C,Unknown,Mrs. Sharma,THURSDAY,Period 2,9:00-10:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_118,Grade 1-C,Unknown,Mrs. Sharma,THURSDAY,Period 3,10:00-11:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_119,Grade 1-C,Unknown,Mrs. Sharma,THURSDAY,Period 4,11:00-12:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_120,Grade 1-C,Unknown,Mrs. Sharma,THURSDAY,Period 5,12:00-13:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_121,Grade 1-C,Unknown,Mrs. Sharma,FRIDAY,Period 1,8:00-9:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_122,Grade 1-C,Unknown,Mrs. Sharma,FRIDAY,Period 2,9:00-10:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_123,Grade 1-C,Unknown,Mrs. Sharma,FRIDAY,Period 3,10:00-11:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_124,Grade 1-C,Unknown,Mrs. Sharma,FRIDAY,Period 4,11:00-12:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_125,Grade 1-C,Unknown,Mrs. Sharma,FRIDAY,Period 5,12:00-13:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_1,LKG,Hindi,Mrs. Sharma,MONDAY,Period 1,8:00-9:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_2,LKG,EVS,Mr. Kumar,MONDAY,Period 2,9:00-10:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_3,LKG,EVS,Mr. Kumar,MONDAY,Period 3,10:00-11:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_4,LKG,English,Mrs. Sharma,MONDAY,Period 4,11:00-12:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_5,LKG,EVS,Mr. Kumar,MONDAY,Period 5,12:00-13:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_6,LKG,English,Mrs. Sharma,TUESDAY,Period 1,8:00-9:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_7,LKG,Mathematics,Mr. Kumar,TUESDAY,Period 2,9:00-10:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_8,LKG,Mathematics,Mr. Kumar,TUESDAY,Period 3,10:00-11:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_9,LKG,Mathematics,Mr. Kumar,TUESDAY,Period 4,11:00-12:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_10,LKG,Mathematics,Mr. Kumar,TUESDAY,Period 5,12:00-13:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_11,LKG,English,Mrs. Sharma,WEDNESDAY,Period 1,8:00-9:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_12,LKG,Hindi,Mrs. Sharma,WEDNESDAY,Period 2,9:00-10:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_13,LKG,Hindi,Mrs. Sharma,WEDNESDAY,Period 3,10:00-11:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_14,LKG,English,Mrs. Sharma,WEDNESDAY,Period 4,11:00-12:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_15,LKG,Mathematics,Mr. Kumar,WEDNESDAY,Period 5,12:00-13:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_16,LKG,English,Mrs. Sharma,THURSDAY,Period 1,8:00-9:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_17,LKG,Unknown,Mrs. Sharma,THURSDAY,Period 2,9:00-10:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_18,LKG,Unknown,Mrs. Sharma,THURSDAY,Period 3,10:00-11:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_19,LKG,Unknown,Mrs. Sharma,THURSDAY,Period 4,11:00-12:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_20,LKG,Unknown,Mrs. Sharma,THURSDAY,Period 5,12:00-13:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_21,LKG,Unknown,Mrs. Sharma,FRIDAY,Period 1,8:00-9:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_22,LKG,Unknown,Mrs. Sharma,FRIDAY,Period 2,9:00-10:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_23,LKG,Unknown,Mrs. Sharma,FRIDAY,Period 3,10:00-11:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_24,LKG,Unknown,Mrs. Sharma,FRIDAY,Period 4,11:00-12:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_25,LKG,Unknown,Mrs. Sharma,FRIDAY,Period 5,12:00-13:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_26,UKG,Hindi,Ms. Patel,MONDAY,Period 1,8:00-9:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_27,UKG,English,Ms. Patel,MONDAY,Period 2,9:00-10:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_28,UKG,English,Ms. Patel,MONDAY,Period 3,10:00-11:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_29,UKG,EVS,Mr. Singh,MONDAY,Period 4,11:00-12:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_30,UKG,English,Ms. Patel,MONDAY,Period 5,12:00-13:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_31,UKG,Mathematics,Mr. Singh,TUESDAY,Period 1,8:00-9:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_32,UKG,Hindi,Ms. Patel,TUESDAY,Period 2,9:00-10:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_33,UKG,EVS,Mr. Singh,TUESDAY,Period 3,10:00-11:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_34,UKG,Hindi,Ms. Patel,TUESDAY,Period 4,11:00-12:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_35,UKG,English,Ms. Patel,TUESDAY,Period 5,12:00-13:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_36,UKG,English,Ms. Patel,WEDNESDAY,Period 1,8:00-9:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_37,UKG,Mathematics,Mr. Singh,WEDNESDAY,Period 2,9:00-10:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_38,UKG,EVS,Mr. Singh,WEDNESDAY,Period 3,10:00-11:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_39,UKG,Mathematics,Mr. Singh,WEDNESDAY,Period 4,11:00-12:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_40,UKG,Mathematics,Mr. Singh,WEDNESDAY,Period 5,12:00-13:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_41,UKG,Mathematics,Mr. Singh,THURSDAY,Period 1,8:00-9:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_42,UKG,Unknown,Mrs. Sharma,THURSDAY,Period 2,9:00-10:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_43,UKG,Unknown,Mrs. Sharma,THURSDAY,Period 3,10:00-11:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_44,UKG,Unknown,Mrs. Sharma,THURSDAY,Period 4,11:00-12:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_45,UKG,Unknown,Mrs. Sharma,THURSDAY,Period 5,12:00-13:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_46,UKG,Unknown,Mrs. Sharma,FRIDAY,Period 1,8:00-9:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_47,UKG,Unknown,Mrs. Sharma,FRIDAY,Period 2,9:00-10:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_48,UKG,Unknown,Mrs. Sharma,FRIDAY,Period 3,10:00-11:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_49,UKG,Unknown,Mrs. Sharma,FRIDAY,Period 4,11:00-12:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_50,UKG,Unknown,Mrs. Sharma,FRIDAY,Period 5,12:00-13:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_51,Grade 1-A,Mathematics,Ms. Verma,MONDAY,Period 1,8:00-9:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_52,Grade 1-A,English,Mrs. Gupta,MONDAY,Period 2,9:00-10:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_53,Grade 1-A,English,Mrs. Gupta,MONDAY,Period 3,10:00-11:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_54,Grade 1-A,English,Mrs. Gupta,MONDAY,Period 4,11:00-12:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_55,Grade 1-A,Hindi,Mrs. Gupta,MONDAY,Period 5,12:00-13:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_56,Grade 1-A,Hindi,Mrs. Gupta,TUESDAY,Period 1,8:00-9:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_57,Grade 1-A,Mathematics,Ms. Verma,TUESDAY,Period 2,9:00-10:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_58,Grade 1-A,EVS,Ms. Verma,TUESDAY,Period 3,10:00-11:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_59,Grade 1-A,EVS,Ms. Verma,TUESDAY,Period 4,11:00-12:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_60,Grade 1-A,EVS,Ms. Verma,TUESDAY,Period 5,12:00-13:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_61,Grade 1-A,Hindi,Mrs. Gupta,WEDNESDAY,Period 1,8:00-9:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_62,Grade 1-A,English,Mrs. Gupta,WEDNESDAY,Period 2,9:00-10:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_63,Grade 1-A,Mathematics,Ms. Verma,WEDNESDAY,Period 3,10:00-11:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_64,Grade 1-A,Mathematics,Ms. Verma,WEDNESDAY,Period 4,11:00-12:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_65,Grade 1-A,English,Mrs. Gupta,WEDNESDAY,Period 5,12:00-13:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_66,Grade 1-A,Mathematics,Ms. Verma,THURSDAY,Period 1,8:00-9:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_67,Grade 1-A,Unknown,Mrs. Sharma,THURSDAY,Period 2,9:00-10:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_68,Grade 1-A,Unknown,Mrs. Sharma,THURSDAY,Period 3,10:00-11:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_69,Grade 1-A,Unknown,Mrs. Sharma,THURSDAY,Period 4,11:00-12:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_70,Grade 1-A,Unknown,Mrs. Sharma,THURSDAY,Period 5,12:00-13:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_71,Grade 1-A,Unknown,Mrs. Sharma,FRIDAY,Period 1,8:00-9:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_72,Grade 1-A,Unknown,Mrs. Sharma,FRIDAY,Period 2,9:00-10:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_73,Grade 1-A,Unknown,Mrs. Sharma,FRIDAY,Period 3,10:00-11:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_74,Grade 1-A,Unknown,Mrs. Sharma,FRIDAY,Period 4,11:00-12:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_75,Grade 1-A,Unknown,Mrs. Sharma,FRIDAY,Period 5,12:00-13:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_76,Grade 1-B,English,Mr. Reddy,MONDAY,Period 1,8:00-9:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_77,Grade 1-B,Mathematics,Mrs. Rao,MONDAY,Period 2,9:00-10:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_78,Grade 1-B,Mathematics,Mrs. Rao,MONDAY,Period 3,10:00-11:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_79,Grade 1-B,Mathematics,Mrs. Rao,MONDAY,Period 4,11:00-12:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_80,Grade 1-B,English,Mr. Reddy,MONDAY,Period 5,12:00-13:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_81,Grade 1-B,English,Mr. Reddy,TUESDAY,Period 1,8:00-9:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_82,Grade 1-B,English,Mr. Reddy,TUESDAY,Period 2,9:00-10:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_83,Grade 1-B,English,Mr. Reddy,TUESDAY,Period 3,10:00-11:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_84,Grade 1-B,Mathematics,Mrs. Rao,TUESDAY,Period 4,11:00-12:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_85,Grade 1-B,Hindi,Mr. Reddy,TUESDAY,Period 5,12:00-13:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_86,Grade 1-B,EVS,Mrs. Rao,WEDNESDAY,Period 1,8:00-9:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_87,Grade 1-B,EVS,Mrs. Rao,WEDNESDAY,Period 2,9:00-10:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_88,Grade 1-B,EVS,Mrs. Rao,WEDNESDAY,Period 3,10:00-11:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_89,Grade 1-B,Hindi,Mr. Reddy,WEDNESDAY,Period 4,11:00-12:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_90,Grade 1-B,Hindi,Mr. Reddy,WEDNESDAY,Period 5,12:00-13:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_91,Grade 1-B,Mathematics,Mrs. Rao,THURSDAY,Period 1,8:00-9:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_92,Grade 1-B,Unknown,Mrs. Sharma,THURSDAY,Period 2,9:00-10:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_93,Grade 1-B,Unknown,Mrs. Sharma,THURSDAY,Period 3,10:00-11:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_94,Grade 1-B,Unknown,Mrs. Sharma,THURSDAY,Period 4,11:00-12:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_95,Grade 1-B,Unknown,Mrs. Sharma,THURSDAY,Period 5,12:00-13:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_96,Grade 1-B,Unknown,Mrs. Sharma,FRIDAY,Period 1,8:00-9:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_97,Grade 1-B,Unknown,Mrs. Sharma,FRIDAY,Period 2,9:00-10:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_98,Grade 1-B,Unknown,Mrs. Sharma,FRIDAY,Period 3,10:00-11:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_99,Grade 1-B,Unknown,Mrs. Sharma,FRIDAY,Period 4,11:00-12:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_100,Grade 1-B,Unknown,Mrs. Sharma,FRIDAY,Period 5,12:00-13:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_101,Grade 1-C,Mathematics,Mr. Joshi,MONDAY,Period 1,8:00-9:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_102,Grade 1-C,English,Ms. Desai,MONDAY,Period 2,9:00-10:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_103,Grade 1-C,English,Ms. Desai,MONDAY,Period 3,10:00-11:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_104,Grade 1-C,English,Ms. Desai,MONDAY,Period 4,11:00-12:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_105,Grade 1-C,English,Ms. Desai,MONDAY,Period 5,12:00-13:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_106,Grade 1-C,Hindi,Ms. Desai,TUESDAY,Period 1,8:00-9:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_107,Grade 1-C,Mathematics,Mr. Joshi,TUESDAY,Period 2,9:00-10:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_108,Grade 1-C,EVS,Mr. Joshi,TUESDAY,Period 3,10:00-11:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_109,Grade 1-C,Mathematics,Mr. Joshi,TUESDAY,Period 4,11:00-12:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_110,Grade 1-C,Hindi,Ms. Desai,TUESDAY,Period 5,12:00-13:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_111,Grade 1-C,English,Ms. Desai,WEDNESDAY,Period 1,8:00-9:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_112,Grade 1-C,Hindi,Ms. Desai,WEDNESDAY,Period 2,9:00-10:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_113,Grade 1-C,Mathematics,Mr. Joshi,WEDNESDAY,Period 3,10:00-11:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_114,Grade 1-C,EVS,Mr. Joshi,WEDNESDAY,Period 4,11:00-12:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_115,Grade 1-C,EVS,Mr. Joshi,WEDNESDAY,Period 5,12:00-13:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_116,Grade 1-C,Mathematics,Mr. Joshi,THURSDAY,Period 1,8:00-9:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_117,Grade 1-C,Unknown,Mrs. Sharma,THURSDAY,Period 2,9:00-10:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_118,Grade 1-C,Unknown,Mrs. Sharma,THURSDAY,Period 3,10:00-11:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_119,Grade 1-C,Unknown,Mrs. Sharma,THURSDAY,Period 4,11:00-12:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_120,Grade 1-C,Unknown,Mrs. Sharma,THURSDAY,Period 5,12:00-13:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_121,Grade 1-C,Unknown,Mrs. Sharma,FRIDAY,Period 1,8:00-9:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_122,Grade 1-C,Unknown,Mrs. Sharma,FRIDAY,Period 2,9:00-10:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_123,Grade 1-C,Unknown,Mrs. Sharma,FRIDAY,Period 3,10:00-11:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_124,Grade 1-C,Unknown,Mrs. Sharma,FRIDAY,Period 4,11:00-12:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_125,Grade 1-C,Unknown,Mrs. Sharma,FRIDAY,Period 5,12:00-13:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_1,LKG,Hindi,Mrs. Sharma,MONDAY,Period 1,8:00-9:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_2,LKG,Mathematics,Mr. Kumar,MONDAY,Period 2,9:00-10:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_3,LKG,Hindi,Mrs. Sharma,MONDAY,Period 3,10:00-11:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_4,LKG,English,Mrs. Sharma,MONDAY,Period 4,11:00-12:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_5,LKG,English,Mrs. Sharma,MONDAY,Period 5,12:00-13:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_6,LKG,Mathematics,Mr. Kumar,TUESDAY,Period 1,8:00-9:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_7,LKG,Mathematics,Mr. Kumar,TUESDAY,Period 2,9:00-10:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_8,LKG,Mathematics,Mr. Kumar,TUESDAY,Period 3,10:00-11:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_9,LKG,Mathematics,Mr. Kumar,TUESDAY,Period 4,11:00-12:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_10,LKG,EVS,Mr. Kumar,TUESDAY,Period 5,12:00-13:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_11,LKG,EVS,Mr. Kumar,WEDNESDAY,Period 1,8:00-9:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_12,LKG,EVS,Mr. Kumar,WEDNESDAY,Period 2,9:00-10:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_13,LKG,English,Mrs. Sharma,WEDNESDAY,Period 3,10:00-11:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_14,LKG,English,Mrs. Sharma,WEDNESDAY,Period 4,11:00-12:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_15,LKG,Hindi,Mrs. Sharma,WEDNESDAY,Period 5,12:00-13:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_16,LKG,English,Mrs. Sharma,THURSDAY,Period 1,8:00-9:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_17,LKG,Unknown,Mrs. Sharma,THURSDAY,Period 2,9:00-10:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_18,LKG,Unknown,Mrs. Sharma,THURSDAY,Period 3,10:00-11:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_19,LKG,Unknown,Mrs. Sharma,THURSDAY,Period 4,11:00-12:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_20,LKG,Unknown,Mrs. Sharma,THURSDAY,Period 5,12:00-13:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_21,LKG,Unknown,Mrs. Sharma,FRIDAY,Period 1,8:00-9:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_22,LKG,Unknown,Mrs. Sharma,FRIDAY,Period 2,9:00-10:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_23,LKG,Unknown,Mrs. Sharma,FRIDAY,Period 3,10:00-11:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_24,LKG,Unknown,Mrs. Sharma,FRIDAY,Period 4,11:00-12:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_25,LKG,Unknown,Mrs. Sharma,FRIDAY,Period 5,12:00-13:00,Classroom 1,CLASSROOM,False,Classroom 1,YES
+entry_26,UKG,English,Ms. Patel,MONDAY,Period 1,8:00-9:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_27,UKG,EVS,Mr. Singh,MONDAY,Period 2,9:00-10:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_28,UKG,Hindi,Ms. Patel,MONDAY,Period 3,10:00-11:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_29,UKG,EVS,Mr. Singh,MONDAY,Period 4,11:00-12:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_30,UKG,EVS,Mr. Singh,MONDAY,Period 5,12:00-13:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_31,UKG,Mathematics,Mr. Singh,TUESDAY,Period 1,8:00-9:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_32,UKG,English,Ms. Patel,TUESDAY,Period 2,9:00-10:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_33,UKG,Hindi,Ms. Patel,TUESDAY,Period 3,10:00-11:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_34,UKG,Mathematics,Mr. Singh,TUESDAY,Period 4,11:00-12:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_35,UKG,English,Ms. Patel,TUESDAY,Period 5,12:00-13:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_36,UKG,English,Ms. Patel,WEDNESDAY,Period 1,8:00-9:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_37,UKG,English,Ms. Patel,WEDNESDAY,Period 2,9:00-10:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_38,UKG,Mathematics,Mr. Singh,WEDNESDAY,Period 3,10:00-11:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_39,UKG,Mathematics,Mr. Singh,WEDNESDAY,Period 4,11:00-12:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_40,UKG,Mathematics,Mr. Singh,WEDNESDAY,Period 5,12:00-13:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_41,UKG,Hindi,Ms. Patel,THURSDAY,Period 1,8:00-9:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_42,UKG,Unknown,Mrs. Sharma,THURSDAY,Period 2,9:00-10:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_43,UKG,Unknown,Mrs. Sharma,THURSDAY,Period 3,10:00-11:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_44,UKG,Unknown,Mrs. Sharma,THURSDAY,Period 4,11:00-12:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_45,UKG,Unknown,Mrs. Sharma,THURSDAY,Period 5,12:00-13:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_46,UKG,Unknown,Mrs. Sharma,FRIDAY,Period 1,8:00-9:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_47,UKG,Unknown,Mrs. Sharma,FRIDAY,Period 2,9:00-10:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_48,UKG,Unknown,Mrs. Sharma,FRIDAY,Period 3,10:00-11:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_49,UKG,Unknown,Mrs. Sharma,FRIDAY,Period 4,11:00-12:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_50,UKG,Unknown,Mrs. Sharma,FRIDAY,Period 5,12:00-13:00,Classroom 2,CLASSROOM,False,Classroom 2,YES
+entry_51,Grade 1-A,Hindi,Mrs. Gupta,MONDAY,Period 1,8:00-9:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_52,Grade 1-A,Hindi,Mrs. Gupta,MONDAY,Period 2,9:00-10:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_53,Grade 1-A,Hindi,Mrs. Gupta,MONDAY,Period 3,10:00-11:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_54,Grade 1-A,English,Mrs. Gupta,MONDAY,Period 4,11:00-12:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_55,Grade 1-A,English,Mrs. Gupta,MONDAY,Period 5,12:00-13:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_56,Grade 1-A,EVS,Ms. Verma,TUESDAY,Period 1,8:00-9:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_57,Grade 1-A,Mathematics,Ms. Verma,TUESDAY,Period 2,9:00-10:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_58,Grade 1-A,English,Mrs. Gupta,TUESDAY,Period 3,10:00-11:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_59,Grade 1-A,Mathematics,Ms. Verma,TUESDAY,Period 4,11:00-12:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_60,Grade 1-A,English,Mrs. Gupta,TUESDAY,Period 5,12:00-13:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_61,Grade 1-A,English,Mrs. Gupta,WEDNESDAY,Period 1,8:00-9:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_62,Grade 1-A,Mathematics,Ms. Verma,WEDNESDAY,Period 2,9:00-10:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_63,Grade 1-A,Mathematics,Ms. Verma,WEDNESDAY,Period 3,10:00-11:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_64,Grade 1-A,Mathematics,Ms. Verma,WEDNESDAY,Period 4,11:00-12:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_65,Grade 1-A,EVS,Ms. Verma,WEDNESDAY,Period 5,12:00-13:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_66,Grade 1-A,EVS,Ms. Verma,THURSDAY,Period 1,8:00-9:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_67,Grade 1-A,Unknown,Mrs. Sharma,THURSDAY,Period 2,9:00-10:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_68,Grade 1-A,Unknown,Mrs. Sharma,THURSDAY,Period 3,10:00-11:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_69,Grade 1-A,Unknown,Mrs. Sharma,THURSDAY,Period 4,11:00-12:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_70,Grade 1-A,Unknown,Mrs. Sharma,THURSDAY,Period 5,12:00-13:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_71,Grade 1-A,Unknown,Mrs. Sharma,FRIDAY,Period 1,8:00-9:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_72,Grade 1-A,Unknown,Mrs. Sharma,FRIDAY,Period 2,9:00-10:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_73,Grade 1-A,Unknown,Mrs. Sharma,FRIDAY,Period 3,10:00-11:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_74,Grade 1-A,Unknown,Mrs. Sharma,FRIDAY,Period 4,11:00-12:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_75,Grade 1-A,Unknown,Mrs. Sharma,FRIDAY,Period 5,12:00-13:00,Classroom 3,CLASSROOM,False,Classroom 3,YES
+entry_76,Grade 1-B,English,Mr. Reddy,MONDAY,Period 1,8:00-9:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_77,Grade 1-B,Mathematics,Mrs. Rao,MONDAY,Period 2,9:00-10:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_78,Grade 1-B,Mathematics,Mrs. Rao,MONDAY,Period 3,10:00-11:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_79,Grade 1-B,EVS,Mrs. Rao,MONDAY,Period 4,11:00-12:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_80,Grade 1-B,English,Mr. Reddy,MONDAY,Period 5,12:00-13:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_81,Grade 1-B,Mathematics,Mrs. Rao,TUESDAY,Period 1,8:00-9:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_82,Grade 1-B,Mathematics,Mrs. Rao,TUESDAY,Period 2,9:00-10:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_83,Grade 1-B,Hindi,Mr. Reddy,TUESDAY,Period 3,10:00-11:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_84,Grade 1-B,Hindi,Mr. Reddy,TUESDAY,Period 4,11:00-12:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_85,Grade 1-B,English,Mr. Reddy,TUESDAY,Period 5,12:00-13:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_86,Grade 1-B,English,Mr. Reddy,WEDNESDAY,Period 1,8:00-9:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_87,Grade 1-B,Hindi,Mr. Reddy,WEDNESDAY,Period 2,9:00-10:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_88,Grade 1-B,Mathematics,Mrs. Rao,WEDNESDAY,Period 3,10:00-11:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_89,Grade 1-B,EVS,Mrs. Rao,WEDNESDAY,Period 4,11:00-12:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_90,Grade 1-B,English,Mr. Reddy,WEDNESDAY,Period 5,12:00-13:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_91,Grade 1-B,EVS,Mrs. Rao,THURSDAY,Period 1,8:00-9:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_92,Grade 1-B,Unknown,Mrs. Sharma,THURSDAY,Period 2,9:00-10:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_93,Grade 1-B,Unknown,Mrs. Sharma,THURSDAY,Period 3,10:00-11:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_94,Grade 1-B,Unknown,Mrs. Sharma,THURSDAY,Period 4,11:00-12:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_95,Grade 1-B,Unknown,Mrs. Sharma,THURSDAY,Period 5,12:00-13:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_96,Grade 1-B,Unknown,Mrs. Sharma,FRIDAY,Period 1,8:00-9:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_97,Grade 1-B,Unknown,Mrs. Sharma,FRIDAY,Period 2,9:00-10:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_98,Grade 1-B,Unknown,Mrs. Sharma,FRIDAY,Period 3,10:00-11:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_99,Grade 1-B,Unknown,Mrs. Sharma,FRIDAY,Period 4,11:00-12:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_100,Grade 1-B,Unknown,Mrs. Sharma,FRIDAY,Period 5,12:00-13:00,Classroom 4,CLASSROOM,False,Classroom 4,YES
+entry_101,Grade 1-C,Mathematics,Mr. Joshi,MONDAY,Period 1,8:00-9:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_102,Grade 1-C,Mathematics,Mr. Joshi,MONDAY,Period 2,9:00-10:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_103,Grade 1-C,English,Ms. Desai,MONDAY,Period 3,10:00-11:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_104,Grade 1-C,Hindi,Ms. Desai,MONDAY,Period 4,11:00-12:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_105,Grade 1-C,Mathematics,Mr. Joshi,MONDAY,Period 5,12:00-13:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_106,Grade 1-C,English,Ms. Desai,TUESDAY,Period 1,8:00-9:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_107,Grade 1-C,EVS,Mr. Joshi,TUESDAY,Period 2,9:00-10:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_108,Grade 1-C,Hindi,Ms. Desai,TUESDAY,Period 3,10:00-11:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_109,Grade 1-C,Mathematics,Mr. Joshi,TUESDAY,Period 4,11:00-12:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_110,Grade 1-C,Mathematics,Mr. Joshi,TUESDAY,Period 5,12:00-13:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_111,Grade 1-C,Hindi,Ms. Desai,WEDNESDAY,Period 1,8:00-9:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_112,Grade 1-C,English,Ms. Desai,WEDNESDAY,Period 2,9:00-10:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_113,Grade 1-C,English,Ms. Desai,WEDNESDAY,Period 3,10:00-11:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_114,Grade 1-C,English,Ms. Desai,WEDNESDAY,Period 4,11:00-12:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_115,Grade 1-C,EVS,Mr. Joshi,WEDNESDAY,Period 5,12:00-13:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_116,Grade 1-C,EVS,Mr. Joshi,THURSDAY,Period 1,8:00-9:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_117,Grade 1-C,Unknown,Mrs. Sharma,THURSDAY,Period 2,9:00-10:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_118,Grade 1-C,Unknown,Mrs. Sharma,THURSDAY,Period 3,10:00-11:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_119,Grade 1-C,Unknown,Mrs. Sharma,THURSDAY,Period 4,11:00-12:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_120,Grade 1-C,Unknown,Mrs. Sharma,THURSDAY,Period 5,12:00-13:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_121,Grade 1-C,Unknown,Mrs. Sharma,FRIDAY,Period 1,8:00-9:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_122,Grade 1-C,Unknown,Mrs. Sharma,FRIDAY,Period 2,9:00-10:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_123,Grade 1-C,Unknown,Mrs. Sharma,FRIDAY,Period 3,10:00-11:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_124,Grade 1-C,Unknown,Mrs. Sharma,FRIDAY,Period 4,11:00-12:00,Classroom 5,CLASSROOM,False,Classroom 5,YES
+entry_125,Grade 1-C,Unknown,Mrs. Sharma,FRIDAY,Period 5,12:00-13:00,Classroom 5,CLASSROOM,False,Classroom 5,YES

@@ -207,8 +207,12 @@ class CSPSolverCompleteV25:
         total_requested = 0
 
         for subject in subjects:
-            distribution[subject.id] = subject.periods_per_week
-            total_requested += subject.periods_per_week
+            # Ensure periods_per_week is an integer, not a list
+            periods = subject.periods_per_week
+            if isinstance(periods, list):
+                periods = periods[0] if periods else 4  # Take first element or default to 4
+            distribution[subject.id] = periods
+            total_requested += periods
 
         # Adjust to match total slots
         if total_requested < total_slots:
@@ -275,6 +279,11 @@ class CSPSolverCompleteV25:
 
             # First pass: apply exact and min constraints, track max constraints
             for subject in subjects:
+                # Ensure periods_per_week is an integer
+                subject_periods = subject.periods_per_week
+                if isinstance(subject_periods, list):
+                    subject_periods = subject_periods[0] if subject_periods else 4
+
                 req_key = f"{class_obj.grade}_{subject.id}"
                 if req_key in requirements_map:
                     req_info = requirements_map[req_key]
@@ -290,12 +299,11 @@ class CSPSolverCompleteV25:
                         min_requirements[subject.id] = periods
                     elif constraint_type == 'max':
                         # Must be at most N periods (start with default, apply max later)
-                        distribution[subject.id] = min(subject.periods_per_week, periods)
+                        distribution[subject.id] = min(subject_periods, periods)
                         max_requirements[subject.id] = periods
                 else:
                     # No requirement specified, use default
-                    periods = subject.periods_per_week
-                    distribution[subject.id] = periods
+                    distribution[subject.id] = subject_periods
 
                 total_required += distribution[subject.id]
 
@@ -339,8 +347,12 @@ class CSPSolverCompleteV25:
                         break
 
                     max_subject_id = max(reducible.items(), key=lambda x: x[1])[0]
-                    if distribution[max_subject_id] > 1:
-                        distribution[max_subject_id] -= 1
+                    # Ensure distribution value is an integer
+                    current_count = distribution[max_subject_id]
+                    if isinstance(current_count, list):
+                        current_count = current_count[0] if current_count else 1
+                    if current_count > 1:
+                        distribution[max_subject_id] = current_count - 1
                         excess -= 1
                     else:
                         break

@@ -1,29 +1,31 @@
 import { PrismaClient } from '@prisma/client';
+import * as bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
 
 async function main() {
   console.log('Start seeding...');
 
-  // Create a test school
-  const school = await prisma.school.upsert({
-    where: { id: 'default-school-id' },
+  // Create super admin user (not tied to any school)
+  const hashedPassword = await bcrypt.hash('Admin123', 10);
+
+  const adminUser = await prisma.user.upsert({
+    where: { email: 'admin@test.com' },
     update: {},
     create: {
-      id: 'default-school-id',
-      name: 'Test School',
-      address: '123 Test Street, Test City',
-      settings: JSON.stringify({
-        academicYear: '2024-2025',
-        timezone: 'UTC',
+      email: 'admin@test.com',
+      passwordHash: hashedPassword,
+      role: 'ADMIN',
+      schoolId: null,  // Super admin with no school
+      profile: JSON.stringify({
+        firstName: 'Admin',
+        lastName: 'User',
       }),
-      subscriptionTier: 'premium',
     },
   });
 
-  console.log('Created school:', school);
-
-  console.log('Seeding completed.');
+  console.log('Created super admin user:', { email: adminUser.email, role: adminUser.role });
+  console.log('Seeding completed. Database is clean - users can create their own schools.');
 }
 
 main()

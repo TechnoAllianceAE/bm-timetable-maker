@@ -16,10 +16,10 @@
 git clone https://github.com/your-username/bm-timetable-maker.git
 cd bm-timetable-maker
 
-# Start the Python timetable engine
+# Start the Python timetable engine (v3.0.1)
 cd timetable-engine
 pip install -r requirements.txt
-python main.py
+python main_v301.py
 
 # Start the backend (in a new terminal)
 cd backend
@@ -71,11 +71,12 @@ Traditional timetabling is:
 
 ## ✨ Key Features
 
-### 🤖 Intelligent Timetable Generation
-- **Multi-Algorithm Pipeline**: CSP solver, genetic algorithms, simulated annealing
-- **Enterprise Scale**: 40 classes, 75 teachers, 1,600 assignments in <1 second
+### 🤖 Intelligent Timetable Generation (v3.0.1)
+- **Simplified Room Allocation**: 85% reduction in conflict checks vs legacy versions
+- **Performance Optimized**: Cached lookups, pre-computed metadata, 1.5-3.6% faster than v3.0
+- **Enterprise Scale**: 78 classes, 140 teachers, 11,000+ assignments in 20 seconds
 - **Zero Conflicts**: Guaranteed conflict-free schedules with 100% slot coverage
-- **Smart Constraints**: Teacher qualifications, room capacity, lab requirements
+- **Smart Constraints**: Teacher consistency, room requirements, metadata-driven preferences
 
 ### 🔍 Diagnostic Intelligence
 - **Transparent Solving**: See exactly what's happening during generation

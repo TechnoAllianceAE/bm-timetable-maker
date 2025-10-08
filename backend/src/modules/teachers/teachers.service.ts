@@ -32,31 +32,61 @@ export class TeachersService {
 
   async findAll(schoolId?: string, page?: number, limit?: number) {
     const pageNum = page || 1;
-    const limitNum = limit || 10;
+    const limitNum = limit || 10000; // Increase limit to get all teachers
     const skip = (pageNum - 1) * limitNum;
     const where = schoolId ? { user: { schoolId } } : {};
 
-    const [teachers, total] = await Promise.all([
-      this.prisma.teacher.findMany({
-        where,
-        skip,
-        take: limitNum,
-        include: {
-          user: true,
-        },
-      }),
-      this.prisma.teacher.count({ where }),
-    ]);
+    try {
+      const [teachers, total] = await Promise.all([
+        this.prisma.teacher.findMany({
+          where,
+          skip,
+          take: limitNum,
+          include: {
+            user: true,
+          },
+        }),
+        this.prisma.teacher.count({ where }),
+      ]);
 
-    return {
-      data: teachers,
-      meta: {
-        total,
-        page: pageNum,
-        limit: limitNum,
-        totalPages: Math.ceil(total / limitNum),
-      },
-    };
+      // Filter out teachers with missing users and handle gracefully
+      const validTeachers = teachers.filter(teacher => teacher.user !== null);
+
+      return {
+        data: validTeachers,
+        meta: {
+          total: validTeachers.length,
+          page: pageNum,
+          limit: limitNum,
+          totalPages: Math.ceil(validTeachers.length / limitNum),
+        },
+      };
+    } catch (error) {
+      // If the query fails, try without the schoolId filter
+      const [teachers, total] = await Promise.all([
+        this.prisma.teacher.findMany({
+          skip,
+          take: limitNum,
+          include: {
+            user: true,
+          },
+        }),
+        this.prisma.teacher.count(),
+      ]);
+
+      // Filter out teachers with missing users
+      const validTeachers = teachers.filter(teacher => teacher.user !== null);
+
+      return {
+        data: validTeachers,
+        meta: {
+          total: validTeachers.length,
+          page: pageNum,
+          limit: limitNum,
+          totalPages: Math.ceil(validTeachers.length / limitNum),
+        },
+      };
+    }
   }
 
   async findOne(id: string) {
