@@ -38,7 +38,21 @@
       "Bash(npx prisma:*)",
       "Bash(py test_subject_requirements.py)",
       "Bash(py test_subject_requirements_simple.py)",
-      "mcp__chrome-devtools__new_page"
+      "mcp__chrome-devtools__new_page",
+      "Bash(sqlite3:*)",
+      "Bash(npm run prisma:generate:*)",
+      "Read(//dev/**)",
+      "Bash(lsof:*)",
+      "Bash(npm run build:*)",
+      "Bash(pkill:*)",
+      "Read(//private/tmp/**)",
+      "Bash(awk:*)",
+      "Bash(xargs kill:*)",
+      "Bash(node:*)",
+      "Bash(./START_ALL_SERVICES.sh:*)",
+      "Bash(git log:*)",
+      "Bash(kill:*)",
+      "Bash(find:*)"
     ],
     "deny": [],
     "ask": []

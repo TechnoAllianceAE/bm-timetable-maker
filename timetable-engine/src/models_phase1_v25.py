@@ -59,6 +59,7 @@ class ConstraintType(str, Enum):
     NO_GAPS = "NO_GAPS"
     LUNCH_BREAK = "LUNCH_BREAK"
     ONE_TEACHER_PER_SUBJECT = "ONE_TEACHER_PER_SUBJECT"
+    SLOT_COVERAGE = "SLOT_COVERAGE"
 
 class ConstraintPriority(str, Enum):
     MANDATORY = "MANDATORY"

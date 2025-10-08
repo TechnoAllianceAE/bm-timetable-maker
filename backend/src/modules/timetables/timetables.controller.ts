@@ -4,6 +4,7 @@ import { TimetablesService } from './timetables.service';
 import { GenerateTimetableDto } from './dto/generate-timetable.dto';
 import { UpdateTimetableDto } from './dto/update-timetable.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { Public } from '../auth/decorators/public.decorator';
 
 @ApiTags('timetables')
 @Controller('timetables')
@@ -18,6 +19,16 @@ export class TimetablesController {
   @ApiResponse({ status: 400, description: 'Invalid constraints' })
   generate(@Body() generateTimetableDto: GenerateTimetableDto) {
     console.log('Received timetable generation request:', generateTimetableDto);
+    return this.timetablesService.generate(generateTimetableDto);
+  }
+
+  @Post('test-generate')
+  @Public()
+  @ApiOperation({ summary: 'Test timetable generation without authentication' })
+  @ApiResponse({ status: 201, description: 'Timetable generated successfully' })
+  @ApiResponse({ status: 400, description: 'Invalid constraints' })
+  testGenerate(@Body() generateTimetableDto: GenerateTimetableDto) {
+    console.log('🧪 TEST: Received timetable generation request:', generateTimetableDto);
     return this.timetablesService.generate(generateTimetableDto);
   }
 

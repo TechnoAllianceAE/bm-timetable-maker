@@ -82,8 +82,10 @@ model Class {
   section     String?          // e.g., A, B, C
   stream      String?          // For grades 11-12
   studentCount Int?
+  homeRoomId  String?          // Dedicated home classroom
 
   school      School           @relation(fields: [schoolId], references: [id])
+  homeRoom    Room?            @relation("ClassHomeRoom", fields: [homeRoomId], references: [id])
   timetableEntries TimetableEntry[]
 
   @@map("classes")
@@ -132,6 +134,7 @@ model Room {
   type     String?
 
   school   School   @relation(fields: [schoolId], references: [id])
+  classHomeRooms Class[] @relation("ClassHomeRoom")
   timetableEntries TimetableEntry[]
 
   @@map("rooms")

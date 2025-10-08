@@ -39,52 +39,54 @@ kill_port() {
 mkdir -p logs
 
 # 1. Start Timetable Engine (Python - Port 8000)
-echo -e "${GREEN}[1/3] Starting Timetable Engine (Python FastAPI)...${NC}"
+echo -e "${GREEN}[1/3] Checking Timetable Engine (Python FastAPI)...${NC}"
 if check_port 8000; then
-    echo -e "${YELLOW}Port 8000 already in use${NC}"
-    kill_port 8000
+    echo -e "${GREEN}  ✓ Timetable Engine already running on port 8000${NC}"
+    TIMETABLE_PID=$(lsof -ti:8000)
+else
+    echo "  → Starting Timetable Engine..."
+    cd timetable-engine
+    python3 main_v25.py > ../logs/timetable-engine.log 2>&1 &
+    TIMETABLE_PID=$!
+    cd ..
+    sleep 2
+    echo -e "${GREEN}  ✓ Timetable Engine started on port 8000 (PID: $TIMETABLE_PID)${NC}"
 fi
-
-cd timetable-engine
-python3 main_v25.py > ../logs/timetable-engine.log 2>&1 &
-TIMETABLE_PID=$!
-echo "  → Timetable Engine started on port 8000 (PID: $TIMETABLE_PID)"
 echo "  → Logs: logs/timetable-engine.log"
-cd ..
-
-sleep 2
 
 # 2. Start Backend (NestJS - Port 5000)
 echo ""
-echo -e "${GREEN}[2/3] Starting Backend (NestJS)...${NC}"
+echo -e "${GREEN}[2/3] Checking Backend (NestJS)...${NC}"
 if check_port 5000; then
-    echo -e "${YELLOW}Port 5000 already in use${NC}"
-    kill_port 5000
+    echo -e "${GREEN}  ✓ Backend already running on port 5000${NC}"
+    BACKEND_PID=$(lsof -ti:5000)
+else
+    echo "  → Starting Backend..."
+    cd backend
+    npm run start:dev > ../logs/backend.log 2>&1 &
+    BACKEND_PID=$!
+    cd ..
+    sleep 3
+    echo -e "${GREEN}  ✓ Backend started on port 5000 (PID: $BACKEND_PID)${NC}"
 fi
-
-cd backend
-npm run start:dev > ../logs/backend.log 2>&1 &
-BACKEND_PID=$!
-echo "  → Backend started on port 5000 (PID: $BACKEND_PID)"
 echo "  → Logs: logs/backend.log"
-cd ..
-
-sleep 3
 
 # 3. Start Frontend (Next.js - Port 3000)
 echo ""
-echo -e "${GREEN}[3/3] Starting Frontend (Next.js)...${NC}"
+echo -e "${GREEN}[3/3] Checking Frontend (Next.js)...${NC}"
 if check_port 3000; then
-    echo -e "${YELLOW}Port 3000 already in use${NC}"
-    kill_port 3000
+    echo -e "${GREEN}  ✓ Frontend already running on port 3000${NC}"
+    FRONTEND_PID=$(lsof -ti:3000)
+else
+    echo "  → Starting Frontend..."
+    cd frontend
+    npm run dev > ../logs/frontend.log 2>&1 &
+    FRONTEND_PID=$!
+    cd ..
+    sleep 2
+    echo -e "${GREEN}  ✓ Frontend started on port 3000 (PID: $FRONTEND_PID)${NC}"
 fi
-
-cd frontend
-npm run dev > ../logs/frontend.log 2>&1 &
-FRONTEND_PID=$!
-echo "  → Frontend started on port 3000 (PID: $FRONTEND_PID)"
 echo "  → Logs: logs/frontend.log"
-cd ..
 
 # Save PIDs to file for later shutdown
 echo "$TIMETABLE_PID" > .service_pids

@@ -83,8 +83,10 @@ model Class {
   section     String?          // e.g., A, B, C
   stream      Stream?          // For grades 11-12
   studentCount Int?
+  homeRoomId  String?          // Dedicated home classroom
 
   school      School           @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  homeRoom    Room?            @relation("ClassHomeRoom", fields: [homeRoomId], references: [id])
   timetableEntries TimetableEntry[]
 
   @@map("classes")
@@ -146,6 +148,7 @@ model Room {
   type     RoomType?
 
   school   School   @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  classHomeRooms Class[] @relation("ClassHomeRoom")
   timetableEntries TimetableEntry[]
 
   @@map("rooms")
@@ -287,6 +290,7 @@ model Timetable {
   id                  String             @id @default(cuid())
   schoolId            String
   academicYearId      String
+  name                String?
   version             Int                @default(1)
   status              TimetableStatus
   wellnessScore       Float?
@@ -393,6 +397,19 @@ enum ConstraintType {
 enum ConstraintPriority {
   HARD
   SOFT
+}
+
+model GradeSubjectRequirement {
+  id            String   @id @default(cuid())
+  schoolId      String
+  grade         Int
+  subjectId     String
+  periodsPerWeek Int
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@unique([schoolId, grade, subjectId])
+  @@map("grade_subject_requirements")
 }
 
 model DepartmentWellnessSummary {
