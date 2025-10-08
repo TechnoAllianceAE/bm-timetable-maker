@@ -99,7 +99,11 @@ def validate_resource_feasibility(
     active_slots = [slot for slot in time_slots if not slot.is_break]
     total_slots_per_class = len(active_slots)
 
-    # 1. Check if total subject periods fit in available time slots
+    # Allow up to 2 free periods per week for self-study
+    MAX_FREE_PERIODS_PER_WEEK = 2
+    min_required_periods = total_slots_per_class - MAX_FREE_PERIODS_PER_WEEK
+
+    # 1. Check if total subject periods fit in available time slots (with tolerance for free periods)
     if subject_requirements:
         # Use grade-specific requirements
         for class_obj in classes:
@@ -111,14 +115,27 @@ def validate_resource_feasibility(
             if required_periods > total_slots_per_class:
                 errors.append(
                     f"Class {class_obj.name} (Grade {class_obj.grade}): "
-                    f"Required {required_periods} periods/week but only {total_slots_per_class} slots available"
+                    f"Required {required_periods} periods/week exceeds {total_slots_per_class} slots available "
+                    f"(even accounting for {MAX_FREE_PERIODS_PER_WEEK} free periods for self-study)"
+                )
+            elif required_periods < min_required_periods:
+                warnings.append(
+                    f"Class {class_obj.name} (Grade {class_obj.grade}): "
+                    f"Only {required_periods} periods/week scheduled out of {total_slots_per_class} slots available "
+                    f"({total_slots_per_class - required_periods} free periods exceeds recommended limit of {MAX_FREE_PERIODS_PER_WEEK})"
                 )
     else:
         # Use default subject periods_per_week
         total_periods_needed = sum(s.periods_per_week for s in subjects)
         if total_periods_needed > total_slots_per_class:
             errors.append(
-                f"Total subject periods ({total_periods_needed}) exceed available time slots ({total_slots_per_class})"
+                f"Total subject periods ({total_periods_needed}) exceed available time slots ({total_slots_per_class}) "
+                f"(even accounting for {MAX_FREE_PERIODS_PER_WEEK} free periods for self-study)"
+            )
+        elif total_periods_needed < min_required_periods:
+            warnings.append(
+                f"Only {total_periods_needed} periods/week scheduled out of {total_slots_per_class} slots available "
+                f"({total_slots_per_class - total_periods_needed} free periods exceeds recommended limit of {MAX_FREE_PERIODS_PER_WEEK})"
             )
 
     # 2. Check teacher availability
