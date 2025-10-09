@@ -77,12 +77,20 @@ Traditional timetabling is:
 - **Enterprise Scale**: 78 classes, 140 teachers, 11,000+ assignments in 20 seconds
 - **Zero Conflicts**: Guaranteed conflict-free schedules with 100% slot coverage
 - **Smart Constraints**: Teacher consistency, room requirements, metadata-driven preferences
+- **Version Tracking**: View which engine version generated each timetable
 
 ### 🔍 Diagnostic Intelligence
 - **Transparent Solving**: See exactly what's happening during generation
 - **Bottleneck Analysis**: Identify resource constraints before they cause problems
 - **Actionable Feedback**: Get specific recommendations instead of generic errors
 - **Resource Advisor**: Pre-computation feasibility analysis with suggestions
+
+### 📥 Data Management
+- **CSV Import**: Bulk import classes, teachers, subjects, and rooms
+- **Compatible Format**: Works with tt_tester data generator output
+- **Sequential Import**: Automatic ordering to handle dependencies
+- **Status Tracking**: Real-time progress and error reporting
+- **School Data Management**: Clear all school data with confirmation dialogs
 
 ### 👥 Multi-Role Support
 - **Administrators**: Complete timetable management and analytics
@@ -188,10 +196,12 @@ Traditional timetabling is:
 - ✅ NestJS app structure with TypeScript
 - ✅ Authentication service with JWT (Passport.js)
 - ✅ User management with RBAC
-- ✅ Complete timetable CRUD operations
+- ✅ Complete timetable CRUD operations with version tracking
 - ✅ Python service integration layer with error handling
 - ✅ Data transformation pipeline for service compatibility
-- ✅ Comprehensive API endpoints (/api/v1/timetables/generate)
+- ✅ CSV import module with csv-parser for bulk data upload
+- ✅ School data management with cascade deletion
+- ✅ Comprehensive API endpoints (/api/v1/timetables/generate, /api/v1/import/*)
 - ✅ Running on port 5000 with Swagger documentation
 
 **Frontend Application** - **✅ CORE FEATURES COMPLETE**
@@ -200,14 +210,18 @@ Traditional timetabling is:
 - ✅ Comprehensive timetable generation form with rule configuration
 - ✅ Hard/soft constraint input areas
 - ✅ Diagnostic UI with failure analysis
-- ✅ CSV data import functionality (10 subjects, 35 rooms, 30 classes, 116 teachers)
+- ✅ Timetable list with engine version badges (v3.0.1, v3.0.0, v2.5.2)
+- ✅ CSV import interface with sequential upload and status tracking
+- ✅ School management with "Clear All Data" feature and double confirmation
 - ✅ Teacher management with JSON field support
 - ✅ Running on port 3000 with live reload
 
 **Data Management** - **✅ FULLY POPULATED**
 - ✅ PostgreSQL database with complete schema
-- ✅ CSV import system for test data
+- ✅ CSV import system compatible with tt_tester format
+- ✅ Bulk import for classes, teachers, subjects, and rooms
 - ✅ Real-world dataset imported (116 teachers, 30 classes, 35 rooms, 10 subjects)
+- ✅ School data cleanup feature with transaction safety
 - ✅ Academic year configuration ready
 
 ### 🔄 Phase 2: Wellness Features (PLANNED)
@@ -320,21 +334,29 @@ NEXT_PUBLIC_WS_URL="ws://localhost:5000"
    - Navigate to `http://localhost:3000`
    - Login with your credentials
 
-2. **Access Timetable Generation**
+2. **Import School Data (Optional)**
+   - Go to Admin Panel → Import Data (`/admin/import`)
+   - Upload CSV files for classes, teachers, subjects, and rooms
+   - Compatible with tt_tester data generator format
+   - Watch sequential import with real-time status updates
+
+3. **Access Timetable Generation**
    - Go to Admin Panel → Generate Timetable (`/admin/timetables/generate`)
    - Configure hard and soft constraint rules
    - Adjust periods per day and generation parameters
 
-3. **Generate Schedule**
+4. **Generate Schedule**
    - Click "Generate Timetable" button
    - Watch real-time progress with diagnostic feedback
    - System will show success/failure with detailed diagnostics
    - Review generated timetable with conflict analysis
+   - Version badge shows which engine generated it (v3.0.1, v3.0.0, v2.5.2)
 
-4. **Manage and Modify**
+5. **Manage and Modify**
    - View timetable in grid format
    - Make manual adjustments with instant validation
    - Export in various formats (PDF, CSV, JSON)
+   - Clear all school data when needed for fresh start
 
 ### API Usage
 
@@ -378,12 +400,18 @@ curl -X POST http://localhost:8000/validate \
 |----------|--------|-------------|
 | `/auth/login` | POST | User authentication |
 | `/auth/register` | POST | User registration |
-| `/timetables` | GET | List all timetables |
+| `/timetables` | GET | List all timetables (includes engineVersion) |
 | `/timetables` | POST | Create new timetable |
 | `/timetables/:id` | GET | Get specific timetable |
 | `/timetables/:id/generate` | POST | Generate timetable |
+| `/schools` | GET | List all schools |
+| `/schools/:id/data` | DELETE | Clear all school data |
+| `/import/classes` | POST | Import classes from CSV |
+| `/import/teachers` | POST | Import teachers from CSV |
+| `/import/subjects` | POST | Import subjects from CSV |
+| `/import/rooms` | POST | Import rooms from CSV |
 
-For complete API documentation, see [OpenAPI Specification](openapi.yaml).
+For complete API documentation, see [OpenAPI Specification](openapi.yaml) and [CSV_IMPORT_GUIDE.md](CSV_IMPORT_GUIDE.md).
 
 ## 🧠 Algorithm Details
 
