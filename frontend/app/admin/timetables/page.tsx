@@ -19,6 +19,7 @@ interface Timetable {
     endDate: string | null;
   };
   isActive: boolean;
+  engineVersion?: string;
   createdAt: string;
 }
 
@@ -133,8 +134,13 @@ export default function TimetablesPage() {
                               </span>
                             )}
                           </div>
-                          <div className="mt-1 text-xs font-mono text-gray-500">
-                            ID: {timetable.id}
+                          <div className="mt-1 flex items-center gap-3 text-xs font-mono text-gray-500">
+                            <span>ID: {timetable.id}</span>
+                            {timetable.engineVersion && (
+                              <span className="px-2 py-0.5 bg-purple-100 text-purple-700 rounded">
+                                v{timetable.engineVersion}
+                              </span>
+                            )}
                           </div>
                           {timetable.description && (
                             <p className="mt-1 text-sm text-gray-600">

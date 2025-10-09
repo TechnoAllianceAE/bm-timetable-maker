@@ -8,6 +8,7 @@ import { ClassesModule } from './modules/classes/classes.module';
 import { SubjectsModule } from './modules/subjects/subjects.module';
 import { RoomsModule } from './modules/rooms/rooms.module';
 import { TimetablesModule } from './modules/timetables/timetables.module';
+import { ImportModule } from './modules/import/import.module';
 import { PrismaModule } from './modules/prisma/prisma.module';
 import { HealthModule } from './modules/health/health.module';
 
@@ -26,6 +27,7 @@ import { HealthModule } from './modules/health/health.module';
     SubjectsModule,
     RoomsModule,
     TimetablesModule,
+    ImportModule,
   ],
 })
 export class AppModule {}

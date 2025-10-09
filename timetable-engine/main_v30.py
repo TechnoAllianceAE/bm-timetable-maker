@@ -296,7 +296,7 @@ async def health_check():
     """Health check endpoint for monitoring."""
     return {
         "status": "healthy",
-        "version": "2.5.2",
+        "version": "3.0.0",
         "solvers": {
             "csp": "ready",
             "ga": "ready"
@@ -594,7 +594,7 @@ async def generate_timetable(request: GenerateRequest):
                     "validation": post_validation,
                     "input_data": input_summary,
                     "diagnostics": {
-                        "version": "2.5.2",
+                        "version": "3.0.0",
                         "phase_failed": "post_validation",
                         "validation_details": post_validation,
                         "input_summary": input_summary
@@ -778,7 +778,7 @@ async def generate_timetable(request: GenerateRequest):
 
     # Build diagnostics
     diagnostics = {
-        "version": "2.5.2",
+        "version": "3.0.0",
         "metadata_enabled": True,
         "timing": {
             "total": round(total_duration, 2),

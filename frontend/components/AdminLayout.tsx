@@ -15,6 +15,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
 
   const navigation = [
     { name: 'Dashboard', href: '/admin/dashboard', icon: '📊' },
+    { name: 'Import Data', href: '/admin/import', icon: '📥' },
     { name: 'Schools', href: '/admin/schools', icon: '🏫' },
     { name: 'Users', href: '/admin/users', icon: '👥' },
     { name: 'Teachers', href: '/admin/teachers', icon: '👨‍🏫' },

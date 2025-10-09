@@ -59,13 +59,17 @@ export default function SchoolsPage() {
 
       if (editingSchool) {
         await schoolAPI.update(editingSchool.id, payload);
+        alert('✅ School updated successfully');
       } else {
         await schoolAPI.create(payload);
+        alert('✅ School created successfully');
       }
       fetchSchools();
       setShowModal(false);
       resetForm();
-    } catch (error) {
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.message || error.message || 'Unknown error occurred';
+      alert(`❌ Failed to save school: ${errorMessage}`);
       console.error('Failed to save school:', error);
     }
   };
@@ -89,9 +93,62 @@ export default function SchoolsPage() {
     if (confirm('Are you sure you want to delete this school?')) {
       try {
         await schoolAPI.delete(id);
+        alert('✅ School deleted successfully');
         fetchSchools();
-      } catch (error) {
+      } catch (error: any) {
+        const errorMessage = error.response?.data?.message || error.message || 'Unknown error occurred';
+        alert(`❌ Failed to delete school: ${errorMessage}`);
         console.error('Failed to delete school:', error);
+      }
+    }
+  };
+
+  const handleClearData = async (id: string, schoolName: string) => {
+    const confirmation = confirm(
+      `⚠️ WARNING: This will permanently delete ALL data for "${schoolName}" including:\n\n` +
+      `• All Teachers\n` +
+      `• All Classes\n` +
+      `• All Subjects\n` +
+      `• All Rooms\n` +
+      `• All Timetables\n` +
+      `• All Time Slots\n` +
+      `• All Academic Years\n\n` +
+      `This action CANNOT be undone!\n\n` +
+      `Are you absolutely sure you want to proceed?`
+    );
+
+    if (confirmation) {
+      const doubleConfirmation = confirm(
+        `🚨 FINAL CONFIRMATION\n\n` +
+        `Type the school name to confirm: "${schoolName}"\n\n` +
+        `Click OK only if you're 100% certain you want to delete ALL data for this school.`
+      );
+
+      if (doubleConfirmation) {
+        try {
+          const response = await schoolAPI.deleteSchoolData(id);
+          const data = response.data;
+          const counts = data.deletedCounts || {};
+
+          alert(
+            `✅ ${data.message || 'Successfully cleared all data!'}\n\n` +
+            `Deleted:\n` +
+            `• ${counts.deletedTeachers || 0} Teachers\n` +
+            `• ${counts.deletedClasses || 0} Classes\n` +
+            `• ${counts.deletedSubjects || 0} Subjects\n` +
+            `• ${counts.deletedRooms || 0} Rooms\n` +
+            `• ${counts.deletedTimetables || 0} Timetables\n` +
+            `• ${counts.deletedEntries || 0} Timetable Entries\n` +
+            `• ${counts.deletedTimeSlots || 0} Time Slots\n` +
+            `• ${counts.deletedRequirements || 0} Subject Requirements\n` +
+            `• ${counts.deletedAcademicYears || 0} Academic Years`
+          );
+          fetchSchools();
+        } catch (error: any) {
+          const errorMessage = error.response?.data?.message || error.message || 'Unknown error occurred';
+          alert(`❌ Failed to clear school data: ${errorMessage}`);
+          console.error('Failed to clear school data:', error);
+        }
       }
     }
   };
@@ -160,6 +217,13 @@ export default function SchoolsPage() {
                           className="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600"
                         >
                           Edit
+                        </button>
+                        <button
+                          onClick={() => handleClearData(school.id, school.name)}
+                          className="px-3 py-1 bg-orange-500 text-white rounded hover:bg-orange-600"
+                          title="Clear all data (teachers, classes, subjects, rooms, timetables)"
+                        >
+                          Clear Data
                         </button>
                         <button
                           onClick={() => handleDelete(school.id)}

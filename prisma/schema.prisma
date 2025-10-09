@@ -292,6 +292,7 @@ model Timetable {
   academicYearId      String
   name                String?
   version             Int                @default(1)
+  engineVersion       String?            // Python service version (e.g., "3.0.1", "2.5.2")
   status              TimetableStatus
   wellnessScore       Float?
   workloadBalanceScore Float?

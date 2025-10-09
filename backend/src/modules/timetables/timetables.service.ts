@@ -303,12 +303,16 @@ export class TimetablesService {
         });
       }
 
+      // Extract engine version from Python response diagnostics
+      const engineVersion = response.data?.diagnostics?.version || null;
+
       // Save timetable to database
       const timetable = await this.prisma.timetable.create({
         data: {
           schoolId,
           academicYearId: generateTimetableDto.academicYearId,
           name: generateTimetableDto.name || null,
+          engineVersion,
           status: isSuccessful ? 'DRAFT' : 'FAILED',
           metadata: JSON.stringify(response.data),
         },
@@ -316,6 +320,7 @@ export class TimetablesService {
 
       console.log('Saved timetable to database with ID:', timetable.id);
       console.log('Python status:', pythonStatus);
+      console.log('Engine version:', engineVersion);
 
       // Store subject requirements if provided
       if (generateTimetableDto.subjectRequirements && generateTimetableDto.subjectRequirements.length > 0) {

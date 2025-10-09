@@ -91,6 +91,7 @@ export const schoolAPI = {
   create: (data: any) => apiClient.post('/schools', data),
   update: (id: string, data: any) => apiClient.put(`/schools/${id}`, data),
   delete: (id: string) => apiClient.delete(`/schools/${id}`),
+  deleteSchoolData: (id: string) => apiClient.delete(`/schools/${id}/data`),
 };
 
 export const userAPI = {

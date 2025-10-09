@@ -49,4 +49,12 @@ export class SchoolsController {
   remove(@Param('id') id: string) {
     return this.schoolsService.remove(id);
   }
+
+  @Delete(':id/data')
+  @ApiOperation({ summary: 'Delete all data for a school (classes, teachers, subjects, rooms, timetables)' })
+  @ApiResponse({ status: 200, description: 'School data deleted successfully' })
+  @ApiResponse({ status: 404, description: 'School not found' })
+  deleteSchoolData(@Param('id') id: string) {
+    return this.schoolsService.deleteSchoolData(id);
+  }
 }
