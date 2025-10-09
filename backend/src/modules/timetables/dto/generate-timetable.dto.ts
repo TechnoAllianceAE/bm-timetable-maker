@@ -1,4 +1,4 @@
-import { IsString, IsOptional, IsObject, IsDateString, IsArray, ValidateNested, IsInt, IsEnum } from 'class-validator';
+import { IsString, IsOptional, IsObject, IsDateString, IsArray, ValidateNested, IsInt, IsEnum, Min, Max } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 
@@ -46,6 +46,14 @@ export class GenerateTimetableDto {
   @IsString()
   name?: string;
 
+  @ApiPropertyOptional({ 
+    example: 'v3.0.1', 
+    description: 'Engine version to use for generation (v2.5, v3.0, v3.0.1)'
+  })
+  @IsOptional()
+  @IsString()
+  engineVersion?: string;
+
   @ApiPropertyOptional({ example: '2024-01-01' })
   @IsOptional()
   @IsDateString()
@@ -62,12 +70,25 @@ export class GenerateTimetableDto {
       minLunchBreakDuration: 30,
       preferMorningForMath: true,
       avoidFridayLastPeriod: true,
+      maxViolations: 0,
     },
     description: 'Additional constraints for timetable generation'
   })
   @IsOptional()
   @IsObject()
   constraints?: any;
+
+  @ApiPropertyOptional({ 
+    example: 0, 
+    description: 'Maximum number of constraint violations allowed (0-3). Higher values may help find solutions when constraints are too strict.',
+    minimum: 0,
+    maximum: 3
+  })
+  @IsOptional()
+  @IsInt()
+  @Min(0)
+  @Max(3)
+  maxViolations?: number;
 
   @ApiPropertyOptional({
     type: [GradeSubjectRequirementDto],

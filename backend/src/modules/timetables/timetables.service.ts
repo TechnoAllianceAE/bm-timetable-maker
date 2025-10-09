@@ -203,6 +203,7 @@ export class TimetablesService {
       const timetableData = {
         school_id: school.id,
         academic_year_id: generateTimetableDto.academicYearId,
+        engine_version: generateTimetableDto.engineVersion || 'v3.0.1', // Default to latest version
         classes: classes.map(cls => ({
           id: cls.id,
           school_id: cls.schoolId,
@@ -253,11 +254,13 @@ export class TimetablesService {
         })) || null,
         options: 3,
         timeout: 60,
+        max_violations: generateTimetableDto.maxViolations ?? generateTimetableDto.constraints?.maxViolations ?? 0,
       };
 
       console.log('Prepared timetable data:', {
         school_id: timetableData.school_id,
         academic_year_id: timetableData.academic_year_id,
+        engine_version: timetableData.engine_version,
         classCount: classes.length,
         teacherCount: teachers.length,
         subjectCount: subjects.length,

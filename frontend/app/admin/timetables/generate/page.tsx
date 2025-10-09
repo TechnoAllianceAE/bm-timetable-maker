@@ -48,9 +48,11 @@ interface GenerationParams {
   periodDuration: number;
   breakDuration: number;
   lunchDuration: number;
+  engineVersion: string;
   constraints: {
     maxConsecutiveTeachingHours: number;
     minBreaksBetweenClasses: number;
+    maxViolations: number;
   };
   hardRules: {
     noTeacherConflicts: boolean;
@@ -107,9 +109,11 @@ export default function GenerateTimetablePage() {
     periodDuration: 45,
     breakDuration: 10,
     lunchDuration: 30,
+    engineVersion: 'v3.0.1', // Default to latest version
     constraints: {
       maxConsecutiveTeachingHours: 3,
       minBreaksBetweenClasses: 1,
+      maxViolations: 0,
     },
     hardRules: {
       noTeacherConflicts: true,
@@ -219,12 +223,14 @@ export default function GenerateTimetablePage() {
         schoolId: params.schoolId,
         academicYearId: params.academicYearId,
         name: params.name,
+        engineVersion: params.engineVersion,
         startDate: params.startDate,
         endDate: params.endDate,
         constraints: {
           // Basic constraints
           maxConsecutiveTeachingHours: params.constraints.maxConsecutiveTeachingHours,
           minBreaksBetweenClasses: params.constraints.minBreaksBetweenClasses,
+          maxViolations: params.constraints.maxViolations,
           avoidBackToBackDifficultSubjects: params.softRules.avoidBackToBackDifficultSubjects,
           preferMorningForDifficultSubjects: params.softRules.preferMorningForDifficultSubjects,
           balanceTeacherWorkload: params.softRules.balanceTeacherWorkload,
@@ -450,6 +456,23 @@ export default function GenerateTimetablePage() {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700">
+                    Engine Version
+                  </label>
+                  <select
+                    value={params.engineVersion}
+                    onChange={(e) => setParams({ ...params, engineVersion: e.target.value })}
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+                  >
+                    <option value="v3.0.1">v3.0.1 (Latest - Requires home classrooms)</option>
+                    <option value="v3.0">v3.0 (Stable - Requires home classrooms)</option>
+                    <option value="v2.5">v2.5 (Legacy - No home classroom requirement)</option>
+                  </select>
+                  <p className="mt-1 text-xs text-gray-500">
+                    v3.0+ engines require home classroom assignments for all classes. Use v2.5 if home classrooms are not assigned.
+                  </p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">
                     Timetable Name
                   </label>
                   <input
@@ -611,6 +634,29 @@ export default function GenerateTimetablePage() {
                       }
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
                     />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Max Violations Allowed
+                    </label>
+                    <select
+                      value={params.constraints.maxViolations}
+                      onChange={(e) =>
+                        handleConstraintChange(
+                          'maxViolations',
+                          parseInt(e.target.value)
+                        )
+                      }
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+                    >
+                      <option value={0}>0 - Perfect schedule (no violations)</option>
+                      <option value={1}>1 - Allow 1 minor violation</option>
+                      <option value={2}>2 - Allow 2 minor violations</option>
+                      <option value={3}>3 - Allow 3 minor violations</option>
+                    </select>
+                    <p className="mt-1 text-xs text-gray-500">
+                      Higher values may help find solutions when constraints are too strict, but may result in lower quality schedules.
+                    </p>
                   </div>
                 </div>
               </div>

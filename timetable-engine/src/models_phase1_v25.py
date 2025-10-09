@@ -214,6 +214,7 @@ class GenerateRequest(BaseModel):
     subject_requirements: Optional[List[GradeSubjectRequirement]] = None  # Grade-subject period requirements
     options: int = Field(3, ge=1, le=5)
     timeout: int = Field(60, ge=10, le=300)
+    max_violations: int = Field(0, ge=0, le=3, description="Maximum number of constraint violations allowed (0-3)")
     weights: OptimizationWeights = OptimizationWeights()
 
 class TimetableSolution(BaseModel):

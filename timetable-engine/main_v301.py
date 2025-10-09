@@ -508,7 +508,8 @@ async def generate_timetable(request: GenerateRequest):
             constraints=constraints,
             num_solutions=request.options,
             subject_requirements=subject_requirements_dict,
-            enforce_teacher_consistency=enforce_teacher_consistency
+            enforce_teacher_consistency=enforce_teacher_consistency,
+            max_violations=request.max_violations
         )
         
         csp_end_time = time.time()
@@ -546,6 +547,7 @@ async def generate_timetable(request: GenerateRequest):
 
         # POST-VALIDATION: Verify generated timetable meets mandatory criteria
         print(f"\n[POST-VALIDATION] Validating generated timetable...")
+        print(f"  Max violations allowed: {request.max_violations}")
         post_validation = validate_timetable(
             timetable=base_solutions[0],
             classes=classes,
@@ -553,7 +555,8 @@ async def generate_timetable(request: GenerateRequest):
             teachers=teachers,
             time_slots=time_slots,
             rooms=rooms,
-            subject_requirements=request.subject_requirements
+            subject_requirements=request.subject_requirements,
+            max_violations=request.max_violations
         )
 
         print(f"[{'OK' if post_validation['is_valid'] else 'FAILED'}] Post-validation "

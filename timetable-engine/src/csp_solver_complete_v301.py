@@ -85,7 +85,8 @@ class CSPSolverCompleteV301:
         constraints: List[Constraint],
         num_solutions: int = 3,
         subject_requirements: Optional[List[Dict]] = None,
-        enforce_teacher_consistency: bool = True
+        enforce_teacher_consistency: bool = True,
+        max_violations: int = 0
     ) -> Tuple[List[Timetable], float, Optional[List[str]], Optional[List[str]]]:
         """
         Generate COMPLETE timetables with simplified room allocation.
@@ -166,6 +167,7 @@ class CSPSolverCompleteV301:
         if self.debug:
             print(f"  Active Slots per week: {len(active_slots)}")
             print(f"  Teacher Consistency: {'ENABLED' if enforce_teacher_consistency else 'DISABLED'}")
+            print(f"  Max Violations Allowed: {max_violations}")
             print(f"  Room Allocation: SIMPLIFIED (v3.0)")
 
         # ============================================================================

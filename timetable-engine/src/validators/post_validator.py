@@ -371,7 +371,8 @@ def validate_timetable(
     teachers: List[Teacher],
     time_slots: List[TimeSlot],
     rooms: List[Room],
-    subject_requirements: List[GradeSubjectRequirement] = None
+    subject_requirements: List[GradeSubjectRequirement] = None,
+    max_violations: int = 0
 ) -> Dict[str, Any]:
     """
     Complete post-validation of generated timetable.
@@ -465,11 +466,13 @@ def validate_timetable(
     lab_valid, lab_violations, lab_metrics = validate_lab_requirements(
         timetable, subjects, rooms
     )
+    # Lab violations are allowed if max_violations > 0
+    lab_critical = max_violations == 0
     checks["lab_requirements"] = {
         "passed": lab_valid,
         "violations": lab_violations,
         "metrics": lab_metrics,
-        "critical": False
+        "critical": lab_critical
     }
     if not lab_valid:
         all_violations.extend(lab_violations)
@@ -479,19 +482,39 @@ def validate_timetable(
     req_valid, req_violations, req_metrics = validate_subject_requirements(
         timetable, classes, subjects, subject_requirements
     )
+    # Subject requirement violations are allowed if max_violations > 0
+    req_critical = max_violations == 0
     checks["subject_requirements"] = {
         "passed": req_valid,
         "violations": req_violations,
         "metrics": req_metrics,
-        "critical": True
+        "critical": req_critical
     }
     all_violations.extend(req_violations)
     all_metrics.update(req_metrics)
 
-    # Determine overall validity (all CRITICAL checks must pass)
-    critical_checks_passed = all(
-        check["passed"] for check in checks.values() if check.get("critical", False)
-    )
+    # Count total violations of potentially allowable types (lab + subject requirements)
+    allowable_violation_count = 0
+    if max_violations > 0:
+        if not lab_valid:
+            allowable_violation_count += len(lab_violations)
+        if not req_valid:
+            allowable_violation_count += len(req_violations)
+    
+    # Determine overall validity
+    if max_violations > 0 and allowable_violation_count <= max_violations:
+        # When violations are allowed and within limit, only check truly critical items
+        truly_critical_checks = [
+            checks["slot_coverage"]["passed"],
+            checks["teacher_conflicts"]["passed"],
+            checks["room_conflicts"]["passed"]
+        ]
+        critical_checks_passed = all(truly_critical_checks)
+    else:
+        # Standard behavior: all CRITICAL checks must pass
+        critical_checks_passed = all(
+            check["passed"] for check in checks.values() if check.get("critical", False)
+        )
 
     # Separate critical violations from warnings
     critical_violations = []
@@ -504,6 +527,17 @@ def validate_timetable(
             else:
                 warnings.extend(check_data["violations"])
 
+    # Add debug information about violation tolerance
+    violation_tolerance_info = None
+    if max_violations > 0:
+        violation_tolerance_info = {
+            "max_violations_allowed": max_violations,
+            "allowable_violations_found": allowable_violation_count,
+            "within_tolerance": allowable_violation_count <= max_violations,
+            "lab_violations": len(lab_violations) if not lab_valid else 0,
+            "subject_requirement_violations": len(req_violations) if not req_valid else 0
+        }
+    
     status = "success" if critical_checks_passed else "failure"
 
     # ==================================================================
@@ -636,7 +670,8 @@ def validate_timetable(
         "critical_violations": critical_violations,
         "warnings": warnings,
         "suggestions": suggestions,  # Add specific suggestions
-        "metrics": all_metrics
+        "metrics": all_metrics,
+        "violation_tolerance": violation_tolerance_info  # Add violation tolerance info
     }
 
     return result
