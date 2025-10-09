@@ -26,6 +26,16 @@ npm run prisma:seed     # Seed database with test data
 npm run dev              # Start TypeScript development server
 npm run build           # Build TypeScript code
 npm start               # Start production server
+
+# Service Management (macOS/Linux)
+./START_ALL_SERVICES.sh  # Start all services (Backend, Frontend, Python)
+./STOP_ALL_SERVICES.sh   # Stop all services
+./STATUS_ALL_SERVICES.sh # Check service status
+
+# Service Management (Windows)
+START_ALL_SERVICES.bat   # Start all services
+STOP_ALL_SERVICES.bat    # Stop all services
+STATUS_ALL_SERVICES.bat  # Check service status
 ```
 
 ### Backend (NestJS API)
@@ -111,10 +121,18 @@ python ab_test_runner.py                     # Run A/B tests between versions
 4. Python service handles complex algorithmic timetable generation
 
 ### Database Schema
-- PostgreSQL database for all entities
+- PostgreSQL database for all entities (SQLite for development)
 - Core entities: School, User, Teacher, Class, Subject, TimeSlot, Room, Timetable
 - Wellness entities defined but not yet implemented: WellnessMetrics, WorkloadAlert, TeacherWellnessProfile
 - All models defined in `prisma/schema.prisma`
+
+**Room Model Fields (Updated Oct 9, 2025):**
+- `id`: String (cuid)
+- `schoolId`: String
+- `name`: String (required) - Room name
+- `code`: String (optional) - Room code/number (e.g., "R101", "LAB-01")
+- `capacity`: Int (optional) - Room capacity
+- `type`: String (optional) - Room type (CLASSROOM, LAB, AUDITORIUM, etc.)
 
 ### Key Backend Modules (NestJS)
 Located in `backend/src/modules/`:
@@ -225,7 +243,11 @@ PYTHON_TIMETABLE_URL=http://localhost:8000
 - Timetable generation integration with Python service
 - CSV data import for bulk operations
 - Swagger API documentation available
-- **Recent Fixes**:
+- **Recent Updates** (October 9, 2025):
+  - Room model now includes optional `code` field for room identification (e.g., "R101", "LAB-01")
+  - Room management simplified - removed unnecessary fields (isLab, hasProjector, hasAC, floor)
+  - Core room fields: name, code, capacity, type
+- **Previous Fixes**:
   - User profile data now stored in JSON profile field (not separate name field)
   - Timetable deletion with cascading entry removal
   - Timetable name persistence in database

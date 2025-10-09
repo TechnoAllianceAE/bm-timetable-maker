@@ -11,11 +11,35 @@
 
 ## 🚀 Quick Start
 
+### Option 1: Using Service Scripts (Recommended)
+
 ```bash
 # Clone the repository
 git clone https://github.com/your-username/bm-timetable-maker.git
 cd bm-timetable-maker
 
+# Install all dependencies
+npm install  # Root dependencies
+cd backend && npm install && cd ..
+cd frontend && npm install && cd ..
+cd timetable-engine && pip install -r requirements.txt && cd ..
+
+# Start all services at once
+./START_ALL_SERVICES.sh     # macOS/Linux
+START_ALL_SERVICES.bat      # Windows
+
+# Check service status
+./STATUS_ALL_SERVICES.sh    # macOS/Linux
+STATUS_ALL_SERVICES.bat     # Windows
+
+# Stop all services
+./STOP_ALL_SERVICES.sh      # macOS/Linux
+STOP_ALL_SERVICES.bat       # Windows
+```
+
+### Option 2: Manual Start
+
+```bash
 # Start the Python timetable engine (v3.0.1)
 cd timetable-engine
 pip install -r requirements.txt
@@ -33,6 +57,12 @@ npm run dev
 ```
 
 Visit `http://localhost:3000` to access the application.
+
+### Service URLs
+- 🐍 **Timetable Engine**: http://localhost:8000
+- 🐍 **API Documentation**: http://localhost:8000/docs
+- 🔧 **Backend API**: http://localhost:5000
+- 🌐 **Frontend**: http://localhost:3000
 
 ## 📋 Table of Contents
 

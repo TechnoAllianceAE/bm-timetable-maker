@@ -1,9 +1,9 @@
 # Product Requirements Document (PRD)
 ## School Timetable Management SaaS Platform
 
-**Version:** 2.5
-**Date:** October 5, 2025
-**Status:** Phase 1 Complete - Python Engine v2.5 Production Ready with Grade-Specific Requirements
+**Version:** 2.6
+**Date:** October 9, 2025
+**Status:** Phase 1 Complete - Python Engine v2.5 Production Ready with Simplified Room Management
 
 ---
 
@@ -28,6 +28,40 @@ The School Timetable Management SaaS Platform is a fully integrated, enterprise-
 - ✅ Thread-safe per-request instances preventing data leaks
 - ✅ Real metrics calculation replacing hardcoded scores
 - ✅ Robust input validation and error handling
+
+---
+
+## 🎯 Room Management Updates (October 9, 2025)
+
+### Simplified Room Management
+The platform has been enhanced with streamlined room management, removing unnecessary fields and adding optional room code support.
+
+#### Implementation Highlights
+- **Backend Schema**: Added optional `code` field to Room model
+  - Type: `String?` (optional)
+  - Purpose: Store room code/number (e.g., "R101", "LAB-01")
+  - Location: `backend/prisma/schema.prisma:133`
+- **CreateRoomDto**: Updated with code field validation
+  - Marked as optional with `@IsOptional()`
+  - Added Swagger API documentation
+- **RoomsService**: Modified create method to handle code field
+- **Frontend Simplification**: Removed unnecessary UI fields
+  - ❌ Removed: `isLab`, `hasProjector`, `hasAC`, `floor`
+  - ✅ Kept: `name`, `code`, `capacity`, `type`
+  - Result: Clean, focused room creation form with 4 essential fields
+
+#### Service Management Enhancement
+Created **STATUS_ALL_SERVICES** scripts for quick service status monitoring:
+- **Features**: Port checking, PID display, process identification, color-coded output
+- **Services Monitored**: Timetable Engine (8000), Backend API (5000), Frontend (3000)
+- **Platforms**: macOS/Linux (.sh) and Windows (.bat)
+- **Integration**: Works seamlessly with existing START/STOP scripts
+
+**Testing Status:**
+- ✅ Backend builds successfully with new schema
+- ✅ Prisma client regenerated correctly
+- ✅ STATUS scripts tested and working
+- ⏳ Frontend room creation ready for end-to-end testing
 
 ---
 
@@ -473,8 +507,26 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Additional tables for classes, subjects, teachers, rooms, timetables, etc.
+CREATE TABLE rooms (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    school_id UUID REFERENCES schools(id) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    code VARCHAR(50),           -- Optional room code (e.g., "R101", "LAB-01")
+    capacity INTEGER,           -- Room capacity
+    type VARCHAR(50),           -- Room type (e.g., "CLASSROOM", "LABORATORY")
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Additional tables for classes, subjects, teachers, timetables, etc.
 ```
+
+#### Room Entity Fields
+- **id**: Unique identifier (UUID)
+- **schoolId**: Reference to school
+- **name**: Room name (required)
+- **code**: Optional room code/number for easy identification (e.g., "R101", "LAB-01")
+- **capacity**: Optional maximum student capacity
+- **type**: Optional room type (e.g., "CLASSROOM", "LABORATORY", "GYM")
 
 ### API Specification
 
@@ -492,6 +544,10 @@ GET /api/v1/teachers
 POST /api/v1/teachers
 GET /api/v1/classes
 POST /api/v1/classes
+GET /api/v1/rooms
+POST /api/v1/rooms
+  - Request: name (required), code (optional), capacity (optional), type (optional)
+  - Response: Created room with all fields
 
 # Authentication
 POST /api/v1/auth/login
@@ -514,6 +570,8 @@ POST /api/v1/auth/register
 - ✅ Grade-specific subject requirements feature complete
 - ✅ Thread-safe, production-ready implementation
 - ✅ User management and timetable naming improvements
+- ✅ **NEW (Oct 9)**: Simplified room management with optional code field
+- ✅ **NEW (Oct 9)**: Service status monitoring scripts (START/STOP/STATUS)
 
 **Current Limitations:**
 - ⚠️ GA Optimizer is placeholder (returns CSP solutions unchanged)
@@ -525,6 +583,6 @@ POST /api/v1/auth/register
 
 ---
 
-*Document Version: 2.5*  
-*Last Updated: October 5, 2025*  
-*Status: Phase 1 Complete - Production Ready with Grade-Specific Requirements*
+*Document Version: 2.6*
+*Last Updated: October 9, 2025*
+*Status: Phase 1 Complete - Production Ready with Simplified Room Management*

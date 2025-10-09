@@ -7,10 +7,12 @@ Scripts to start and stop all services (Backend, Frontend, Timetable Engine) in 
 ### For Windows:
 - **`START_ALL_SERVICES.bat`** - Start all 3 services
 - **`STOP_ALL_SERVICES.bat`** - Stop all 3 services
+- **`STATUS_ALL_SERVICES.bat`** - Check status of all services ✨ NEW
 
 ### For macOS/Linux:
 - **`START_ALL_SERVICES.sh`** - Start all 3 services
 - **`STOP_ALL_SERVICES.sh`** - Stop all 3 services
+- **`STATUS_ALL_SERVICES.sh`** - Check status of all services ✨ NEW
 
 ## 🚀 Usage
 
@@ -19,6 +21,9 @@ Scripts to start and stop all services (Backend, Frontend, Timetable Engine) in 
 ```cmd
 # Start all services
 START_ALL_SERVICES.bat
+
+# Check service status
+STATUS_ALL_SERVICES.bat
 
 # Stop all services
 STOP_ALL_SERVICES.bat
@@ -29,6 +34,9 @@ STOP_ALL_SERVICES.bat
 ```bash
 # Start all services
 ./START_ALL_SERVICES.sh
+
+# Check service status
+./STATUS_ALL_SERVICES.sh
 
 # Stop all services
 ./STOP_ALL_SERVICES.sh
@@ -92,6 +100,16 @@ tail -f logs/frontend.log
 - ✅ Kills processes by port number
 - ✅ Uses saved PIDs for cleanup (macOS/Linux)
 - ✅ Ensures all processes are terminated
+
+### STATUS Scripts: ✨ NEW
+- ✅ Checks if each service is running on its designated port
+- ✅ Shows PID (Process ID) for running services
+- ✅ Shows process name for identification
+- ✅ Color-coded output (Green = Running, Red = Stopped, Yellow = Partial)
+- ✅ Displays service URLs for quick access
+- ✅ Shows saved PIDs from .service_pids file
+- ✅ Overall status summary (3/3, 2/3, etc.)
+- ✅ No changes to running services - read-only status check
 
 ## ⚠️ Port Conflicts
 
@@ -194,16 +212,72 @@ These scripts are for **development** only. For production:
 # Start everything
 ./START_ALL_SERVICES.sh
 
+# Check service status
+./STATUS_ALL_SERVICES.sh
+
 # Stop everything
 ./STOP_ALL_SERVICES.sh
 
 # View all logs
 tail -f logs/*.log
 
-# Check running services
+# Check running services manually
 lsof -i :3000,5000,8000
 
 # Force kill all node processes (careful!)
 pkill -9 node
 pkill -9 python3
+```
+
+## 📊 STATUS Script Output Example
+
+```bash
+$ ./STATUS_ALL_SERVICES.sh
+
+==================================
+Service Status Check
+==================================
+
+[1/3] Timetable Engine (Python FastAPI)
+✓ Timetable Engine
+  Status: RUNNING
+  Port: 8000
+  PID: 31303
+  Process: python3
+  URL: http://localhost:8000
+
+[2/3] Backend (NestJS)
+✓ Backend API
+  Status: RUNNING
+  Port: 5000
+  PID: 31308
+  Process: node
+  URL: http://localhost:5000
+
+[3/3] Frontend (Next.js)
+✓ Frontend
+  Status: RUNNING
+  Port: 3000
+  PID: 31331
+  Process: node
+  URL: http://localhost:3000
+
+==================================
+All Services Running (3/3)
+==================================
+
+Saved PIDs in .service_pids:
+31303
+31308
+31331
+
+Available commands:
+  START_ALL_SERVICES.sh  - Start all services
+  STOP_ALL_SERVICES.sh   - Stop all services
+  STATUS_ALL_SERVICES.sh - Check service status
+
+View logs in the logs/ directory:
+  logs/timetable-engine.log
+  logs/backend.log
+  logs/frontend.log
 ```
