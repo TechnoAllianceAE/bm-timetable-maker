@@ -130,6 +130,7 @@ model Room {
   id       String   @id @default(cuid())
   schoolId String
   name     String
+  code     String?
   capacity Int?
   type     String?
 

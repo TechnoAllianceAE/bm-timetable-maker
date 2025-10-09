@@ -15,13 +15,19 @@ export enum RoomType {
 }
 
 export class CreateRoomDto {
-  @ApiProperty({ example: 'school-id-123' })
+  @ApiPropertyOptional({ example: 'school-id-123' })
+  @IsOptional()
   @IsString()
-  schoolId: string;
+  schoolId?: string;
 
   @ApiProperty({ example: 'Room 101' })
   @IsString()
   name: string;
+
+  @ApiPropertyOptional({ example: 'R101' })
+  @IsOptional()
+  @IsString()
+  code?: string;
 
   @ApiPropertyOptional({ example: 40, minimum: 1, maximum: 200 })
   @IsOptional()

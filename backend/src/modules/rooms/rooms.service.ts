@@ -9,7 +9,13 @@ export class RoomsService {
 
   async create(createRoomDto: CreateRoomDto) {
     return this.prisma.room.create({
-      data: createRoomDto,
+      data: {
+        schoolId: createRoomDto.schoolId!,
+        name: createRoomDto.name,
+        code: createRoomDto.code,
+        capacity: createRoomDto.capacity,
+        type: createRoomDto.type,
+      },
       include: {
         school: true,
       },
