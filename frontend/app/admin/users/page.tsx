@@ -10,6 +10,11 @@ interface User {
   email: string;
   role: 'ADMIN' | 'PRINCIPAL' | 'TEACHER' | 'STUDENT' | 'PARENT';
   profile?: string | { name?: string };
+  schoolId?: string;
+  school?: {
+    id: string;
+    name: string;
+  };
   createdAt: string;
   updatedAt?: string;
 }
@@ -188,8 +193,14 @@ export default function UsersPage() {
                         <div className="mt-1">
                           <p className="text-sm text-gray-600">{user.email}</p>
                         </div>
-                        <div className="mt-2 text-sm text-gray-500">
-                          Joined: {new Date(user.createdAt).toLocaleDateString()}
+                        <div className="mt-2 flex items-center space-x-4 text-sm text-gray-500">
+                          <span>Joined: {new Date(user.createdAt).toLocaleDateString()}</span>
+                          {user.school && (
+                            <span className="flex items-center">
+                              <span className="text-gray-400">|</span>
+                              <span className="ml-4">🏫 {user.school.name}</span>
+                            </span>
+                          )}
                         </div>
                       </div>
                       <div className="ml-4 flex-shrink-0 flex space-x-2">

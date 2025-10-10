@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Body, Param, Query, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, Query, UseGuards, Request, BadRequestException } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
 import { SubjectsService } from './subjects.service';
 import { CreateSubjectDto } from './dto/create-subject.dto';
@@ -15,7 +15,15 @@ export class SubjectsController {
   @Post()
   @ApiOperation({ summary: 'Create a new subject' })
   @ApiResponse({ status: 201, description: 'Subject created successfully' })
-  create(@Body() createSubjectDto: CreateSubjectDto) {
+  create(@Body() createSubjectDto: CreateSubjectDto, @Request() req: any) {
+    // Extract schoolId from JWT token
+    const schoolId = req.user?.schoolId;
+    if (!schoolId) {
+      throw new BadRequestException('School ID not found in user session');
+    }
+
+    // Set schoolId from token
+    createSubjectDto.schoolId = schoolId;
     return this.subjectsService.create(createSubjectDto);
   }
 

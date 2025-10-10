@@ -17,6 +17,22 @@ const apiClient = axios.create({
   },
 });
 
+// Engine API client for Timetable Engine v3.5
+const getEngineURL = () => {
+  if (typeof window !== 'undefined') {
+    return 'http://localhost:8000';  // FastAPI server
+  }
+  return 'http://localhost:8000';
+};
+
+const engineClient = axios.create({
+  baseURL: getEngineURL(),
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  timeout: 30000,  // 30 second timeout for generation requests
+});
+
 apiClient.interceptors.request.use((config) => {
   console.log('=== Axios Request Interceptor ===');
   console.log('Request URL:', config.url);
@@ -37,6 +53,41 @@ apiClient.interceptors.request.use((config) => {
   return config;
 }, (error) => {
   console.error('Request interceptor error:', error);
+  return Promise.reject(error);
+});
+
+// Engine client interceptors
+engineClient.interceptors.request.use((config) => {
+  console.log('=== Engine API Request ===');
+  console.log('Request URL:', config.url);
+  console.log('Request method:', config.method);
+  console.log('Full URL:', config.baseURL + config.url);
+  
+  if (typeof window !== 'undefined') {
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers = config.headers ?? {};
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+  }
+  return config;
+}, (error) => {
+  console.error('Engine request interceptor error:', error);
+  return Promise.reject(error);
+});
+
+engineClient.interceptors.response.use((response) => {
+  console.log('=== Engine API Response ===');
+  console.log('Response status:', response.status);
+  console.log('Response data:', response.data);
+  return response;
+}, (error) => {
+  console.error('=== Engine API Error ===');
+  console.error('Error:', error);
+  if (error.response) {
+    console.error('Error response status:', error.response.status);
+    console.error('Error response data:', error.response.data);
+  }
   return Promise.reject(error);
 });
 
@@ -127,7 +178,7 @@ export const subjectAPI = {
 };
 
 export const roomAPI = {
-  list: () => apiClient.get('/rooms'),
+  list: (limit?: number) => apiClient.get('/rooms', { params: { limit: limit || 100 } }),
   get: (id: string) => apiClient.get(`/rooms/${id}`),
   create: (data: any) => apiClient.post('/rooms', data),
   update: (id: string, data: any) => apiClient.put(`/rooms/${id}`, data),
@@ -146,6 +197,7 @@ interface GenerateTimetablePayload {
   schoolId: string;
   academicYearId: string;
   name?: string;
+  engineVersion?: string;
   constraints?: Record<string, unknown>;
 }
 
@@ -157,11 +209,34 @@ export const timetableAPI = {
   delete: (id: string) => apiClient.delete(`/timetables/${id}`),
   activate: (id: string) => apiClient.post(`/timetables/${id}/activate`),
   deactivate: (id: string) => apiClient.post(`/timetables/${id}/deactivate`),
+  
+  // NEW: Timetable Engine v3.5 API Integration
   generate: (payload: GenerateTimetablePayload) =>
     apiClient.post('/timetables/generate', payload, {
       // Treat 400 as a valid response (constraint validation errors are expected)
       validateStatus: (status) => status < 500,
     }),
+  
+  // NEW: Engine API endpoints
+  engineGenerate: (payload: GenerateTimetablePayload) =>
+    engineClient.post('/api/v1/timetables/generate', payload),
+  
+  getGenerationStatus: (sessionId: string) =>
+    engineClient.get(`/api/v1/timetables/generate/${sessionId}/status`),
+  
+  getGenerationResult: (sessionId: string) =>
+    engineClient.get(`/api/v1/timetables/${sessionId}/result`),
+  
+  getTimetableView: (timetableId: string) =>
+    engineClient.get(`/api/v1/timetables/${timetableId}/view`),
+  
+  listSessions: () => engineClient.get('/api/v1/sessions'),
+  
+  cleanupSession: (sessionId: string) =>
+    engineClient.delete(`/api/v1/sessions/${sessionId}`),
+  
+  getSystemStats: () => engineClient.get('/api/v1/system/stats'),
+  
   getSummary: (id: string) => apiClient.get(`/timetables/${id}/summary`),
 };
 

@@ -1,0 +1,21 @@
+name,grade,section,studentCount
+Grade 6A,6,A,35
+Grade 6B,6,B,26
+Grade 6C,6,C,25
+Grade 7A,7,A,29
+Grade 7B,7,B,28
+Grade 7C,7,C,28
+Grade 8A,8,A,27
+Grade 8B,8,B,26
+Grade 8C,8,C,35
+Grade 9A,9,A,33
+Grade 9B,9,B,26
+Grade 9C,9,C,34
+Grade 10A,10,A,31
+Grade 10B,10,B,25
+Grade 10C,10,C,25
+Grade 11A,11,A,26
+Grade 11B,11,B,28
+Grade 11C,11,C,28
+Grade 12A,12,A,33
+Grade 12B,12,B,34

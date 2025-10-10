@@ -1,0 +1,22 @@
+{
+  "test_timestamp": 1760087627,
+  "data_summary": {
+    "classes": 20,
+    "subjects": 10,
+    "teachers": 66,
+    "rooms": 39,
+    "time_slots": 35
+  },
+  "csp_results": {
+    "timetables_generated": 3,
+    "generation_time": 0.22586798667907715
+  },
+  "evaluation_results": {
+    "best_score": 881.9646087817434,
+    "average_score": 877.2368216163154
+  },
+  "performance_metrics": {
+    "total_time": 0.6163361072540283,
+    "csp_time": 0.22586798667907715
+  }
+}

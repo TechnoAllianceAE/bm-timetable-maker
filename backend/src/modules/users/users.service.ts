@@ -40,6 +40,12 @@ export class UsersService {
           schoolId: true,
           profile: true,
           createdAt: true,
+          school: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
         },
         orderBy: {
           createdAt: 'desc',
@@ -108,11 +114,34 @@ export class UsersService {
 
   async remove(id: string) {
     try {
+      // First, check if user exists
+      const user = await this.prisma.user.findUnique({
+        where: { id },
+        include: { teacher: true },
+      });
+
+      if (!user) {
+        throw new NotFoundException(`User with ID ${id} not found`);
+      }
+
+      // Delete related teacher record if it exists (to avoid foreign key constraint)
+      if (user.teacher) {
+        await this.prisma.teacher.delete({
+          where: { id: user.teacher.id },
+        });
+      }
+
+      // Now delete the user
       return await this.prisma.user.delete({
         where: { id },
       });
     } catch (error) {
-      throw new NotFoundException(`User with ID ${id} not found`);
+      if (error instanceof NotFoundException) {
+        throw error;
+      }
+      // Log the actual error for debugging
+      console.error('Error deleting user:', error);
+      throw new NotFoundException(`User with ID ${id} not found or could not be deleted`);
     }
   }
 }

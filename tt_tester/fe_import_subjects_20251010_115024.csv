@@ -1,0 +1,11 @@
+name,code,credits,requiresLab,minPeriodsPerWeek,maxPeriodsPerWeek
+Mathematics,MATH,6,False,5,7
+English,ENG,5,False,4,6
+Science,SCI,6,True,5,7
+Social Studies,SS,4,False,3,5
+Computer Science,CS,4,True,3,5
+Physical Education,PE,3,False,2,4
+Art,ART,3,False,2,4
+Music,MUS,2,False,2,3
+Hindi,HIN,4,False,3,5
+French,FR,3,False,2,4

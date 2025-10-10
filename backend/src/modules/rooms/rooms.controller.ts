@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Body, Param, Query, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, Query, UseGuards, Request, BadRequestException } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
 import { RoomsService } from './rooms.service';
 import { CreateRoomDto } from './dto/create-room.dto';
@@ -15,7 +15,15 @@ export class RoomsController {
   @Post()
   @ApiOperation({ summary: 'Create a new room' })
   @ApiResponse({ status: 201, description: 'Room created successfully' })
-  create(@Body() createRoomDto: CreateRoomDto) {
+  create(@Body() createRoomDto: CreateRoomDto, @Request() req: any) {
+    // Extract schoolId from JWT token
+    const schoolId = req.user?.schoolId;
+    if (!schoolId) {
+      throw new BadRequestException('School ID not found in user session');
+    }
+
+    // Set schoolId from token
+    createRoomDto.schoolId = schoolId;
     return this.roomsService.create(createRoomDto);
   }
 

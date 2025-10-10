@@ -1,0 +1,614 @@
+{
+  "total_tests": 25,
+  "passed_tests": 25,
+  "failed_tests": 0,
+  "performance_metrics": {
+    "MICRO_Evaluator": {
+      "execution_time": 0.006280183792114258,
+      "result": {
+        "single_score": 996.0,
+        "batch_count": 3,
+        "best_score": 996.4724747683481,
+        "avg_score": 995.6483165122321,
+        "penalty_types": 2
+      }
+    },
+    "MICRO_Ranking": {
+      "execution_time": 0.007496833801269531,
+      "result": {
+        "ranked_count": 5,
+        "top_score": 997.0,
+        "score_range": 2.0,
+        "top_3_count": 3,
+        "quality_filtered_count": 5
+      }
+    },
+    "MICRO_Caching": {
+      "execution_time": 0.012920856475830078,
+      "result": {
+        "stored_count": 3,
+        "retrieved_success": true,
+        "best_found": true,
+        "cache_size_mb": 0.03389739990234375
+      }
+    },
+    "MICRO_GA_Caching": {
+      "execution_time": 0.06200599670410156,
+      "result": {
+        "generations_completed": 3,
+        "population_size": 5,
+        "cache_integration": true,
+        "best_cached": true,
+        "evolution_report_generated": true
+      }
+    },
+    "MICRO_End_to_End": {
+      "execution_time": 0.03875398635864258,
+      "result": {
+        "initial_generation": {
+          "timetable_count": 4,
+          "generation_time": 0.003693819046020508,
+          "conflicts": 0
+        },
+        "evaluation_ranking": {
+          "ranked_count": 4,
+          "best_score": 997.0,
+          "worst_score": 995.0
+        },
+        "caching": {
+          "cached_count": 4,
+          "session_id": "workflow_MICRO_1760077798"
+        },
+        "optimization": {
+          "optimized_count": 3,
+          "ga_session": "workflow_MICRO_1760077798_optimized"
+        },
+        "final_comparison": {
+          "final_best_score": 995.4724747683481,
+          "improvement": -1.5275252316519072,
+          "improvement_percentage": -0.15321215964412307
+        }
+      }
+    },
+    "SMALL_Evaluator": {
+      "execution_time": 0.028016090393066406,
+      "result": {
+        "single_score": 963.5278640450005,
+        "batch_count": 3,
+        "best_score": 968.7911657535268,
+        "avg_score": 967.0261647060269,
+        "penalty_types": 3
+      }
+    },
+    "SMALL_Ranking": {
+      "execution_time": 0.04517674446105957,
+      "result": {
+        "ranked_count": 5,
+        "top_score": 968.2798809542858,
+        "score_range": 7.488715200758975,
+        "top_3_count": 3,
+        "quality_filtered_count": 5
+      }
+    },
+    "SMALL_Caching": {
+      "execution_time": 0.04475212097167969,
+      "result": {
+        "stored_count": 3,
+        "retrieved_success": true,
+        "best_found": true,
+        "cache_size_mb": 0.17125511169433594
+      }
+    },
+    "SMALL_GA_Caching": {
+      "execution_time": 0.19416189193725586,
+      "result": {
+        "generations_completed": 3,
+        "population_size": 5,
+        "cache_integration": true,
+        "best_cached": true,
+        "evolution_report_generated": true
+      }
+    },
+    "SMALL_End_to_End": {
+      "execution_time": 0.13048768043518066,
+      "result": {
+        "initial_generation": {
+          "timetable_count": 4,
+          "generation_time": 0.030544757843017578,
+          "conflicts": 0
+        },
+        "evaluation_ranking": {
+          "ranked_count": 4,
+          "best_score": 971.7911657535268,
+          "worst_score": 960.2678998635391
+        },
+        "caching": {
+          "cached_count": 4,
+          "session_id": "workflow_SMALL_1760077798"
+        },
+        "optimization": {
+          "optimized_count": 3,
+          "ga_session": "workflow_SMALL_1760077798_optimized"
+        },
+        "final_comparison": {
+          "final_best_score": 971.7911657535268,
+          "improvement": 0.0,
+          "improvement_percentage": 0.0
+        }
+      }
+    },
+    "MEDIUM_Evaluator": {
+      "execution_time": 0.12617802619934082,
+      "result": {
+        "single_score": 846.8553690344436,
+        "batch_count": 3,
+        "best_score": 848.4992375115262,
+        "avg_score": 846.6054894068808,
+        "penalty_types": 4
+      }
+    },
+    "MEDIUM_Ranking": {
+      "execution_time": 0.2029571533203125,
+      "result": {
+        "ranked_count": 5,
+        "top_score": 841.6825037318774,
+        "score_range": 7.991956828735169,
+        "top_3_count": 3,
+        "quality_filtered_count": 5
+      }
+    },
+    "MEDIUM_Caching": {
+      "execution_time": 0.16406512260437012,
+      "result": {
+        "stored_count": 3,
+        "retrieved_success": true,
+        "best_found": true,
+        "cache_size_mb": 0.4921998977661133
+      }
+    },
+    "MEDIUM_GA_Caching": {
+      "execution_time": 0.4889717102050781,
+      "result": {
+        "generations_completed": 2,
+        "population_size": 5,
+        "cache_integration": true,
+        "best_cached": true,
+        "evolution_report_generated": true
+      }
+    },
+    "MEDIUM_End_to_End": {
+      "execution_time": 0.39905524253845215,
+      "result": {
+        "initial_generation": {
+          "timetable_count": 4,
+          "generation_time": 0.14464187622070312,
+          "conflicts": 0
+        },
+        "evaluation_ranking": {
+          "ranked_count": 4,
+          "best_score": 852.808865298115,
+          "worst_score": 834.401195484462
+        },
+        "caching": {
+          "cached_count": 4,
+          "session_id": "workflow_MEDIUM_1760077799"
+        },
+        "optimization": {
+          "optimized_count": 3,
+          "ga_session": "workflow_MEDIUM_1760077799_optimized"
+        },
+        "final_comparison": {
+          "final_best_score": 852.808865298115,
+          "improvement": 0.0,
+          "improvement_percentage": 0.0
+        }
+      }
+    },
+    "LARGE_Evaluator": {
+      "execution_time": 0.5177600383758545,
+      "result": {
+        "single_score": 646.3148400357495,
+        "batch_count": 3,
+        "best_score": 656.7934398800338,
+        "avg_score": 646.514714866776,
+        "penalty_types": 4
+      }
+    },
+    "LARGE_Ranking": {
+      "execution_time": 0.823218822479248,
+      "result": {
+        "ranked_count": 5,
+        "top_score": 656.3201655638749,
+        "score_range": 25.03489352430836,
+        "top_3_count": 3,
+        "quality_filtered_count": 5
+      }
+    },
+    "LARGE_Caching": {
+      "execution_time": 0.5930099487304688,
+      "result": {
+        "stored_count": 3,
+        "retrieved_success": true,
+        "best_found": true,
+        "cache_size_mb": 1.2087430953979492
+      }
+    },
+    "LARGE_GA_Caching": {
+      "execution_time": 1.5338952541351318,
+      "result": {
+        "generations_completed": 2,
+        "population_size": 5,
+        "cache_integration": true,
+        "best_cached": true,
+        "evolution_report_generated": true
+      }
+    },
+    "LARGE_End_to_End": {
+      "execution_time": 2.108288049697876,
+      "result": {
+        "initial_generation": {
+          "timetable_count": 4,
+          "generation_time": 1.062182903289795,
+          "conflicts": 0
+        },
+        "evaluation_ranking": {
+          "ranked_count": 4,
+          "best_score": 656.7126581424918,
+          "worst_score": 628.2316312481502
+        },
+        "caching": {
+          "cached_count": 4,
+          "session_id": "workflow_LARGE_1760077804"
+        },
+        "optimization": {
+          "optimized_count": 3,
+          "ga_session": "workflow_LARGE_1760077804_optimized"
+        },
+        "final_comparison": {
+          "final_best_score": 656.7126581424918,
+          "improvement": 0.0,
+          "improvement_percentage": 0.0
+        }
+      }
+    },
+    "ENTERPRISE_Evaluator": {
+      "execution_time": 2.9538941383361816,
+      "result": {
+        "single_score": 247.72832876484586,
+        "batch_count": 3,
+        "best_score": 247.72832876484586,
+        "avg_score": 224.41386575116232,
+        "penalty_types": 4
+      }
+    },
+    "ENTERPRISE_Ranking": {
+      "execution_time": 6.275598764419556,
+      "result": {
+        "ranked_count": 5,
+        "top_score": 237.73067702743538,
+        "score_range": 38.00552132697544,
+        "top_3_count": 3,
+        "quality_filtered_count": 0
+      }
+    },
+    "ENTERPRISE_Caching": {
+      "execution_time": 2.4388840198516846,
+      "result": {
+        "stored_count": 3,
+        "retrieved_success": true,
+        "best_found": true,
+        "cache_size_mb": 2.2058897018432617
+      }
+    },
+    "ENTERPRISE_GA_Caching": {
+      "execution_time": 5.331484794616699,
+      "result": {
+        "generations_completed": 2,
+        "population_size": 5,
+        "cache_integration": true,
+        "best_cached": true,
+        "evolution_report_generated": true
+      }
+    },
+    "ENTERPRISE_End_to_End": {
+      "execution_time": 4.945596933364868,
+      "result": {
+        "initial_generation": {
+          "timetable_count": 4,
+          "generation_time": 3.7456960678100586,
+          "conflicts": 0
+        },
+        "evaluation_ranking": {
+          "ranked_count": 4,
+          "best_score": 224.71644189294727,
+          "worst_score": 200.74210603502752
+        },
+        "caching": {
+          "cached_count": 4,
+          "session_id": "workflow_ENTERPRISE_1760077826"
+        },
+        "optimization": {
+          "optimized_count": 3,
+          "ga_session": "workflow_ENTERPRISE_1760077826_optimized"
+        },
+        "final_comparison": {
+          "final_best_score": 224.71644189294727,
+          "improvement": 0.0,
+          "improvement_percentage": 0.0
+        }
+      }
+    }
+  },
+  "size_results": {
+    "MICRO": {
+      "evaluator": {
+        "single_score": 996.0,
+        "batch_count": 3,
+        "best_score": 996.4724747683481,
+        "avg_score": 995.6483165122321,
+        "penalty_types": 2
+      },
+      "ranking": {
+        "ranked_count": 5,
+        "top_score": 997.0,
+        "score_range": 2.0,
+        "top_3_count": 3,
+        "quality_filtered_count": 5
+      },
+      "caching": {
+        "stored_count": 3,
+        "retrieved_success": true,
+        "best_found": true,
+        "cache_size_mb": 0.03389739990234375
+      },
+      "ga_caching": {
+        "generations_completed": 3,
+        "population_size": 5,
+        "cache_integration": true,
+        "best_cached": true,
+        "evolution_report_generated": true
+      },
+      "end_to_end": {
+        "initial_generation": {
+          "timetable_count": 4,
+          "generation_time": 0.003693819046020508,
+          "conflicts": 0
+        },
+        "evaluation_ranking": {
+          "ranked_count": 4,
+          "best_score": 997.0,
+          "worst_score": 995.0
+        },
+        "caching": {
+          "cached_count": 4,
+          "session_id": "workflow_MICRO_1760077798"
+        },
+        "optimization": {
+          "optimized_count": 3,
+          "ga_session": "workflow_MICRO_1760077798_optimized"
+        },
+        "final_comparison": {
+          "final_best_score": 995.4724747683481,
+          "improvement": -1.5275252316519072,
+          "improvement_percentage": -0.15321215964412307
+        }
+      }
+    },
+    "SMALL": {
+      "evaluator": {
+        "single_score": 963.5278640450005,
+        "batch_count": 3,
+        "best_score": 968.7911657535268,
+        "avg_score": 967.0261647060269,
+        "penalty_types": 3
+      },
+      "ranking": {
+        "ranked_count": 5,
+        "top_score": 968.2798809542858,
+        "score_range": 7.488715200758975,
+        "top_3_count": 3,
+        "quality_filtered_count": 5
+      },
+      "caching": {
+        "stored_count": 3,
+        "retrieved_success": true,
+        "best_found": true,
+        "cache_size_mb": 0.17125511169433594
+      },
+      "ga_caching": {
+        "generations_completed": 3,
+        "population_size": 5,
+        "cache_integration": true,
+        "best_cached": true,
+        "evolution_report_generated": true
+      },
+      "end_to_end": {
+        "initial_generation": {
+          "timetable_count": 4,
+          "generation_time": 0.030544757843017578,
+          "conflicts": 0
+        },
+        "evaluation_ranking": {
+          "ranked_count": 4,
+          "best_score": 971.7911657535268,
+          "worst_score": 960.2678998635391
+        },
+        "caching": {
+          "cached_count": 4,
+          "session_id": "workflow_SMALL_1760077798"
+        },
+        "optimization": {
+          "optimized_count": 3,
+          "ga_session": "workflow_SMALL_1760077798_optimized"
+        },
+        "final_comparison": {
+          "final_best_score": 971.7911657535268,
+          "improvement": 0.0,
+          "improvement_percentage": 0.0
+        }
+      }
+    },
+    "MEDIUM": {
+      "evaluator": {
+        "single_score": 846.8553690344436,
+        "batch_count": 3,
+        "best_score": 848.4992375115262,
+        "avg_score": 846.6054894068808,
+        "penalty_types": 4
+      },
+      "ranking": {
+        "ranked_count": 5,
+        "top_score": 841.6825037318774,
+        "score_range": 7.991956828735169,
+        "top_3_count": 3,
+        "quality_filtered_count": 5
+      },
+      "caching": {
+        "stored_count": 3,
+        "retrieved_success": true,
+        "best_found": true,
+        "cache_size_mb": 0.4921998977661133
+      },
+      "ga_caching": {
+        "generations_completed": 2,
+        "population_size": 5,
+        "cache_integration": true,
+        "best_cached": true,
+        "evolution_report_generated": true
+      },
+      "end_to_end": {
+        "initial_generation": {
+          "timetable_count": 4,
+          "generation_time": 0.14464187622070312,
+          "conflicts": 0
+        },
+        "evaluation_ranking": {
+          "ranked_count": 4,
+          "best_score": 852.808865298115,
+          "worst_score": 834.401195484462
+        },
+        "caching": {
+          "cached_count": 4,
+          "session_id": "workflow_MEDIUM_1760077799"
+        },
+        "optimization": {
+          "optimized_count": 3,
+          "ga_session": "workflow_MEDIUM_1760077799_optimized"
+        },
+        "final_comparison": {
+          "final_best_score": 852.808865298115,
+          "improvement": 0.0,
+          "improvement_percentage": 0.0
+        }
+      }
+    },
+    "LARGE": {
+      "evaluator": {
+        "single_score": 646.3148400357495,
+        "batch_count": 3,
+        "best_score": 656.7934398800338,
+        "avg_score": 646.514714866776,
+        "penalty_types": 4
+      },
+      "ranking": {
+        "ranked_count": 5,
+        "top_score": 656.3201655638749,
+        "score_range": 25.03489352430836,
+        "top_3_count": 3,
+        "quality_filtered_count": 5
+      },
+      "caching": {
+        "stored_count": 3,
+        "retrieved_success": true,
+        "best_found": true,
+        "cache_size_mb": 1.2087430953979492
+      },
+      "ga_caching": {
+        "generations_completed": 2,
+        "population_size": 5,
+        "cache_integration": true,
+        "best_cached": true,
+        "evolution_report_generated": true
+      },
+      "end_to_end": {
+        "initial_generation": {
+          "timetable_count": 4,
+          "generation_time": 1.062182903289795,
+          "conflicts": 0
+        },
+        "evaluation_ranking": {
+          "ranked_count": 4,
+          "best_score": 656.7126581424918,
+          "worst_score": 628.2316312481502
+        },
+        "caching": {
+          "cached_count": 4,
+          "session_id": "workflow_LARGE_1760077804"
+        },
+        "optimization": {
+          "optimized_count": 3,
+          "ga_session": "workflow_LARGE_1760077804_optimized"
+        },
+        "final_comparison": {
+          "final_best_score": 656.7126581424918,
+          "improvement": 0.0,
+          "improvement_percentage": 0.0
+        }
+      }
+    },
+    "ENTERPRISE": {
+      "evaluator": {
+        "single_score": 247.72832876484586,
+        "batch_count": 3,
+        "best_score": 247.72832876484586,
+        "avg_score": 224.41386575116232,
+        "penalty_types": 4
+      },
+      "ranking": {
+        "ranked_count": 5,
+        "top_score": 237.73067702743538,
+        "score_range": 38.00552132697544,
+        "top_3_count": 3,
+        "quality_filtered_count": 0
+      },
+      "caching": {
+        "stored_count": 3,
+        "retrieved_success": true,
+        "best_found": true,
+        "cache_size_mb": 2.2058897018432617
+      },
+      "ga_caching": {
+        "generations_completed": 2,
+        "population_size": 5,
+        "cache_integration": true,
+        "best_cached": true,
+        "evolution_report_generated": true
+      },
+      "end_to_end": {
+        "initial_generation": {
+          "timetable_count": 4,
+          "generation_time": 3.7456960678100586,
+          "conflicts": 0
+        },
+        "evaluation_ranking": {
+          "ranked_count": 4,
+          "best_score": 224.71644189294727,
+          "worst_score": 200.74210603502752
+        },
+        "caching": {
+          "cached_count": 4,
+          "session_id": "workflow_ENTERPRISE_1760077826"
+        },
+        "optimization": {
+          "optimized_count": 3,
+          "ga_session": "workflow_ENTERPRISE_1760077826_optimized"
+        },
+        "final_comparison": {
+          "final_best_score": 224.71644189294727,
+          "improvement": 0.0,
+          "improvement_percentage": 0.0
+        }
+      }
+    }
+  }
+}

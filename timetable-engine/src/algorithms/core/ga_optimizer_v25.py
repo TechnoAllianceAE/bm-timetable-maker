@@ -29,6 +29,16 @@ import copy
 import statistics
 from collections import defaultdict
 from dataclasses import dataclass
+import uuid
+
+import sys
+from pathlib import Path
+
+# Add parent directories to path for imports
+sys.path.append(str(Path(__file__).parent.parent.parent))
+
+from evaluation import TimetableEvaluator, EvaluationConfig
+from persistence.timetable_cache import TimetableCache
 
 
 @dataclass
@@ -82,10 +92,24 @@ class GAOptimizerV25:
     - weights.morning_period_cutoff → defines "morning" dynamically
     """
     
-    def __init__(self):
+    def __init__(self, 
+                 evaluator: Optional[TimetableEvaluator] = None,
+                 cache: Optional[TimetableCache] = None,
+                 enable_caching: bool = True):
         self.version = "2.5"
         self.stats_history: List[GenerationStats] = []
         self.weights: Optional[OptimizationWeights] = None
+        self.evaluator: Optional[TimetableEvaluator] = evaluator
+        
+        # Cache integration
+        self.enable_caching = enable_caching
+        if self.enable_caching:
+            self.cache = cache or TimetableCache()
+        else:
+            self.cache = None
+        
+        # Session management
+        self.current_session_id: Optional[str] = None
     
     def evolve(
         self,
@@ -94,12 +118,14 @@ class GAOptimizerV25:
         mutation_rate: float = 0.15,
         crossover_rate: float = 0.7,
         elitism_count: int = 2,
-        weights: Optional[Any] = None
+        weights: Optional[Any] = None,
+        session_id: Optional[str] = None,
+        cache_intermediate: bool = True
     ) -> List[Dict]:
         """
         Evolve population of timetables using genetic algorithm.
         
-        VERSION 2.5: Now uses metadata for all penalty calculations.
+        VERSION 2.5: Now uses metadata for all penalty calculations and caching.
         
         Args:
             population: Initial timetables from CSP solver (with metadata)
@@ -108,6 +134,8 @@ class GAOptimizerV25:
             crossover_rate: Probability of crossover (0.0-1.0)
             elitism_count: Number of best solutions to preserve
             weights: OptimizationWeights with v2.5 fields
+            session_id: Optional session ID for cache organization
+            cache_intermediate: Whether to cache intermediate generations
         
         Returns:
             Optimized timetables sorted by fitness (best first)
@@ -116,12 +144,25 @@ class GAOptimizerV25:
         - Each timetable entry must have subject_metadata
         - Each timetable entry must have teacher_metadata
         - Graceful degradation if metadata missing
+        
+        CACHING:
+        - All generations cached if enabled
+        - Best result preserved after completion
+        - Intermediate results cleaned up automatically
         """
         if not population:
             return []
         
+        # Setup session for caching
+        self.current_session_id = session_id or str(uuid.uuid4())
+        
         # Store weights for fitness calculation
         self.weights = weights or OptimizationWeights()
+        
+        # Initialize evaluator if not provided
+        if self.evaluator is None:
+            config = EvaluationConfig.from_optimization_weights(self.weights)
+            self.evaluator = TimetableEvaluator(config)
         
         # Reset stats
         self.stats_history = []
@@ -130,7 +171,16 @@ class GAOptimizerV25:
         current_population = [self._ensure_dict(t) for t in population]
         
         # Evaluate initial population
-        fitness_scores = [self._calculate_fitness(t) for t in current_population]
+        fitness_scores = [self.evaluator.evaluate(t).total_score for t in current_population]
+        
+        # Cache initial population if enabled
+        if self.enable_caching and self.cache and cache_intermediate:
+            self.cache.store_ga_population(
+                population=current_population,
+                session_id=self.current_session_id,
+                generation=0,
+                fitness_scores=fitness_scores
+            )
         
         # Evolution loop
         for gen in range(generations):
@@ -168,7 +218,16 @@ class GAOptimizerV25:
             
             # Evaluate new population
             current_population = next_population
-            fitness_scores = [self._calculate_fitness(t) for t in current_population]
+            fitness_scores = [self.evaluator.evaluate(t).total_score for t in current_population]
+            
+            # Cache generation if enabled
+            if self.enable_caching and self.cache and cache_intermediate:
+                self.cache.store_ga_population(
+                    population=current_population,
+                    session_id=self.current_session_id,
+                    generation=gen + 1,
+                    fitness_scores=fitness_scores
+                )
             
             # Track statistics
             stats = GenerationStats(
@@ -185,89 +244,31 @@ class GAOptimizerV25:
                                                   key=lambda x: x[0],
                                                   reverse=True)]
         
+        # Cache final result if enabled
+        if self.enable_caching and self.cache:
+            # Store the best timetable as the session result
+            best_timetable = sorted_population[0]
+            best_fitness = max(fitness_scores)
+            
+            final_id = self.cache.store_timetable(
+                timetable=best_timetable,
+                session_id=self.current_session_id,
+                generation=generations,  # Mark as final generation
+                fitness_score=best_fitness,
+                metadata={'session_final': True, 'total_generations': generations}
+            )
+            
+            # Complete session (keeps best, cleans up intermediate results)
+            if cache_intermediate:
+                self.cache.complete_session(self.current_session_id, keep_best=True)
+        
         return sorted_population
     
-    def _calculate_fitness(self, timetable_dict: Dict) -> float:
-        """
-        Calculate fitness score based on soft constraints.
-        Higher score = better quality.
-        
-        VERSION 2.5: ALL penalties now use metadata.
-        
-        Fitness Calculation Strategy:
-        ------------------------------
-        Start with base score of 1000 and subtract penalties for violations.
-        Each penalty type has a weight that controls how much we care about it.
-        
-        Penalty Types:
-        1. Workload imbalance - Teachers have unequal teaching loads
-        2. Student gaps - Empty periods between classes in a day
-        3. Time preferences - Subjects scheduled at wrong times (METADATA-DRIVEN)
-        4. Consecutive periods - Teachers teaching too many periods in a row (METADATA-DRIVEN)
-        
-        All weights are configurable via OptimizationWeights in the API request.
-        
-        v2.5 CHANGES:
-        - Time preferences use subject_metadata.prefer_morning (not hardcoded names)
-        - Period cutoff uses weights.morning_period_cutoff (not hardcoded 4)
-        - Consecutive limit uses teacher_metadata.max_consecutive_periods (not hardcoded 3)
-        """
-        score = 1000.0  # Start high, subtract penalties
-        
-        try:
-            # Extract TimetableEntry objects from the timetable
-            assignments = self._extract_assignments(timetable_dict)
-            
-            if not assignments:
-                return 0.0  # Empty timetable = invalid
-            
-            # Pre-compute groupings for efficiency
-            teacher_loads = self._calculate_teacher_workloads(assignments)
-            class_schedules = self._group_by_class(assignments)
-            
-            # --- Apply Penalties ---
-            
-            # Penalty 1: Unbalanced teacher workload
-            # Example: Teacher A has 20 periods, Teacher B has 8 periods
-            # Penalty increases with workload variance
-            workload_penalty = self._workload_imbalance_penalty(teacher_loads)
-            score -= workload_penalty * self.weights.workload_balance
-            
-            # Penalty 2: Gaps in student schedules
-            # Example: Class has periods 1, 2, 5, 6 (gap at periods 3-4)
-            # Each gap period adds to penalty
-            gap_penalty = self._calculate_gap_penalty(class_schedules)
-            score -= gap_penalty * self.weights.gap_minimization
-            
-            # Penalty 3: Time preference violations (v2.5: METADATA-DRIVEN)
-            # Example: Math (prefer_morning=True) scheduled at period 7
-            # Uses subject_metadata instead of hardcoded keywords
-            pref_penalty = self._time_preference_penalty(assignments)
-            score -= pref_penalty * self.weights.time_preferences
-            
-            # Penalty 4: Consecutive period violations (v2.5: METADATA-DRIVEN)
-            # Example: Teacher teaches periods 1-5 consecutively (5 > teacher's max of 3)
-            # Uses teacher_metadata.max_consecutive_periods instead of hardcoded 3
-            consecutive_penalty = self._consecutive_period_penalty(teacher_loads)
-            score -= consecutive_penalty * self.weights.consecutive_periods
-            
-        except Exception as e:
-            # If fitness calculation fails, return very low score
-            # This prevents crashes but signals poor solution
-            print(f"Warning: Fitness calculation error: {e}")
-            return 0.0
-        
-        return max(0.0, score)  # Ensure non-negative score
+    # FITNESS CALCULATION NOW HANDLED BY TimetableEvaluator
+    # All penalty calculation methods moved to evaluation module for reusability
     
     def _extract_assignments(self, timetable_dict: Dict) -> List[Dict]:
-        """
-        Extract assignment list from timetable dict.
-        
-        Based on actual models_phase1_v25.py structure:
-        Timetable has an "entries" field with list of TimetableEntry objects.
-        Each entry contains: class_id, subject_id, teacher_id, room_id, 
-        time_slot_id, day_of_week, period_number, subject_metadata, teacher_metadata
-        """
+        """Extract assignment list from timetable dict (needed for crossover/mutation)."""
         # Primary structure: Timetable.entries (list of TimetableEntry)
         if "entries" in timetable_dict:
             return timetable_dict["entries"]
@@ -300,216 +301,7 @@ class GAOptimizerV25:
         
         return []
     
-    def _calculate_teacher_workloads(self, assignments: List[Dict]) -> Dict[str, List[Dict]]:
-        """Group assignments by teacher. Works with TimetableEntry structure."""
-        workloads = defaultdict(list)
-        for assignment in assignments:
-            # TimetableEntry has teacher_id field directly
-            teacher_id = assignment.get("teacher_id")
-            if teacher_id:
-                workloads[teacher_id].append(assignment)
-        return dict(workloads)
-    
-    def _group_by_class(self, assignments: List[Dict]) -> Dict[str, List[Dict]]:
-        """Group assignments by class. Works with TimetableEntry structure."""
-        schedules = defaultdict(list)
-        for assignment in assignments:
-            # TimetableEntry has class_id field directly
-            class_id = assignment.get("class_id")
-            if class_id:
-                schedules[class_id].append(assignment)
-        return dict(schedules)
-    
-    def _workload_imbalance_penalty(self, teacher_loads: Dict[str, List[Dict]]) -> float:
-        """
-        Calculate penalty for unbalanced teacher workload distribution.
-        Uses standard deviation - higher std dev = more imbalance.
-        """
-        if not teacher_loads:
-            return 0.0
-        
-        workload_counts = [len(assignments) for assignments in teacher_loads.values()]
-        
-        if len(workload_counts) < 2:
-            return 0.0
-        
-        # Use standard deviation as penalty
-        std_dev = statistics.stdev(workload_counts)
-        return float(std_dev)
-    
-    def _calculate_gap_penalty(self, class_schedules: Dict[str, List[Dict]]) -> float:
-        """
-        Count gaps (empty periods between classes) in student schedules.
-        Works with TimetableEntry structure: day_of_week, period_number
-        """
-        total_gaps = 0
-        
-        for class_id, assignments in class_schedules.items():
-            # Group by day - TimetableEntry uses day_of_week field (DayOfWeek enum)
-            by_day = defaultdict(list)
-            for assignment in assignments:
-                # TimetableEntry has day_of_week (enum: MONDAY, TUESDAY, etc.)
-                day = assignment.get("day_of_week")
-                # TimetableEntry has period_number (int: 1, 2, 3, etc.)
-                period = assignment.get("period_number")
-                
-                if day and period:
-                    by_day[day].append(period)
-            
-            # Count gaps per day
-            for day, periods in by_day.items():
-                if len(periods) < 2:
-                    continue
-                
-                sorted_periods = sorted(periods)
-                for i in range(len(sorted_periods) - 1):
-                    gap = sorted_periods[i + 1] - sorted_periods[i] - 1
-                    total_gaps += max(0, gap)
-        
-        return float(total_gaps)
-    
-    def _time_preference_penalty(self, assignments: List[Dict]) -> float:
-        """
-        Penalty for scheduling subjects at non-preferred times.
-        
-        VERSION 2.5: METADATA-DRIVEN (replaces hardcoded subject keywords)
-        
-        Metadata-Driven Approach:
-        -------------------------
-        Uses subject metadata (prefer_morning flag) instead of hardcoded keywords.
-        This makes the system:
-        - Language-agnostic (works with any language)
-        - School-customizable (each school defines their preferences)
-        - Maintainable (no code changes needed for curriculum updates)
-        
-        How It Works:
-        1. Reads subject_metadata.prefer_morning from each assignment
-        2. Reads weights.morning_period_cutoff to define "morning"
-        3. Penalizes if prefer_morning=True but period > cutoff
-        
-        Fallback Behavior:
-        - If subject metadata not available, no penalty applied
-        - If morning_period_cutoff not set, uses default of 4
-        - System continues to work even without metadata
-        
-        Examples:
-        - Math (prefer_morning=True) at period 2, cutoff=4 → no penalty
-        - Math (prefer_morning=True) at period 7, cutoff=4 → penalty!
-        - PE (prefer_morning=False) at period 7, cutoff=4 → no penalty
-        """
-        penalty = 0
-        
-        # v2.5: Get configurable morning cutoff from weights
-        morning_cutoff = getattr(self.weights, 'morning_period_cutoff', 4)
-        
-        for assignment in assignments:
-            period_num = assignment.get("period_number")
-            if not period_num:
-                continue
-            
-            # v2.5: Read from subject metadata (not hardcoded keywords!)
-            subject_metadata = assignment.get("subject_metadata", {})
-            
-            # Option 1: Boolean flag (simple and most common)
-            # Uses configurable cutoff instead of hardcoded 4
-            prefer_morning = subject_metadata.get("prefer_morning", False)
-            if prefer_morning and period_num > morning_cutoff:
-                penalty += 1
-            
-            # Option 2: Preferred periods list (more flexible)
-            # If school specifies exact periods, use those instead
-            preferred_periods = subject_metadata.get("preferred_periods")
-            if preferred_periods and period_num not in preferred_periods:
-                # Only penalize if we haven't already penalized with prefer_morning
-                if not prefer_morning:
-                    penalty += 1
-            
-            # Option 3: Avoid periods list (negative preference)
-            avoid_periods = subject_metadata.get("avoid_periods")
-            if avoid_periods and period_num in avoid_periods:
-                penalty += 1
-        
-        return float(penalty)
-    
-    def _consecutive_period_penalty(self, teacher_loads: Dict[str, List[Dict]]) -> float:
-        """
-        Penalty for teachers teaching too many consecutive periods.
-        
-        VERSION 2.5: METADATA-DRIVEN (replaces hardcoded max_consecutive = 3)
-        
-        Metadata-Driven Approach:
-        -------------------------
-        Uses teacher metadata (max_consecutive_periods) instead of hardcoded value.
-        This allows per-teacher customization based on:
-        - Teacher preference/contract
-        - Subject intensity (Lab teachers vs. regular teachers)
-        - Teacher experience level
-        - Union rules or school policy
-        
-        Educational Rationale:
-        ----------------------
-        Teaching is cognitively demanding. Research suggests that teaching quality
-        degrades after 3 consecutive periods without a break. However, this varies:
-        - Experienced teachers may handle 4-5 consecutive periods
-        - Lab/Workshop teachers often need more breaks (equipment setup)
-        - Part-time teachers may prefer longer consecutive blocks
-        
-        How It Works:
-        1. Reads teacher_metadata.max_consecutive_periods for each teacher
-        2. Groups assignments by day per teacher
-        3. Counts consecutive runs of periods
-        4. Penalizes runs that exceed teacher's specific limit
-        
-        Fallback Behavior:
-        - If teacher metadata not available, uses default of 3
-        - System continues to work even without metadata
-        
-        Examples:
-        - Teacher A (max=3): [P1,P2,P3,P4] → penalty of 1 (4 > 3)
-        - Teacher B (max=4): [P1,P2,P3,P4] → no penalty (4 ≤ 4)
-        - Teacher C (max=2): [P1,P2,P3] → penalty of 1 (3 > 2)
-        """
-        penalty = 0
-        default_max_consecutive = 3  # Fallback if metadata missing
-        
-        for teacher_id, assignments in teacher_loads.items():
-            # v2.5: Read teacher's specific limit from metadata (not hardcoded!)
-            # Use first assignment's teacher_metadata (all assignments from same teacher)
-            teacher_metadata = assignments[0].get("teacher_metadata", {}) if assignments else {}
-            max_consecutive = teacher_metadata.get("max_consecutive_periods", default_max_consecutive)
-            
-            # Group by day - using day_of_week enum (MONDAY, TUESDAY, etc.)
-            by_day = defaultdict(list)
-            for assignment in assignments:
-                day = assignment.get("day_of_week")
-                period_num = assignment.get("period_number")
-                
-                if day and period_num:
-                    by_day[day].append(period_num)
-            
-            # Check consecutive periods per day against teacher's specific limit
-            for day, periods in by_day.items():
-                sorted_periods = sorted(periods)
-                consecutive = 1
-                
-                # Count consecutive runs
-                # Example: [1, 2, 3, 5, 6] -> runs of 3 and 2
-                for i in range(len(sorted_periods) - 1):
-                    if sorted_periods[i + 1] == sorted_periods[i] + 1:
-                        consecutive += 1
-                    else:
-                        # Run ended, check if it exceeded THIS TEACHER'S limit
-                        if consecutive > max_consecutive:
-                            penalty += (consecutive - max_consecutive)
-                        consecutive = 1  # Reset counter
-                
-                # Check final run
-                if consecutive > max_consecutive:
-                    penalty += (consecutive - max_consecutive)
-        
-        return float(penalty)
-    
-    def _tournament_selection(self, population: List[Dict], fitness_scores: List[float], 
+    def _tournament_selection(self, population: List[Dict], fitness_scores: List[float],
                              tournament_size: int = 3) -> Dict:
         """
         Select individual using tournament selection.
@@ -682,6 +474,69 @@ class GAOptimizerV25:
             pass
         
         return mutated
+    
+    def get_cached_best_timetable(self, session_id: Optional[str] = None) -> Optional[Dict[str, Any]]:
+        """
+        Retrieve the best timetable from cache for a session.
+        
+        Args:
+            session_id: Session ID to retrieve from (uses current if None)
+            
+        Returns:
+            Best timetable data if found, None otherwise
+        """
+        if not self.enable_caching or not self.cache:
+            return None
+        
+        target_session = session_id or self.current_session_id
+        if not target_session:
+            return None
+        
+        result = self.cache.get_best_timetable(target_session)
+        return result[1] if result else None
+    
+    def resume_from_generation(self, session_id: str, generation: int) -> Optional[List[Dict]]:
+        """
+        Resume GA evolution from a cached generation.
+        
+        Args:
+            session_id: Session to resume from
+            generation: Generation number to resume from
+            
+        Returns:
+            Population from that generation if found
+        """
+        if not self.enable_caching or not self.cache:
+            return None
+        
+        return self.cache.get_generation_population(session_id, generation)
+    
+    def get_cache_stats(self) -> Optional[Dict[str, Any]]:
+        """
+        Get statistics about the current cache.
+        
+        Returns:
+            Cache statistics if caching enabled, None otherwise
+        """
+        if not self.enable_caching or not self.cache:
+            return None
+        
+        return self.cache.get_cache_stats()
+    
+    def cleanup_session(self, session_id: Optional[str] = None, keep_best: bool = True):
+        """
+        Clean up a specific session's cache.
+        
+        Args:
+            session_id: Session to clean up (uses current if None)
+            keep_best: Whether to keep the best timetable
+        """
+        if not self.enable_caching or not self.cache:
+            return
+        
+        target_session = session_id or self.current_session_id
+        if target_session:
+            self.cache.complete_session(target_session, keep_best)
     
     def _update_assignments(self, timetable_dict: Dict, entries: List[Dict]):
         """

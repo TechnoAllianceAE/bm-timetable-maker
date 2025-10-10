@@ -1,6 +1,44 @@
-# CLAUDE.md
+# WARP.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Warp AI when working with code in this repository through the terminal interface.
+
+## Warp AI Terminal Guidance
+
+### Quick Start Commands
+When working in Warp terminal, these are the most commonly used commands:
+
+```bash
+# Quick service startup (all services)
+./START_ALL_SERVICES.sh        # macOS/Linux
+START_ALL_SERVICES.bat         # Windows
+
+# Individual service startup
+cd backend && npm run start:dev                    # Backend (port 5000)
+cd frontend && npm run dev                         # Frontend (port 3000) 
+cd timetable-engine && python main_v301.py        # Python Engine (port 8000)
+
+# Database operations
+npm run prisma:generate && npm run prisma:push   # Quick DB setup
+npm run prisma:seed                              # Add test data
+
+# Testing and validation
+cd tt_tester && python timetable_viewer.py       # View generated timetables
+pytest timetable-engine/                         # Run Python tests
+cd backend && npm run test                       # Run backend tests
+```
+
+### Current Version Status (for Warp AI)
+- **Python Engine**: Use v3.0.1 (`main_v301.py`) - Latest and recommended
+- **Backend**: NestJS on port 5000 - Fully operational
+- **Frontend**: Next.js 15 on port 3000 - Core features complete
+- **Database**: SQLite (dev.db) for development, PostgreSQL for production
+
+### Development Workflow in Terminal
+1. **Start services**: `./START_ALL_SERVICES.sh`
+2. **Check status**: `./STATUS_ALL_SERVICES.sh` 
+3. **Generate timetable**: Use frontend UI at http://localhost:3000
+4. **View results**: `cd tt_tester && python timetable_viewer.py`
+5. **Stop services**: `./STOP_ALL_SERVICES.sh`
 
 ## Project Overview
 
@@ -81,9 +119,10 @@ cd timetable-engine
 # Install dependencies
 pip install -r requirements.txt
 
-# Start services (v2.5 is latest with metadata-driven optimization)
-python main_v25.py                                    # Latest v2.5 service on port 8000
-uvicorn main_v25:app --reload --port 8000             # Alternative start method
+# Start services (v3.0.1 is latest and recommended)
+python main_v301.py                                   # Latest v3.0.1 service on port 8000 (RECOMMENDED)
+uvicorn main_v301:app --reload --port 8000            # Alternative start method for v3.0.1
+python main_v25.py                                    # v2.5 service (fastest but complex)
 python test_v25_metadata_flow.py                      # Test v2.5 metadata flow
 
 # Legacy services (if needed)
@@ -183,10 +222,14 @@ The system uses **metadata-driven optimization** with multiple solver versions:
 - **Algorithms** (`src/algorithms/`): Supporting algorithms and utilities
 
 #### Available Services
-- **v2.5 Service** (`main_v25.py`): Latest with metadata-driven optimization (RECOMMENDED)
+- **v3.0.1 Service** (`main_v301.py`): Latest with simplified room allocation and performance optimizations (RECOMMENDED)
+- **v3.0 Service** (`main_v30.py`): Stable with simplified room allocation
+- **v2.5 Service** (`main_v25.py`): Fastest generation but complex code (LEGACY)
 - **v2.0 Service** (`main_v20.py`): Stable legacy version
 
-#### Key Features (v2.5)
+#### Key Features (v3.0.1 - Current)
+- **Simplified Room Allocation**: 85% fewer conflict checks, pre-assigned home classrooms
+- **Performance Optimizations**: Cached lookups, pre-computed metadata, 1.5-3.6% faster than v3.0
 - **Metadata-driven optimization**: Subject preferences (prefer_morning), teacher constraints (max_consecutive_periods)
 - **Language-agnostic**: Customizable preference configurations per school
 - **Grade-specific subject requirements**: Define custom period allocations per subject per grade level
@@ -270,9 +313,10 @@ PYTHON_TIMETABLE_URL=http://localhost:8000
 
 ### Python Engine Version Strategy
 The timetable engine has multiple versions for iterative development:
-- **Use v3.0** (`main_v30.py`, `models_phase1_v30.py`, etc.) for new development (LATEST)
-- v3.0 includes simplified room allocation (85% performance improvement)
-- v2.5 includes metadata-driven optimization and language-agnostic preferences (STABLE)
+- **Use v3.0.1** (`main_v301.py`, `csp_solver_complete_v301.py`, etc.) for new development (LATEST)
+- v3.0.1 includes simplified room allocation and performance optimizations (85% conflict reduction, 1.5-3.6% faster)
+- v3.0 includes simplified room allocation (85% performance improvement) 
+- v2.5 includes metadata-driven optimization and language-agnostic preferences (FASTEST)
 - Test metadata flow with `test_v25_metadata_flow.py` before making changes
 - Legacy versions (v2.0, etc.) are kept for reference and A/B testing
 
@@ -425,3 +469,77 @@ Use **v2.0** if:
 - You prefer the proven legacy system
 - You don't need advanced metadata features
 - You want maximum simplicity
+
+## 🔧 **WARP AI TROUBLESHOOTING**
+
+### Common Terminal Operations
+
+#### Service Management Issues
+```bash
+# Check if services are running
+lsof -i :3000  # Frontend
+lsof -i :5000  # Backend  
+lsof -i :8000  # Python Engine
+
+# Kill stuck services
+pkill -f "npm run start:dev"    # Backend
+pkill -f "npm run dev"          # Frontend
+pkill -f "main_v301.py"         # Python Engine
+
+# Clean restart all services
+./STOP_ALL_SERVICES.sh && ./START_ALL_SERVICES.sh
+```
+
+#### Database Issues
+```bash
+# Reset database completely
+rm -f prisma/dev.db*           # Remove SQLite files
+npm run prisma:push            # Recreate schema
+npm run prisma:seed            # Add test data
+
+# Check database connections
+npm run prisma:studio          # Open database GUI
+```
+
+#### Python Environment Issues
+```bash
+# Check Python dependencies
+cd timetable-engine
+pip list | grep -E "fastapi|uvicorn|pydantic"
+
+# Reinstall if needed
+pip install -r requirements.txt
+
+# Test Python service manually
+curl -X GET http://localhost:8000/health
+```
+
+#### File Permission Issues (macOS/Linux)
+```bash
+# Make scripts executable
+chmod +x *.sh
+
+# Fix common permission issues
+sudo chown -R $USER:$USER node_modules/
+```
+
+### Performance Optimization Tips
+- Use v3.0.1 for best performance (1.5-3.6% faster than v3.0)
+- Assign home classrooms to all classes for 85% fewer room conflict checks
+- Use `utopia_school_generator.py` to create v3.0-compatible test data
+- Monitor generation logs in `tt_tester/` directory for bottlenecks
+
+### Quick Health Checks
+```bash
+# Verify all services respond
+curl -s http://localhost:3000 | grep -q "School Timetable" && echo "Frontend OK" || echo "Frontend FAIL"
+curl -s http://localhost:5000/api/health | grep -q "OK" && echo "Backend OK" || echo "Backend FAIL"  
+curl -s http://localhost:8000/health | grep -q "OK" && echo "Python OK" || echo "Python FAIL"
+```
+
+### Log Locations
+- **Backend logs**: Check terminal running `npm run start:dev`
+- **Frontend logs**: Check terminal running `npm run dev`
+- **Python logs**: Check terminal running `main_v301.py`
+- **Timetable generation logs**: `tt_tester/` directory
+- **Database logs**: Enable via Prisma debug environment variables

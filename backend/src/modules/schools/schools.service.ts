@@ -112,26 +112,24 @@ export class SchoolsService {
         where: { schoolId: id },
       });
 
-      // Delete teachers (linked to school via user.schoolId)
-      const teachers = await tx.teacher.findMany({
-        where: {
-          user: {
-            schoolId: id,
-          },
-        },
-        select: { id: true, userId: true },
+      // First, get all users belonging to this school
+      const usersToDelete = await tx.user.findMany({
+        where: { schoolId: id },
+        select: { id: true },
       });
 
+      const userIds = usersToDelete.map(u => u.id);
+
+      // Delete all teachers associated with these users
       const deletedTeachers = await tx.teacher.deleteMany({
         where: {
-          id: { in: teachers.map(t => t.id) },
+          userId: { in: userIds },
         },
       });
 
-      // Delete associated user accounts
-      const userIds = teachers.map(t => t.userId);
+      // Delete all user accounts belonging to this school
       await tx.user.deleteMany({
-        where: { id: { in: userIds } },
+        where: { schoolId: id },
       });
 
       // Delete classes

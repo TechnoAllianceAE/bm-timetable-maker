@@ -55,7 +55,12 @@
       "Bash(find:*)",
       "Read(///**)",
       "Bash(npm run prisma:seed:*)",
-      "Bash(tee:*)"
+      "Bash(tee:*)",
+      "Read(//Users/afzal/Projects/react_apps/TimeTableAI/**)",
+      "Bash(killall:*)",
+      "Bash(npm run start:prod:*)",
+      "Bash(./STATUS_ALL_SERVICES.sh)",
+      "Bash(xargs ps:*)"
     ],
     "deny": [],
     "ask": []

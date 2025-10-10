@@ -86,7 +86,9 @@ class CSPSolverCompleteV301:
         num_solutions: int = 3,
         subject_requirements: Optional[List[Dict]] = None,
         enforce_teacher_consistency: bool = True,
-        max_violations: int = 0
+        max_violations: int = 0,
+        allow_partial_solutions: bool = True,
+        min_coverage: float = 0.70
     ) -> Tuple[List[Timetable], float, Optional[List[str]], Optional[List[str]]]:
         """
         Generate COMPLETE timetables with simplified room allocation.
@@ -107,6 +109,9 @@ class CSPSolverCompleteV301:
             num_solutions: Number of solutions to generate
             subject_requirements: Optional grade-specific subject requirements
             enforce_teacher_consistency: If True, one teacher per subject per class
+            max_violations: Maximum violations allowed (for tolerance)
+            allow_partial_solutions: If True, return partial solutions instead of failing
+            min_coverage: Minimum coverage required for partial solutions (0.0-1.0)
 
         Returns:
             Tuple of (timetables, generation_time, conflicts, suggestions)
@@ -203,40 +208,73 @@ class CSPSolverCompleteV301:
             class_subject_distributions = {c.id: subject_distribution for c in classes}
 
         # ============================================================================
-        # PHASE 2: CSP scheduling with SIMPLIFIED room allocation
+        # PHASE 2: CSP scheduling with PARTIAL SOLUTION support
         # ============================================================================
         if self.debug:
-            print(f"\n[CSP v{self.version}] === PHASE 2: CSP SCHEDULING (SIMPLIFIED ROOMS) ===")
+            print(f"\n[CSP v{self.version}] === PHASE 2: CSP SCHEDULING (PARTIAL SOLUTIONS) ===")
+            print(f"  Partial Solutions: {'ENABLED' if allow_partial_solutions else 'DISABLED'}")
+            print(f"  Min Coverage Required: {min_coverage*100:.1f}%")
 
         solutions = []
-        for attempt in range(num_solutions):
-            if self.debug:
-                print(f"\n[CSP v{self.version}] Generating solution {attempt + 1}/{num_solutions}")
-
-            solution = self._generate_complete_solution(
-                classes, subjects, teachers, active_slots,
-                rooms, shared_rooms,  # v3.0: Pass both full room list and shared rooms
-                teacher_subjects, class_subject_distributions,
-                subject_lookup, teacher_lookup, room_lookup,
-                enforce_teacher_consistency,
-                greedy_assignment
-            )
-
-            if solution:
-                solutions.append(solution)
+        
+        if allow_partial_solutions:
+            # Try multiple relaxation levels to get partial solutions
+            relaxation_levels = [0.0, 0.3, 0.5, 0.8]  # 0.0 = strict, 0.8 = very relaxed
+            
+            for relaxation in relaxation_levels:
                 if self.debug:
-                    entries_count = len(solution.entries)
-                    expected = len(classes) * len(active_slots)
+                    print(f"\n[CSP v{self.version}] Trying relaxation level: {relaxation}")
+                
+                for attempt in range(max(1, num_solutions // len(relaxation_levels))):
+                    solution = self._generate_partial_solution(
+                        classes, subjects, teachers, active_slots,
+                        rooms, shared_rooms,
+                        teacher_subjects, class_subject_distributions,
+                        subject_lookup, teacher_lookup, room_lookup,
+                        enforce_teacher_consistency,
+                        greedy_assignment,
+                        relaxation_level=relaxation,
+                        min_coverage=min_coverage
+                    )
+                    
+                    if solution and self._calculate_coverage(solution, len(classes), len(active_slots)) >= min_coverage:
+                        # Add coverage and quality metrics
+                        coverage = self._calculate_coverage(solution, len(classes), len(active_slots))
+                        solution.metadata["coverage"] = coverage
+                        solution.metadata["relaxation_level"] = relaxation
+                        
+                        solutions.append(solution)
+                        if self.debug:
+                            self._log_solution_stats(solution, len(classes), len(active_slots))
+                        
+                        # If we got good coverage, don't need more relaxed attempts
+                        if coverage >= 0.95:
+                            break
+                
+                # If we have enough good solutions, stop trying more relaxed levels
+                if len(solutions) >= num_solutions:
+                    break
+        else:
+            # Original complete solution generation
+            for attempt in range(num_solutions):
+                if self.debug:
+                    print(f"\n[CSP v{self.version}] Generating complete solution {attempt + 1}/{num_solutions}")
 
-                    # v3.0: Count room allocation types
-                    home_room_count = sum(1 for e in solution.entries if not e.is_shared_room)
-                    shared_room_count = sum(1 for e in solution.entries if e.is_shared_room)
+                solution = self._generate_complete_solution(
+                    classes, subjects, teachers, active_slots,
+                    rooms, shared_rooms,
+                    teacher_subjects, class_subject_distributions,
+                    subject_lookup, teacher_lookup, room_lookup,
+                    enforce_teacher_consistency,
+                    greedy_assignment
+                )
 
-                    print(f"  [OK] Generated {entries_count}/{expected} entries")
-                    print(f"  Coverage: {(entries_count/expected)*100:.1f}%")
-                    print(f"  Room Allocation:")
-                    print(f"    - Home Classrooms: {home_room_count} periods ({(home_room_count/entries_count)*100:.1f}%)")
-                    print(f"    - Shared Amenities: {shared_room_count} periods ({(shared_room_count/entries_count)*100:.1f}%)")
+                if solution:
+                    coverage = self._calculate_coverage(solution, len(classes), len(active_slots))
+                    solution.metadata["coverage"] = coverage
+                    solutions.append(solution)
+                    if self.debug:
+                        self._log_solution_stats(solution, len(classes), len(active_slots))
 
         generation_time = time.time() - start_time
 
@@ -244,13 +282,23 @@ class CSPSolverCompleteV301:
             print(f"\n[CSP v{self.version}] Generation complete")
             print(f"  Solutions: {len(solutions)}")
             print(f"  Time: {generation_time:.2f}s")
+            if solutions:
+                avg_coverage = sum(s.metadata.get('coverage', 0) for s in solutions) / len(solutions)
+                print(f"  Average Coverage: {avg_coverage*100:.1f}%")
 
         if solutions:
-            return solutions, generation_time, None, None
+            # Sort solutions by coverage and quality
+            solutions.sort(key=lambda s: (s.metadata.get('coverage', 0), -s.metadata.get('relaxation_level', 0)), reverse=True)
+            return solutions[:num_solutions], generation_time, None, None
         else:
-            return [], generation_time, \
-                   ["Could not generate complete timetable"], \
-                   ["Try adjusting teacher availability or add more teachers"]
+            if allow_partial_solutions:
+                return [], generation_time, \
+                       [f"Could not generate timetable with minimum {min_coverage*100:.0f}% coverage"], \
+                       ["Try reducing minimum coverage requirement or adding more teachers/rooms"]
+            else:
+                return [], generation_time, \
+                       ["Could not generate complete timetable"], \
+                       ["Try adjusting teacher availability or add more teachers"]
 
     # ============================================================================
     # HELPER METHODS (mostly unchanged from v2.5.2)
@@ -670,3 +718,355 @@ class CSPSolverCompleteV301:
         )
 
         return timetable
+    
+    def _generate_partial_solution(
+        self, classes, subjects, teachers, active_slots,
+        rooms, shared_rooms,
+        teacher_subjects, class_subject_distributions,
+        subject_lookup, teacher_lookup, room_lookup,
+        enforce_teacher_consistency,
+        greedy_assignment=None,
+        relaxation_level=0.0,
+        min_coverage=0.70
+    ):
+        """Generate partial solution with constraint relaxation."""
+        entries = []
+        entry_id = 1
+        unfilled_slots = []  # Track gaps
+
+        teacher_busy = {}
+        shared_room_busy = set()
+        class_subject_count = {}
+
+        # Use greedy pre-assignment if available
+        if greedy_assignment:
+            class_subject_teacher_map = greedy_assignment.copy()
+        else:
+            class_subject_teacher_map = {}
+
+        # Initialize subject counts
+        for class_obj in classes:
+            for subject in subjects:
+                class_subject_count[(class_obj.id, subject.id)] = 0
+
+        # Pre-compute subject metadata
+        subject_has_metadata = {}
+        for subj_id, subj in subject_lookup.items():
+            subject_has_metadata[subj_id] = hasattr(subj, 'prefer_morning')
+
+        # Pre-shuffle subjects_to_assign
+        shuffled_subjects_by_class = {}
+        for class_obj in classes:
+            subject_distribution = class_subject_distributions.get(class_obj.id, {})
+            subjects_to_assign = []
+            for subject_id, count in subject_distribution.items():
+                subjects_to_assign.extend([subject_id] * count)
+            random.shuffle(subjects_to_assign)
+            shuffled_subjects_by_class[class_obj.id] = subjects_to_assign[:len(active_slots)]
+
+        # Schedule each class with relaxed constraints
+        for class_obj in classes:
+            subject_distribution = class_subject_distributions.get(class_obj.id, {})
+            subjects_to_assign = shuffled_subjects_by_class.get(class_obj.id, [])
+
+            # Assign each slot
+            for slot_index, slot in enumerate(active_slots):
+                assigned = False
+                slot_id = slot.id
+                subjects_count = len(subjects_to_assign)
+                best_assignment = None
+                assignment_score = -1
+
+                for try_index in range(subjects_count):
+                    actual_index = (slot_index + try_index) % subjects_count
+                    subject_id = subjects_to_assign[actual_index]
+                    subject = subject_lookup.get(subject_id)
+
+                    if not subject:
+                        continue
+
+                    class_id = class_obj.id
+                    count_key = (class_id, subject_id)
+                    current_count = class_subject_count.get(count_key, 0)
+                    target_count = subject_distribution.get(subject_id, 0)
+
+                    # Relaxed constraint: allow some over-allocation
+                    if relaxation_level < 0.5 and current_count >= target_count:
+                        continue
+                    elif relaxation_level >= 0.5 and current_count >= target_count * (1 + relaxation_level):
+                        continue
+
+                    # Get teacher with relaxation
+                    available_teacher = self._get_teacher_with_relaxation(
+                        class_obj, subject, slot,
+                        class_subject_teacher_map,
+                        teacher_subjects, teachers,
+                        teacher_busy, active_slots,
+                        enforce_teacher_consistency,
+                        relaxation_level
+                    )
+
+                    if not available_teacher:
+                        continue
+
+                    # Get room with relaxation
+                    room_id, is_shared = self._get_room_with_relaxation(
+                        class_obj, subject, slot,
+                        shared_rooms, shared_room_busy,
+                        relaxation_level
+                    )
+
+                    if not room_id:
+                        continue
+
+                    # Calculate assignment quality score
+                    score = self._calculate_assignment_score(
+                        subject, slot, available_teacher, room_id,
+                        current_count, target_count, relaxation_level
+                    )
+
+                    # Keep the best assignment for this slot
+                    if score > assignment_score:
+                        assignment_score = score
+                        best_assignment = {
+                            'subject': subject,
+                            'teacher': available_teacher,
+                            'room_id': room_id,
+                            'is_shared': is_shared,
+                            'count_key': count_key
+                        }
+
+                # Apply the best assignment if found
+                if best_assignment:
+                    entry = TimetableEntry(
+                        id=f"entry_{entry_id}",
+                        timetable_id="temp",
+                        class_id=class_obj.id,
+                        subject_id=best_assignment['subject'].id,
+                        teacher_id=best_assignment['teacher'].id,
+                        room_id=best_assignment['room_id'],
+                        time_slot_id=slot_id,
+                        day_of_week=slot.day_of_week,
+                        period_number=slot.period_number,
+                        is_shared_room=best_assignment['is_shared'],
+                        subject_metadata={
+                            "prefer_morning": best_assignment['subject'].prefer_morning,
+                            "requires_lab": best_assignment['subject'].requires_lab
+                        } if subject_has_metadata.get(best_assignment['subject'].id, False) else None,
+                        teacher_metadata={
+                            "max_consecutive_periods": best_assignment['teacher'].max_consecutive_periods
+                        }
+                    )
+
+                    entries.append(entry)
+                    entry_id += 1
+
+                    # Mark resources as busy
+                    teacher_busy[(best_assignment['teacher'].id, slot_id)] = True
+                    if best_assignment['is_shared']:
+                        shared_room_busy.add((best_assignment['room_id'], slot_id))
+
+                    # Update count
+                    class_subject_count[best_assignment['count_key']] += 1
+                    assigned = True
+
+                if not assigned:
+                    # Track unfilled slot
+                    unfilled_slots.append({
+                        'class_id': class_obj.id,
+                        'class_name': class_obj.name,
+                        'time_slot_id': slot_id,
+                        'day': slot.day_of_week.value,
+                        'period': slot.period_number,
+                        'reason': self._determine_gap_reason(class_obj, slot, subjects_to_assign,
+                                                           teacher_subjects, teachers,
+                                                           shared_rooms, teacher_busy,
+                                                           shared_room_busy)
+                    })
+
+        # Calculate coverage
+        expected_entries = len(classes) * len(active_slots)
+        actual_entries = len(entries)
+        coverage = actual_entries / expected_entries if expected_entries > 0 else 0
+
+        # Only return solution if it meets minimum coverage
+        if coverage < min_coverage:
+            return None
+
+        # Create timetable with gap information
+        timetable = Timetable(
+            id="temp",
+            school_id=classes[0].school_id if classes else "",
+            academic_year_id="temp",
+            status=TimetableStatus.DRAFT,
+            entries=entries,
+            metadata={
+                "version": self.version,
+                "teacher_consistency": enforce_teacher_consistency,
+                "room_allocation": "simplified_v3.0",
+                "coverage": coverage,
+                "relaxation_level": relaxation_level,
+                "unfilled_slots": unfilled_slots,
+                "gaps_count": len(unfilled_slots),
+                "entries_count": len(entries),
+                "expected_entries": expected_entries
+            }
+        )
+
+        return timetable
+    
+    def _calculate_coverage(self, timetable, num_classes, num_slots):
+        """Calculate coverage percentage for a timetable."""
+        if not timetable or not timetable.entries:
+            return 0.0
+        
+        expected_entries = num_classes * num_slots
+        actual_entries = len(timetable.entries)
+        return actual_entries / expected_entries if expected_entries > 0 else 0.0
+    
+    def _log_solution_stats(self, solution, num_classes, num_slots):
+        """Log statistics about a generated solution."""
+        entries_count = len(solution.entries)
+        expected = num_classes * num_slots
+        coverage = solution.metadata.get('coverage', 0)
+        relaxation = solution.metadata.get('relaxation_level', 0)
+        gaps = solution.metadata.get('gaps_count', 0)
+        
+        # Count room allocation types
+        home_room_count = sum(1 for e in solution.entries if not getattr(e, 'is_shared_room', False))
+        shared_room_count = sum(1 for e in solution.entries if getattr(e, 'is_shared_room', False))
+        
+        print(f"  [OK] Generated {entries_count}/{expected} entries ({coverage*100:.1f}% coverage)")
+        print(f"  Relaxation Level: {relaxation:.1f}, Gaps: {gaps}")
+        if entries_count > 0:
+            print(f"  Room Allocation:")
+            print(f"    - Home Classrooms: {home_room_count} periods ({(home_room_count/entries_count)*100:.1f}%)")
+            print(f"    - Shared Amenities: {shared_room_count} periods ({(shared_room_count/entries_count)*100:.1f}%)")
+    
+    def _get_teacher_with_relaxation(self, class_obj, subject, slot, class_subject_teacher_map,
+                                   teacher_subjects, teachers, teacher_busy, active_slots,
+                                   enforce_teacher_consistency, relaxation_level):
+        """Get available teacher with constraint relaxation."""
+        
+        if enforce_teacher_consistency:
+            # Try to get consistent teacher first
+            available_teacher = self._get_consistent_teacher(
+                class_obj, subject, slot, class_subject_teacher_map,
+                teacher_subjects, teachers, teacher_busy, active_slots
+            )
+            if available_teacher:
+                return available_teacher
+            
+            # If relaxation allows, try any qualified teacher
+            if relaxation_level >= 0.3:
+                qualified = teacher_subjects.get(subject.id, [])
+                for teacher in qualified:
+                    if (teacher.id, slot.id) not in teacher_busy:
+                        return teacher
+        else:
+            # Standard teacher search
+            qualified = teacher_subjects.get(subject.id, [])
+            for teacher in qualified:
+                if (teacher.id, slot.id) not in teacher_busy:
+                    return teacher
+        
+        # High relaxation: allow any teacher for any subject (emergency measure)
+        if relaxation_level >= 0.8:
+            for teacher in teachers:
+                if (teacher.id, slot.id) not in teacher_busy:
+                    return teacher
+        
+        return None
+    
+    def _get_room_with_relaxation(self, class_obj, subject, slot, shared_rooms, 
+                                shared_room_busy, relaxation_level):
+        """Get appropriate room with constraint relaxation."""
+        
+        # Try standard room allocation first
+        room_id, is_shared = self._get_appropriate_room_v30(
+            class_obj, subject, slot, shared_rooms, shared_room_busy
+        )
+        
+        if room_id:
+            return room_id, is_shared
+        
+        # If no room available and relaxation allows, use home classroom for lab subjects
+        if relaxation_level >= 0.5 and subject.requires_lab:
+            # Allow lab subjects in regular classrooms
+            return class_obj.home_room_id, False
+        
+        # High relaxation: try any available shared room regardless of type
+        if relaxation_level >= 0.8:
+            for room in shared_rooms:
+                conflict_key = (room.id, slot.id)
+                if conflict_key not in shared_room_busy:
+                    if room.capacity >= (class_obj.student_count or 30):
+                        return room.id, True
+        
+        return None, False
+    
+    def _calculate_assignment_score(self, subject, slot, teacher, room_id, 
+                                  current_count, target_count, relaxation_level):
+        """Calculate quality score for an assignment."""
+        score = 100  # Base score
+        
+        # Prefer assignments that meet subject requirements
+        if current_count < target_count:
+            score += 20
+        elif current_count > target_count:
+            score -= 10 * (current_count - target_count)
+        
+        # Prefer morning slots for subjects that prefer morning
+        if hasattr(subject, 'prefer_morning') and subject.prefer_morning:
+            if slot.period_number <= 4:  # Morning periods
+                score += 10
+            else:
+                score -= 5
+        
+        # Prefer proper room types
+        if subject.requires_lab and 'LAB' not in room_id.upper():
+            score -= 15  # Penalty for lab subjects in regular rooms
+        
+        # Penalize high relaxation assignments
+        score -= int(relaxation_level * 20)
+        
+        return score
+    
+    def _determine_gap_reason(self, class_obj, slot, subjects_to_assign, 
+                            teacher_subjects, teachers, shared_rooms, 
+                            teacher_busy, shared_room_busy):
+        """Determine why a slot couldn't be filled."""
+        reasons = []
+        
+        # Check if any subjects need to be assigned
+        if not subjects_to_assign:
+            reasons.append("No subjects configured for this class")
+            return "; ".join(reasons)
+        
+        # Check teacher availability
+        available_teachers = 0
+        for subject_id in subjects_to_assign[:3]:  # Check first few subjects
+            qualified = teacher_subjects.get(subject_id, [])
+            for teacher in qualified:
+                if (teacher.id, slot.id) not in teacher_busy:
+                    available_teachers += 1
+                    break
+        
+        if available_teachers == 0:
+            reasons.append("No teachers available")
+        
+        # Check room availability for lab subjects
+        lab_subjects = [s for s in subjects_to_assign[:3] if s in [sub.id for sub in shared_rooms if 'lab' in sub.name.lower()]]
+        if lab_subjects:
+            available_labs = 0
+            for room in shared_rooms:
+                if room.type.value == "LAB":
+                    if (room.id, slot.id) not in shared_room_busy:
+                        available_labs += 1
+            if available_labs == 0:
+                reasons.append("No lab rooms available")
+        
+        if not reasons:
+            reasons.append("Complex constraint conflicts")
+        
+        return "; ".join(reasons)

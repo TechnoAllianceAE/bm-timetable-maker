@@ -1,0 +1,11 @@
+code,name,needs_lab,periods_per_week
+MATH,Mathematics,false,6
+ENG,English,false,5
+SCI,Science,true,6
+SS,Social Studies,false,4
+CS,Computer Science,true,4
+PE,Physical Education,false,3
+ART,Art,false,3
+MUS,Music,false,2
+HIN,Hindi,false,4
+FR,French,false,3

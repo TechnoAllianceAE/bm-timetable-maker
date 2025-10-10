@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Body, Param, Query, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, Query, UseGuards, Request, BadRequestException } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
 import { ClassesService } from './classes.service';
 import { CreateClassDto } from './dto/create-class.dto';
@@ -15,7 +15,15 @@ export class ClassesController {
   @Post()
   @ApiOperation({ summary: 'Create a new class' })
   @ApiResponse({ status: 201, description: 'Class created successfully' })
-  create(@Body() createClassDto: CreateClassDto) {
+  create(@Body() createClassDto: CreateClassDto, @Request() req: any) {
+    // Extract schoolId from JWT token
+    const schoolId = req.user?.schoolId;
+    if (!schoolId) {
+      throw new BadRequestException('School ID not found in user session');
+    }
+
+    // Set schoolId from token
+    createClassDto.schoolId = schoolId;
     return this.classesService.create(createClassDto);
   }
 

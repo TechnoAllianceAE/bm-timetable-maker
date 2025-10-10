@@ -10,10 +10,6 @@ interface Room {
   code: string;
   capacity: number;
   type: string;
-  isLab: boolean;
-  hasProjector: boolean;
-  hasAC: boolean;
-  floor: number;
   schoolId: string;
   createdAt: string;
 }
@@ -28,10 +24,6 @@ export default function RoomsPage() {
     code: '',
     capacity: 30,
     type: 'CLASSROOM',
-    isLab: false,
-    hasProjector: false,
-    hasAC: false,
-    floor: 0,
   });
 
   useEffect(() => {
@@ -72,10 +64,6 @@ export default function RoomsPage() {
       code: room.code,
       capacity: room.capacity,
       type: room.type,
-      isLab: room.isLab,
-      hasProjector: room.hasProjector,
-      hasAC: room.hasAC,
-      floor: room.floor,
     });
     setShowModal(true);
   };
@@ -98,10 +86,6 @@ export default function RoomsPage() {
       code: '',
       capacity: 30,
       type: 'CLASSROOM',
-      isLab: false,
-      hasProjector: false,
-      hasAC: false,
-      floor: 0,
     });
   };
 
@@ -147,11 +131,6 @@ export default function RoomsPage() {
                             <div className="text-lg font-medium text-blue-600">
                               {room.name}
                             </div>
-                            {room.isLab && (
-                              <span className="ml-2 px-2 py-1 text-xs bg-purple-100 text-purple-800 rounded">
-                                Lab
-                              </span>
-                            )}
                           </div>
                           <div className="mt-2 sm:flex sm:justify-between">
                             <div className="sm:flex sm:space-x-6">
@@ -162,19 +141,8 @@ export default function RoomsPage() {
                                 Capacity: {room.capacity}
                               </p>
                               <p className="flex items-center text-sm text-gray-500">
-                                Floor: {room.floor}
-                              </p>
-                              <p className="flex items-center text-sm text-gray-500">
                                 Type: {room.type}
                               </p>
-                            </div>
-                            <div className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 space-x-3">
-                              {room.hasProjector && (
-                                <span className="text-green-600">Projector</span>
-                              )}
-                              {room.hasAC && (
-                                <span className="text-blue-600">AC</span>
-                              )}
                             </div>
                           </div>
                         </div>
@@ -273,68 +241,6 @@ export default function RoomsPage() {
                     <option value="LIBRARY">Library</option>
                     <option value="SPORTS">Sports Room</option>
                   </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Floor Number
-                  </label>
-                  <input
-                    type="number"
-                    required
-                    min="0"
-                    value={formData.floor}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        floor: parseInt(e.target.value),
-                      })
-                    }
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <div className="flex items-center">
-                    <input
-                      type="checkbox"
-                      id="isLab"
-                      checked={formData.isLab}
-                      onChange={(e) =>
-                        setFormData({ ...formData, isLab: e.target.checked })
-                      }
-                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                    />
-                    <label htmlFor="isLab" className="ml-2 block text-sm text-gray-900">
-                      This is a laboratory
-                    </label>
-                  </div>
-                  <div className="flex items-center">
-                    <input
-                      type="checkbox"
-                      id="hasProjector"
-                      checked={formData.hasProjector}
-                      onChange={(e) =>
-                        setFormData({ ...formData, hasProjector: e.target.checked })
-                      }
-                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                    />
-                    <label htmlFor="hasProjector" className="ml-2 block text-sm text-gray-900">
-                      Has projector
-                    </label>
-                  </div>
-                  <div className="flex items-center">
-                    <input
-                      type="checkbox"
-                      id="hasAC"
-                      checked={formData.hasAC}
-                      onChange={(e) =>
-                        setFormData({ ...formData, hasAC: e.target.checked })
-                      }
-                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                    />
-                    <label htmlFor="hasAC" className="ml-2 block text-sm text-gray-900">
-                      Has air conditioning
-                    </label>
-                  </div>
                 </div>
                 <div className="flex justify-end space-x-3">
                   <button
